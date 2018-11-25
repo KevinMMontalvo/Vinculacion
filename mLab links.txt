@@ -1,0 +1,13 @@
+To connect using the mongo shell:
+
+mongo ds041167.mlab.com:41167/aula-multisensorial -u <dbuser> -p <dbpassword>
+
+
+
+To connect using a driver via the standard MongoDB URI
+
+mongodb://<dbuser>:<dbpassword>@ds041167.mlab.com:41167/aula-multisensorial
+
+
+user: kevin
+pass: admin123
