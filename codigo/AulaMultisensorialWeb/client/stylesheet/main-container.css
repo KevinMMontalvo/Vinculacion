@@ -5,6 +5,9 @@
   position: absolute;
   left: 20vw;
   color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .main-info {
@@ -13,7 +16,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  position: absolute;
   top: 2vh;
   left: 2vh;
 }
@@ -33,6 +36,6 @@
   background-size: 2vw;
 }
 
-#login {
+#login-icon {
   background-image: url(login.svg);
 }

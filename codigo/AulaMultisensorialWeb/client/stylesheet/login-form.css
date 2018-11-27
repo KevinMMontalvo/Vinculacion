@@ -1,0 +1,9 @@
+.login-form {
+  width: 70vw;
+  height: 50vh;
+}
+
+.login-input {
+  height: 14vh;
+  font-size: 2.2em;
+}

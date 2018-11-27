@@ -14,7 +14,8 @@ export default class Main extends React.Component {
         return(
             <div>
               <SideMenu/>
-              <MainContainer></MainContainer>
+              <MainContainer>
+              </MainContainer>
             </div>
         );
     }
