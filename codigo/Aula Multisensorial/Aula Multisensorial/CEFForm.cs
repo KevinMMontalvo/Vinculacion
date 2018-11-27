@@ -28,7 +28,7 @@ namespace Aula_Multisensorial
         {
             CefSettings cefSettings = new CefSettings();
             Cef.Initialize(cefSettings);
-            chromiumWebBrowser = new ChromiumWebBrowser("http:\\www.youtube.com");
+            chromiumWebBrowser = new ChromiumWebBrowser("http:\\localhost:3000");
             this.Controls.Add(chromiumWebBrowser);
             chromiumWebBrowser.Dock = DockStyle.Fill;
         }

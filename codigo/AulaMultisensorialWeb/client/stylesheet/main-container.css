@@ -1,0 +1,38 @@
+
+.main-container {
+  width: 80vw;
+  height: 100vh;
+  position: absolute;
+  left: 20vw;
+  color: #333;
+}
+
+.main-info {
+  width: 20vw;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 2vh;
+  left: 2vh;
+}
+
+.main-title {
+  font-size: 1.5em;
+  margin-left: 0.5vw;
+}
+
+.main-icon {
+  width: 4vw;
+  height: 4vw;
+  background-color: #F4F6F6;
+  border-radius: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 2vw;
+}
+
+#login {
+  background-image: url(login.svg);
+}
