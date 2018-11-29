@@ -3,6 +3,7 @@
   height: 100vh;
   position: fixed;
   background-color: #2E4155;
+  animation: slide-menu 1s ease-out;
 }
 
 .menu-title {
@@ -15,6 +16,9 @@
   color: #FFF;
   position: relative;
   top: 7vh;
+  animation: fade-in 0.5s ease-in;
+  animation-fill-mode: backwards;
+  animation-delay: 1.75s;
 }
 
 .menu-icon {
@@ -27,6 +31,9 @@
   background-repeat: no-repeat;
   background-size: 6vw;
   top: 0;
+  animation: spin-to-tiny 1.25s ease-in;
+  animation-fill-mode: backwards;
+  animation-delay: 0.75s;
 }
 
 .user-info-container {
@@ -35,4 +42,31 @@
   background-color: #24394E;
   position: absolute;
   bottom: 0;
+  animation: fade-in 1s ease-in-out;
+  animation-fill-mode: backwards;
+  animation-delay: 2s;
+}
+
+.menu-options {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 35vh;
+}
+
+.menu-option {
+  width: 100%;
+  height: auto;
+  font-size: 1.4em;
+  color: #FFF;
+  transition: 0.5s;
+  text-indent: 2vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
+
+.menu-option:hover {
+  background-color: #263443;
+  cursor: pointer;
+  text-indent: 2.5vw;
 }

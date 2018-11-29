@@ -1,6 +1,10 @@
 .login-form {
   width: 70vw;
   height: 50vh;
+  animation: fade-in 1.0s ease-out;
+  animation-fill-mode: backwards;
+  animation-delay: 2.5s;
+  position: relative;
 }
 
 .login-input {
