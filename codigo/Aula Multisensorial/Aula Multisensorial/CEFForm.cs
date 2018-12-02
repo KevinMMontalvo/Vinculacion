@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
+using MongoDB.Driver;
+using Aula_Multisensorial.Model;
+using System.Collections.Generic;
 
 namespace Aula_Multisensorial
 {
@@ -31,6 +27,16 @@ namespace Aula_Multisensorial
             chromiumWebBrowser = new ChromiumWebBrowser("http:\\localhost:3000");
             this.Controls.Add(chromiumWebBrowser);
             chromiumWebBrowser.Dock = DockStyle.Fill;
+            
+            /*MongoClient client = new MongoClient("mongodb://kevin:admin123@ds041167.mlab.com:41167/aula-multisensorial");
+            IMongoDatabase database = client.GetDatabase("aula-multisensorial");
+            IMongoCollection<Teacher> teachersCollection=database.GetCollection<Teacher>("teachers");
+            List<Teacher> teachersList= teachersCollection.AsQueryable().ToList();
+
+            foreach (Teacher teacher in teachersList)
+            {
+                Console.WriteLine(teacher.Speciality);
+            }*/
         }
     }
 }
