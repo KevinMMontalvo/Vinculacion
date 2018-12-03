@@ -63,10 +63,29 @@
   text-indent: 2vw;
   padding-top: 1vh;
   padding-bottom: 1vh;
+  position: relative;
+  animation: slide-left 1s ease-out;
+  animation-fill-mode: backwards;
 }
 
 .menu-option:hover {
   background-color: #263443;
   cursor: pointer;
   text-indent: 2.5vw;
+}
+
+#option1 {
+  animation-delay: 1.5s;
+}
+
+#option2 {
+  animation-delay: 1.75s;
+}
+
+#option3 {
+  animation-delay: 2.0s;
+}
+
+#option4 {
+  animation-delay: 2.25s;
 }

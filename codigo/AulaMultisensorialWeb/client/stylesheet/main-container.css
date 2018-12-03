@@ -8,6 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-x: hidden;
 }
 
 .main-info {
@@ -45,4 +46,9 @@
 
 #login-icon {
   background-image: url(login.svg);
+}
+
+#student-icon {
+  background-image: url(student.svg);
+  background-size: 1.5vw;
 }

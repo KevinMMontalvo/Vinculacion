@@ -12,10 +12,10 @@ export default class Main extends React.Component {
             <div>
               <div className="login-form">
                 <div className="input-container">
-                  <input placeholder="Usuario" className="login-input" type="text"></input>
+                  <input id="username" placeholder="Usuario" className="horizontal-input" type="text"></input>
                 </div>
                 <div className="input-container">
-                  <input placeholder="Contraseña" className="login-input" type="password"></input>
+                  <input id="password" placeholder="Contraseña" className="horizontal-input" type="password"></input>
                 </div>
                 <div className="button-container">
                   <div className="primary-button">Ingresar</div>

@@ -7,13 +7,16 @@ export default class SideMenu extends React.Component {
           isLogged: true,
         }
     }
+    StudentOption(){
+      this.props.StudentOption();
+    }
     render() {
         return(
             <div>
               <div className="side-menu">
                 {this.state.isLogged ?
                   <div className="menu-options">
-                    <div id="option1" className="menu-option">Estudiantes</div>
+                    <div onClick={() => this.StudentOption()} id="option1" className="menu-option">Estudiantes</div>
                     <div id="option2" className="menu-option">Docentes</div>
                     <div id="option3" className="menu-option">Niveles</div>
                     <div id="option4" className="menu-option">Registro de actividades</div>

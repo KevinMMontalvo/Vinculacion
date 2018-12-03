@@ -1,0 +1,52 @@
+.student-form {
+  width: 70vw;
+  height: auto;
+  max-height: 60vh;
+  animation: fade-in 1s;
+}
+
+.student-input {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.tech-help-input-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-tech-help-button {
+  width: 4vw;
+  height: 4vw;
+  background-color: #2980B9;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  border-radius: 100%;
+  background-image: url(right-w.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 2vw;
+  transition: 0.5s;
+}
+
+.add-tech-help-button:hover {
+  -webkit-box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.75);
+  cursor: pointer;
+}
+
+.added-tech-help-container {
+  width: 40%;
+  height: 30vh;
+  background-color: #F8F9F9;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  border-bottom: solid 2px;
+  border-color: #AEB6BF;
+}

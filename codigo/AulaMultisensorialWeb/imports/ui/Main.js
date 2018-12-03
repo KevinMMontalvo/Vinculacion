@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import SideMenu from '../components/SideMenu';
 import MainContainer from '../components/MainContainer';
 
 export default class Main extends React.Component {
@@ -13,7 +12,6 @@ export default class Main extends React.Component {
     render() {
         return(
             <div>
-              <SideMenu/>
               <MainContainer>
               </MainContainer>
             </div>
