@@ -48,7 +48,7 @@ export default class StudentMenu extends React.Component {
                 <div className="management-options">
                   <div id="visualize" className="management-option">
                     <div id="visualize-icon" className="management-icon"></div>
-                    <div className="management-text">Visualizar estudiantes</div>
+                    <div className="management-text">Estudiantes registrados</div>
                   </div>
                   <div onClick={() => this.AddStudent()} id="add" className="management-option">
                     <div id="add-icon" className="management-icon"></div>
