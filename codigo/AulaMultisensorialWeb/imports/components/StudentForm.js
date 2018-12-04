@@ -67,12 +67,25 @@ export default class StudentForm extends React.Component {
     ValidateEmptyInputs(){
       let firstName = document.getElementById('first-name-input').value;
       let lastName = document.getElementById('lastname-input').value;
+      let level_id = document.getElementById('level-select').value;
+      let gender = document.getElementById('gender-select').value;
+      let condition = document.getElementById('condition-select').value;
+
       let validationArray = new Array();
       if(firstName == ""){
         validationArray.push("firstName");
       }
       if(lastName == ""){
         validationArray.push("lastName");
+      }
+      if(level_id == ""){
+        validationArray.push("level");
+      }
+      if(gender == ""){
+        validationArray.push("gender");
+      }
+      if(condition == ""){
+        validationArray.push("condition");
       }
       return validationArray;
     }
@@ -85,6 +98,15 @@ export default class StudentForm extends React.Component {
         }
         if(validationArray[i] == "lastName"){
           this.ShowWarningMenssage("Apellido paterno");
+        }
+        if(validationArray[i] == "condition"){
+          this.ShowWarningMenssage("Condición");
+        }
+        if(validationArray[i] == "gender"){
+          this.ShowWarningMenssage("Género");
+        }
+        if(validationArray[i] == "level"){
+          this.ShowWarningMenssage("Nivel");
         }
       }
       if(validationArray.length == 0){
@@ -144,7 +166,6 @@ export default class StudentForm extends React.Component {
         technical_help: technical_help,
         percentage_of_disability: percentage_of_disability,
       }
-      console.log(student);
     }
 
     render() {
