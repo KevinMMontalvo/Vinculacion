@@ -1,0 +1,9 @@
+meteor npm install --save react react-dom
+meteor npm install --save react-router-dom
+meteor remove blaze-html-templates
+meteor add static-html
+meteor add ultimatejs:tracker-react
+meteor npm install --save react-spinners
+meteor npm add react-date-picker --save
+meteor npm install butter-toast
+meteor npm install react-select --save

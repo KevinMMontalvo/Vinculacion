@@ -6,7 +6,7 @@
 .management-options {
   width: 100%;
   height: auto;
-  padding-top: 10vh;
+  padding-top: 5vh;
   transition: 0.5s;
 }
 
@@ -36,18 +36,23 @@
   box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.75);
 }
 
+.management-option:hover div.management-icon {
+  opacity: 1;
+}
+
 .management-icon {
-  width: 20vw;
+  width: 10vw;
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-origin: content-box;
   background-size: 2.5vw;
+  opacity: 0.5;
   transition: 0.5s;
 }
 
 .management-text {
-  width: 80vw;
+  width: 60vw;
   height: 100%;
   text-align: 3vw;
   font-size: 1.8em;
@@ -58,38 +63,50 @@
   transition: 0.5s;
 }
 
-#add {
-  background-color: #28B463;
+#visualize {
+  background-color: #2BBEA2;
   animation: slide-right 0.75s;
 }
 
-#add-icon {
-  background-color: #2ECC71;
-  background-image: url(add-w.svg);
+#visualize-icon {
+  background-color: #2BBEA2;
+  background-image: url(search-w.svg);
 }
 
-#modify {
-  background-color: #F39C12;
+#add {
+  background-color: #1BAB8F;
   animation: slide-right 0.75s;
   animation-fill-mode: backwards;
   animation-delay: 0.25s;
 }
 
-#modify-icon {
-  background-color: #F5B041;
-  background-image: url(info-w.svg);
-  background-size: 1.25vw;
+#add-icon {
+  background-color: #1BAB8F;
+  background-image: url(add-w.svg);
 }
 
-#delete {
-  background-color: #CB4335;
+#modify {
+  background-color: #138D75;
   animation: slide-right 0.75s;
   animation-fill-mode: backwards;
   animation-delay: 0.5s;
 }
 
+#modify-icon {
+  background-color: #138D75;
+  background-image: url(info-w.svg);
+  background-size: 0.75vw;
+}
+
+#delete {
+  background-color: #0D6453;
+  animation: slide-right 0.75s;
+  animation-fill-mode: backwards;
+  animation-delay: 1.0s;
+}
+
 #delete-icon {
-  background-color: #E74C3C;
+  background-color: #0D6453;
   background-image: url(delete-w.svg);
 }
 
@@ -110,6 +127,7 @@
   left: 0.5vw;
   background-color: transparent !important;
   z-index: 6;
+  transition: 0.5s;
 }
 
 .min-management-icon {
@@ -122,26 +140,39 @@
   animation: spin-to-tiny 1s ease-out;
 }
 
-#min-add-icon {
+#min-vizualize-icon {
   width: 4vw;
   height: 4vw;
-  background-color: #2ECC71;
+  background-color: #2BBEA2;
+  background-image: url(search-w.svg);
+}
+
+#min-add-icon {
+  width: 3.8vw;
+  height: 3.8vw;
+  background-color: #1BAB8F;
   background-image: url(add-w.svg);
+  position: relative;
+  left: 0.1vw;
 }
 
 #min-modify-icon {
-  background-color: #F5B041;
+  background-color: #138D75;
   background-image: url(info-w.svg);
   background-size: 0.6vw;
-  width: 3.5vw;
-  height: 3.5vw;
+  width: 3.6vw;
+  height: 3.6vw;
+  position: relative;
+  left: 0.2vw;
 }
 
 #min-delete-icon {
-  background-color: #E74C3C;
+  background-color: #0D6453;
   background-image: url(delete-w.svg);
-  width: 3vw;
-  height: 3vw;
+  width: 3.4vw;
+  height: 3.4vw;
+  position: relative;
+  left: 0.3vw;
 }
 
 .min-management-text {
@@ -162,27 +193,33 @@
   display: none;
 }
 
+#min-vizualize-text{
+  top: 1.0vw;
+  background-color: #2BBEA2;
+}
+
 #min-add-text{
-  top: 1vw;
-  background-color: #2ECC71;
+  top: 0.9vw;
+  background-color: #1BAB8F;
 }
 
 #min-modify-text{
-  top: 0.75vw;
-  background-color: #F5B041;
+  top: 0.8vw;
+  background-color: #138D75;
 }
 
 #min-delete-text{
-  top: 0.5vw;
-  background-color: #E74C3C;
+  top: 0.7vw;
+  background-color: #0D6453;
 }
 
 .min-management-option:hover {
   cursor: pointer;
+  left: -0.1vw;
 }
 
 .min-management-option:hover div.min-management-text {
-  right: 3.5vw;
+  right: 3.2vw;
   opacity: 1;
   z-index: 1;
   display: block;
