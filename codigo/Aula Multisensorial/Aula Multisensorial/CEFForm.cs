@@ -6,6 +6,7 @@ using MongoDB.Driver;
 using Aula_Multisensorial.Model;
 using System.Collections.Generic;
 using Aula_Multisensorial.Access;
+using MongoDB.Bson;
 
 namespace Aula_Multisensorial
 {
@@ -42,12 +43,12 @@ namespace Aula_Multisensorial
 
             /*MongoClient client = new MongoClient("mongodb://kevin:admin123@ds041167.mlab.com:41167/aula-multisensorial");
             IMongoDatabase database = client.GetDatabase("aula-multisensorial");
-            IMongoCollection<Teacher> teachersCollection=database.GetCollection<Teacher>("teachers");
-            List<Teacher> teachersList= teachersCollection.AsQueryable().ToList();
+            IMongoCollection<BsonDocument> teachersCollection=database.GetCollection<BsonDocument>("students");
+            List<BsonDocument> teachersList= teachersCollection.AsQueryable().ToList();
 
-            foreach (Teacher teacher in teachersList)
+            foreach (BsonDocument teacher in teachersList)
             {
-                Console.WriteLine(teacher.Speciality);
+                Console.WriteLine(teacher.ToString());
             }*/
         }
 

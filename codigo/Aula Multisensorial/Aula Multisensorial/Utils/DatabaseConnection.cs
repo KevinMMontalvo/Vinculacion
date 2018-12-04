@@ -26,7 +26,5 @@ namespace Aula_Multisensorial.Utils
             }
             return instance;
         }
-
-
     }
 }
