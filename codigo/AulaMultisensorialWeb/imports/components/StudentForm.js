@@ -87,11 +87,13 @@ export default class StudentForm extends React.Component
 
 	ValidateEmptyInputs()
 	{
+
+		//alert(studentsController.getStudents()); /////////////////////////
 		let firstName = document.getElementById('first-name-input').value;
 		let lastName = document.getElementById('lastname-input').value;
-    let level_id = document.getElementById('level-select').value;
-    let gender = document.getElementById('gender-select').value;
-    let condition = document.getElementById('condition-select').value;
+		let level_id = document.getElementById('level-select').value;
+		let gender = document.getElementById('gender-select').value;
+		let condition = document.getElementById('condition-select').value;
 
 		let validationArray = new Array();
 		if (firstName == "")
@@ -102,15 +104,18 @@ export default class StudentForm extends React.Component
 		{
 			validationArray.push("lastName");
 		}
-    if(level_id == ""){
-      validationArray.push("level");
-    }
-    if(gender == ""){
-      validationArray.push("gender");
-    }
-    if(condition == ""){
-      validationArray.push("condition");
-    }
+		if (level_id == "")
+		{
+			validationArray.push("level");
+		}
+		if (gender == "")
+		{
+			validationArray.push("gender");
+		}
+		if (condition == "")
+		{
+			validationArray.push("condition");
+		}
 		return validationArray;
 	}
 
@@ -127,15 +132,18 @@ export default class StudentForm extends React.Component
 			{
 				this.ShowWarningMenssage("Apellido paterno");
 			}
-      if(validationArray[i] == "condition"){
-        this.ShowWarningMenssage("Condición");
-      }
-      if(validationArray[i] == "gender"){
-        this.ShowWarningMenssage("Género");
-      }
-      if(validationArray[i] == "level"){
-        this.ShowWarningMenssage("Nivel");
-      }
+			if (validationArray[i] == "condition")
+			{
+				this.ShowWarningMenssage("Condición");
+			}
+			if (validationArray[i] == "gender")
+			{
+				this.ShowWarningMenssage("Género");
+			}
+			if (validationArray[i] == "level")
+			{
+				this.ShowWarningMenssage("Nivel");
+			}
 		}
 		if (validationArray.length == 0)
 		{
@@ -210,8 +218,7 @@ export default class StudentForm extends React.Component
 
 	render()
 	{
-		return (
-			<div>
+		return (<div>
 				<div className="student-form">
 					<div className="form-container">
 						<p className="input-label">Nombre del guagua</p>
@@ -290,7 +297,8 @@ export default class StudentForm extends React.Component
 								<div className="tech-helps-title">Ayudas técnicas del estudiante</div>
 								{this.state.techHelps.map((techHelps) =>
 								{
-									return <TechnicalHelp remove={true} RemoveTechnicalHelp={this.RemoveTechnicalHelp.bind(this)}
+									return <TechnicalHelp remove={true}
+									                      RemoveTechnicalHelp={this.RemoveTechnicalHelp.bind(this)}
 									                      techHelps={techHelps} key={techHelps._id}></TechnicalHelp>;
 								})}
 							</div>
@@ -310,8 +318,7 @@ export default class StudentForm extends React.Component
 					}}
 					timeout={6000}
 				/>
-			</div>
-		);
+			</div>);
 	}
 }
 

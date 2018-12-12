@@ -1,6 +1,7 @@
 ﻿using Aula_Multisensorial.Model;
 using Aula_Multisensorial.Utils;
 using MongoDB.Bson;
+using MongoDB.Bson.IO;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,9 @@ namespace Aula_Multisensorial.Access
         public string GetStudents()
         {
             List<BsonDocument> studentsList = studentsCollection.AsQueryable().ToList();
+            var jsonWriterSettings = new JsonWriterSettings { OutputMode = JsonOutputMode.Strict };
+            Console.WriteLine(studentsList.ToJson(jsonWriterSettings));
+            
             return studentsList.ToJson();
         }
 
