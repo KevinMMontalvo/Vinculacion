@@ -7,7 +7,7 @@ namespace Aula_Multisensorial.Model
     class Student
     {
         [BsonId]
-        private ObjectId id;
+        private string id;
 
         [BsonElement("names")]
         private string names;
@@ -37,7 +37,7 @@ namespace Aula_Multisensorial.Model
         {
         }
 
-        public Student(ObjectId id, string names, string lastNames, string diagnostic, string gender, DateTime birthday, string condition, string[] technicalHelps, ObjectId levelId)
+        public Student(string id, string names, string lastNames, string diagnostic, string gender, DateTime birthday, string condition, string[] technicalHelps, ObjectId levelId)
         {
             this.id = id;
             this.names = names;
@@ -50,7 +50,7 @@ namespace Aula_Multisensorial.Model
             this.levelId = levelId;
         }
 
-        public ObjectId Id { get => id; set => id = value; }
+        public string Id { get => id; set => id = value; }
         public string Names { get => names; set => names = value; }
         public string LastNames { get => lastnames; set => lastnames = value; }
         public string Diagnostic { get => diagnostic; set => diagnostic = value; }
