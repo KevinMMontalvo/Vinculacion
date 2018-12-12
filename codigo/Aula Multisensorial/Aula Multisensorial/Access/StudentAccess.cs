@@ -23,6 +23,7 @@ namespace Aula_Multisensorial.Access
         public void InsertStudent(Dictionary<string,object> student)
         {
             BsonDocument document = new BsonDocument(student);
+            Console.WriteLine(document.ToJson());
             studentsCollection.InsertOne(document);
         }
 

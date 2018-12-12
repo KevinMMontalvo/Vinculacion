@@ -22,7 +22,12 @@ export default class TechnicalHelp extends React.Component {
                 <div className="tech-help-name">
                   {this.props.techHelps.name}
                 </div>
-                <div onClick={() => this.RemoveTechnicalHelp(this.props.techHelps._id)} className="tech-help-delete-button"></div>
+                {
+                  this.props.remove ?
+                    <div onClick={() => this.RemoveTechnicalHelp(this.props.techHelps._id)} className="tech-help-delete-button"></div>
+                  :
+                  undefined
+                }
               </div>
             </div>
         );

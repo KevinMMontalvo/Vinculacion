@@ -9,29 +9,31 @@ export default class StudentMenu extends React.Component {
     }
 
     MinimizeMenu(){
+      if(!this.state.isMenuMinimized){
+        var container = document.getElementsByClassName('management-menu');
+        var menu = document.getElementsByClassName('management-options');
+        var options = document.getElementsByClassName('management-option');
+        var icons = document.getElementsByClassName('management-icon');
+        var texts = document.getElementsByClassName('management-text');
+        icons[0].id = 'min-vizualize-icon';
+        icons[1].id = 'min-add-icon';
+        icons[2].id = 'min-modify-icon';
+        icons[3].id = 'min-delete-icon';
+        texts[0].id = 'min-vizualize-text';
+        texts[1].id = 'min-add-text';
+        texts[2].id = 'min-modify-text';
+        texts[3].id = 'min-delete-text';
+        container[0].className = 'min-management-menu';
+        menu[0].className = 'min-management-options';
+        for (var i = 0; i < 4; i++) {
+          options[0].className = 'min-management-option';
+          icons[0].className = 'min-management-icon';
+          texts[0].className = 'min-management-text';
+        }
+      }
       this.setState({
         isMenuMinimized: true,
       });
-      var container = document.getElementsByClassName('management-menu');
-      var menu = document.getElementsByClassName('management-options');
-      var options = document.getElementsByClassName('management-option');
-      var icons = document.getElementsByClassName('management-icon');
-      var texts = document.getElementsByClassName('management-text');
-      icons[0].id = 'min-vizualize-icon';
-      icons[1].id = 'min-add-icon';
-      icons[2].id = 'min-modify-icon';
-      icons[3].id = 'min-delete-icon';
-      texts[0].id = 'min-vizualize-text';
-      texts[1].id = 'min-add-text';
-      texts[2].id = 'min-modify-text';
-      texts[3].id = 'min-delete-text';
-      container[0].className = 'min-management-menu';
-      menu[0].className = 'min-management-options';
-      for (var i = 0; i < 4; i++) {
-        options[0].className = 'min-management-option';
-        icons[0].className = 'min-management-icon';
-        texts[0].className = 'min-management-text';
-      }
     }
 
     AddStudent(){
@@ -39,14 +41,17 @@ export default class StudentMenu extends React.Component {
       this.props.AddStudent();
     }
 
-
+    ShowStudentRecords(){
+      this.MinimizeMenu();
+      this.props.ShowStudentRecords();
+    }
 
     render() {
         return(
             <div>
               <div className="management-menu">
                 <div className="management-options">
-                  <div id="visualize" className="management-option">
+                  <div onClick={() => this.ShowStudentRecords()} id="visualize" className="management-option">
                     <div id="visualize-icon" className="management-icon"></div>
                     <div className="management-text">Estudiantes registrados</div>
                   </div>

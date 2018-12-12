@@ -3,6 +3,7 @@ import LoginForm from '../components/LoginForm';
 import SideMenu from '../components/SideMenu';
 import StudentMenu from '../components/StudentMenu';
 import StudentForm from '../components/StudentForm';
+import StudentRecords from '../components/StudentRecords';
 
 export default class MainContainer extends React.Component {
     constructor(props) {
@@ -11,6 +12,7 @@ export default class MainContainer extends React.Component {
           loginForm: true,
           studentOption: false,
           addStudentForm: false,
+          showStudentRecords: false,
         }
     }
 
@@ -20,6 +22,7 @@ export default class MainContainer extends React.Component {
         loginForm: false,
         studentOption: true,
         addStudentForm: false,
+        showStudentRecords: false,
       });
       document.getElementById('main-title').innerHTML = "Estudiantes";
       document.getElementsByClassName('main-icon')[0].id = "student-icon";
@@ -29,9 +32,17 @@ export default class MainContainer extends React.Component {
         loginForm: false,
         studentOption: true,
         addStudentForm: true,
+        showStudentRecords: false,
       });
     }
-
+    ShowStudentRecords(){
+      this.setState({
+        loginForm: false,
+        studentOption: true,
+        addStudentForm: false,
+        showStudentRecords: true,
+      });
+    }
 
 
 
@@ -47,10 +58,16 @@ export default class MainContainer extends React.Component {
                 {
                   this.state.studentOption ?
                   <div>
-                    <StudentMenu AddStudent={this.AddStudent.bind(this)}/>
+                    <StudentMenu ShowStudentRecords={this.ShowStudentRecords.bind(this)} AddStudent={this.AddStudent.bind(this)}/>
                     {
                       this.state.addStudentForm ?
                       <StudentForm/>
+                      :
+                      undefined
+                    }
+                    {
+                      this.state.showStudentRecords ?
+                      <StudentRecords/>
                       :
                       undefined
                     }

@@ -1,0 +1,41 @@
+.registry {
+  width: 100%;
+  height: auto;
+  padding-bottom: 2vh;
+  padding-top: 2vh;
+  font-size: 0.9em;
+  display: flex;
+  justify-content: center;
+}
+
+.registry-row {
+  padding-left: 1vw;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.registry-row p {
+  text-indent: 0.5vw;
+}
+
+.map-container {
+  width: 50%;
+}
+
+.identifier-column {
+  width: 20%;
+  height: auto;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  font-size: 4em;
+  background-color: #17A589;
+  color: #FFF;
+  animation: fade-in 0.5s;
+  animation-fill-mode: backwards;
+  animation-delay: 0.5s;
+}
+
+.information-column {
+  width: 80%;
+}

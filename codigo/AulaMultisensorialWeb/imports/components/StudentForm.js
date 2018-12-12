@@ -89,6 +89,10 @@ export default class StudentForm extends React.Component
 	{
 		let firstName = document.getElementById('first-name-input').value;
 		let lastName = document.getElementById('lastname-input').value;
+    let level_id = document.getElementById('level-select').value;
+    let gender = document.getElementById('gender-select').value;
+    let condition = document.getElementById('condition-select').value;
+
 		let validationArray = new Array();
 		if (firstName == "")
 		{
@@ -98,6 +102,15 @@ export default class StudentForm extends React.Component
 		{
 			validationArray.push("lastName");
 		}
+    if(level_id == ""){
+      validationArray.push("level");
+    }
+    if(gender == ""){
+      validationArray.push("gender");
+    }
+    if(condition == ""){
+      validationArray.push("condition");
+    }
 		return validationArray;
 	}
 
@@ -114,6 +127,15 @@ export default class StudentForm extends React.Component
 			{
 				this.ShowWarningMenssage("Apellido paterno");
 			}
+      if(validationArray[i] == "condition"){
+        this.ShowWarningMenssage("Condición");
+      }
+      if(validationArray[i] == "gender"){
+        this.ShowWarningMenssage("Género");
+      }
+      if(validationArray[i] == "level"){
+        this.ShowWarningMenssage("Nivel");
+      }
 		}
 		if (validationArray.length == 0)
 		{
@@ -167,7 +189,7 @@ export default class StudentForm extends React.Component
 		let gender = document.getElementById('gender-select').value;
 		let condition = document.getElementById('condition-select').value;
 		let technical_help = this.state.techHelps;
-		let percentage_of_disability = document.getElementById('percentage-of-disability-input').value;
+		let percentage_of_disability = parseInt(document.getElementById('percentage-of-disability-input').value);
 		let student = {
 			names: names,
 			surnames: surnames,
@@ -188,117 +210,115 @@ export default class StudentForm extends React.Component
 
 	render()
 	{
-		return (<div>
-			<div className="student-form">
-				<div className="form-container">
-					<p className="input-label">Nombre del guagua</p>
-					<div id="vertical-input" className="student-input">
-						<input id="first-name-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-						       placeholder="Primer nombre" className="vertical-input"></input>
-						<input id="second-name-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-						       placeholder="Segundo nombre" className="vertical-input"></input>
-						<input id="lastname-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-						       placeholder="Apellido paterno" className="vertical-input"></input>
-						<input id="mothers-lastname-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-						       placeholder="Apellido materno" className="vertical-input"></input>
-					</div>
-				</div>
-				<div className="form-container">
-					<p className="input-label">Género</p>
-					<div className="input-container">
-						<select id="gender-select">
-							<option value="" selected disabled hidden>Selecione el género del estudiante</option>
-							<option value="Masculino">Masculino</option>
-							<option value="Masculino">Femenino</option>
-						</select>
-					</div>
-				</div>
-				<div className="form-container">
-					<p className="input-label">Fecha de nacimiento</p>
-					<div className="date-input-container">
-						<DatePicker
-							onChange={this.onChange}
-							value={this.state.date}
-							locate={this.lang}
-						/>
-					</div>
-				</div>
-				<div className="form-container">
-					<p className="input-label">Diagnóstico</p>
-					<div className="input-container">
-						<textarea id="diagnostic-input" placeholder="Observaciones sobre el estudiante"></textarea>
-					</div>
-				</div>
-				<div className="form-container">
-					<p className="input-label">Condición</p>
-					<div className="input-container">
-						<select id="condition-select">
-							<option value="" selected disabled hidden>Selecione la condición del estudiante</option>
-							<option value="Masculino">Civíl</option>
-							<option value="Masculino">Militar</option>
-						</select>
-					</div>
-				</div>
-				<div className="form-container">
-					<p className="input-label">Nivel</p>
-					<div className="input-container">
-						<select id="level-select">
-							<option value="" selected disabled hidden>Selecione el nivel del estudiante</option>
-							<option value="Masculino">Nivel1</option>
-							<option value="Masculino">Nivel2</option>
-						</select>
-					</div>
-				</div>
-				<div className="form-container">
-					<p className="input-label">Porcentaje de discapacidad</p>
-					<div className="input-container">
-						<input id="percentage-of-disability-input" maxLength="2"
-						       onKeyPress={() => this.ValidateOnlyNumbers(event)} placeholder="%"
-						       className="horizontal-input"/>
-					</div>
-				</div>
-				<div className="form-container">
-					<p className="input-label">Ayudas técnicas</p>
-					<div className="tech-help-input-container">
-						<input id="technical-help-input" placeholder="Tipo de ayuda"
-						       className="vertical-input"></input>
-						<div onClick={() => this.AddTechnicalHelp()} className="add-tech-help-button"></div>
-						<div className="added-tech-help-container">
-							<div className="tech-helps-title">Ayudas técnicas del estudiante</div>
-							{this.state.techHelps.map((techHelps) =>
-							{
-								return <TechnicalHelp RemoveTechnicalHelp={this.RemoveTechnicalHelp.bind(this)}
-								                      techHelps={techHelps} key={techHelps._id}></TechnicalHelp>;
-							})}
+		return (
+			<div>
+				<div className="student-form">
+					<div className="form-container">
+						<p className="input-label">Nombre del guagua</p>
+						<div id="vertical-input" className="student-input">
+							<input id="first-name-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
+							       placeholder="Primer nombre" className="vertical-input"></input>
+							<input id="second-name-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
+							       placeholder="Segundo nombre" className="vertical-input"></input>
+							<input id="lastname-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
+							       placeholder="Apellido paterno" className="vertical-input"></input>
+							<input id="mothers-lastname-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
+							       placeholder="Apellido materno" className="vertical-input"></input>
 						</div>
 					</div>
-				</div>
-				<div className="button-container">
-					<div onClick={() => this.CheckWarningMessages()} className="secondary-button">Completar
-						Registro
+					<div className="form-container">
+						<p className="input-label">Género</p>
+						<div className="input-container">
+							<select id="gender-select">
+								<option value="" selected disabled hidden>Selecione el género del estudiante</option>
+								<option value="Masculino">Masculino</option>
+								<option value="Masculino">Femenino</option>
+							</select>
+						</div>
 					</div>
+					<div className="form-container">
+						<p className="input-label">Fecha de nacimiento</p>
+						<div className="date-input-container">
+							<DatePicker
+								onChange={this.onChange}
+								value={this.state.date}
+								locate={this.lang}
+							/>
+						</div>
+					</div>
+					<div className="form-container">
+						<p className="input-label">Diagnóstico</p>
+						<div className="input-container">
+							<textarea id="diagnostic-input" placeholder="Observaciones sobre el estudiante"></textarea>
+						</div>
+					</div>
+					<div className="form-container">
+						<p className="input-label">Condición</p>
+						<div className="input-container">
+							<select id="condition-select">
+								<option value="" selected disabled hidden>Selecione la condición del estudiante</option>
+								<option value="Masculino">Civíl</option>
+								<option value="Masculino">Militar</option>
+							</select>
+						</div>
+					</div>
+					<div className="form-container">
+						<p className="input-label">Nivel</p>
+						<div className="input-container">
+							<select id="level-select">
+								<option value="" selected disabled hidden>Selecione el nivel del estudiante</option>
+								<option value="Masculino">Nivel1</option>
+								<option value="Masculino">Nivel2</option>
+							</select>
+						</div>
+					</div>
+					<div className="form-container">
+						<p className="input-label">Porcentaje de discapacidad</p>
+						<div className="input-container">
+							<input id="percentage-of-disability-input" maxLength="2"
+							       onKeyPress={() => this.ValidateOnlyNumbers(event)} placeholder="%"
+							       className="horizontal-input"/>
+						</div>
+					</div>
+					<div className="form-container">
+						<p className="input-label">Ayudas técnicas</p>
+						<div className="tech-help-input-container">
+							<input id="technical-help-input" placeholder="Tipo de ayuda"
+							       className="vertical-input"></input>
+							<div onClick={() => this.AddTechnicalHelp()} className="add-tech-help-button"></div>
+							<div className="added-tech-help-container">
+								<div className="tech-helps-title">Ayudas técnicas del estudiante</div>
+								{this.state.techHelps.map((techHelps) =>
+								{
+									return <TechnicalHelp remove={true} RemoveTechnicalHelp={this.RemoveTechnicalHelp.bind(this)}
+									                      techHelps={techHelps} key={techHelps._id}></TechnicalHelp>;
+								})}
+							</div>
+						</div>
+					</div>
+					<div className="button-container">
+						<div onClick={() => this.CheckWarningMessages()} className="secondary-button">Completar
+							Registro
+						</div>
+					</div>
+					<div className="separator"></div>
 				</div>
-				<div className="separator"></div>
+				<ButterToast
+					position={{
+						vertical: POS_TOP,
+						horizontal: POS_RIGHT
+					}}
+					timeout={6000}
+				/>
 			</div>
-			<ButterToast
-				position={{
-					vertical: POS_TOP,
-					horizontal: POS_RIGHT
-				}}
-				timeout={6000}
-			/>
-		</div>);
+		);
 	}
 }
 
 /*
 TODO
+campo de nombres y apellidos no admite ñ y tildes--------later
 
-campo de nombres y apellidos no admite ñ y tildes
-cambiar el formato de fecha dd/mm/aaaaa
-fecha se envia con 5 horas
-porcentaje de discapacidad se envia como string
-las ayudas tecnicas no deben ir con id
 
 BUG
 cuando estas en el formulario de registro de estudiantes y se le da clic en alguna opcion del menu no carga nada.
