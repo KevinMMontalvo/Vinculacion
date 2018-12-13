@@ -24,7 +24,7 @@ namespace Aula_Multisensorial.Access
         public void InsertStudent(Dictionary<string,object> student)
         {
             BsonDocument document = new BsonDocument(student);
-            Console.WriteLine(document.ToJson());
+            //Console.WriteLine(document.ToJson());
             studentsCollection.InsertOne(document);
         }
 
@@ -38,7 +38,7 @@ namespace Aula_Multisensorial.Access
             var jsonWriterSettings = new JsonWriterSettings { OutputMode = JsonOutputMode.Strict };
             Console.WriteLine(studentsList.ToJson(jsonWriterSettings));
             
-            return studentsList.ToJson();
+            return studentsList.ToJson(jsonWriterSettings);
         }
 
     }

@@ -11,12 +11,13 @@ export default class Registry extends React.Component {
     }
 
     CalculateAge() {
-      //var birthday = this.props.students.birthdate;
+      var date = this.props.students.birthdate;
+      console.log(parseInt(date[0]));
       //var ageDifMs = Date.now() - birthday.getTime();
       //var ageDate = new Date(ageDifMs);
-      this.setState({
-        age: 10
-      })
+      /*this.setState({
+        age: Math.abs(ageDate.getUTCFullYear() - 1970),
+      });*/
     }
 
     componentWillMount(){

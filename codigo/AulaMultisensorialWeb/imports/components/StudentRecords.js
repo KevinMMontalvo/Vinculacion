@@ -13,23 +13,24 @@ export default class StudentsRecords extends React.Component {
 
     componentWillMount(){
       const { MongoClient, ObjectId } = require('mongodb');
-      Tracker.autorun(() => {
+
         this.setState({
           students: this.LoadStudents(),
         }, () => this.CheckLoadedData())
-      });
+
     }
 
     CheckLoadedData(){
-      if(true){
+      if(this.state.students.length > 0){
         this.setState({
           isDataLoaded: true
-        }, () => console.log(this.state.students))
+        });
       }
     }
 
     LoadStudents() {
-      var students = JSON.parse('[{ "_id" : "5c10615ffb6fc04dd6eae4e1", "names" : "asd hjbjhb", "surnames" : "kjnkj nkj", "level_id" : "Masculino", "diagnostic" : "asd", "birthdate" : "1995-10-31T10:00:00Z", "gender" : "Masculino", "condition" : "Masculino", "technical_help" : [{ "name" : "asdfsfg", "_id" : 0 }, { "name" : "jrtjhtrh", "_id" : 1 }], "percentage_of_disability" : "0" }]');
+      var studentsString = studentsController.getStudents();
+      var students = JSON.parse(studentsString);
       return students;
     }
 
