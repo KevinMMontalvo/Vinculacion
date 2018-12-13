@@ -31,6 +31,7 @@
   font-size: 4em;
   background-color: #17A589;
   color: #FFF;
+  text-transform: uppercase;
   animation: fade-in 0.5s;
   animation-fill-mode: backwards;
   animation-delay: 0.5s;

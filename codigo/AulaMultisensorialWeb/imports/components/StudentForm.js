@@ -19,6 +19,7 @@ export default class StudentForm extends React.Component
 				label: 'Femenino'
 			},],
 			emptyInputMessage: "Existen campos vacios: ",
+			successRegisteredMessage: "Registro completo",
 			techHelps: [],
 			emptyFields: true,
 		};
@@ -85,10 +86,20 @@ export default class StudentForm extends React.Component
 		});
 	}
 
+	ShowSuccessMenssage()
+	{
+		ButterToast.raise({
+			content: <Cinnamon.Crisp
+				scheme={Cinnamon.Crisp.SCHEME_GREY}
+				content={() => <div>{"Estudiante registrado"}</div>}
+				title={this.state.successRegisteredMessage}
+				icon={<div className="alert-success-icon"></div>}
+			/>
+		});
+	}
+
 	ValidateEmptyInputs()
 	{
-
-		//alert(studentsController.getStudents()); /////////////////////////
 		let firstName = document.getElementById('first-name-input').value;
 		let lastName = document.getElementById('lastname-input').value;
 		let level_id = document.getElementById('level-select').value;
@@ -196,7 +207,7 @@ export default class StudentForm extends React.Component
 		let birthdate = this.state.date;
 		let gender = document.getElementById('gender-select').value;
 		let condition = document.getElementById('condition-select').value;
-		let technical_help = this.state.techHelps;
+		let technical_helps = this.state.techHelps;
 		let percentage_of_disability = parseInt(document.getElementById('percentage-of-disability-input').value);
 		let student = {
 			names: names,
@@ -206,14 +217,28 @@ export default class StudentForm extends React.Component
 			birthdate: birthdate,
 			gender: gender,
 			condition: condition,
-			technical_help: technical_help,
+			technical_helps: technical_helps,
 			percentage_of_disability: percentage_of_disability,
 		};
-
 		studentsController.insertStudent(student);
+		this.ClearAllFields();
+		this.ShowSuccessMenssage();
+	}
 
-
-		alert(studentsController.getStudents());
+	ClearAllFields(){
+		document.getElementById('first-name-input').value = "";
+		document.getElementById('second-name-input').value = "";
+		document.getElementById('lastname-input').value = "";
+		document.getElementById('mothers-lastname-input').value = "";
+		document.getElementById('level-select').value = "";
+		document.getElementById('diagnostic-input').value = "";
+		document.getElementById('gender-select').value = "";
+		document.getElementById('condition-select').value = "";
+		document.getElementById('percentage-of-disability-input').value = "";
+		this.setState({
+			birthdate: new Date(),
+			techHelps: [],
+		});
 	}
 
 	render()
@@ -264,8 +289,8 @@ export default class StudentForm extends React.Component
 						<div className="input-container">
 							<select id="condition-select">
 								<option value="" selected disabled hidden>Selecione la condición del estudiante</option>
-								<option value="Masculino">Civíl</option>
-								<option value="Masculino">Militar</option>
+								<option value="Cívil">Civíl</option>
+								<option value="Militar">Militar</option>
 							</select>
 						</div>
 					</div>
@@ -274,8 +299,8 @@ export default class StudentForm extends React.Component
 						<div className="input-container">
 							<select id="level-select">
 								<option value="" selected disabled hidden>Selecione el nivel del estudiante</option>
-								<option value="Masculino">Nivel1</option>
-								<option value="Masculino">Nivel2</option>
+								<option value="Nivel-1">Nivel1</option>
+								<option value="Nivel-2">Nivel2</option>
 							</select>
 						</div>
 					</div>
@@ -316,7 +341,7 @@ export default class StudentForm extends React.Component
 						vertical: POS_TOP,
 						horizontal: POS_RIGHT
 					}}
-					timeout={6000}
+					timeout={7500}
 				/>
 			</div>);
 	}

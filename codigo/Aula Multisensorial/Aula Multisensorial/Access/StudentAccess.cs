@@ -36,7 +36,7 @@ namespace Aula_Multisensorial.Access
         {
             List<BsonDocument> studentsList = studentsCollection.AsQueryable().ToList();
             var jsonWriterSettings = new JsonWriterSettings { OutputMode = JsonOutputMode.Strict };
-            Console.WriteLine(studentsList.ToJson(jsonWriterSettings));
+            //Console.WriteLine(studentsList.ToJson(jsonWriterSettings));
             
             return studentsList.ToJson(jsonWriterSettings);
         }

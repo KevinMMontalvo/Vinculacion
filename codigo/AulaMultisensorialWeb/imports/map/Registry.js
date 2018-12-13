@@ -11,8 +11,7 @@ export default class Registry extends React.Component {
     }
 
     CalculateAge() {
-      var date = this.props.students.birthdate;
-      console.log(parseInt(date[0]));
+      var birthday = this.props.students.birthdate;
       //var ageDifMs = Date.now() - birthday.getTime();
       //var ageDate = new Date(ageDifMs);
       /*this.setState({
@@ -52,13 +51,13 @@ export default class Registry extends React.Component {
                     <b>Nivel:</b> <p>{this.props.students.level_id}</p>
                   </div>
                   <div className="registry-row">
-                    <b>Porcentaje de discapacidad:</b> <p>{this.props.students.percentage}</p>
+                    <b>Porcentaje de discapacidad:</b> <p>{this.props.students.percentage_of_disability}</p>
                   </div>
                   <div className="registry-row">
                     <b>Ayudas técnicas:</b>
                     <div className="map-container">
                       {
-                        this.props.students.technical_help.map((techHelps) =>
+                        this.props.students.technical_helps.map((techHelps) =>
         								{
         									return <TechnicalHelp remove={false} techHelps={techHelps} key={techHelps._id}></TechnicalHelp>;
         								})
