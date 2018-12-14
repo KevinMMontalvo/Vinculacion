@@ -100,6 +100,7 @@ export default class StudentForm extends React.Component
 
 	ValidateEmptyInputs()
 	{
+		studentsController.getStudents()//
 		let firstName = document.getElementById('first-name-input').value;
 		let lastName = document.getElementById('lastname-input').value;
 		let level_id = document.getElementById('level-select').value;
@@ -350,7 +351,8 @@ export default class StudentForm extends React.Component
 /*
 TODO
 campo de nombres y apellidos no admite ñ y tildes--------later
-
+cuando no se ingresa una ayuda tecnica deberia enviar un array vacio, esta enviando null
+no se ha validado el ingreso del campo de porcentaje de discapacidad
 
 BUG
 cuando estas en el formulario de registro de estudiantes y se le da clic en alguna opcion del menu no carga nada.
