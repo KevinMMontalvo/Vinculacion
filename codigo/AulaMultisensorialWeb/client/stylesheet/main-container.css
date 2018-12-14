@@ -52,3 +52,8 @@
   background-image: url(student.svg);
   background-size: 1.5vw;
 }
+
+#teacher-icon {
+  background-image: url(teacher.svg);
+  background-size: 2.5vw;
+}

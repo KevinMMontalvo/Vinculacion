@@ -10,6 +10,12 @@ export default class SideMenu extends React.Component {
     StudentOption(){
       this.props.StudentOption();
     }
+    TeacherOption(){
+      this.props.TeacherOption();
+    }
+    LevelOption(){
+      this.props.LevelOption();
+    }
     render() {
         return(
             <div>
@@ -17,8 +23,8 @@ export default class SideMenu extends React.Component {
                 {this.state.isLogged ?
                   <div className="menu-options">
                     <div onClick={() => this.StudentOption()} id="option1" className="menu-option">Estudiantes</div>
-                    <div id="option2" className="menu-option">Docentes</div>
-                    <div id="option3" className="menu-option">Niveles</div>
+                    <div onClick={() => this.TeacherOption()} id="option2" className="menu-option">Docentes</div>
+                    <div onClick={() => this.LevelOption()} id="option3" className="menu-option">Niveles</div>
                     <div id="option4" className="menu-option">Actividades</div>
                   </div>
                   :

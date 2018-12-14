@@ -70,7 +70,7 @@
 
 #visualize-icon {
   background-color: #2BBEA2;
-  background-image: url(search-w.svg);
+  background-image: url(list-w.svg);
 }
 
 #add {
@@ -144,7 +144,7 @@
   width: 4vw;
   height: 4vw;
   background-color: #2BBEA2;
-  background-image: url(search-w.svg);
+  background-image: url(list-w.svg);
 }
 
 #min-add-icon {

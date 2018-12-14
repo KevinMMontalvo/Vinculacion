@@ -3,7 +3,7 @@ import DatePicker from 'react-date-picker';
 import ButterToast, { Cinnamon, POS_BOTTOM, POS_RIGHT, POS_TOP } from 'butter-toast';
 import TechnicalHelp from '../map/TechnicalHelp';
 
-export default class StudentForm extends React.Component
+export default class LevelForm extends React.Component
 {
 	constructor(props)
 	{
@@ -246,7 +246,7 @@ export default class StudentForm extends React.Component
 		return (<div>
 				<div className="student-form">
 					<div className="form-container">
-						<p className="input-label">Nombre del estudiante</p>
+						<p className="input-label">Nombre del docente</p>
 						<div id="vertical-input" className="student-input">
 							<input id="first-name-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
 							       placeholder="Primer nombre" className="vertical-input"></input>
@@ -259,79 +259,26 @@ export default class StudentForm extends React.Component
 						</div>
 					</div>
 					<div className="form-container">
-						<p className="input-label">Género</p>
-						<div className="input-container">
-							<select id="gender-select">
-								<option value="" selected disabled hidden>Selecione el género del estudiante</option>
-								<option value="Masculino">Masculino</option>
-								<option value="Masculino">Femenino</option>
-							</select>
-						</div>
-					</div>
-					<div className="form-container">
-						<p className="input-label">Fecha de nacimiento</p>
-						<div className="date-input-container">
-							<DatePicker
-								onChange={this.onChange}
-								value={this.state.date}
-								locate={this.lang}
-							/>
-						</div>
-					</div>
-					<div className="form-container">
-						<p className="input-label">Diagnóstico</p>
-						<div className="input-container">
-							<textarea id="diagnostic-input" placeholder="Observaciones sobre el estudiante"></textarea>
-						</div>
-					</div>
-					<div className="form-container">
-						<p className="input-label">Condición</p>
-						<div className="input-container">
-							<select id="condition-select">
-								<option value="" selected disabled hidden>Selecione la condición del estudiante</option>
-								<option value="Cívil">Civíl</option>
-								<option value="Militar">Militar</option>
-							</select>
-						</div>
-					</div>
-					<div className="form-container">
 						<p className="input-label">Nivel</p>
 						<div className="input-container">
 							<select id="level-select">
-								<option value="" selected disabled hidden>Selecione el nivel del estudiante</option>
+								<option value="" selected disabled hidden>Selecione el nivel del docente</option>
 								<option value="Nivel-1">Nivel1</option>
 								<option value="Nivel-2">Nivel2</option>
 							</select>
 						</div>
 					</div>
 					<div className="form-container">
-						<p className="input-label">Porcentaje de discapacidad</p>
+						<p className="input-label">Especialidad</p>
 						<div className="input-container">
-							<input id="percentage-of-disability-input" maxLength="2"
-							       onKeyPress={() => this.ValidateOnlyNumbers(event)} placeholder="%"
+							<input id="speciality-input"
+							       onKeyPress={() => this.ValidateOnlyLetters(event)} placeholder="Especialidad del docente"
 							       className="horizontal-input"/>
 						</div>
 					</div>
-					<div className="form-container">
-						<p className="input-label">Ayudas técnicas</p>
-						<div className="tech-help-input-container">
-							<input id="technical-help-input" placeholder="Tipo de ayuda"
-							       className="vertical-input"></input>
-							<div onClick={() => this.AddTechnicalHelp()} className="add-tech-help-button"></div>
-							<div className="added-tech-help-container">
-								<div className="tech-helps-title">Ayudas técnicas del estudiante</div>
-								{this.state.techHelps.map((techHelps) =>
-								{
-									return <TechnicalHelp remove={true}
-									                      RemoveTechnicalHelp={this.RemoveTechnicalHelp.bind(this)}
-									                      techHelps={techHelps} key={techHelps._id}></TechnicalHelp>;
-								})}
-							</div>
-						</div>
-					</div>
 					<div className="button-container">
-						<div onClick={() => this.CheckWarningMessages()} className="secondary-button">Completar
-							Registro
+						<div onClick={() => this.CheckWarningMessages()} className="secondary-button">
+							Completar Registro
 						</div>
 					</div>
 					<div className="separator"></div>
