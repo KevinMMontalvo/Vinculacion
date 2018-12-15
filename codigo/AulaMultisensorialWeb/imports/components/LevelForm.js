@@ -246,34 +246,20 @@ export default class LevelForm extends React.Component
 		return (<div>
 				<div className="student-form">
 					<div className="form-container">
-						<p className="input-label">Nombre del docente</p>
-						<div id="vertical-input" className="student-input">
-							<input id="first-name-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-							       placeholder="Primer nombre" className="vertical-input"></input>
-							<input id="second-name-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-							       placeholder="Segundo nombre" className="vertical-input"></input>
-							<input id="lastname-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-							       placeholder="Apellido paterno" className="vertical-input"></input>
-							<input id="mothers-lastname-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-							       placeholder="Apellido materno" className="vertical-input"></input>
-						</div>
-					</div>
-					<div className="form-container">
-						<p className="input-label">Nivel</p>
+						<p className="input-label">Temática</p>
 						<div className="input-container">
-							<select id="level-select">
-								<option value="" selected disabled hidden>Selecione el nivel del docente</option>
-								<option value="Nivel-1">Nivel1</option>
-								<option value="Nivel-2">Nivel2</option>
-							</select>
-						</div>
-					</div>
-					<div className="form-container">
-						<p className="input-label">Especialidad</p>
-						<div className="input-container">
-							<input id="speciality-input"
+							<input id="theme"
 							       onKeyPress={() => this.ValidateOnlyLetters(event)} placeholder="Especialidad del docente"
 							       className="horizontal-input"/>
+						</div>
+					</div>
+					<div className="form-container">
+						<p className="input-label">Rango de edades</p>
+						<div id="vertical-input" className="student-input">
+							<input id="min-age" onKeyPress={() => this.ValidateOnlyNumbers(event)}
+							       placeholder="Edad mínima" className="vertical-input" maxLength="2"></input>
+							<input id="max-age" onKeyPress={() => this.ValidateOnlyNumbers(event)}
+							       placeholder="Edad máxima" className="vertical-input" maxLength="2"></input>
 						</div>
 					</div>
 					<div className="button-container">
