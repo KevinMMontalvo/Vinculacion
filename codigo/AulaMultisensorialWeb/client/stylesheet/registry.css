@@ -6,6 +6,9 @@
   font-size: 0.9em;
   display: flex;
   justify-content: center;
+  margin-top: 0.5vh;
+  border-bottom: solid 2px;
+  border-color: #333;
 }
 
 .registry-row {
@@ -29,7 +32,7 @@
   display: flex;
   align-items: center;
   font-size: 4em;
-  background-color: #17A589;
+  background: linear-gradient(to bottom left, #2e86c1 0%, #2bbea2 100%);
   color: #FFF;
   text-transform: uppercase;
   animation: fade-in 0.5s;

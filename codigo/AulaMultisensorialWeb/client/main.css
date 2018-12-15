@@ -115,26 +115,34 @@
   font-family: 'Catamaran', sans-serif;
 }
 
+body {
+  background-color: #100F12;
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 0.5vw;
+    z-index: 5 !important;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
     background: #7F8C8D;
+    z-index: 5 !important;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: #566573;
     transition: 0.5s;
+    z-index: 5 !important;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #525D67;
     cursor: pointer;
+    z-index: 5 !important;
 }
 
 .input-container {
@@ -148,13 +156,13 @@
 
 .horizontal-input {
   border: none;
-  background-color: #F8F9F9;
-  border-bottom: solid 2px;
-  border-color: #AEB6BF;
+  background-color: #1E1D21;
+  border-bottom: solid 4px;
+  border-color: #333;
   width: 84%;
   transition: 0.25s;
   text-align: center;
-  color: #333;
+  color: #FFF;
   height: 5vh;
   font-size: 1em;
   text-transform: capitalize;
@@ -162,24 +170,33 @@
 
 .horizontal-input:focus {
   outline: none;
-  border-bottom: solid 4px;
+  border-bottom: solid 6px;
   border-color: #2980B9;
   width: 88%;
   background-color: transparent;
 }
 
+#username:focus {
+  border-color: #2BBEA2;
+}
+
+#password:focus {
+  border-color: #2980B9;
+}
+
 textarea {
   border: none;
-  background-color: #F8F9F9;
+  background-color: #1E1D21;
   border-bottom: solid 2px;
-  border-color: #AEB6BF;
+  border-color: #333;
   width: 84%;
   transition: 0.25s;
   text-align: center;
-  color: #333;
+  color: #FFF;
   height: 10vh;
   resize: none;
   font-size: 1.0em;
+  text-transform: capitalize;
 }
 
 textarea:focus {
@@ -199,7 +216,7 @@ textarea:focus {
 }
 
 .primary-button {
-  background-color: #2E86C1;
+  background: linear-gradient(to right, #2e86c1 0%, #2bbea2 100%);
   width: 90%;
   height: 100%;
   display: flex;
@@ -217,7 +234,7 @@ textarea:focus {
 }
 
 .secondary-button {
-  background-color: #2E86C1;
+  background: linear-gradient(to right, #2e86c1 0%, #2bbea2 100%);
   width: 84%;
   height: 100%;
   display: flex;
@@ -236,13 +253,13 @@ textarea:focus {
 
 .vertical-input {
   border: none;
-  background-color: #F8F9F9;
+  background-color: #1E1D21;
   border-left: solid 2px;
-  border-color: #AEB6BF;
+  border-color: #333;
   width: 20%;
   transition: 0.25s;
   text-align: center;
-  color: #333;
+  color: #FFF;
   font-size: 1.0em;
   margin-left: 1vw;
   text-transform: capitalize;
@@ -291,7 +308,8 @@ textarea:focus {
   left: 0.5vw;
   height: 5vh;
   border-left: solid 2px;
-  border-color: #AEB6BF;
+  border-color: #333;
+  color: #FFF;
 }
 
 .react-date-picker__wrapper {
@@ -302,29 +320,39 @@ textarea:focus {
 
 .react-date-picker__inputGroup {
   display: block !important;
-  background-color: #F8F9F9 !important;
+  background-color: #1E1D21 !important;
   text-align: center !important;
+  color: #FFF;
+}
+
+.react-date-picker__inputGroup__input {
+  color: #FFF !important;
 }
 
 .react-date-picker.react-date-picker--open.react-date-picker--enabled {
   width: 88%;
   transition: 0.5s;
   border-left: solid 4px;
-  border-color: #2980B9;
+  background-color: #1E1D21;
   height: 5vh;
   transition: 0.5s;
+}
+
+g {
+  stroke: white;
 }
 
 select {
   width: 84%;
   height: 5vh;
   border: none;
-  background-color: #F8F9F9;
+  background-color: #1E1D21;
   border-left: solid 2px;
-  border-color: #AEB6BF;
+  border-color: #333;
   font-size: 1em;
   transition: 0.5s;
   text-align-last: center;
+  color: #FFF;
 }
 
 select:focus {
@@ -360,15 +388,18 @@ select:focus {
 .record-container {
   position: relative;
   width: 65vw;
-  max-height: 70vh;
+  max-height: 67.5vh;
   overflow-y: scroll;
   animation: slide-right 1s ease-out;
 }
 
-.button {
-  position: fixed;
-  width: 10vw;
-  height: 10vw;
-  background-color: #333;
-  top: -5vw;
+.butter-alert.style__Div-sc-1url3us-0.jtQObZ {
+  border-radius: none;
+  box-shadow: none;
+  background-color: #000;
+  color: #FFF;
+}
+
+.butter-alert.style__Div-sc-1url3us-0.jtQObZ div.content {
+  color: #FFF;
 }

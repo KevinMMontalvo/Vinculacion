@@ -4,11 +4,12 @@
   height: 100vh;
   position: absolute;
   left: 20vw;
-  color: #333;
+  color: #FFF;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow-x: hidden;
+  background-color: #1a181d;
 }
 
 .main-info {
@@ -56,4 +57,9 @@
 #teacher-icon {
   background-image: url(teacher.svg);
   background-size: 2.5vw;
+}
+
+#level-icon {
+  background-image: url(level.svg);
+  background-size: 2vw;
 }

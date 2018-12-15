@@ -44,11 +44,11 @@
 .added-tech-help-container {
   width: 40%;
   height: 30vh;
-  background-color: #F8F9F9;
+  background-color: #1E1D21;
   margin-left: 1vw;
   margin-right: 1vw;
   border-bottom: solid 2px;
-  border-color: #AEB6BF;
+  border-color: #333;
 }
 
 .tech-helps-title {

@@ -1,0 +1,84 @@
+.record-tools {
+  position: relative;
+  width: 65vw;
+  height: 6vh;
+  background-color: #1E1D21;
+  margin-bottom: 2vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-input {
+  border: none;
+  width: 21.7vw;
+  background-color: #1E1D21;
+  border-left: solid 4px;
+  border-color: #333;
+  height: 100%;
+  transition: 0.25s;
+  text-align: center;
+  color: #FFF;
+  font-size: 1em;
+}
+
+.search-input:focus {
+  outline: none !important;
+  border-left: solid 6px;
+  border-color: #2980B9;
+  background-color: transparent;
+  border-bottom: none;
+}
+
+.sort-select {
+  width: 35vw;
+  height: 100%;
+}
+
+.sort-select:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.tool-input-container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: auto;
+}
+
+.search-icon {
+  width: 5vw;
+  height: 100%;
+  background-image: url(search-w.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 1vw;
+  background-color: #333;
+  margin-right: 0.1vw;
+  transition: 0.5s;
+}
+
+.search-icon:hover {
+  background-color: #2E2E2E;
+  cursor: pointer;
+}
+
+.sort-icon {
+  width: 3vw;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 1vw;
+  background-color: #333;
+  transition: 0.5s;
+}
+
+.sort-icon:hover {
+  background-color: #2E2E2E;
+  cursor: pointer;
+}
+
+#sort-acendent {
+  background-image: url(up-w.svg);
+}

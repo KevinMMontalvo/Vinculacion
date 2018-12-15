@@ -78,7 +78,8 @@ export default class StudentForm extends React.Component
 	{
 		ButterToast.raise({
 			content: <Cinnamon.Crisp
-				scheme={Cinnamon.Crisp.SCHEME_GREY}
+				className="butter-alert"
+				scheme={Cinnamon.Slim.SCHEME_BLUE}
 				content={() => <div>{field}</div>}
 				title={this.state.emptyInputMessage}
 				icon={<div className="alert-warning-icon"></div>}
@@ -90,7 +91,8 @@ export default class StudentForm extends React.Component
 	{
 		ButterToast.raise({
 			content: <Cinnamon.Crisp
-				scheme={Cinnamon.Crisp.SCHEME_GREY}
+				className="butter-alert"
+				scheme={Cinnamon.Slim.SCHEME_DARK}
 				content={() => <div>{"Estudiante registrado"}</div>}
 				title={this.state.successRegisteredMessage}
 				icon={<div className="alert-success-icon"></div>}
@@ -100,7 +102,6 @@ export default class StudentForm extends React.Component
 
 	ValidateEmptyInputs()
 	{
-		studentsController.getStudents()//
 		let firstName = document.getElementById('first-name-input').value;
 		let lastName = document.getElementById('lastname-input').value;
 		let level_id = document.getElementById('level-select').value;
@@ -209,7 +210,16 @@ export default class StudentForm extends React.Component
 		let gender = document.getElementById('gender-select').value;
 		let condition = document.getElementById('condition-select').value;
 		let technical_helps = this.state.techHelps;
-		let percentage_of_disability = parseInt(document.getElementById('percentage-of-disability-input').value);
+		let percentage_of_disability = document.getElementById('percentage-of-disability-input').value;
+		if (percentage_of_disability == ""){
+			percentage_of_disability = 0;
+		}
+		else {
+			percentage_of_disability = parseInt(percentage_of_disability);
+		}
+		if(technical_helps == ""){
+			technical_helps = new Array();
+		}
 		let student = {
 			names: names,
 			surnames: surnames,
@@ -342,7 +352,7 @@ export default class StudentForm extends React.Component
 						vertical: POS_TOP,
 						horizontal: POS_RIGHT
 					}}
-					timeout={7500}
+					timeout={72500}
 				/>
 			</div>);
 	}
@@ -352,7 +362,6 @@ export default class StudentForm extends React.Component
 TODO
 campo de nombres y apellidos no admite ñ y tildes--------later
 cuando no se ingresa una ayuda tecnica deberia enviar un array vacio, esta enviando null
-no se ha validado el ingreso del campo de porcentaje de discapacidad
 
 BUG
 cuando estas en el formulario de registro de estudiantes y se le da clic en alguna opcion del menu no carga nada.

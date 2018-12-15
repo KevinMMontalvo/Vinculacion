@@ -11,12 +11,13 @@ export default class Registry extends React.Component {
     }
 
     CalculateAge() {
-      var birthday = this.props.students.birthdate;
-      //var ageDifMs = Date.now() - birthday.getTime();
-      //var ageDate = new Date(ageDifMs);
-      /*this.setState({
+      var birthdate = new Date(this.props.students.birthdate);
+      var ageDifMs = Date.now() - birthdate.getTime();
+      var ageDate = new Date(ageDifMs);
+      this.setState({
         age: Math.abs(ageDate.getUTCFullYear() - 1970),
-      });*/
+        birthdate: birthdate,
+      });
     }
 
     componentWillMount(){
@@ -33,13 +34,16 @@ export default class Registry extends React.Component {
                     <b>Nombre:</b> <p>{this.props.students.names}</p>
                   </div>
                   <div className="registry-row">
+                    <b>Apellidos:</b> <p>{this.props.students.surnames}</p>
+                  </div>
+                  <div className="registry-row">
                     <b>Género:</b> <p>{this.props.students.gender}</p>
                   </div>
                   <div className="registry-row">
                     <b>Diagnostico:</b> <p>{this.props.students.diagnostic}</p>
                   </div>
                   <div className="registry-row">
-                    <b>Fecha de naciemiento:</b> <p></p>
+                    <b>Fecha de naciemiento:</b> <p>{this.state.birthdate. getDate() + ' - ' + (this.state.birthdate. getMonth() + 1) + ' - ' + this.state.birthdate. getUTCFullYear()}</p>
                   </div>
                   <div className="registry-row">
                     <b>Edad:</b> <p>{this.state.age}</p>
@@ -51,7 +55,7 @@ export default class Registry extends React.Component {
                     <b>Nivel:</b> <p>{this.props.students.level_id}</p>
                   </div>
                   <div className="registry-row">
-                    <b>Porcentaje de discapacidad:</b> <p>{this.props.students.percentage_of_disability}</p>
+                    <b>Porcentaje de discapacidad:</b> <p>{this.props.students.percentage_of_disability}%</p>
                   </div>
                   <div className="registry-row">
                     <b>Ayudas técnicas:</b>

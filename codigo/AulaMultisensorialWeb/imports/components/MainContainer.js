@@ -133,7 +133,7 @@ export default class MainContainer extends React.Component {
         showLevelRecords: false,
       });
       document.getElementById('main-title').innerHTML = "Niveles";
-      document.getElementsByClassName('main-icon')[0].id = "teacher-icon";
+      document.getElementsByClassName('main-icon')[0].id = "level-icon";
     }
     AddLevel(){
       this.setState({
