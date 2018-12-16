@@ -48,6 +48,7 @@ export default class StudentsRecords extends React.Component {
       const { MongoClient, ObjectId } = require('mongodb');
       this.setState({
         students: this.LoadStudents(),
+        allStudents: this.LoadStudents(),
       }, () => this.CheckLoadedData());
     }
 
@@ -90,29 +91,52 @@ export default class StudentsRecords extends React.Component {
     }
 
     ChangeSortWay(){
-      if(this.state.sortWay == "asc"){
-        this.setState({
-          sortWay: 'des'
-        }, () => this.SortData());
-        document.getElementById('sort-acendent').style.transform = "rotate(0deg)";
-      }
-      if(this.state.sortWay == "des"){
-        this.setState({
-          sortWay: 'asc'
-        }, () => this.SortData());
-        document.getElementById('sort-acendent').style.transform = "rotate(180deg)";
+      var attributeValue = document.getElementById('sort-select').value;
+      if(attributeValue != ""){
+        if(this.state.sortWay == "asc"){
+          this.setState({
+            sortWay: 'des'
+          }, () => this.SortData());
+          document.getElementById('sort-acendent').style.transform = "rotate(0deg)";
+        }
+        if(this.state.sortWay == "des"){
+          this.setState({
+            sortWay: 'asc'
+          }, () => this.SortData());
+          document.getElementById('sort-acendent').style.transform = "rotate(180deg)";
+        }
       }
     }
 
     SearchData(){
-      var Filter = require('data-filter');
-      const filter = new Filter(this.state.students);
-      var name = document.getElementById('sort-select').value;
-      var value = document.getElementById('search-input').value;
-      console.log(name);
-      console.log(value);
-      const filtered = filter.addFilter(name, value, 'string');
-      console.log(filtered);
+      var attributeValue = document.getElementById('sort-select').value;
+      var searchValue = document.getElementById('search-input').value;
+      var allStudents = this.state.allStudents;
+      var searchResultArray = [];
+      if(attributeValue == ""){
+        for (var i = 0; i < allStudents.length; i++) {
+          for (var j = 0; j < this.state.attributes.length; j++) {
+            if (allStudents[i][this.state.attributes[j].value].toString().toUpperCase().includes(searchValue.toString().toUpperCase())) {
+              searchResultArray.push(allStudents[i]);
+              break;
+            }
+          }
+        }
+      }
+      else{
+        for (var i = 0; i < this.state.students.length; i++) {
+          console.log('yes con atrib');
+          if (allStudents[i][attributeValue].toString().toUpperCase().includes(searchValue.toString().toUpperCase())) {
+            searchResultArray.push(allStudents[i]);
+          }
+        }
+      }
+      if(searchValue == ""){
+        searchResultArray = allStudents;
+      }
+      this.setState({
+        students: searchResultArray,
+      });
     }
 
     render() {
@@ -120,7 +144,7 @@ export default class StudentsRecords extends React.Component {
             <div>
               <div className="record-tools">
                 <div className="tool-input-container">
-                  <input id="search-input" placeholder="Buscar estudiante..." className="search-input"></input>
+                  <input onKeyPress={() => this.SearchData()} onKeyUp={() => this.SearchData()} onKeyDown={() => this.SearchData()} id="search-input" placeholder="Buscar estudiante..." className="search-input"></input>
                   <div onClick={() => this.SearchData()} className="search-icon"></div>
                 </div>
                 <div className="tool-input-container">
