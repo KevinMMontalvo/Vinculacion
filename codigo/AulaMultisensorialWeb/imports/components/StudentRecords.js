@@ -87,7 +87,11 @@ export default class StudentsRecords extends React.Component {
       sortJsonArray(studentsArray, attributeValue,this.state.sortWay);
       this.setState({
         students: studentsArray,
-      })
+      });
+      var searchValue = document.getElementById('search-input').value;
+      if(searchValue != ""){
+        this.SearchData();
+      }
     }
 
     ChangeSortWay(){
@@ -144,13 +148,14 @@ export default class StudentsRecords extends React.Component {
             <div>
               <div className="record-tools">
                 <div className="tool-input-container">
-                  <input onKeyPress={() => this.SearchData()} onKeyUp={() => this.SearchData()} onKeyDown={() => this.SearchData()} id="search-input" placeholder="Buscar estudiante..." className="search-input"></input>
+                  <input onKeyPress={() => this.SearchData()} onKeyUp={() => this.SearchData()} onKeyDown={() => this.SearchData()} id="search-input" placeholder="Ingrese lo que esta buscando..." className="search-input"></input>
                   <div onClick={() => this.SearchData()} className="search-icon"></div>
                 </div>
                 <div className="tool-input-container">
                   <div onClick={() => this.ChangeSortWay()} id="sort-acendent" className="sort-icon"></div>
                   <select onChange={() => this.SortData()} id="sort-select" className="sort-select">
                     <option value="" selected disabled hidden>Selecione el atributo para ordenar la información</option>
+                    <option value="">Ningún atributo</option>
                   </select>
                 </div>
               </div>

@@ -118,6 +118,7 @@
 body {
   background-color: #100F12;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 /* width */
