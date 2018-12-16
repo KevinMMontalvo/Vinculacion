@@ -168,7 +168,7 @@ export default class StudentForm extends React.Component
 
 	AddTechnicalHelp()
 	{
-		let techHelpName = document.getElementById('technical-help-input').value;
+		let techHelpName = this.CapitalizeFirstLetter(document.getElementById('technical-help-input').value.toString());
 		if (techHelpName == "")
 		{
 			this.ShowWarningMenssage("Ayuda técnica");
@@ -202,10 +202,10 @@ export default class StudentForm extends React.Component
 
 	AddStudent()
 	{
-		let names = document.getElementById('first-name-input').value + " " + document.getElementById('second-name-input').value;
-		let surnames = document.getElementById('lastname-input').value + " " + document.getElementById('mothers-lastname-input').value;
+		let names = this.CapitalizeFirstLetter(document.getElementById('first-name-input').value.toString()) + " " + this.CapitalizeFirstLetter(document.getElementById('second-name-input').value.toString());
+		let surnames = this.CapitalizeFirstLetter(document.getElementById('lastname-input').value.toString()) + " " + this.CapitalizeFirstLetter(document.getElementById('mothers-lastname-input').value.toString());
 		let level_id = document.getElementById('level-select').value;
-		let diagnostic = document.getElementById('diagnostic-input').value;
+		let diagnostic = this.CapitalizeFirstLetter(document.getElementById('diagnostic-input').value.toString());
 		let birthdate = this.state.date;
 		let gender = document.getElementById('gender-select').value;
 		let condition = document.getElementById('condition-select').value;
@@ -250,6 +250,10 @@ export default class StudentForm extends React.Component
 			birthdate: new Date(),
 			techHelps: [],
 		});
+	}
+
+	CapitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 	}
 
 	render()

@@ -154,10 +154,10 @@ export default class StudentsRecords extends React.Component {
   	{
       let way = "";
       if(this.state.sortWay == "asc"){
-        way = "Descendete";
+        way = "Descendente";
       }
       else {
-        way = "Ascendete";
+        way = "Ascendente";
       }
   		ButterToast.raise({
   			content: <Cinnamon.Crisp
