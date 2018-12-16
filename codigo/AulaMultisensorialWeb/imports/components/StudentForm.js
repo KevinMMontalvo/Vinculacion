@@ -60,7 +60,7 @@ export default class StudentForm extends React.Component
 			var key = theEvent.keyCode || theEvent.which;
 			key = String.fromCharCode(key);
 		}
-		var regex = /[a-zA-Z]|\1/;
+		var regex = /^[a-zA-ZñÑ\s\W]/;
 		if (!regex.test(key))
 		{
 			theEvent.returnValue = false;
@@ -357,13 +357,3 @@ export default class StudentForm extends React.Component
 			</div>);
 	}
 }
-
-/*
-TODO
-campo de nombres y apellidos no admite ñ y tildes--------later
-cuando no se ingresa una ayuda tecnica deberia enviar un array vacio, esta enviando null
-
-BUG
-cuando estas en el formulario de registro de estudiantes y se le da clic en alguna opcion del menu no carga nada.
-
- */

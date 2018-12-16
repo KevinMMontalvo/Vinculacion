@@ -9,12 +9,15 @@ export default class SideMenu extends React.Component {
     }
     StudentOption(){
       this.props.StudentOption();
+      this.props.MaximizeMenu();
     }
     TeacherOption(){
       this.props.TeacherOption();
+      this.props.MaximizeMenu();
     }
     LevelOption(){
       this.props.LevelOption();
+      this.props.MaximizeMenu();
     }
     render() {
         return(

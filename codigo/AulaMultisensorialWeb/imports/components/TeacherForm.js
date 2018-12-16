@@ -60,7 +60,7 @@ export default class TeacherForm extends React.Component
 			var key = theEvent.keyCode || theEvent.which;
 			key = String.fromCharCode(key);
 		}
-		var regex = /[a-zA-Z]|\1/;
+		var regex = /^[a-zA-ZñÑ\s\W]/;
 		if (!regex.test(key))
 		{
 			theEvent.returnValue = false;

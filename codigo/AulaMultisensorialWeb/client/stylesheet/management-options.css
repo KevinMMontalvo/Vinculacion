@@ -94,8 +94,8 @@
 
 #modify-icon {
   background-color: #138D75;
-  background-image: url(info-w.svg);
-  background-size: 0.75vw;
+  background-image: url(modify-w.svg);
+  background-size: 2vw;
 }
 
 #delete {
@@ -117,6 +117,7 @@
   width: auto;
   height: auto;
   z-index: 1000;
+  transition: 0.5s;
 }
 
 .min-management-option {
@@ -128,7 +129,7 @@
   left: 0.5vw;
   background-color: transparent !important;
   z-index: 1000;
-  transition: 0.5s;
+  transition: 0.5s ease-out;
 }
 
 .min-management-icon {
@@ -159,8 +160,8 @@
 
 #min-modify-icon {
   background-color: #138D75;
-  background-image: url(info-w.svg);
-  background-size: 0.6vw;
+  background-image: url(modify-w.svg);
+  background-size: 1.2vw;
   width: 3.6vw;
   height: 3.6vw;
   position: relative;

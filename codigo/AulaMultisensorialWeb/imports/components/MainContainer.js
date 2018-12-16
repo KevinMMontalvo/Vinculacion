@@ -23,6 +23,7 @@ export default class MainContainer extends React.Component {
           levelOption: false,
           addLevelForm: false,
           showLevelRecords: false,
+          isMenuMinimized: false,
         }
     }
 
@@ -164,11 +165,44 @@ export default class MainContainer extends React.Component {
       });
     }
 
+    MaximizeMenu(){
+      if(this.state.isMenuMinimized){
+        this.setState({
+          isMenuMinimized: !this.state.isMenuMinimized,
+        });
+        var container = document.getElementsByClassName('min-management-menu');
+        var menu = document.getElementsByClassName('min-management-options');
+        var options = document.getElementsByClassName('min-management-option');
+        var icons = document.getElementsByClassName('min-management-icon');
+        var texts = document.getElementsByClassName('min-management-text');
+        icons[0].id = 'visualize-icon';
+        icons[1].id = 'add-icon';
+        icons[2].id = 'modify-icon';
+        icons[3].id = 'delete-icon';
+        texts[0].id = 'vizualize-text';
+        texts[1].id = 'add-text';
+        texts[2].id = 'modify-text';
+        texts[3].id = 'delete-text';
+        container[0].className = 'management-menu';
+        menu[0].className = 'management-options';
+        for (var i = 0; i < 4; i++) {
+          options[0].className = 'management-option';
+          icons[0].className = 'management-icon';
+          texts[0].className = 'management-text';
+        }
+      }
+    }
+
+    MinimizeMenu(value){
+      this.setState({
+        isMenuMinimized: value,
+      });
+    }
 
     render() {
         return(
             <div>
-            <SideMenu LevelOption={this.LevelOption.bind(this)} TeacherOption={this.TeacherOption.bind(this)} StudentOption={this.StudentOption.bind(this)}/>
+            <SideMenu MaximizeMenu={() => this.MaximizeMenu()} LevelOption={this.LevelOption.bind(this)} TeacherOption={this.TeacherOption.bind(this)} StudentOption={this.StudentOption.bind(this)}/>
               <div className="main-container">
                 <div id="main-info" className="main-info">
                   <div id="login-icon" className="main-icon"></div>
@@ -177,7 +211,7 @@ export default class MainContainer extends React.Component {
                 {
                   this.state.studentOption ?
                   <div>
-                    <StudentMenu ShowStudentRecords={this.ShowStudentRecords.bind(this)} AddStudent={this.AddStudent.bind(this)}/>
+                    <StudentMenu MinimizeMenu={this.MinimizeMenu.bind(this)} isMenuMinimized={this.state.isMenuMinimized} ShowStudentRecords={this.ShowStudentRecords.bind(this)} AddStudent={this.AddStudent.bind(this)}/>
                     {
                       this.state.addStudentForm ?
                       <StudentForm/>
@@ -198,7 +232,7 @@ export default class MainContainer extends React.Component {
                 {
                   this.state.teacherOption ?
                   <div>
-                    <TeacherMenu ShowTeachersRecords={this.ShowTeachersRecords.bind(this)} AddTeacher={this.AddTeacher.bind(this)}/>
+                    <TeacherMenu MinimizeMenu={this.MinimizeMenu.bind(this)} isMenuMinimized={this.state.isMenuMinimized} ShowTeachersRecords={this.ShowTeachersRecords.bind(this)} AddTeacher={this.AddTeacher.bind(this)}/>
                     {
                       this.state.addTeacherForm ?
                       <TeacherForm/>
@@ -219,7 +253,7 @@ export default class MainContainer extends React.Component {
                 {
                   this.state.levelOption ?
                   <div>
-                    <LevelMenu ShowLevelsRecords={this.ShowLevelsRecords.bind(this)} AddLevel={this.AddLevel.bind(this)}/>
+                    <LevelMenu MinimizeMenu={this.MinimizeMenu.bind(this)} isMenuMinimized={this.state.isMenuMinimized} ShowLevelsRecords={this.ShowLevelsRecords.bind(this)} AddLevel={this.AddLevel.bind(this)}/>
                     {
                       this.state.addLevelForm ?
                       <LevelForm/>

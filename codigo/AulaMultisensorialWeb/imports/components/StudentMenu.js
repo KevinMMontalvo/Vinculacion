@@ -4,12 +4,13 @@ export default class StudentMenu extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          isMenuMinimized: false,
+
         }
     }
 
     MinimizeMenu(){
-      if(!this.state.isMenuMinimized){
+      this.props.MinimizeMenu(true);
+      if(!this.props.isMenuMinimized){
         var container = document.getElementsByClassName('management-menu');
         var menu = document.getElementsByClassName('management-options');
         var options = document.getElementsByClassName('management-option');
@@ -31,9 +32,6 @@ export default class StudentMenu extends React.Component {
           texts[0].className = 'min-management-text';
         }
       }
-      this.setState({
-        isMenuMinimized: true,
-      });
     }
 
     AddStudent(){
@@ -45,6 +43,7 @@ export default class StudentMenu extends React.Component {
       this.MinimizeMenu();
       this.props.ShowStudentRecords();
     }
+
 
     render() {
         return(
