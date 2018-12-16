@@ -387,6 +387,15 @@ select:focus {
   height: 100%;
 }
 
+.alert-info-icon {
+  background-image: url(info-w.svg);
+  background-position: center;
+  background-size: 0.5vw;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
 .record-container {
   position: relative;
   width: 65vw;

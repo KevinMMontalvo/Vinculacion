@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Registry from '../map/Registry';
 import Filter, { Sort, FilterValue } from 'data-engine';
+import ButterToast, { Cinnamon, POS_BOTTOM, POS_RIGHT, POS_TOP } from 'butter-toast';
 
 export default class StudentsRecords extends React.Component {
     constructor(props) {
@@ -11,6 +12,7 @@ export default class StudentsRecords extends React.Component {
           allStudents: [],
           isDataLoaded: false,
           sortWay: 'des',
+          sortAttribute: 'des',
           attributes: [
                         {
                           value: 'names',
@@ -78,6 +80,10 @@ export default class StudentsRecords extends React.Component {
         option.value = this.state.attributes[i].value;
         sortSelect.add(option);
       }
+      var option = document.createElement("option");
+      option.text = "Ningún atributo";
+      option.value = "";
+      sortSelect.add(option);
     }
 
     SortData(){
@@ -109,6 +115,7 @@ export default class StudentsRecords extends React.Component {
           }, () => this.SortData());
           document.getElementById('sort-acendent').style.transform = "rotate(180deg)";
         }
+        this.ShowSortWayMessage();
       }
     }
 
@@ -143,6 +150,31 @@ export default class StudentsRecords extends React.Component {
       });
     }
 
+    ShowSortWayMessage()
+  	{
+      let way = "";
+      if(this.state.sortWay == "asc"){
+        way = "Descendete";
+      }
+      else {
+        way = "Ascendete";
+      }
+  		ButterToast.raise({
+  			content: <Cinnamon.Crisp
+  				className="butter-alert"
+  				scheme={Cinnamon.Slim.SCHEME_DARK}
+  				content={() => <div>{way}</div>}
+  				title={"Ordenamiento"}
+  				icon={<div className="alert-info-icon"></div>}
+  			/>
+  		});
+      this.dismissAll();
+  	}
+
+    dismissAll = () => {
+        this.tray.dismissAll();
+    }
+
     render() {
         return(
             <div>
@@ -155,7 +187,6 @@ export default class StudentsRecords extends React.Component {
                   <div onClick={() => this.ChangeSortWay()} id="sort-acendent" className="sort-icon"></div>
                   <select onChange={() => this.SortData()} id="sort-select" className="sort-select">
                     <option value="" selected disabled hidden>Selecione el atributo para ordenar la información</option>
-                    <option value="">Ningún atributo</option>
                   </select>
                 </div>
               </div>
@@ -173,6 +204,14 @@ export default class StudentsRecords extends React.Component {
                   undefined
                 }
               </div>
+              <ButterToast
+      					position={{
+      						vertical: POS_TOP,
+      						horizontal: POS_RIGHT
+      					}}
+      					timeout={3000}
+                ref={tray => this.tray = tray}
+      				/>
             </div>
         );
     }

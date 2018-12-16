@@ -352,7 +352,7 @@ export default class StudentForm extends React.Component
 						vertical: POS_TOP,
 						horizontal: POS_RIGHT
 					}}
-					timeout={72500}
+					timeout={7500}
 				/>
 			</div>);
 	}
