@@ -9,6 +9,57 @@ import TeacherForm from '../components/TeacherForm';
 import LevelMenu from '../components/LevelMenu';
 import LevelForm from '../components/LevelForm';
 
+var canvas;
+var c;
+var galaxy = [];
+for (var i = 0; i < 100; i++) {
+  galaxy.push(new Star(Math.random() * innerWidth, Math.random() * innerHeight, Math.random() * 0.08, Math.random() * 0.09, Math.random() * 3));
+}
+
+function animate(){
+  requestAnimationFrame(animate);
+  c.clearRect(0, 0, innerWidth, innerHeight);
+  for (var i = 0; i < galaxy.length; i++) {
+    galaxy[i].update();
+  }
+}
+
+function Star(x, y, dx, dy, radius) {
+  this.x = x;
+  this.y = y;
+  this.dx = dx;
+  this.dy = dy;
+  this.radius = radius;
+  this.draw = function() {
+    c.beginPath();
+    c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    c.strokeStyle = '#FFFFFF';
+    c.fillStyle = '#FFFFFF';
+    c.stroke();
+    c.fill();
+  }
+  this.update = function() {
+    if(this.x + this.radius > innerWidth || this.x - this.radius < 0){
+      this.dx = -this.dx;
+    }
+    if(this.y + this.radius > innerHeight || this.y - this.radius < 0){
+      this.dy = -this.dy;
+    }
+      this.x += this.dx;
+      this.y += this.dy;
+      this.draw();
+  }
+}
+
+function initializeSpaceCanvas(){
+  canvas = document.getElementById('space-canvas');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  c = canvas.getContext('2d');
+  animate();
+}
+
+
 export default class MainContainer extends React.Component {
     constructor(props) {
         super(props);
@@ -199,10 +250,25 @@ export default class MainContainer extends React.Component {
       });
     }
 
+
+    InitializeSpaceCanvas(){
+      initializeSpaceCanvas();
+    }
+
+
+
+
+    componentDidMount(){
+      this.InitializeSpaceCanvas();
+    }
+
     render() {
         return(
             <div>
-            <SideMenu MaximizeMenu={() => this.MaximizeMenu()} LevelOption={this.LevelOption.bind(this)} TeacherOption={this.TeacherOption.bind(this)} StudentOption={this.StudentOption.bind(this)}/>
+              <canvas id="space-canvas">
+
+              </canvas>
+              <SideMenu MaximizeMenu={() => this.MaximizeMenu()} LevelOption={this.LevelOption.bind(this)} TeacherOption={this.TeacherOption.bind(this)} StudentOption={this.StudentOption.bind(this)}/>
               <div className="main-container">
                 <div id="main-info" className="main-info">
                   <div id="login-icon" className="main-icon"></div>
