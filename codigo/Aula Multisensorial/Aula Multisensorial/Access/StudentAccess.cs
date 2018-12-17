@@ -1,12 +1,8 @@
 ﻿using Aula_Multisensorial.Model;
 using Aula_Multisensorial.Utils;
 using MongoDB.Bson;
-using MongoDB.Bson.IO;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
-using System;
 using System.Collections.Generic;
 
 namespace Aula_Multisensorial.Access
@@ -28,6 +24,7 @@ namespace Aula_Multisensorial.Access
         {
             BsonDocument document = new BsonDocument(student);
 
+            //cuando no se ingresa ayudas tecnicas se retorna null, la siguiente linea cambia a un array vacio
             if(document.GetValue("technical_helps").IsBsonNull)
             {
                 document.Set("technical_helps", new BsonArray());
@@ -45,6 +42,22 @@ namespace Aula_Multisensorial.Access
             List<Student> studentsList = studentsCollection.Find(_ => true).ToList();
             //Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(studentsList));
             return Newtonsoft.Json.JsonConvert.SerializeObject(studentsList);
+        }
+
+        public void ModifyStudent(Dictionary<string, object> student)
+        {
+            BsonDocument document = new BsonDocument(student);
+
+            string id = document.GetValue("_id").AsString;
+            FilterDefinition<Student> filter = Builders<Student>.Filter.Eq("_id", id);
+            Student objectStudent = BsonSerializer.Deserialize<Student>(document);
+            studentsCollection.ReplaceOne(filter,objectStudent);
+        }
+
+        public void DeleteStudent(string id)
+        {
+            FilterDefinition<Student> filter = Builders<Student>.Filter.Eq("_id", id);
+            studentsCollection.DeleteOne(filter);
         }
     }
 }
