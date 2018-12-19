@@ -67,7 +67,7 @@ namespace Aula_Multisensorial.Model
         }
     }
 
-    public class Technical_Helps
+    class Technical_Helps
     {
         [BsonElement("_id")]
         [JsonProperty(PropertyName = "_id")]

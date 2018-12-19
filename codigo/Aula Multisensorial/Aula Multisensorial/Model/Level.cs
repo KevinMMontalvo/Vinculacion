@@ -1,37 +1,38 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace Aula_Multisensorial.Model
 {
     class Level
     {
         [BsonId]
-        private ObjectId id;
+        [BsonRepresentation(BsonType.ObjectId)]
+        [JsonProperty(PropertyName = "_id")]
+        public string Id { get; set; }
 
         [BsonElement("name")]
-        private string name;
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         [BsonElement("min_age")]
-        private int minAge;
+        [JsonProperty(PropertyName = "min_age")]
+        public int MinAge { get; set; }
 
         [BsonElement("max_age")]
-        private int maxAge;
+        [JsonProperty(PropertyName = "max_age")]
+        public int MaxAge { get; set; }
 
         public Level()
         {
         }
 
-        public Level(ObjectId id, string name, int minAge, int maxAge)
+        public Level(string id, string name, int minAge, int maxAge)
         {
-            this.Id = id;
-            this.Name = name;
-            this.MinAge = minAge;
-            this.MaxAge = maxAge;
+            Id = id;
+            Name = name;
+            MinAge = minAge;
+            MaxAge = maxAge;
         }
-
-        public ObjectId Id { get => id; set => id = value; }
-        public string Name { get => name; set => name = value; }
-        public int MinAge { get => minAge; set => minAge = value; }
-        public int MaxAge { get => maxAge; set => maxAge = value; }
     }
 }

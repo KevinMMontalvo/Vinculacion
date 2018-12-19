@@ -288,7 +288,7 @@ export default class StudentForm extends React.Component
 			technical_helps: technical_helps,
 			percentage_of_disability: percentage_of_disability,
 		};
-		console.log(student);
+		studentsController.modifyStudent(student);
 		this.ClearAllFields();
 		this.ShowModifySuccessMenssage();
 		this.props.CloseModifyForm();
