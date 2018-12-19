@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Modal from 'react-responsive-modal';
 import TechnicalHelp from '../map/TechnicalHelp';
 
 export default class Registry extends React.Component {
@@ -24,6 +24,28 @@ export default class Registry extends React.Component {
       this.CalculateAge();
     }
 
+    ShowModifyForm(student) {
+      this.props.ShowModifyForm(student);
+    }
+
+    onOpenModal = () => {
+      this.setState({ openDeleteModal: true });
+    };
+
+    onCloseModal = () => {
+      this.setState({ openDeleteModal: false });
+    };
+
+    ShowDeleteConfirmation() {
+      this.onOpenModal();
+    }
+
+    DeleteStudent(student) {
+      console.log(student._id.$oid.toString());
+      this.onCloseModal();
+      this.props.ShowDeletedRegistry();
+    }
+
     render() {
         return(
             <div>
@@ -43,7 +65,7 @@ export default class Registry extends React.Component {
                     <b>Diagnostico:</b> <p>{this.props.students.diagnostic}</p>
                   </div>
                   <div className="registry-row">
-                    <b>Fecha de naciemiento:</b> <p>{this.state.birthdate. getDate() + ' - ' + (this.state.birthdate. getMonth() + 1) + ' - ' + this.state.birthdate. getUTCFullYear()}</p>
+                    <b>Fecha de naciemiento:</b> <p>{this.state.birthdate.getDate() + ' - ' + (this.state.birthdate. getMonth() + 1) + ' - ' + this.state.birthdate. getUTCFullYear()}</p>
                   </div>
                   <div className="registry-row">
                     <b>Edad:</b> <p>{this.state.age}</p>
@@ -69,6 +91,29 @@ export default class Registry extends React.Component {
                     </div>
                   </div>
                 </div>
+                {
+                  this.props.modify ?
+                  <div onClick={() => this.ShowModifyForm(this.props.students)} className="registry-modify-button"></div>
+                  :
+                  undefined
+                }
+                {
+                  this.props.delete ?
+                  <div>
+                    <Modal open={this.state.openDeleteModal} onClose={this.onCloseModal} center>
+                      <div className="delete-message-container">
+                        <p>¿Esta segur@ que desea eliminar este registro?</p>
+                        <div className="delete-mesagge-options">
+                          <div onClick={() => this.DeleteStudent(this.props.students)} id="delete-ok" className="delete-mesasage-button">Si</div>
+                          <div onClick={() => this.onCloseModal()} id="delete-cancel" className="delete-mesasage-button">No</div>
+                        </div>
+                      </div>
+                    </Modal>
+                    <div onClick={() => this.ShowDeleteConfirmation()} className="registry-delete-button"></div>
+                  </div>
+                  :
+                  undefined
+                }
               </div>
             </div>
         );

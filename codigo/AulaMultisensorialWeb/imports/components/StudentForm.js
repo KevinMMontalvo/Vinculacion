@@ -20,6 +20,7 @@ export default class StudentForm extends React.Component
 			},],
 			emptyInputMessage: "Existen campos vacios: ",
 			successRegisteredMessage: "Registro completo",
+			successModifiedMessage: "Cambios realizados",
 			techHelps: [],
 			emptyFields: true,
 		};
@@ -87,7 +88,7 @@ export default class StudentForm extends React.Component
 		});
 	}
 
-	ShowSuccessMenssage()
+	ShowAddSuccessMenssage()
 	{
 		ButterToast.raise({
 			content: <Cinnamon.Crisp
@@ -95,6 +96,19 @@ export default class StudentForm extends React.Component
 				scheme={Cinnamon.Slim.SCHEME_DARK}
 				content={() => <div>{"Estudiante registrado"}</div>}
 				title={this.state.successRegisteredMessage}
+				icon={<div className="alert-success-icon"></div>}
+			/>
+		});
+	}
+
+	ShowModifySuccessMenssage()
+	{
+		ButterToast.raise({
+			content: <Cinnamon.Crisp
+				className="butter-alert"
+				scheme={Cinnamon.Slim.SCHEME_DARK}
+				content={() => <div>{"Registro modificado"}</div>}
+				title={this.state.successModifiedMessage}
 				icon={<div className="alert-success-icon"></div>}
 			/>
 		});
@@ -160,9 +174,16 @@ export default class StudentForm extends React.Component
 		}
 		if (validationArray.length == 0)
 		{
-			this.setState({
-				emptyFields: false,
-			}, () => this.AddStudent());
+			if(this.props.studentToModify == undefined){
+				this.setState({
+					emptyFields: false,
+				}, () => this.AddStudent());
+			}
+			else{
+				this.setState({
+					emptyFields: false,
+				}, () => this.ModifyStudent());
+			}
 		}
 	}
 
@@ -233,8 +254,46 @@ export default class StudentForm extends React.Component
 		};
 		studentsController.insertStudent(student);
 		this.ClearAllFields();
-		this.ShowSuccessMenssage();
+		this.ShowAddSuccessMenssage();
 	}
+
+	ModifyStudent()
+	{
+		let names = this.CapitalizeFirstLetter(document.getElementById('first-name-input').value.toString()) + " " + this.CapitalizeFirstLetter(document.getElementById('second-name-input').value.toString());
+		let surnames = this.CapitalizeFirstLetter(document.getElementById('lastname-input').value.toString()) + " " + this.CapitalizeFirstLetter(document.getElementById('mothers-lastname-input').value.toString());
+		let level_id = document.getElementById('level-select').value;
+		let diagnostic = this.CapitalizeFirstLetter(document.getElementById('diagnostic-input').value.toString());
+		let birthdate = this.state.date;
+		let gender = document.getElementById('gender-select').value;
+		let condition = document.getElementById('condition-select').value;
+		let technical_helps = this.state.techHelps;
+		let percentage_of_disability = document.getElementById('percentage-of-disability-input').value;
+		if (percentage_of_disability == ""){
+			percentage_of_disability = 0;
+		}
+		else {
+			percentage_of_disability = parseInt(percentage_of_disability);
+		}
+		if(technical_helps == ""){
+			technical_helps = new Array();
+		}
+		let student = {
+			names: names,
+			surnames: surnames,
+			level_id: level_id,
+			diagnostic: diagnostic,
+			birthdate: birthdate,
+			gender: gender,
+			condition: condition,
+			technical_helps: technical_helps,
+			percentage_of_disability: percentage_of_disability,
+		};
+		console.log(student);
+		this.ClearAllFields();
+		this.ShowModifySuccessMenssage();
+		this.props.CloseModifyForm();
+	}
+
 
 	ClearAllFields(){
 		document.getElementById('first-name-input').value = "";
@@ -254,6 +313,25 @@ export default class StudentForm extends React.Component
 
 	CapitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+
+	componentDidMount(){
+		if(this.props.studentToModify != undefined){
+			var names = this.props.studentToModify.names.split(" ");
+			document.getElementById('first-name-input').value = names[0];
+			document.getElementById('second-name-input').value = names[1];
+			var surnames = this.props.studentToModify.surnames.split(" ");
+			document.getElementById('lastname-input').value = surnames[0];
+			document.getElementById('mothers-lastname-input').value = surnames[1];
+			document.getElementById('level-select').value = this.props.studentToModify.level_id;
+			document.getElementById('diagnostic-input').value = this.props.studentToModify.diagnostic;
+			document.getElementById('gender-select').value = this.props.studentToModify.gender;
+			document.getElementById('condition-select').value = this.props.studentToModify.condition;
+			document.getElementById('percentage-of-disability-input').value = this.props.studentToModify.percentage_of_disability;
+			this.setState({
+				techHelps: this.props.studentToModify.technical_helps,
+			});
+		}
 	}
 
 	render()
@@ -345,8 +423,13 @@ export default class StudentForm extends React.Component
 						</div>
 					</div>
 					<div className="button-container">
-						<div onClick={() => this.CheckWarningMessages()} className="secondary-button">Completar
-							Registro
+						<div onClick={() => this.CheckWarningMessages()} className="secondary-button">
+							{
+								this.props.studentToModify != undefined ?
+									<div>Modificar Registros</div>
+								:
+									<div>Completar Registro</div>
+							}
 						</div>
 					</div>
 					<div className="separator"></div>

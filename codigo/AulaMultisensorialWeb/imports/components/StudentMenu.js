@@ -44,6 +44,15 @@ export default class StudentMenu extends React.Component {
       this.props.ShowStudentRecords();
     }
 
+    ModifyStudent(){
+      this.MinimizeMenu();
+      this.props.ShowModifyButton();
+    }
+
+    DeleteStudent(){
+      this.MinimizeMenu();
+      this.props.ShowDeleteButton();
+    }
 
     render() {
         return(
@@ -58,11 +67,11 @@ export default class StudentMenu extends React.Component {
                     <div id="add-icon" className="management-icon"></div>
                     <div className="management-text">Registrar estudiantes</div>
                   </div>
-                  <div id="modify" className="management-option">
+                  <div onClick={() => this.ModifyStudent()} id="modify" className="management-option">
                     <div id="modify-icon" className="management-icon"></div>
                     <div className="management-text">Modificar información</div>
                   </div>
-                  <div id="delete" className="management-option">
+                  <div onClick={() => this.DeleteStudent()} id="delete" className="management-option">
                     <div id="delete-icon" className="management-icon"></div>
                     <div className="management-text">Eliminar registros</div>
                   </div>

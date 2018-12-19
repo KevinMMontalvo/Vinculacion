@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import StudentForm from '../components/StudentForm';
 import Registry from '../map/Registry';
 import Filter, { Sort, FilterValue } from 'data-engine';
 import ButterToast, { Cinnamon, POS_BOTTOM, POS_RIGHT, POS_TOP } from 'butter-toast';
@@ -42,7 +42,7 @@ export default class StudentsRecords extends React.Component {
                           value: 'percentage_of_disability',
                           text: 'Procentaje de discapacidad'
                         }
-                      ]
+                      ],
         }
     }
 
@@ -67,7 +67,8 @@ export default class StudentsRecords extends React.Component {
     }
 
     LoadStudents() {
-      var studentsString = studentsController.getStudents();
+      //var studentsString = studentsController.getStudents();
+      var studentsString = '[{ "_id": { "$oid": "5c106a8c75c6cfe7a4adc8d1" }, "names": "Mateo Francisco", "surnames": "Mateo Aldaz", "level_id": "Masculino", "diagnostic": "discapacidad auditiva", "birthdate": { "$date": "1988-12-07T10:00:00.000Z" }, "gender": "Masculino", "condition": "Civil", "technical_helps": [ { "name": "jhgasd", "_id": 0 }, { "name": "kjabsd", "_id": 1 } ], "percentage_of_disability": 57 },{ "_id": { "$oid": "5c107c7e370512508047ad57" }, "names": "Kevin Marcelo", "surnames": "Montalvo Velasteguí", "level_id": "Masculino", "diagnostic": "adfsaf", "birthdate": { "$date": "2018-12-12T08:11:33.082Z" }, "gender": "Masculino", "condition": "Masculino", "technical_helps": [ { "name": "pokp", "_id": 0 } ], "percentage_of_disability": 55 },{ "_id": { "$oid": "5c12975575c6cfc7cc90b7b7" }, "names": "Pepito Juan", "surnames": "Perez ", "level_id": "Nivel-2", "diagnostic": "Nada que agregar", "birthdate": { "$date": "2007-12-13T10:00:00.000Z" }, "gender": "Masculino", "condition": "Cívil", "technical_helps": [ { "name": "Silla de ruedas", "_id": 0 } ], "percentage_of_disability": 22 },{ "_id": { "$oid": "5c16712075c6cf46ec886665" }, "names": "Prueba Capitialize", "surnames": "Tíldes Etcetc", "level_id": "Nivel-2", "diagnostic": "ÉóéñÑé ajvsdjas", "birthdate": { "$date": "2004-01-08T10:00:00.000Z" }, "gender": "Masculino", "condition": "Cívil", "technical_helps": [], "percentage_of_disability": 77 }]';
       var students = JSON.parse(studentsString);
       return students;
     }
@@ -136,7 +137,6 @@ export default class StudentsRecords extends React.Component {
       }
       else{
         for (var i = 0; i < this.state.students.length; i++) {
-          console.log('yes con atrib');
           if (allStudents[i][attributeValue].toString().toUpperCase().includes(searchValue.toString().toUpperCase())) {
             searchResultArray.push(allStudents[i]);
           }
@@ -150,8 +150,7 @@ export default class StudentsRecords extends React.Component {
       });
     }
 
-    ShowSortWayMessage()
-  	{
+    ShowSortWayMessage(){
       let way = "";
       if(this.state.sortWay == "asc"){
         way = "Descendente";
@@ -175,43 +174,74 @@ export default class StudentsRecords extends React.Component {
         this.tray.dismissAll();
     }
 
+    ShowModifyForm(student){
+      this.props.ShowModifyForm();
+      this.setState({
+        studentToModify: student,
+      });
+    }
+
+    ShowDeletedRegistry(){
+  		ButterToast.raise({
+  			content: <Cinnamon.Crisp
+  				className="butter-alert"
+  				scheme={Cinnamon.Slim.SCHEME_DARK}
+  				content={() => <div>{"Eliminado"}</div>}
+  				title={"Registro"}
+  				icon={<div className="alert-info-icon"></div>}
+  			/>
+  		});
+      this.dismissAll();
+  	}
+
+    CloseModifyForm(){
+      this.props.CloseModifyForm();
+    }
+
     render() {
         return(
             <div>
-              <div className="record-tools">
-                <div className="tool-input-container">
-                  <input onKeyPress={() => this.SearchData()} onKeyUp={() => this.SearchData()} onKeyDown={() => this.SearchData()} id="search-input" placeholder="Ingrese lo que esta buscando..." className="search-input"></input>
-                  <div onClick={() => this.SearchData()} className="search-icon"></div>
-                </div>
-                <div className="tool-input-container">
-                  <div onClick={() => this.ChangeSortWay()} id="sort-acendent" className="sort-icon"></div>
-                  <select onChange={() => this.SortData()} id="sort-select" className="sort-select">
-                    <option value="" selected disabled hidden>Selecione el atributo para ordenar la información</option>
-                  </select>
-                </div>
-              </div>
-              <div className="record-container">
-                {
-                  this.state.isDataLoaded ?
-                  <div>
-                    {this.state.students.map((students) =>
-                      {
-                        return <Registry students={students} key={students._id}></Registry>;
-                      })
+              {
+                this.props.showModifyForm ?
+                  <StudentForm CloseModifyForm={() => this.CloseModifyForm()} studentToModify={this.state.studentToModify}/>
+                :
+                <div>
+                  <div className="record-tools">
+                    <div className="tool-input-container">
+                      <input onKeyPress={() => this.SearchData()} onKeyUp={() => this.SearchData()} onKeyDown={() => this.SearchData()} id="search-input" placeholder="Ingrese lo que esta buscando..." className="search-input"></input>
+                      <div onClick={() => this.SearchData()} className="search-icon"></div>
+                    </div>
+                    <div className="tool-input-container">
+                      <div onClick={() => this.ChangeSortWay()} id="sort-acendent" className="sort-icon"></div>
+                      <select onChange={() => this.SortData()} id="sort-select" className="sort-select">
+                        <option value="" selected disabled hidden>Selecione el atributo para ordenar la información</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="record-container">
+                    {
+                      this.state.isDataLoaded ?
+                      <div>
+                        {this.state.students.map((students) =>
+                          {
+                            return <Registry ShowDeletedRegistry={() => this.ShowDeletedRegistry()} delete={this.props.delete} ShowModifyForm={this.ShowModifyForm.bind(this)} modify={this.props.modify} students={students} key={students._id}></Registry>;
+                          })
+                        }
+                      </div>
+                      :
+                      undefined
                     }
                   </div>
-                  :
-                  undefined
-                }
-              </div>
-              <ButterToast
-      					position={{
-      						vertical: POS_TOP,
-      						horizontal: POS_RIGHT
-      					}}
-      					timeout={3000}
-                ref={tray => this.tray = tray}
-      				/>
+                  <ButterToast
+          					position={{
+          						vertical: POS_TOP,
+          						horizontal: POS_RIGHT
+          					}}
+          					timeout={3000}
+                    ref={tray => this.tray = tray}
+          				/>
+                </div>
+              }
             </div>
         );
     }
