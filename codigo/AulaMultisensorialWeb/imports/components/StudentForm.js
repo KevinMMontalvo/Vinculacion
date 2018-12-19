@@ -278,6 +278,7 @@ export default class StudentForm extends React.Component
 			technical_helps = new Array();
 		}
 		let student = {
+			_id: this.props.studentToModify._id,
 			names: names,
 			surnames: surnames,
 			level_id: level_id,
