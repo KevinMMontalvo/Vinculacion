@@ -103,6 +103,8 @@
     <Compile Include="Model\Teacher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\ArduinoConnection.cs" />
+    <Compile Include="Utils\ArduinoController.cs" />
     <Compile Include="Utils\DatabaseConnection.cs" />
     <EmbeddedResource Include="CEFForm.resx">
       <DependentUpon>CEFForm.cs</DependentUpon>

@@ -8,14 +8,13 @@ namespace Aula_Multisensorial.Utils
         private static readonly string URL = "ds041167.mlab.com:41167/aula-multisensorial";
         private static readonly string USER = "kevin";
         private static readonly string PASSWORD = "admin123";
-        private IMongoDatabase database;
 
-        public IMongoDatabase Database { get => database; set => database = value; }
+        public IMongoDatabase Database { get; set; }
 
         private DatabaseConnection()
         {
             MongoClient client = new MongoClient("mongodb://"+USER+":"+PASSWORD+"@"+URL);
-            database = client.GetDatabase("aula-multisensorial");
+            Database = client.GetDatabase("aula-multisensorial");
         }
 
         public static DatabaseConnection GetInstance()

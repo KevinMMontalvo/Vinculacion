@@ -30,7 +30,7 @@ export default class SideMenu extends React.Component
 
 	FuncionParaProbar()
 	{
-		levelsController.getLevels();
+		arduinoController.sendMessage("ON:")
 	}
 
 	render()
