@@ -230,3 +230,11 @@
   width: auto;
   height: auto;
 }
+
+#turn-on-icon {
+  background-image: url(turn-on-w.svg);
+}
+
+#turn-off-icon {
+  background-image: url(turn-off-w.svg);
+}

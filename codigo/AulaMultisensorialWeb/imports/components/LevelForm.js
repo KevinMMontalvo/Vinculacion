@@ -77,7 +77,7 @@ export default class LevelForm extends React.Component
 		ButterToast.raise({
 			content: <Cinnamon.Crisp
 				scheme={Cinnamon.Crisp.SCHEME_GREY}
-				content={() => <div>{"Estudiante registrado"}</div>}
+				content={() => <div>{"Nivel registrado"}</div>}
 				title={this.state.successRegisteredMessage}
 				icon={<div className="alert-success-icon"></div>}
 			/>
@@ -195,6 +195,7 @@ export default class LevelForm extends React.Component
 		this.ClearAllFields();
 		this.ShowModifySuccessMenssage();
 		this.props.CloseModifyForm();
+		this.props.UpdateTable();
 	}
 
 	render()
@@ -223,7 +224,7 @@ export default class LevelForm extends React.Component
 						<div onClick={() => this.CheckWarningMessages()} className="secondary-button">
 							{
 								this.props.levelToModify != undefined ?
-									<div>Modificar Registros</div>
+									<div>Modificar Registro</div>
 								:
 									<div>Completar Registro</div>
 							}

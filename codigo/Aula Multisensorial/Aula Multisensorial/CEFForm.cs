@@ -2,8 +2,11 @@
 using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
+using MongoDB.Driver;
+using Aula_Multisensorial.Model;
+using System.Collections.Generic;
 using Aula_Multisensorial.Access;
-using Aula_Multisensorial.Utils;
+using MongoDB.Bson;
 
 namespace Aula_Multisensorial
 {
@@ -22,9 +25,7 @@ namespace Aula_Multisensorial
             chromiumWebBrowser.RegisterJsObject("studentsController", new StudentAccess());
             chromiumWebBrowser.RegisterJsObject("levelsController", new LevelAccess());
             chromiumWebBrowser.RegisterJsObject("teachersController", new TeacherAccess());
-            chromiumWebBrowser.RegisterJsObject("arduinoController", new ArduinoController());
         }
-
         private void InitializeChromium()
         {
             CefSettings cefSettings = new CefSettings();
