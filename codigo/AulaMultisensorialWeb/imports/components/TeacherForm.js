@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import DatePicker from 'react-date-picker';
 import ButterToast, { Cinnamon, POS_BOTTOM, POS_RIGHT, POS_TOP } from 'butter-toast';
-import TechnicalHelp from '../map/TechnicalHelp';
 
 export default class TeacherForm extends React.Component
 {
@@ -9,8 +7,6 @@ export default class TeacherForm extends React.Component
 	{
 		super(props);
 		this.state = {
-			date: new Date(),
-			locate: "es-MX",
 			options: [{
 				value: 'Masculino',
 				label: 'Masculino'
@@ -20,7 +16,6 @@ export default class TeacherForm extends React.Component
 			},],
 			emptyInputMessage: "Existen campos vacios: ",
 			successRegisteredMessage: "Registro completo",
-			techHelps: [],
 			emptyFields: true,
 		};
 	}
@@ -71,9 +66,6 @@ export default class TeacherForm extends React.Component
 		}
 	}
 
-	onChange = date => this.setState({ date });
-	lang = "es-MX";
-
 	ShowWarningMenssage(field)
 	{
 		ButterToast.raise({
@@ -91,8 +83,21 @@ export default class TeacherForm extends React.Component
 		ButterToast.raise({
 			content: <Cinnamon.Crisp
 				scheme={Cinnamon.Crisp.SCHEME_GREY}
-				content={() => <div>{"Estudiante registrado"}</div>}
+				content={() => <div>{"Docente registrado"}</div>}
 				title={this.state.successRegisteredMessage}
+				icon={<div className="alert-success-icon"></div>}
+			/>
+		});
+	}
+
+	ShowModifySuccessMenssage()
+	{
+		ButterToast.raise({
+			content: <Cinnamon.Crisp
+				className="butter-alert"
+				scheme={Cinnamon.Slim.SCHEME_DARK}
+				content={() => <div>{"Registro modificado"}</div>}
+				title={this.state.successModifiedMessage}
 				icon={<div className="alert-success-icon"></div>}
 			/>
 		});
@@ -103,8 +108,7 @@ export default class TeacherForm extends React.Component
 		let firstName = document.getElementById('first-name-input').value;
 		let lastName = document.getElementById('lastname-input').value;
 		let level_id = document.getElementById('level-select').value;
-		let gender = document.getElementById('gender-select').value;
-		let condition = document.getElementById('condition-select').value;
+		let speciality = document.getElementById('speciality-input').value;
 
 		let validationArray = new Array();
 		if (firstName == "")
@@ -119,13 +123,9 @@ export default class TeacherForm extends React.Component
 		{
 			validationArray.push("level");
 		}
-		if (gender == "")
+		if (speciality == "")
 		{
-			validationArray.push("gender");
-		}
-		if (condition == "")
-		{
-			validationArray.push("condition");
+			validationArray.push("speciality");
 		}
 		return validationArray;
 	}
@@ -143,84 +143,42 @@ export default class TeacherForm extends React.Component
 			{
 				this.ShowWarningMenssage("Apellido paterno");
 			}
-			if (validationArray[i] == "condition")
-			{
-				this.ShowWarningMenssage("Condición");
-			}
-			if (validationArray[i] == "gender")
-			{
-				this.ShowWarningMenssage("Género");
-			}
 			if (validationArray[i] == "level")
 			{
 				this.ShowWarningMenssage("Nivel");
 			}
+			if (validationArray[i] == "speciality")
+			{
+				this.ShowWarningMenssage("Especialidad");
+			}
 		}
 		if (validationArray.length == 0)
 		{
-			this.setState({
-				emptyFields: false,
-			}, () => this.AddStudent());
+			if(this.props.teacherToModify == undefined){
+				this.setState({
+					emptyFields: false,
+				}, () => this.AddTeacher());
+			}
+			else {
+				this.setState({
+					emptyFields: false,
+				}, () => this.ModifyTeacher());
+			}
 		}
 	}
 
-	AddTechnicalHelp()
-	{
-		let techHelpName = document.getElementById('technical-help-input').value;
-		if (techHelpName == "")
-		{
-			this.ShowWarningMenssage("Ayuda técnica");
-		}
-		else
-		{
-			let techHelpArray = this.state.techHelps;
-			let techHelpJSON = {};
-			techHelpJSON.name = techHelpName;
-			techHelpJSON._id = techHelpArray.length;
-			techHelpArray.push(techHelpJSON);
-			this.setState({
-				techHelps: techHelpArray,
-			});
-			document.getElementById('technical-help-input').value = "";
-		}
-	}
-
-	RemoveTechnicalHelp(index)
-	{
-		let techHelpArray = this.state.techHelps;
-		techHelpArray.splice(index, 1);
-		for (var i = index; i < techHelpArray.length; i++)
-		{
-			techHelpArray[i]._id--;
-		}
-		this.setState({
-			techHelps: techHelpArray,
-		});
-	}
-
-	AddStudent()
+	AddTeacher()
 	{
 		let names = document.getElementById('first-name-input').value + " " + document.getElementById('second-name-input').value;
 		let surnames = document.getElementById('lastname-input').value + " " + document.getElementById('mothers-lastname-input').value;
 		let level_id = document.getElementById('level-select').value;
-		let diagnostic = document.getElementById('diagnostic-input').value;
-		let birthdate = this.state.date;
-		let gender = document.getElementById('gender-select').value;
-		let condition = document.getElementById('condition-select').value;
-		let technical_helps = this.state.techHelps;
-		let percentage_of_disability = parseInt(document.getElementById('percentage-of-disability-input').value);
-		let student = {
-			names: names,
-			surnames: surnames,
+		let speciality = document.getElementById('speciality-input').value;
+		let teacher = {
+			name: names + " " + surnames,
 			level_id: level_id,
-			diagnostic: diagnostic,
-			birthdate: birthdate,
-			gender: gender,
-			condition: condition,
-			technical_helps: technical_helps,
-			percentage_of_disability: percentage_of_disability,
+			speciality: speciality,
 		};
-		studentsController.insertStudent(student);
+		teachersController.insertTeacher(teacher);
 		this.ClearAllFields();
 		this.ShowSuccessMenssage();
 	}
@@ -231,15 +189,64 @@ export default class TeacherForm extends React.Component
 		document.getElementById('lastname-input').value = "";
 		document.getElementById('mothers-lastname-input').value = "";
 		document.getElementById('level-select').value = "";
-		document.getElementById('diagnostic-input').value = "";
-		document.getElementById('gender-select').value = "";
-		document.getElementById('condition-select').value = "";
-		document.getElementById('percentage-of-disability-input').value = "";
+		document.getElementById('speciality-input').value = "";
+	}
+
+	componentDidMount(){
+		if(this.props.teacherToModify != undefined){
+			var names = this.props.teacherToModify.name.split(" ");
+			document.getElementById('first-name-input').value = names[0];
+			document.getElementById('second-name-input').value = names[1];
+			document.getElementById('lastname-input').value = names[0];
+			document.getElementById('mothers-lastname-input').value = names[1];
+			document.getElementById('level-select').value = this.props.teacherToModify.level_id;
+			document.getElementById('speciality-input').value = this.props.teacherToModify.speciality;
+		}
+		this.LoadLevelsInSelect();
+	}
+
+	CapitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+
+	ModifyTeacher(){
+		let names = this.CapitalizeFirstLetter(document.getElementById('first-name-input').value.toString()) + " " + this.CapitalizeFirstLetter(document.getElementById('second-name-input').value.toString());
+		let surnames = this.CapitalizeFirstLetter(document.getElementById('lastname-input').value.toString()) + " " + this.CapitalizeFirstLetter(document.getElementById('mothers-lastname-input').value.toString());
+		let level_id = document.getElementById('level-select').value;
+		let speciality = this.CapitalizeFirstLetter(document.getElementById('speciality-input').value.toString());
+		let teacher = {
+			_id: this.props.teacherToModify._id,
+			name: names + " " + surnames,
+			level_id: level_id,
+			speciality: speciality,
+		};
+		teachersController.modifyTeacher(teacher);
+		this.ClearAllFields();
+		this.ShowModifySuccessMenssage();
+		this.props.CloseModifyForm();
+		this.props.UpdateTable();
+	}
+
+	LoadLevels() {
+		var levelsString = levelsController.getLevels();
+		var levels = JSON.parse(levelsString);
+		return levels;
+	}
+
+	LoadLevelsInSelect(){
 		this.setState({
-			birthdate: new Date(),
-			techHelps: [],
+			levels: this.LoadLevels(),
+		},() => {
+			var levelSelect = document.getElementById('level-select');
+			for (var i = 0; i < this.state.levels.length; i++) {
+				var option = document.createElement("option");
+				option.text = this.state.levels[i].name;
+				option.value = this.state.levels[i]._id;
+				levelSelect.add(option);
+			}
 		});
 	}
+
 
 	render()
 	{
@@ -263,8 +270,6 @@ export default class TeacherForm extends React.Component
 						<div className="input-container">
 							<select id="level-select">
 								<option value="" selected disabled hidden>Selecione el nivel del docente</option>
-								<option value="Nivel-1">Nivel1</option>
-								<option value="Nivel-2">Nivel2</option>
 							</select>
 						</div>
 					</div>
@@ -278,7 +283,12 @@ export default class TeacherForm extends React.Component
 					</div>
 					<div className="button-container">
 						<div onClick={() => this.CheckWarningMessages()} className="secondary-button">
-							Completar Registro
+							{
+								this.props.teacherToModify != undefined ?
+									<div>Modificar Registro</div>
+								:
+									<div>Completar Registro</div>
+							}
 						</div>
 					</div>
 					<div className="separator"></div>
@@ -293,13 +303,3 @@ export default class TeacherForm extends React.Component
 			</div>);
 	}
 }
-
-/*
-TODO
-campo de nombres y apellidos no admite ñ y tildes--------later
-
-
-BUG
-cuando estas en el formulario de registro de estudiantes y se le da clic en alguna opcion del menu no carga nada.
-
- */

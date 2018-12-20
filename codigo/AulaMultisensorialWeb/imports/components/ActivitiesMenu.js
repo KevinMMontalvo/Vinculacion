@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class TeacherMenu extends React.Component {
+export default class ActivitiesMenu extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,24 +34,12 @@ export default class TeacherMenu extends React.Component {
       }
     }
 
-    AddTeacher(){
-      this.MinimizeMenu();
-      this.props.AddTeacher();
+    TurnOn(){
+      arduinoController.sendMessage("ON:")
     }
 
-    ShowTeachersRecords(){
-      this.MinimizeMenu();
-      this.props.ShowTeachersRecords();
-    }
-
-    ModifyTeacher(){
-      this.MinimizeMenu();
-      this.props.ShowModifyButton();
-    }
-
-    DeleteTeacher(){
-      this.MinimizeMenu();
-      this.props.ShowDeleteButton();
+    TurnOff(){
+      arduinoController.sendMessage("OFF:")
     }
 
     render() {
@@ -59,25 +47,17 @@ export default class TeacherMenu extends React.Component {
             <div>
               <div className="management-menu">
                 <div className="management-options">
-                  <div onClick={() => this.ShowTeachersRecords()} id="visualize" className="management-option">
-                    <div id="visualize-icon" className="management-icon"></div>
-                    <div className="management-text">Docentes registrados</div>
+                  <div onClick={() => this.TurnOn()} id="visualize" className="management-option">
+                    <div id="turn-on-icon" className="management-icon"></div>
+                    <div className="management-text">Encender</div>
                   </div>
-                  <div onClick={() => this.AddTeacher()} id="add" className="management-option">
-                    <div id="add-icon" className="management-icon"></div>
-                    <div className="management-text">Registrar docentes</div>
+                  <div onClick={() => this.TurnOff()} id="add" className="management-option">
+                    <div id="turn-off-icon" className="management-icon"></div>
+                    <div className="management-text">Apagar</div>
                   </div>
-                  <div onClick={() => this.ModifyTeacher()} id="modify" className="management-option">
-                    <div id="modify-icon" className="management-icon"></div>
-                    <div className="management-text">Modificar información</div>
-                  </div>
-                  <div onClick={() => this.DeleteTeacher()} id="delete" className="management-option">
-                    <div id="delete-icon" className="management-icon"></div>
-                    <div className="management-text">Eliminar registros</div>
-                  </div>
-                </div>
               </div>
             </div>
+          </div>
         );
     }
 }

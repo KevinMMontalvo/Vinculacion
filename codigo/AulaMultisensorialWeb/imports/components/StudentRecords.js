@@ -197,12 +197,19 @@ export default class StudentsRecords extends React.Component {
       this.props.CloseModifyForm();
     }
 
+    UpdateTable(){
+      this.setState({
+        students: this.LoadStudents(),
+        allStudents: this.LoadStudents(),
+      })
+    }
+
     render() {
         return(
             <div>
               {
                 this.props.showModifyForm ?
-                  <StudentForm CloseModifyForm={() => this.CloseModifyForm()} studentToModify={this.state.studentToModify}/>
+                  <StudentForm UpdateTable={this.UpdateTable.bind(this)} CloseModifyForm={() => this.CloseModifyForm()} studentToModify={this.state.studentToModify}/>
                 :
                 <div>
                   <div className="record-tools">
@@ -230,9 +237,9 @@ export default class StudentsRecords extends React.Component {
                                       ShowModifyForm={this.ShowModifyForm.bind(this)}
                                       modify={this.props.modify}
                                       students={students}
-                                      key={students._id}>
-
-                                    </Registry>;
+                                      key={students._id}
+                                      UpdateTable={this.UpdateTable.bind(this)}>
+                                    </Registry>
                           })
                         }
                       </div>

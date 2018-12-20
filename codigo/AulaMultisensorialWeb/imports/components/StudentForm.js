@@ -292,6 +292,7 @@ export default class StudentForm extends React.Component
 		this.ClearAllFields();
 		this.ShowModifySuccessMenssage();
 		this.props.CloseModifyForm();
+		this.props.UpdateTable();
 	}
 
 
@@ -332,6 +333,27 @@ export default class StudentForm extends React.Component
 				techHelps: this.props.studentToModify.technical_helps,
 			});
 		}
+		this.LoadLevelsInSelect();
+	}
+
+	LoadLevels() {
+		var levelsString = levelsController.getLevels();
+		var levels = JSON.parse(levelsString);
+		return levels;
+	}
+
+	LoadLevelsInSelect(){
+		this.setState({
+			levels: this.LoadLevels(),
+		},() => {
+			var levelSelect = document.getElementById('level-select');
+			for (var i = 0; i < this.state.levels.length; i++) {
+				var option = document.createElement("option");
+				option.text = this.state.levels[i].name;
+				option.value = this.state.levels[i]._id;
+				levelSelect.add(option);
+			}
+		});
 	}
 
 	render()
@@ -392,8 +414,6 @@ export default class StudentForm extends React.Component
 						<div className="input-container">
 							<select id="level-select">
 								<option value="" selected disabled hidden>Selecione el nivel del estudiante</option>
-								<option value="Nivel-1">Nivel1</option>
-								<option value="Nivel-2">Nivel2</option>
 							</select>
 						</div>
 					</div>
@@ -426,7 +446,7 @@ export default class StudentForm extends React.Component
 						<div onClick={() => this.CheckWarningMessages()} className="secondary-button">
 							{
 								this.props.studentToModify != undefined ?
-									<div>Modificar Registros</div>
+									<div>Modificar Registro</div>
 								:
 									<div>Completar Registro</div>
 							}
