@@ -4,7 +4,7 @@ export default class LevelMenu extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          
+
         }
     }
 
@@ -44,6 +44,16 @@ export default class LevelMenu extends React.Component {
       this.props.ShowLevelsRecords();
     }
 
+    ModifyLevel(){
+      this.MinimizeMenu();
+      this.props.ShowModifyButton();
+    }
+
+    DeleteLevel(){
+      this.MinimizeMenu();
+      this.props.ShowDeleteButton();
+    }
+
     render() {
         return(
             <div>
@@ -57,11 +67,11 @@ export default class LevelMenu extends React.Component {
                     <div id="add-icon" className="management-icon"></div>
                     <div className="management-text">Registrar niveles</div>
                   </div>
-                  <div id="modify" className="management-option">
+                  <div onClick={() => this.ModifyLevel()} id="modify" className="management-option">
                     <div id="modify-icon" className="management-icon"></div>
                     <div className="management-text">Modificar información</div>
                   </div>
-                  <div id="delete" className="management-option">
+                  <div onClick={() => this.DeleteLevel()} id="delete" className="management-option">
                     <div id="delete-icon" className="management-icon"></div>
                     <div className="management-text">Eliminar registros</div>
                   </div>

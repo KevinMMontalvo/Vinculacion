@@ -9,6 +9,7 @@ export default class LevelForm extends React.Component
 		this.state = {
 			emptyInputMessage: "Existen campos vacios: ",
 			successRegisteredMessage: "Registro completo",
+			successModifiedMessage: "Cambios realizados",
 			emptyFields: true,
 		};
 	}
@@ -83,6 +84,19 @@ export default class LevelForm extends React.Component
 		});
 	}
 
+	ShowModifySuccessMenssage()
+	{
+		ButterToast.raise({
+			content: <Cinnamon.Crisp
+				className="butter-alert"
+				scheme={Cinnamon.Slim.SCHEME_DARK}
+				content={() => <div>{"Registro modificado"}</div>}
+				title={this.state.successModifiedMessage}
+				icon={<div className="alert-success-icon"></div>}
+			/>
+		});
+	}
+
 	ValidateEmptyInputs()
 	{
 		let levelName = document.getElementById('level-name-input').value;
@@ -125,9 +139,16 @@ export default class LevelForm extends React.Component
 		}
 		if (validationArray.length == 0)
 		{
-			this.setState({
-				emptyFields: false,
-			}, () => this.AddLevel());
+			if(this.props.levelToModify == undefined){
+				this.setState({
+					emptyFields: false,
+				}, () => this.AddLevel());
+			}
+			else {
+				this.setState({
+					emptyFields: false,
+				}, () => this.ModifyLevel());
+			}
 		}
 	}
 
@@ -150,6 +171,30 @@ export default class LevelForm extends React.Component
 		let levelName = document.getElementById('level-name-input').value = "";
 		let maxAge = document.getElementById('max-age-input').value = "";
 		let minAge = document.getElementById('min-age-input').value = "";
+	}
+
+	componentDidMount(){
+		if(this.props.levelToModify != undefined){
+			document.getElementById('level-name-input').value = this.props.levelToModify.name;
+			document.getElementById('max-age-input').value = this.props.levelToModify.max_age;
+			document.getElementById('min-age-input').value = this.props.levelToModify.min_age;
+		}
+	}
+
+	ModifyLevel(){
+		let levelName = document.getElementById('level-name-input').value;
+		let maxAge = parseInt(document.getElementById('max-age-input').value);
+		let minAge = parseInt(document.getElementById('min-age-input').value);
+		let level = {
+			_id: this.props.levelToModify._id,
+			name: levelName,
+			min_age: minAge,
+			max_age: maxAge,
+		};
+		levelsController.modifyLevel(level);
+		this.ClearAllFields();
+		this.ShowModifySuccessMenssage();
+		this.props.CloseModifyForm();
 	}
 
 	render()
@@ -176,7 +221,12 @@ export default class LevelForm extends React.Component
 					</div>
 					<div className="button-container">
 						<div onClick={() => this.CheckWarningMessages()} className="secondary-button">
-							Completar Registro
+							{
+								this.props.levelToModify != undefined ?
+									<div>Modificar Registros</div>
+								:
+									<div>Completar Registro</div>
+							}
 						</div>
 					</div>
 					<div className="separator"></div>

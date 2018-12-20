@@ -41,7 +41,7 @@ namespace Aula_Multisensorial.Access
         public string GetStudents()
         {
             List<Student> studentsList = studentsCollection.Find(_ => true).ToList();
-            Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(studentsList));
+            //Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(studentsList));
             return Newtonsoft.Json.JsonConvert.SerializeObject(studentsList);
         }
 
@@ -52,7 +52,7 @@ namespace Aula_Multisensorial.Access
         public void ModifyStudent(Dictionary<string, object> student)
         {
             BsonDocument document = new BsonDocument(student);
-
+            Console.WriteLine(document.ToJson());
             //cuando no se ingresa ayudas tecnicas se retorna null, la siguiente linea cambia a un array vacio
             if (document.GetValue("technical_helps").IsBsonNull)
             {
