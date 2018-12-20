@@ -23,6 +23,7 @@ namespace Aula_Multisensorial
         {
             InitializeChromium();
             chromiumWebBrowser.RegisterJsObject("studentsController", new StudentAccess());
+            chromiumWebBrowser.RegisterJsObject("levelsController", new LevelAccess());
         }
         private void InitializeChromium()
         {
@@ -41,15 +42,6 @@ namespace Aula_Multisensorial
             //browserSettings.Javascript = CefState.Enabled;
             chromiumWebBrowser.BrowserSettings = browserSettings;*/
 
-            /*MongoClient client = new MongoClient("mongodb://kevin:admin123@ds041167.mlab.com:41167/aula-multisensorial");
-            IMongoDatabase database = client.GetDatabase("aula-multisensorial");
-            IMongoCollection<BsonDocument> teachersCollection=database.GetCollection<BsonDocument>("students");
-            List<BsonDocument> teachersList= teachersCollection.AsQueryable().ToList();
-
-            foreach (BsonDocument teacher in teachersList)
-            {
-                Console.WriteLine(teacher.ToString());
-            }*/
         }
 
         private void CEFForm_FormClosing(object sender, FormClosingEventArgs e)

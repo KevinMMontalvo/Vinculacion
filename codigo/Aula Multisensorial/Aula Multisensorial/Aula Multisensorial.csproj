@@ -87,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Access\LevelAccess.cs" />
     <Compile Include="Access\StudentAccess.cs" />
     <Compile Include="CEFForm.cs">
       <SubType>Form</SubType>
