@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="Access\LevelAccess.cs" />
     <Compile Include="Access\StudentAccess.cs" />
+    <Compile Include="Access\TeacherAccess.cs" />
     <Compile Include="CEFForm.cs">
       <SubType>Form</SubType>
     </Compile>

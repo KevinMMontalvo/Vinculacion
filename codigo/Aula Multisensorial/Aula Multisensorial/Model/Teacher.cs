@@ -1,37 +1,38 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace Aula_Multisensorial.Model
 {
     class Teacher
     {
         [BsonId]
-        private ObjectId id;
+        [BsonRepresentation(BsonType.ObjectId)]
+        [JsonProperty(PropertyName = "_id")]
+        public string Id { get; set; }
 
         [BsonElement("name")]
-        private string name;
+        [JsonProperty(PropertyName = "name")]
+        private string Name { get; set; }
 
         [BsonElement("speciality")]
-        private string speciality;
+        [JsonProperty(PropertyName = "speciality")]
+        private string Speciality { get; set; }
 
         [BsonElement("level_id")]
-        private ObjectId levelId;
+        [JsonProperty(PropertyName = "level_id")]
+        private string LevelId { get; set; }
 
         public Teacher()
         {
         }
 
-        public Teacher(ObjectId id, string name, string speciality, ObjectId levelId)
+        public Teacher(string id, string name, string speciality, string levelId)
         {
-            this.id = id;
-            this.name = name;
-            this.speciality = speciality;
-            this.levelId = levelId;
+            Id = id;
+            Name = name;
+            Speciality = speciality;
+            LevelId = levelId;
         }
-
-        public ObjectId Id { get => id; set => id = value; }
-        public string Name { get => name; set => name = value; }
-        public string Speciality { get => speciality; set => speciality = value; }
-        public ObjectId LevelId { get => levelId; set => levelId = value; }
     }
 }

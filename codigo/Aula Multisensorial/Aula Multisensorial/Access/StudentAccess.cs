@@ -41,7 +41,7 @@ namespace Aula_Multisensorial.Access
         public string GetStudents()
         {
             List<Student> studentsList = studentsCollection.Find(_ => true).ToList();
-            Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(studentsList));
+            //Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(studentsList));
             return Newtonsoft.Json.JsonConvert.SerializeObject(studentsList);
         }
 
