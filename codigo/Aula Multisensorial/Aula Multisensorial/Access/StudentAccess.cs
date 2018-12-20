@@ -52,7 +52,7 @@ namespace Aula_Multisensorial.Access
         public void ModifyStudent(Dictionary<string, object> student)
         {
             BsonDocument document = new BsonDocument(student);
-
+            Console.WriteLine(document.ToJson());
             //cuando no se ingresa ayudas tecnicas se retorna null, la siguiente linea cambia a un array vacio
             if (document.GetValue("technical_helps").IsBsonNull)
             {

@@ -257,8 +257,7 @@ export default class StudentForm extends React.Component
 		this.ShowAddSuccessMenssage();
 	}
 
-	ModifyStudent()
-	{
+	ModifyStudent(){
 		let names = this.CapitalizeFirstLetter(document.getElementById('first-name-input').value.toString()) + " " + this.CapitalizeFirstLetter(document.getElementById('second-name-input').value.toString());
 		let surnames = this.CapitalizeFirstLetter(document.getElementById('lastname-input').value.toString()) + " " + this.CapitalizeFirstLetter(document.getElementById('mothers-lastname-input').value.toString());
 		let level_id = document.getElementById('level-select').value;

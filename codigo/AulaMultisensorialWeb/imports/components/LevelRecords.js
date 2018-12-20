@@ -1,46 +1,30 @@
 import React, { Component } from 'react';
-import StudentForm from '../components/StudentForm';
+import LevelForm from '../components/LevelForm';
 import Registry from '../map/Registry';
 import Filter, { Sort, FilterValue } from 'data-engine';
 import ButterToast, { Cinnamon, POS_BOTTOM, POS_RIGHT, POS_TOP } from 'butter-toast';
 
-export default class StudentsRecords extends React.Component {
+export default class LevelRecords extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          students: [],
-          allStudents: [],
+          levels: [],
+          allLevels: [],
           isDataLoaded: false,
           sortWay: 'des',
           sortAttribute: 'des',
           attributes: [
                         {
-                          value: 'names',
-                          text: 'Primer nombre'
+                          value: 'name',
+                          text: 'Nombre del nivel'
                         },
                         {
-                          value: 'surnames',
-                          text: 'Apellido paterno'
+                          value: 'max_age',
+                          text: 'Edad máxima'
                         },
                         {
-                          value: 'birthdate',
-                          text: 'Fecha de nacimiento / Edad'
-                        },
-                        {
-                          value: 'condition',
-                          text: 'Condicion'
-                        },
-                        {
-                          value: 'level_id',
-                          text: 'Nivel'
-                        },
-                        {
-                          value: 'gender',
-                          text: 'Género'
-                        },
-                        {
-                          value: 'percentage_of_disability',
-                          text: 'Procentaje de discapacidad'
+                          value: 'min_age',
+                          text: 'Edad mínima'
                         }
                       ],
         }
@@ -49,8 +33,8 @@ export default class StudentsRecords extends React.Component {
     componentWillMount(){
       const { MongoClient, ObjectId } = require('mongodb');
       this.setState({
-        students: this.LoadStudents(),
-        allStudents: this.LoadStudents(),
+        levels: this.LoadLevels(),
+        allLevels: this.LoadLevels(),
       }, () => this.CheckLoadedData());
     }
 
@@ -59,17 +43,18 @@ export default class StudentsRecords extends React.Component {
     }
 
     CheckLoadedData(){
-      if(this.state.students.length > 0){
+      if(this.state.levels.length > 0){
         this.setState({
           isDataLoaded: true
         });
       }
     }
 
-    LoadStudents() {
-      var studentsString = studentsController.getStudents();
-      var students = JSON.parse(studentsString);
-      return students;
+    LoadLevels() {
+      var levelsString = levelsController.getLevels();
+      console.log(levelsString);
+      var levels = JSON.parse(levelsString);
+      return levels;
     }
 
     LoadAttributesInSelect(){
@@ -89,10 +74,10 @@ export default class StudentsRecords extends React.Component {
     SortData(){
       var attributeValue = document.getElementById('sort-select').value;
       var sortJsonArray = require('sort-json-array');
-      var studentsArray = this.state.students;
-      sortJsonArray(studentsArray, attributeValue,this.state.sortWay);
+      var levelsArray = this.state.levels;
+      sortJsonArray(levelsArray, attributeValue,this.state.sortWay);
       this.setState({
-        students: studentsArray,
+        levels: levelsArray,
       });
       var searchValue = document.getElementById('search-input').value;
       if(searchValue != ""){
@@ -122,30 +107,30 @@ export default class StudentsRecords extends React.Component {
     SearchData(){
       var attributeValue = document.getElementById('sort-select').value;
       var searchValue = document.getElementById('search-input').value;
-      var allStudents = this.state.allStudents;
+      var allLevels = this.state.allLevels;
       var searchResultArray = [];
       if(attributeValue == ""){
-        for (var i = 0; i < allStudents.length; i++) {
+        for (var i = 0; i < allLevels.length; i++) {
           for (var j = 0; j < this.state.attributes.length; j++) {
-            if (allStudents[i][this.state.attributes[j].value].toString().toUpperCase().includes(searchValue.toString().toUpperCase())) {
-              searchResultArray.push(allStudents[i]);
+            if (allLevels[i][this.state.attributes[j].value].toString().toUpperCase().includes(searchValue.toString().toUpperCase())) {
+              searchResultArray.push(allLevels[i]);
               break;
             }
           }
         }
       }
       else{
-        for (var i = 0; i < this.state.students.length; i++) {
-          if (allStudents[i][attributeValue].toString().toUpperCase().includes(searchValue.toString().toUpperCase())) {
-            searchResultArray.push(allStudents[i]);
+        for (var i = 0; i < this.state.levels.length; i++) {
+          if (allLevels[i][attributeValue].toString().toUpperCase().includes(searchValue.toString().toUpperCase())) {
+            searchResultArray.push(allLevels[i]);
           }
         }
       }
       if(searchValue == ""){
-        searchResultArray = allStudents;
+        searchResultArray = allLevels;
       }
       this.setState({
-        students: searchResultArray,
+        levels: searchResultArray,
       });
     }
 
@@ -173,10 +158,10 @@ export default class StudentsRecords extends React.Component {
         this.tray.dismissAll();
     }
 
-    ShowModifyForm(student){
+    ShowModifyForm(level){
       this.props.ShowModifyForm();
       this.setState({
-        studentToModify: student,
+        levelToModify: level,
       });
     }
 
@@ -197,12 +182,25 @@ export default class StudentsRecords extends React.Component {
       this.props.CloseModifyForm();
     }
 
+    ShowDeletedRegistry(){
+  		ButterToast.raise({
+  			content: <Cinnamon.Crisp
+  				className="butter-alert"
+  				scheme={Cinnamon.Slim.SCHEME_DARK}
+  				content={() => <div>{"Eliminado"}</div>}
+  				title={"Registro"}
+  				icon={<div className="alert-info-icon"></div>}
+  			/>
+  		});
+      this.dismissAll();
+  	}
+
     render() {
         return(
             <div>
               {
                 this.props.showModifyForm ?
-                  <StudentForm CloseModifyForm={() => this.CloseModifyForm()} studentToModify={this.state.studentToModify}/>
+                  <LevelForm CloseModifyForm={() => this.CloseModifyForm()} levelToModify={this.state.levelToModify}/>
                 :
                 <div>
                   <div className="record-tools">
@@ -221,17 +219,16 @@ export default class StudentsRecords extends React.Component {
                     {
                       this.state.isDataLoaded ?
                       <div>
-                        {this.state.students.map((students) =>
+                        {this.state.levels.map((levels) =>
                           {
                             return <Registry
-                                      show={"students"}
+                                      show={"levels"}
                                       ShowDeletedRegistry={() => this.ShowDeletedRegistry()}
                                       delete={this.props.delete}
                                       ShowModifyForm={this.ShowModifyForm.bind(this)}
                                       modify={this.props.modify}
-                                      students={students}
-                                      key={students._id}>
-
+                                      levels={levels}
+                                      key={levels._id}>
                                     </Registry>;
                           })
                         }

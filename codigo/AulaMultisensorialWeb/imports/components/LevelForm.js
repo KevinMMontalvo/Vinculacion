@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import DatePicker from 'react-date-picker';
 import ButterToast, { Cinnamon, POS_BOTTOM, POS_RIGHT, POS_TOP } from 'butter-toast';
-import TechnicalHelp from '../map/TechnicalHelp';
 
 export default class LevelForm extends React.Component
 {
@@ -9,18 +7,9 @@ export default class LevelForm extends React.Component
 	{
 		super(props);
 		this.state = {
-			date: new Date(),
-			locate: "es-MX",
-			options: [{
-				value: 'Masculino',
-				label: 'Masculino'
-			}, {
-				value: 'Femenino',
-				label: 'Femenino'
-			},],
 			emptyInputMessage: "Existen campos vacios: ",
 			successRegisteredMessage: "Registro completo",
-			techHelps: [],
+			successModifiedMessage: "Cambios realizados",
 			emptyFields: true,
 		};
 	}
@@ -71,9 +60,6 @@ export default class LevelForm extends React.Component
 		}
 	}
 
-	onChange = date => this.setState({ date });
-	lang = "es-MX";
-
 	ShowWarningMenssage(field)
 	{
 		ButterToast.raise({
@@ -98,34 +84,37 @@ export default class LevelForm extends React.Component
 		});
 	}
 
+	ShowModifySuccessMenssage()
+	{
+		ButterToast.raise({
+			content: <Cinnamon.Crisp
+				className="butter-alert"
+				scheme={Cinnamon.Slim.SCHEME_DARK}
+				content={() => <div>{"Registro modificado"}</div>}
+				title={this.state.successModifiedMessage}
+				icon={<div className="alert-success-icon"></div>}
+			/>
+		});
+	}
+
 	ValidateEmptyInputs()
 	{
-		let firstName = document.getElementById('first-name-input').value;
-		let lastName = document.getElementById('lastname-input').value;
-		let level_id = document.getElementById('level-select').value;
-		let gender = document.getElementById('gender-select').value;
-		let condition = document.getElementById('condition-select').value;
+		let levelName = document.getElementById('level-name-input').value;
+		let maxAge = document.getElementById('max-age-input').value;
+		let minAge = document.getElementById('min-age-input').value;
 
 		let validationArray = new Array();
-		if (firstName == "")
+		if (levelName == "")
 		{
-			validationArray.push("firstName");
+			validationArray.push("levelName");
 		}
-		if (lastName == "")
+		if (maxAge == "")
 		{
-			validationArray.push("lastName");
+			validationArray.push("maxAge");
 		}
-		if (level_id == "")
+		if (minAge == "")
 		{
-			validationArray.push("level");
-		}
-		if (gender == "")
-		{
-			validationArray.push("gender");
-		}
-		if (condition == "")
-		{
-			validationArray.push("condition");
+			validationArray.push("minAge");
 		}
 		return validationArray;
 	}
@@ -135,110 +124,77 @@ export default class LevelForm extends React.Component
 		let validationArray = this.ValidateEmptyInputs();
 		for (var i = 0; i < validationArray.length; i++)
 		{
-			if (validationArray[i] == "firstName")
+			if (validationArray[i] == "levelName")
 			{
-				this.ShowWarningMenssage("Primer nombre");
+				this.ShowWarningMenssage("Nombre del nivel");
 			}
-			if (validationArray[i] == "lastName")
+			if (validationArray[i] == "maxAge")
 			{
-				this.ShowWarningMenssage("Apellido paterno");
+				this.ShowWarningMenssage("Edad máxima");
 			}
-			if (validationArray[i] == "condition")
+			if (validationArray[i] == "minAge")
 			{
-				this.ShowWarningMenssage("Condición");
-			}
-			if (validationArray[i] == "gender")
-			{
-				this.ShowWarningMenssage("Género");
-			}
-			if (validationArray[i] == "level")
-			{
-				this.ShowWarningMenssage("Nivel");
+				this.ShowWarningMenssage("Edad mínima");
 			}
 		}
 		if (validationArray.length == 0)
 		{
-			this.setState({
-				emptyFields: false,
-			}, () => this.AddStudent());
+			if(this.props.levelToModify == undefined){
+				this.setState({
+					emptyFields: false,
+				}, () => this.AddLevel());
+			}
+			else {
+				this.setState({
+					emptyFields: false,
+				}, () => this.ModifyLevel());
+			}
 		}
 	}
 
-	AddTechnicalHelp()
+	AddLevel()
 	{
-		let techHelpName = document.getElementById('technical-help-input').value;
-		if (techHelpName == "")
-		{
-			this.ShowWarningMenssage("Ayuda técnica");
-		}
-		else
-		{
-			let techHelpArray = this.state.techHelps;
-			let techHelpJSON = {};
-			techHelpJSON.name = techHelpName;
-			techHelpJSON._id = techHelpArray.length;
-			techHelpArray.push(techHelpJSON);
-			this.setState({
-				techHelps: techHelpArray,
-			});
-			document.getElementById('technical-help-input').value = "";
-		}
-	}
-
-	RemoveTechnicalHelp(index)
-	{
-		let techHelpArray = this.state.techHelps;
-		techHelpArray.splice(index, 1);
-		for (var i = index; i < techHelpArray.length; i++)
-		{
-			techHelpArray[i]._id--;
-		}
-		this.setState({
-			techHelps: techHelpArray,
-		});
-	}
-
-	AddStudent()
-	{
-		let names = document.getElementById('first-name-input').value + " " + document.getElementById('second-name-input').value;
-		let surnames = document.getElementById('lastname-input').value + " " + document.getElementById('mothers-lastname-input').value;
-		let level_id = document.getElementById('level-select').value;
-		let diagnostic = document.getElementById('diagnostic-input').value;
-		let birthdate = this.state.date;
-		let gender = document.getElementById('gender-select').value;
-		let condition = document.getElementById('condition-select').value;
-		let technical_helps = this.state.techHelps;
-		let percentage_of_disability = parseInt(document.getElementById('percentage-of-disability-input').value);
-		let student = {
-			names: names,
-			surnames: surnames,
-			level_id: level_id,
-			diagnostic: diagnostic,
-			birthdate: birthdate,
-			gender: gender,
-			condition: condition,
-			technical_helps: technical_helps,
-			percentage_of_disability: percentage_of_disability,
+		let levelName = document.getElementById('level-name-input').value;
+		let maxAge = parseInt(document.getElementById('max-age-input').value);
+		let minAge = parseInt(document.getElementById('min-age-input').value);
+		let level = {
+			name: levelName,
+			min_age: minAge,
+			max_age: maxAge,
 		};
-		studentsController.insertStudent(student);
+		levelsController.insertLevel(level);
 		this.ClearAllFields();
 		this.ShowSuccessMenssage();
 	}
 
 	ClearAllFields(){
-		document.getElementById('first-name-input').value = "";
-		document.getElementById('second-name-input').value = "";
-		document.getElementById('lastname-input').value = "";
-		document.getElementById('mothers-lastname-input').value = "";
-		document.getElementById('level-select').value = "";
-		document.getElementById('diagnostic-input').value = "";
-		document.getElementById('gender-select').value = "";
-		document.getElementById('condition-select').value = "";
-		document.getElementById('percentage-of-disability-input').value = "";
-		this.setState({
-			birthdate: new Date(),
-			techHelps: [],
-		});
+		let levelName = document.getElementById('level-name-input').value = "";
+		let maxAge = document.getElementById('max-age-input').value = "";
+		let minAge = document.getElementById('min-age-input').value = "";
+	}
+
+	componentDidMount(){
+		if(this.props.levelToModify != undefined){
+			document.getElementById('level-name-input').value = this.props.levelToModify.name;
+			document.getElementById('max-age-input').value = this.props.levelToModify.max_age;
+			document.getElementById('min-age-input').value = this.props.levelToModify.min_age;
+		}
+	}
+
+	ModifyLevel(){
+		let levelName = document.getElementById('level-name-input').value;
+		let maxAge = parseInt(document.getElementById('max-age-input').value);
+		let minAge = parseInt(document.getElementById('min-age-input').value);
+		let level = {
+			_id: this.props.levelToModify._id,
+			name: levelName,
+			min_age: minAge,
+			max_age: maxAge,
+		};
+		levelsController.modifyLevel(level);
+		this.ClearAllFields();
+		this.ShowModifySuccessMenssage();
+		this.props.CloseModifyForm();
 	}
 
 	render()
@@ -246,25 +202,31 @@ export default class LevelForm extends React.Component
 		return (<div>
 				<div className="student-form">
 					<div className="form-container">
-						<p className="input-label">Temática</p>
+						<p className="input-label">Nombre</p>
 						<div className="input-container">
-							<input id="theme"
-							       onKeyPress={() => this.ValidateOnlyLetters(event)} placeholder="Especialidad del docente"
+							<input id="level-name-input"
+							       onKeyPress={() => this.ValidateOnlyLetters(event)}
+										 placeholder="Nombre del nivel"
 							       className="horizontal-input"/>
 						</div>
 					</div>
 					<div className="form-container">
 						<p className="input-label">Rango de edades</p>
 						<div id="vertical-input" className="student-input">
-							<input id="min-age" onKeyPress={() => this.ValidateOnlyNumbers(event)}
+							<input id="min-age-input" onKeyPress={() => this.ValidateOnlyNumbers(event)}
 							       placeholder="Edad mínima" className="vertical-input" maxLength="2"></input>
-							<input id="max-age" onKeyPress={() => this.ValidateOnlyNumbers(event)}
+							<input id="max-age-input" onKeyPress={() => this.ValidateOnlyNumbers(event)}
 							       placeholder="Edad máxima" className="vertical-input" maxLength="2"></input>
 						</div>
 					</div>
 					<div className="button-container">
 						<div onClick={() => this.CheckWarningMessages()} className="secondary-button">
-							Completar Registro
+							{
+								this.props.levelToModify != undefined ?
+									<div>Modificar Registros</div>
+								:
+									<div>Completar Registro</div>
+							}
 						</div>
 					</div>
 					<div className="separator"></div>
@@ -279,13 +241,3 @@ export default class LevelForm extends React.Component
 			</div>);
 	}
 }
-
-/*
-TODO
-campo de nombres y apellidos no admite ñ y tildes--------later
-
-
-BUG
-cuando estas en el formulario de registro de estudiantes y se le da clic en alguna opcion del menu no carga nada.
-
- */
