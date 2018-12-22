@@ -1,4 +1,5 @@
-﻿using System.IO.Ports;
+﻿using System;
+using System.IO.Ports;
 
 namespace Aula_Multisensorial.Utils
 {
@@ -13,7 +14,7 @@ namespace Aula_Multisensorial.Utils
 
         public void SendMessage(string message)
         {
-            serialPort.WriteLine(message);
+            serialPort.Write(message);
         }
     }
 }

@@ -7,6 +7,7 @@ using Aula_Multisensorial.Model;
 using System.Collections.Generic;
 using Aula_Multisensorial.Access;
 using MongoDB.Bson;
+using Aula_Multisensorial.Utils;
 
 namespace Aula_Multisensorial
 {
@@ -25,6 +26,7 @@ namespace Aula_Multisensorial
             chromiumWebBrowser.RegisterJsObject("studentsController", new StudentAccess());
             chromiumWebBrowser.RegisterJsObject("levelsController", new LevelAccess());
             chromiumWebBrowser.RegisterJsObject("teachersController", new TeacherAccess());
+            chromiumWebBrowser.RegisterJsObject("arduinoController", new ArduinoController());
         }
         private void InitializeChromium()
         {

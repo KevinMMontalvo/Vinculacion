@@ -38,7 +38,7 @@ export default class ActivitiesMenu extends React.Component {
       arduinoController.sendMessage("ON:")
     }
 
-    TurnOff(){
+    TurnOff()   {
       arduinoController.sendMessage("OFF:")
     }
 
