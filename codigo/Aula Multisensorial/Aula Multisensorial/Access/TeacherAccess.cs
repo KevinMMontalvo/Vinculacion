@@ -45,5 +45,25 @@ namespace Aula_Multisensorial.Access
             FilterDefinition<Teacher> filter = Builders<Teacher>.Filter.Eq("Id", id);
             teachersCollection.DeleteOne(filter);
         }
+
+        public bool ValidateTeacherLogin(string name, string password)
+        {
+            FilterDefinition<Teacher> filter = Builders<Teacher>.Filter.Eq("Name", name);
+            List<Teacher> teachersList = teachersCollection.Find(filter).ToList();
+
+            if (teachersList.Count!=1)
+            {
+                return false;
+            }
+
+            if (teachersList[0].Password.Equals(password))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

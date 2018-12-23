@@ -13,24 +13,29 @@ namespace Aula_Multisensorial.Model
 
         [BsonElement("name")]
         [JsonProperty(PropertyName = "name")]
-        private string Name { get; set; }
+        public string Name { get; set; }
+
+        [BsonElement("password")]
+        [JsonProperty(PropertyName = "password")]
+        public string Password { get; set; }
 
         [BsonElement("speciality")]
         [JsonProperty(PropertyName = "speciality")]
-        private string Speciality { get; set; }
+        public string Speciality { get; set; }
 
         [BsonElement("level_id")]
         [JsonProperty(PropertyName = "level_id")]
-        private string LevelId { get; set; }
+        public string LevelId { get; set; }
 
         public Teacher()
         {
         }
 
-        public Teacher(string id, string name, string speciality, string levelId)
+        public Teacher(string id, string name, string password, string speciality, string levelId)
         {
             Id = id;
             Name = name;
+            Password = password;
             Speciality = speciality;
             LevelId = levelId;
         }
