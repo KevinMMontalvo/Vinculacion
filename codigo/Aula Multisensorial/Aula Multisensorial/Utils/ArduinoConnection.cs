@@ -13,7 +13,7 @@ namespace Aula_Multisensorial.Utils
         private ArduinoConnection()
         {
             SerialPort = new SerialPort(USB_PORT,BAUD_RATE);
-            SerialPort.Open();
+            //SerialPort.Open();
         }
 
         public static ArduinoConnection GetInstance()
