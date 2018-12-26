@@ -230,7 +230,7 @@ textarea:focus {
 }
 
 .primary-button:hover {
-  width: 98%;
+  width: 92.5%;
   cursor: pointer;
   background-color: #248ED5;
 }

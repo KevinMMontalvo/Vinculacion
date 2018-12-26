@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AdvancedMenu from '../components/AdvancedMenu';
 
 export default class SideMenu extends React.Component
 {
@@ -36,6 +37,7 @@ export default class SideMenu extends React.Component
 	render()
 	{
 		return (<div>
+				<AdvancedMenu/>
 				<div className="side-menu">
 					{this.state.isLogged ? <div className="menu-options">
 						<div onClick={() => this.StudentOption()} id="option1" className="menu-option">Estudiantes</div>
