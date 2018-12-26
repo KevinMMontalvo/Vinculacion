@@ -281,6 +281,24 @@ export default class TeacherForm extends React.Component
 							       className="horizontal-input"/>
 						</div>
 					</div>
+					<div className="form-container">
+						<p className="input-label">Información de la cuenta</p>
+						<div className="input-container">
+							<input id="username-input"
+							       onKeyPress={() => this.ValidateOnlyLetters(event)} placeholder="Nombre de usuario"
+							       className="horizontal-input"/>
+						</div>
+						<div className="input-container">
+							<input id="password-input"
+							       placeholder="Contraseña"
+							       className="horizontal-input"/>
+						</div>
+						<div className="input-container">
+							<input id="password-confirmation-input"
+							       placeholder="Confirmar contraseña"
+							       className="horizontal-input"/>
+						</div>
+					</div>
 					<div className="button-container">
 						<div onClick={() => this.CheckWarningMessages()} className="secondary-button">
 							{

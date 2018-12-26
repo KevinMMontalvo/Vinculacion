@@ -9,11 +9,20 @@ export default class Main extends React.Component {
 
         }
     }
+
+    UploadExcel(){
+
+    }
+
+    componentDidMount(){
+      
+    }
+
     render() {
         return(
             <div>
                 <MainContainer>
-                  
+
                 </MainContainer>
             </div>
         );
