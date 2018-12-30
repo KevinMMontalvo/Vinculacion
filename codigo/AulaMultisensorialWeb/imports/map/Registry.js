@@ -156,7 +156,7 @@ export default class Registry extends React.Component {
                     <div>
                       <Modal open={this.state.openDeleteModal} onClose={this.onCloseModal} center>
                         <div className="delete-message-container">
-                          <p>¿Esta segur@ que desea eliminar este registro?</p>
+                          <p>¿Esta seguro/a que desea eliminar este registro?</p>
                           <div className="delete-mesagge-options">
                             <div onClick={() => this.DeleteStudent(this.props.students)} id="delete-ok" className="delete-mesasage-button">Si</div>
                             <div onClick={() => this.onCloseModal()} id="delete-cancel" className="delete-mesasage-button">No</div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AdvancedMenu from '../components/AdvancedMenu';
+import UserMenu from '../components/UserMenu';
 
 export default class SideMenu extends React.Component
 {
@@ -7,7 +7,7 @@ export default class SideMenu extends React.Component
 	{
 		super(props);
 		this.state = {
-			isLogged: true,
+			openUserMenu: false,
 		};
 	}
 
@@ -31,16 +31,19 @@ export default class SideMenu extends React.Component
 
 	ActivitiesMenu()
 	{
+		/*Aca podes probar lo que queras*/
 		//this.props.ShowActivitiesMenu();
-		activitiesController.startMatrizActivity("Matrix");
+	}
+
+	Logout(){
+		this.props.Logout();
 	}
 
 	render()
 	{
 		return (<div>
-				<AdvancedMenu/>
 				<div className="side-menu">
-					{this.state.isLogged ? <div className="menu-options">
+					{this.props.isLogged ? <div className="menu-options">
 						<div onClick={() => this.StudentOption()} id="option1" className="menu-option">Estudiantes</div>
 						<div onClick={() => this.TeacherOption()} id="option2" className="menu-option">Docentes</div>
 						<div onClick={() => this.LevelOption()} id="option3" className="menu-option">Niveles</div>
@@ -48,8 +51,19 @@ export default class SideMenu extends React.Component
 						</div>
 					</div> : <div className="menu-icon"></div>}
 					<div className="menu-title">FUVIME</div>
-					<div className="user-info-container"></div>
-				</div>
+						{
+							this.props.user != undefined ?
+							<div>
+								<div className="user-info-container">
+									<div className="user-icon-container"></div>
+									<div className="username-container">{this.props.user.name}</div>
+										<UserMenu Logout={this.Logout.bind(this)}/>
+								</div>
+							</div>
+							:
+							undefined
+						}
+					</div>
 			</div>);
 	}
 }

@@ -88,12 +88,15 @@
 }
 
 .delete-message-container {
-  height: 12.5vh;
+  height: 10.5vh;
   width: 32.5vw;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  margin-bottom: 1vh;
 }
 
 .delete-message-container p{
-  font-size: 1.4em;
+  font-size: 1.3em;
   text-align: center;
 }
 
@@ -103,7 +106,7 @@
   display: flex;
   justify-content: center;
   position: relative;
-  top: 3vh;
+  top: 2vh;
 }
 
 .delete-mesasage-button {
