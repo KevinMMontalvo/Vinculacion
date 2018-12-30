@@ -31,7 +31,8 @@ export default class SideMenu extends React.Component
 
 	ActivitiesMenu()
 	{
-		this.props.ShowActivitiesMenu();
+		//this.props.ShowActivitiesMenu();
+		activitiesController.startMatrizActivity("Matrix");
 	}
 
 	render()

@@ -78,7 +78,7 @@ namespace Aula_Multisensorial.Access
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
             cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
 
-            ReplaceOneResult result = teachersCollection.ReplaceOne(filter, objectTeacher,null,cancellationTokenSource.Token);
+            ReplaceOneResult result = teachersCollection.ReplaceOne(filter, objectTeacher, null, cancellationTokenSource.Token);
 
             //validacion de la ejecucion correcta de la modificacion
             if (result.IsAcknowledged && result.ModifiedCount == 1)
@@ -103,7 +103,7 @@ namespace Aula_Multisensorial.Access
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
             cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
 
-            DeleteResult deleteResult = teachersCollection.DeleteOne(filter,cancellationTokenSource.Token);
+            DeleteResult deleteResult = teachersCollection.DeleteOne(filter, cancellationTokenSource.Token);
 
             //validacion de la ejecucion correcta de la eliminacion
             if (deleteResult.IsAcknowledged && deleteResult.DeletedCount == 1)
@@ -119,8 +119,8 @@ namespace Aula_Multisensorial.Access
         /// <summary>
         /// Valida los datos de ingreso de un docente
         /// </summary>
-        /// <param name="name">Nombre del docente</param>
-        /// <param name="password">Contraseña del docente</param>
+        /// <param name="name">String con el nombre del docente</param>
+        /// <param name="password">String con la contraseña del docente</param>
         /// <returns>Retorna true si los datos de ingreso son correctos</returns>
         public bool ValidateTeacherLogin(string name, string password)
         {
@@ -130,7 +130,7 @@ namespace Aula_Multisensorial.Access
             List<Teacher> teachersList = teachersCollection.Find(filter).ToList();
 
             // solo debe haber un docente con ese nombre
-            if (teachersList.Count!=1)
+            if (teachersList.Count != 1)
             {
                 return false;
             }
@@ -144,6 +144,34 @@ namespace Aula_Multisensorial.Access
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Cambia el password de un docente
+        /// </summary>
+        /// <param name="id">string con el id del docente a ser modificado</param>
+        /// <param name="newPassword">String con la nueva contraseña</param>
+        /// <returns></returns>
+        public bool ChangeTeacherPassword(string id, string newPassword)
+        {
+            FilterDefinition<Teacher> filter = Builders<Teacher>.Filter.Eq("Id", id);
+
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+
+            UpdateDefinition<Teacher> updateDefinition = Builders<Teacher>.Update.Set("Password", newPassword);
+
+            UpdateResult updateResult = teachersCollection.UpdateOne(filter, updateDefinition, null, cancellationTokenSource.Token);
+
+            if (updateResult.IsAcknowledged && updateResult.ModifiedCount == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
     }
 }

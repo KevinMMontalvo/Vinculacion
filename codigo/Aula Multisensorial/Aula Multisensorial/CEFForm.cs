@@ -2,11 +2,7 @@
 using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
-using MongoDB.Driver;
-using Aula_Multisensorial.Model;
-using System.Collections.Generic;
 using Aula_Multisensorial.Access;
-using MongoDB.Bson;
 using Aula_Multisensorial.Utils;
 
 namespace Aula_Multisensorial
@@ -14,6 +10,7 @@ namespace Aula_Multisensorial
     public partial class CEFForm : Form
     {
         public ChromiumWebBrowser chromiumWebBrowser;
+
         public CEFForm()
         {
             InitializeComponent();
@@ -27,7 +24,10 @@ namespace Aula_Multisensorial
             chromiumWebBrowser.RegisterJsObject("levelsController", new LevelAccess());
             chromiumWebBrowser.RegisterJsObject("teachersController", new TeacherAccess());
             chromiumWebBrowser.RegisterJsObject("arduinoController", new ArduinoController());
+            chromiumWebBrowser.RegisterJsObject("excelController",new ExcelImporter(this));
+            chromiumWebBrowser.RegisterJsObject("activitiesController",new ActivitiesController(this));
         }
+
         private void InitializeChromium()
         {
             CefSettings cefSettings = new CefSettings();
@@ -38,12 +38,12 @@ namespace Aula_Multisensorial
             this.Controls.Add(chromiumWebBrowser);
             chromiumWebBrowser.Dock = DockStyle.Fill;
 
-            /*//permite el acceso a archivos locales
+            //permite el acceso a archivos locales
             BrowserSettings browserSettings = new BrowserSettings();
-            //browserSettings.FileAccessFromFileUrls = CefState.Enabled;
-            //browserSettings.UniversalAccessFromFileUrls = CefState.Enabled;
+            browserSettings.FileAccessFromFileUrls = CefState.Enabled;
+            browserSettings.UniversalAccessFromFileUrls = CefState.Enabled;
             //browserSettings.Javascript = CefState.Enabled;
-            chromiumWebBrowser.BrowserSettings = browserSettings;*/
+            chromiumWebBrowser.BrowserSettings = browserSettings;
 
         }
 

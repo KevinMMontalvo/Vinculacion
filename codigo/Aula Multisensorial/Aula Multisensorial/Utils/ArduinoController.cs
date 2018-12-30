@@ -9,7 +9,6 @@ namespace Aula_Multisensorial.Utils
 
         public ArduinoController()
         {
-            serialPort = ArduinoConnection.GetInstance().SerialPort;
         }
 
         public void SendMessage(string message)
