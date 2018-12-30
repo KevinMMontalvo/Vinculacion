@@ -45,6 +45,8 @@
   animation: fade-in 1s ease-in-out;
   animation-fill-mode: backwards;
   animation-delay: 2s;
+  display: flex;
+  color: #FFF;
 }
 
 .menu-options {
@@ -88,4 +90,43 @@
 
 #option4 {
   animation-delay: 2.25s;
+}
+
+.user-icon-container {
+  width: 5vw;
+  height: 100%;
+  background-image: url(user-gra.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 2.75vw;
+}
+
+.username-container {
+  width: 12.5vw;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  text-indent: 0.5vw;
+  align-items: center;
+}
+
+.user-options-container {
+  width: 2.5vw;
+  height: 100%;
+  position: relative;
+  z-index: 100;
+  background-color: #1E1D21;
+  background-image: url(options-w.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 0.35vw;
+  transition: 0.25s ease-in;
+  animation: spin-to-tiny 1s ease-out;
+  animation-fill-mode: backwards;
+  animation-delay: 1s;
+}
+
+.user-options-container:hover {
+  cursor: pointer;
+  background-color: #212125;
 }

@@ -68,6 +68,7 @@ export default class MainContainer extends React.Component {
         super(props);
         this.state = {
           loginForm: true,
+          isLogged: false,
           studentOption: false,
           addStudentForm: false,
           showStudentRecords: false,
@@ -542,13 +543,31 @@ export default class MainContainer extends React.Component {
       this.InitializeSpaceCanvas();
     }
 
+    SuccessfullLogin(user){
+      this.setState({
+        isLogged: true,
+        loginForm: false,
+        user: user,
+      });
+      document.getElementById('main-title').innerHTML = "Bienvenido/a";
+      document.getElementsByClassName('main-icon')[0].id = "home-icon";
+    }
+
+    Logout(){
+      this.setState({
+        isLogged: false,
+        loginForm: true,
+        user: undefined,
+      });
+    }
+
     render() {
         return(
             <div>
               <canvas id="space-canvas">
 
               </canvas>
-              <SideMenu ShowActivitiesMenu={this.ShowActivitiesMenu.bind(this)} MaximizeMenu={() => this.MaximizeMenu()} LevelOption={this.LevelOption.bind(this)} TeacherOption={this.TeacherOption.bind(this)} StudentOption={this.StudentOption.bind(this)}/>
+              <SideMenu Logout={this.Logout.bind(this)} user={this.state.user} isLogged={this.state.isLogged} ShowActivitiesMenu={this.ShowActivitiesMenu.bind(this)} MaximizeMenu={() => this.MaximizeMenu()} LevelOption={this.LevelOption.bind(this)} TeacherOption={this.TeacherOption.bind(this)} StudentOption={this.StudentOption.bind(this)}/>
               <div className="main-container">
                 <div id="main-info" className="main-info">
                   <div id="login-icon" className="main-icon"></div>
@@ -627,7 +646,7 @@ export default class MainContainer extends React.Component {
                 }
                 {
                   this.state.loginForm ?
-                    <LoginForm/>
+                    <LoginForm SuccessfullLogin={this.SuccessfullLogin.bind(this)}/>
                   :
                   undefined
                 }

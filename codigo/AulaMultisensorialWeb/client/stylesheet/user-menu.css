@@ -1,33 +1,10 @@
-.advanced-menu-container {
-  width: 4vw;
-  height: 4vw;
-  position: fixed;
-  background-image: url(app.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 1.5vw;
-  bottom: 5.5vw;
-  left: 15.5vw;
-  z-index: 100;
-  transition: 0.75s ease-in;
-  animation: spin-to-tiny 1s ease-out;
-  animation-fill-mode: backwards;
-  animation-delay: 1s;
-}
-
-.advanced-menu-container:hover {
-  cursor: pointer;
-  background-color: #1a181d;
-  border-radius: 100%;
-}
-
 .advanced-menu-options-container {
   width: 40vw;
   height: auto;
 }
 
-.styles_modal__gNwvD {
-  padding: 0 !important;
+.user-options-modal {
+  padding: 0;
 }
 
 .advanced-menu-title {
@@ -38,6 +15,17 @@
   color: #333;
   font-size: 1.4em;
   font-weight: bold;
+}
+
+.styles_modal__gNwvD {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 1vh;
+  padding-bottom: 0;
+}
+
+path {
+  fill: #333;
 }
 
 .advanced-menu-sub-title {
@@ -72,6 +60,12 @@
   background-position: 5.5vw 1.25vh;
   background-size: 4.5vh;
   background-image: url(excel-w.svg);
+}
+
+#logout {
+  background-position: 5.5vw 1.25vh;
+  background-size: 4.5vh;
+  background-image: url(logout-w.svg);
 }
 
 .advanced-menu-option-container-g:hover {

@@ -179,7 +179,7 @@ body {
 }
 
 #username:focus {
-  border-color: #2BBEA2;
+    border-color: #2BBEA2;
 }
 
 #password:focus {
@@ -391,6 +391,15 @@ select:focus {
   background-image: url(info-w.svg);
   background-position: center;
   background-size: 0.5vw;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
+.wrong-info-icon {
+  background-image: url(wrong-r.svg);
+  background-position: center;
+  background-size: 2.0vw;
   background-repeat: no-repeat;
   width: 100%;
   height: 100%;
