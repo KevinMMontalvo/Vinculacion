@@ -64,7 +64,8 @@ export default class LevelForm extends React.Component
 	{
 		ButterToast.raise({
 			content: <Cinnamon.Crisp
-				scheme={Cinnamon.Crisp.SCHEME_GREY}
+				className="butter-alert"
+				scheme={Cinnamon.Slim.SCHEME_DARK}
 				content={() => <div>{field}</div>}
 				title={this.state.emptyInputMessage}
 				icon={<div className="alert-warning-icon"></div>}
@@ -76,7 +77,8 @@ export default class LevelForm extends React.Component
 	{
 		ButterToast.raise({
 			content: <Cinnamon.Crisp
-				scheme={Cinnamon.Crisp.SCHEME_GREY}
+				className="butter-alert"
+				scheme={Cinnamon.Slim.SCHEME_DARK}
 				content={() => <div>{"Nivel registrado"}</div>}
 				title={this.state.successRegisteredMessage}
 				icon={<div className="alert-success-icon"></div>}
@@ -122,6 +124,7 @@ export default class LevelForm extends React.Component
 	CheckWarningMessages()
 	{
 		let validationArray = this.ValidateEmptyInputs();
+		console.log(validationArray.length);
 		for (var i = 0; i < validationArray.length; i++)
 		{
 			if (validationArray[i] == "levelName")

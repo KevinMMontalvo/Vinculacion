@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
 import ButterToast, { Cinnamon, POS_BOTTOM, POS_RIGHT, POS_TOP } from 'butter-toast';
+import DatePicker from 'react-date-picker';
 
-export default class TeacherForm extends React.Component
+export default class PeriodForm extends React.Component
 {
 	constructor(props)
 	{
 		super(props);
 		this.state = {
-			options: [{
-				value: 'Masculino',
-				label: 'Masculino'
-			}, {
-				value: 'Femenino',
-				label: 'Femenino'
-			},],
 			emptyInputMessage: "Existen campos vacios: ",
 			successRegisteredMessage: "Registro completo",
 			emptyFields: true,
-			isTheSamePassword: false,
+			date: new Date(),
+			locate: "es-MX",
 		};
 	}
+
+	onChange = date => this.setState({ date });
+	lang = "es-MX";
 
 	ValidateOnlyNumbers(evt)
 	{
@@ -106,48 +104,6 @@ export default class TeacherForm extends React.Component
 		});
 	}
 
-	ShowSamePasswordMenssage()
-	{
-		ButterToast.raise({
-			content: <Cinnamon.Crisp
-				className="butter-alert"
-				scheme={Cinnamon.Slim.SCHEME_DARK}
-				content={() => <div>{"Contraseña correcta"}</div>}
-				title={"Las contraseñas coinciden"}
-				icon={<div className="alert-success-icon"></div>}
-			/>
-		});
-		this.dismissAll();
-	}
-
-	ShowNotTheSamePasswordMenssage()
-	{
-		ButterToast.raise({
-			content: <Cinnamon.Crisp
-				className="butter-alert"
-				scheme={Cinnamon.Slim.SCHEME_DARK}
-				content={() => <div>{"Contraseña incorrecta"}</div>}
-				title={"Las contraseñas no coinciden"}
-				icon={<div className="alert-warning-icon"></div>}
-			/>
-		});
-		this.dismissAll();
-	}
-
-	ShowPasswordNotMatchMenssage()
-	{
-		ButterToast.raise({
-			content: <Cinnamon.Crisp
-				className="butter-alert"
-				scheme={Cinnamon.Slim.SCHEME_DARK}
-				content={() => <div>{"Debe confirmar su contraseña para poder continuar"}</div>}
-				title={"Las contraseñas no coinciden"}
-				icon={<div className="alert-warning-icon"></div>}
-			/>
-		});
-		this.dismissAll();
-	}
-
 	dismissAll = () => {
 			this.tray.dismissAll();
 	}
@@ -206,32 +162,32 @@ export default class TeacherForm extends React.Component
 		}
 		if (validationArray.length == 0 && this.state.isTheSamePassword)
 		{
-			if(this.props.teacherToModify == undefined){
+			if(this.props.periodToModify == undefined){
 				this.setState({
 					emptyFields: false,
-				}, () => this.AddTeacher());
+				}, () => this.AddPeriod());
 			}
 			else {
 				this.setState({
 					emptyFields: false,
-				}, () => this.ModifyTeacher());
+				}, () => this.ModifyPeriod());
 			}
 		}
 	}
 
-	AddTeacher()
+	AddPeriod()
 	{
 		let name = document.getElementById('name-input').value;
 		let level_id = document.getElementById('level-select').value;
 		let speciality = document.getElementById('speciality-input').value;
 		let password = document.getElementById('password-input').value;
-		let teacher = {
+		let period = {
 			name: name,
 			level_id: level_id,
 			speciality: speciality,
 			password: password
 		};
-		teachersController.insertTeacher(teacher);
+		periodsController.insertPeriod(period);
 		this.ClearAllFields();
 		this.ShowSuccessMenssage();
 	}
@@ -246,53 +202,32 @@ export default class TeacherForm extends React.Component
 	}
 
 	componentDidMount(){
-		if(this.props.teacherToModify != undefined){
-			document.getElementById('name-input').value = this.props.teacherToModify.name;
-			document.getElementById('level-select').value = this.props.teacherToModify.level_id;
-			document.getElementById('speciality-input').value = this.props.teacherToModify.speciality;
+		if(this.props.periodToModify != undefined){
+			document.getElementById('name-input').value = this.props.periodToModify.name;
+			document.getElementById('level-select').value = this.props.periodToModify.level_id;
+			document.getElementById('speciality-input').value = this.props.periodToModify.speciality;
 		}
-		this.LoadLevelsInSelect();
 	}
 
 	CapitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 	}
 
-	ModifyTeacher(){
+	ModifyPeriod(){
 		let name = document.getElementById('name-input').value;
 		let level_id = document.getElementById('level-select').value;
 		let speciality = this.CapitalizeFirstLetter(document.getElementById('speciality-input').value.toString());
-		let teacher = {
-			_id: this.props.teacherToModify._id,
+		let period = {
+			_id: this.props.periodToModify._id,
 			name: name,
 			level_id: level_id,
 			speciality: speciality,
 		};
-		teachersController.modifyTeacher(teacher);
+		periodsController.modifyPeriod(period);
 		this.ClearAllFields();
 		this.ShowModifySuccessMenssage();
 		this.props.CloseModifyForm();
 		this.props.UpdateTable();
-	}
-
-	LoadLevels() {
-		var levelsString = levelsController.getLevels();
-		var levels = JSON.parse(levelsString);
-		return levels;
-	}
-
-	LoadLevelsInSelect(){
-		this.setState({
-			levels: this.LoadLevels(),
-		},() => {
-			var levelSelect = document.getElementById('level-select');
-			for (var i = 0; i < this.state.levels.length; i++) {
-				var option = document.createElement("option");
-				option.text = this.state.levels[i].name;
-				option.value = this.state.levels[i]._id;
-				levelSelect.add(option);
-			}
-		});
 	}
 
 	VerifySamePassword(){
@@ -321,58 +256,30 @@ export default class TeacherForm extends React.Component
 		return (<div>
 				<div className="student-form">
 					<div className="form-container">
-						<p className="input-label">Nombre del docente</p>
+						<p className="input-label">Nombre del periodo</p>
 						<div className="form-container">
 							<p className="input-label">Nombre</p>
 							<div className="input-container">
 								<input id="name-input"
-								       onKeyPress={() => this.ValidateOnlyLetters(event)} placeholder="Nombre y apellido del docente"
+								       onKeyPress={() => this.ValidateOnlyLetters(event)} placeholder="Nombre del periodo"
 								       className="horizontal-input"/>
 							</div>
 						</div>
 					</div>
 					<div className="form-container">
-						<p className="input-label">Nivel</p>
-						<div className="input-container">
-							<select id="level-select">
-								<option value="" selected disabled hidden>Selecione el nivel del docente</option>
-							</select>
+						<p className="input-label">Fecha de inicio</p>
+						<div className="date-input-container">
+							<DatePicker
+								onChange={this.onChange}
+								value={this.state.date}
+								locate={this.lang}
+							/>
 						</div>
 					</div>
-					<div className="form-container">
-						<p className="input-label">Especialidad</p>
-						<div className="input-container">
-							<input id="speciality-input"
-							       onKeyPress={() => this.ValidateOnlyLetters(event)} placeholder="Especialidad del docente"
-							       className="horizontal-input"/>
-						</div>
-					</div>
-					{
-						this.props.teacherToModify == undefined ?
-						<div>
-							<div className="form-container">
-								<p className="input-label">Información de la cuenta</p>
-								<div className="input-container">
-									<input onBlur={() => this.VerifySamePassword()} id="password-input"
-									       placeholder="Contraseña"
-									       className="horizontal-input"
-											 	 type="password"/>
-								</div>
-								<div className="input-container">
-									<input onKeyDown={() => this.VerifySamePassword()} onKeyUp={() => this.VerifySamePassword()} onKeyPress={() => this.VerifySamePassword()} id="password-confirmation-input"
-									       placeholder="Confirmar contraseña"
-									       className="horizontal-input"
-											 	 type="password"/>
-								</div>
-							</div>
-						</div>
-						:
-						undefined
-					}
 					<div className="button-container">
 						<div onClick={() => this.CheckWarningMessages()} className="secondary-button">
 							{
-								this.props.teacherToModify != undefined ?
+								this.props.periodToModify != undefined ?
 									<div>Modificar Registro</div>
 								:
 									<div>Completar Registro</div>

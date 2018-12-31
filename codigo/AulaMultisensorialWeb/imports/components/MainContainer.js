@@ -10,6 +10,8 @@ import TeacherRecords from '../components/TeacherRecords';
 import LevelMenu from '../components/LevelMenu';
 import LevelForm from '../components/LevelForm';
 import LevelRecords from '../components/LevelRecords';
+import PeriodMenu from '../components/PeriodMenu';
+import PeriodForm from '../components/PeriodForm';
 import ActivitiesMenu from '../components/ActivitiesMenu';
 
 var canvas;
@@ -78,6 +80,9 @@ export default class MainContainer extends React.Component {
           levelOption: false,
           addLevelForm: false,
           showLevelRecords: false,
+          periodOption: false,
+          addPeriodForm: false,
+          showPeriodRecords: false,
           isMenuMinimized: false,
           showModifyForm: false,
           activityOption: false,
@@ -97,6 +102,9 @@ export default class MainContainer extends React.Component {
         levelOption: false,
         addLevelForm: false,
         showLevelRecords: false,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
         showModifyForm: false,
         modifyStudent: false,
         deleteStudent: false,
@@ -117,6 +125,9 @@ export default class MainContainer extends React.Component {
         levelOption: false,
         addLevelForm: false,
         showLevelRecords: false,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
         showModifyForm: false,
         modifyStudent: false,
         deleteStudent: false,
@@ -135,6 +146,9 @@ export default class MainContainer extends React.Component {
         levelOption: false,
         addLevelForm: false,
         showLevelRecords: false,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
         showModifyForm: false,
         modifyStudent: false,
         deleteStudent: false,
@@ -154,6 +168,9 @@ export default class MainContainer extends React.Component {
         levelOption: false,
         addLevelForm: false,
         showLevelRecords: false,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
         modifyStudent: true,
         showModifyForm: false,
         modifyStudent: true,
@@ -174,6 +191,9 @@ export default class MainContainer extends React.Component {
         levelOption: false,
         addLevelForm: false,
         showLevelRecords: false,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
         modifyStudent: true,
         showModifyForm: false,
         modifyStudent: false,
@@ -194,6 +214,9 @@ export default class MainContainer extends React.Component {
         levelOption: false,
         addLevelForm: false,
         showLevelRecords: false,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
         showModifyForm: false,
         modifyStudent: true,
         activityOption: false,
@@ -213,6 +236,9 @@ export default class MainContainer extends React.Component {
         levelOption: false,
         addLevelForm: false,
         showLevelRecords: false,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
         showModifyForm: false,
         modifyStudent: true,
         activityOption: false,
@@ -230,6 +256,9 @@ export default class MainContainer extends React.Component {
         levelOption: false,
         addLevelForm: false,
         showLevelRecords: false,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
         showModifyForm: false,
         modifyStudent: false,
         deleteStudent: false,
@@ -250,6 +279,9 @@ export default class MainContainer extends React.Component {
         levelOption: true,
         addLevelForm: false,
         showLevelRecords: false,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
         showModifyForm: false,
         modifyStudent: true,
         activityOption: false,
@@ -257,6 +289,7 @@ export default class MainContainer extends React.Component {
       document.getElementById('main-title').innerHTML = "Niveles";
       document.getElementsByClassName('main-icon')[0].id = "level-icon";
     }
+
     AddLevel(){
       this.setState({
         loginForm: false,
@@ -269,11 +302,15 @@ export default class MainContainer extends React.Component {
         levelOption: true,
         addLevelForm: true,
         showLevelRecords: false,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
         showModifyForm: false,
         modifyStudent: true,
         activityOption: false,
       });
     }
+
     ShowLevelsRecords(){
       this.setState({
         loginForm: false,
@@ -286,6 +323,52 @@ export default class MainContainer extends React.Component {
         levelOption: true,
         addLevelForm: false,
         showLevelRecords: true,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
+        showModifyForm: false,
+        modifyStudent: false,
+        deleteStudent: false,
+        activityOption: false,
+      });
+    }
+
+    AddPeriod(){
+      this.setState({
+        loginForm: false,
+        studentOption: false,
+        addStudentForm: false,
+        showStudentRecords: false,
+        teacherOption: false,
+        addTeacherForm: false,
+        showTeacherRecords: false,
+        levelOption: false,
+        addLevelForm: false,
+        showLevelRecords: false,
+        periodOption: true,
+        addPeriodForm: true,
+        showPeriodRecords: false,
+        showModifyForm: false,
+        modifyStudent: false,
+        activityOption: false,
+      });
+    }
+
+    ShowPeriodsRecords(){
+      this.setState({
+        loginForm: false,
+        studentOption: false,
+        addStudentForm: false,
+        showStudentRecords: false,
+        teacherOption: false,
+        addTeacherForm: false,
+        showTeacherRecords: false,
+        levelOption: false,
+        addLevelForm: false,
+        showLevelRecords: false,
+        periodOption: true,
+        addPeriodForm: false,
+        showPeriodRecords: true,
         showModifyForm: false,
         modifyStudent: false,
         deleteStudent: false,
@@ -305,6 +388,32 @@ export default class MainContainer extends React.Component {
         levelOption: true,
         addLevelForm: false,
         showLevelRecords: true,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
+        modifyStudent: false,
+        showModifyForm: false,
+        modifyStudent: true,
+        deleteStudent: false,
+        activityOption: false,
+      });
+    }
+
+    ShowPeriodModifyButton(){
+      this.setState({
+        loginForm: false,
+        studentOption: false,
+        addStudentForm: false,
+        showStudentRecords: true,
+        teacherOption: false,
+        addTeacherForm: false,
+        showTeacherRecords: false,
+        levelOption: false,
+        addLevelForm: false,
+        showLevelRecords: false,
+        periodOption: true,
+        addPeriodForm: false,
+        showPeriodRecords: true,
         modifyStudent: false,
         showModifyForm: false,
         modifyStudent: true,
@@ -325,6 +434,9 @@ export default class MainContainer extends React.Component {
         levelOption: false,
         addLevelForm: false,
         showLevelRecords: false,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
         modifyStudent: false,
         showModifyForm: false,
         modifyStudent: true,
@@ -345,6 +457,9 @@ export default class MainContainer extends React.Component {
         levelOption: true,
         addLevelForm: false,
         showLevelRecords: true,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
         modifyStudent: false,
         showModifyForm: false,
         modifyStudent: false,
@@ -365,6 +480,32 @@ export default class MainContainer extends React.Component {
         levelOption: false,
         addLevelForm: false,
         showLevelRecords: false,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
+        modifyStudent: false,
+        showModifyForm: false,
+        modifyStudent: false,
+        deleteStudent: true,
+        activityOption: false,
+      });
+    }
+
+    ShowPeriodDeleteButton(){
+      this.setState({
+        loginForm: false,
+        studentOption: false,
+        addStudentForm: false,
+        showStudentRecords: false,
+        teacherOption: false,
+        addTeacherForm: false,
+        showTeacherRecords: false,
+        levelOption: false,
+        addLevelForm: false,
+        showLevelRecords: false,
+        periodOption: true,
+        addPeriodForm: false,
+        showPeriodRecords: true,
         modifyStudent: false,
         showModifyForm: false,
         modifyStudent: false,
@@ -385,6 +526,9 @@ export default class MainContainer extends React.Component {
         levelOption: false,
         addLevelForm: false,
         showLevelRecords: false,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
         modifyStudent: true,
         showModifyForm: true,
         activityOption: false,
@@ -403,6 +547,9 @@ export default class MainContainer extends React.Component {
         levelOption: true,
         addLevelForm: false,
         showLevelRecords: true,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
         modifyStudent: true,
         showModifyForm: true,
         activityOption: false,
@@ -421,6 +568,30 @@ export default class MainContainer extends React.Component {
         levelOption: false,
         addLevelForm: false,
         showLevelRecords: false,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
+        modifyStudent: true,
+        showModifyForm: true,
+        activityOption: false,
+      });
+    }
+
+    ShowPeriodModifyForm(){
+      this.setState({
+        loginForm: false,
+        studentOption: false,
+        addStudentForm: false,
+        showStudentRecords: false,
+        teacherOption: false,
+        addTeacherForm: false,
+        showTeacherRecords: false,
+        levelOption: false,
+        addLevelForm: false,
+        showLevelRecords: false,
+        periodOption: true,
+        addPeriodForm: false,
+        showPeriodRecords: true,
         modifyStudent: true,
         showModifyForm: true,
         activityOption: false,
@@ -439,6 +610,9 @@ export default class MainContainer extends React.Component {
         levelOption: false,
         addLevelForm: false,
         showLevelRecords: false,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
         modifyStudent: true,
         showModifyForm: false,
         activityOption: false,
@@ -457,6 +631,9 @@ export default class MainContainer extends React.Component {
         levelOption: true,
         addLevelForm: false,
         showLevelRecords: true,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
         modifyStudent: true,
         showModifyForm: false,
         activityOption: false,
@@ -475,6 +652,30 @@ export default class MainContainer extends React.Component {
         levelOption: false,
         addLevelForm: false,
         showLevelRecords: false,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
+        modifyStudent: true,
+        showModifyForm: false,
+        activityOption: false,
+      });
+    }
+
+    ClosePeriodModifyForm(){
+      this.setState({
+        loginForm: false,
+        studentOption: false,
+        addStudentForm: false,
+        showStudentRecords: false,
+        teacherOption: false,
+        addTeacherForm: false,
+        showTeacherRecords: false,
+        levelOption: false,
+        addLevelForm: false,
+        showLevelRecords: false,
+        periodOption: true,
+        addPeriodForm: false,
+        showPeriodRecords: true,
         modifyStudent: true,
         showModifyForm: false,
         activityOption: false,
@@ -493,10 +694,36 @@ export default class MainContainer extends React.Component {
         levelOption: false,
         addLevelForm: false,
         showLevelRecords: false,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
         modifyStudent: false,
         showModifyForm: false,
         activityOption: true,
       });
+    }
+
+    PeriodOption(){
+      this.setState({
+        loginForm: false,
+        studentOption: false,
+        addStudentForm: false,
+        showStudentRecords: false,
+        teacherOption: false,
+        addTeacherForm: false,
+        showTeacherRecords: false,
+        levelOption: false,
+        addLevelForm: false,
+        showLevelRecords: false,
+        periodOption: true,
+        addPeriodForm: false,
+        showPeriodRecords: false,
+        showModifyForm: false,
+        modifyStudent: false,
+        activityOption: false,
+      });
+      document.getElementById('main-title').innerHTML = "Periodos";
+      document.getElementsByClassName('main-icon')[0].id = "period-icon";
     }
 
     MaximizeMenu(){
@@ -549,7 +776,7 @@ export default class MainContainer extends React.Component {
         loginForm: false,
         user: user,
       });
-      document.getElementById('main-title').innerHTML = "Bienvenido/a";
+      document.getElementById('main-title').innerHTML = "Bienvenido-a";
       document.getElementsByClassName('main-icon')[0].id = "home-icon";
     }
 
@@ -558,7 +785,24 @@ export default class MainContainer extends React.Component {
         isLogged: false,
         loginForm: true,
         user: undefined,
+        studentOption: false,
+        addStudentForm: false,
+        showStudentRecords: false,
+        teacherOption: false,
+        addTeacherForm: false,
+        showTeacherRecords: false,
+        levelOption: false,
+        addLevelForm: false,
+        showLevelRecords: false,
+        periodOption: false,
+        addPeriodForm: false,
+        showPeriodRecords: false,
+        modifyStudent: false,
+        showModifyForm: false,
+        activityOption: false,
       });
+      document.getElementById('main-title').innerHTML = "Inicio de sesión";
+      document.getElementsByClassName('login-icon')[0].id = "home-icon";
     }
 
     render() {
@@ -567,7 +811,16 @@ export default class MainContainer extends React.Component {
               <canvas id="space-canvas">
 
               </canvas>
-              <SideMenu Logout={this.Logout.bind(this)} user={this.state.user} isLogged={this.state.isLogged} ShowActivitiesMenu={this.ShowActivitiesMenu.bind(this)} MaximizeMenu={() => this.MaximizeMenu()} LevelOption={this.LevelOption.bind(this)} TeacherOption={this.TeacherOption.bind(this)} StudentOption={this.StudentOption.bind(this)}/>
+              <SideMenu
+                Logout={this.Logout.bind(this)}
+                user={this.state.user}
+                isLogged={this.state.isLogged}
+                ShowActivitiesMenu={this.ShowActivitiesMenu.bind(this)}
+                MaximizeMenu={() => this.MaximizeMenu()}
+                PeriodOption={this.PeriodOption.bind(this)}
+                LevelOption={this.LevelOption.bind(this)}
+                TeacherOption={this.TeacherOption.bind(this)}
+                StudentOption={this.StudentOption.bind(this)}/>
               <div className="main-container">
                 <div id="main-info" className="main-info">
                   <div id="login-icon" className="main-icon"></div>
@@ -576,7 +829,13 @@ export default class MainContainer extends React.Component {
                 {
                   this.state.studentOption ?
                   <div>
-                    <StudentMenu ShowDeleteButton={() => this.ShowStudentDeleteButton()} ShowModifyButton={() => this.ShowStudentModifyButton()} MinimizeMenu={this.MinimizeMenu.bind(this)} isMenuMinimized={this.state.isMenuMinimized} ShowStudentRecords={this.ShowStudentRecords.bind(this)} AddStudent={this.AddStudent.bind(this)}/>
+                    <StudentMenu
+                      ShowDeleteButton={() => this.ShowStudentDeleteButton()}
+                      ShowModifyButton={() => this.ShowStudentModifyButton()}
+                      MinimizeMenu={this.MinimizeMenu.bind(this)}
+                      isMenuMinimized={this.state.isMenuMinimized}
+                      ShowStudentRecords={this.ShowStudentRecords.bind(this)}
+                      AddStudent={this.AddStudent.bind(this)}/>
                     {
                       this.state.addStudentForm ?
                       <StudentForm/>
@@ -585,7 +844,12 @@ export default class MainContainer extends React.Component {
                     }
                     {
                       this.state.showStudentRecords ?
-                      <StudentRecords CloseModifyForm={() => this.CloseStudentModifyForm()} delete={this.state.deleteStudent} ShowModifyForm={this.ShowStudentModifyForm.bind(this)} showModifyForm={this.state.showModifyForm} modify={this.state.modifyStudent} />
+                      <StudentRecords
+                        CloseModifyForm={() => this.CloseStudentModifyForm()}
+                        delete={this.state.deleteStudent}
+                        ShowModifyForm={this.ShowStudentModifyForm.bind(this)}
+                        showModifyForm={this.state.showModifyForm}
+                        modify={this.state.modifyStudent} />
                       :
                       undefined
                     }
@@ -597,7 +861,13 @@ export default class MainContainer extends React.Component {
                 {
                   this.state.teacherOption ?
                   <div>
-                    <TeacherMenu ShowDeleteButton={() => this.ShowTeacherDeleteButton()} ShowModifyButton={() => this.ShowTeacherModifyButton()} MinimizeMenu={this.MinimizeMenu.bind(this)} isMenuMinimized={this.state.isMenuMinimized} ShowTeachersRecords={this.ShowTeachersRecords.bind(this)} AddTeacher={this.AddTeacher.bind(this)}/>
+                    <TeacherMenu
+                      ShowDeleteButton={() => this.ShowTeacherDeleteButton()}
+                      ShowModifyButton={() => this.ShowTeacherModifyButton()}
+                      MinimizeMenu={this.MinimizeMenu.bind(this)}
+                      isMenuMinimized={this.state.isMenuMinimized}
+                      ShowTeachersRecords={this.ShowTeachersRecords.bind(this)}
+                      AddTeacher={this.AddTeacher.bind(this)}/>
                     {
                       this.state.addTeacherForm ?
                       <TeacherForm/>
@@ -606,7 +876,12 @@ export default class MainContainer extends React.Component {
                     }
                     {
                       this.state.showTeacherRecords ?
-                      <TeacherRecords CloseModifyForm={() => this.CloseTeacherModifyForm()} delete={this.state.deleteStudent} ShowModifyForm={this.ShowTeacherModifyForm.bind(this)} showModifyForm={this.state.showModifyForm} modify={this.state.modifyStudent} />
+                      <TeacherRecords
+                        CloseModifyForm={() => this.CloseTeacherModifyForm()}
+                        delete={this.state.deleteStudent}
+                        ShowModifyForm={this.ShowTeacherModifyForm.bind(this)}
+                        showModifyForm={this.state.showModifyForm}
+                        modify={this.state.modifyStudent} />
                       :
                       undefined
                     }
@@ -618,7 +893,13 @@ export default class MainContainer extends React.Component {
                 {
                   this.state.levelOption ?
                   <div>
-                    <LevelMenu ShowDeleteButton={() => this.ShowLevelDeleteButton()} ShowModifyButton={() => this.ShowLevelModifyButton()} MinimizeMenu={this.MinimizeMenu.bind(this)} isMenuMinimized={this.state.isMenuMinimized} ShowLevelsRecords={this.ShowLevelsRecords.bind(this)} AddLevel={this.AddLevel.bind(this)}/>
+                    <LevelMenu
+                      ShowDeleteButton={() => this.ShowLevelDeleteButton()}
+                      ShowModifyButton={() => this.ShowLevelModifyButton()}
+                      MinimizeMenu={this.MinimizeMenu.bind(this)}
+                      isMenuMinimized={this.state.isMenuMinimized}
+                      ShowLevelsRecords={this.ShowLevelsRecords.bind(this)}
+                      AddLevel={this.AddLevel.bind(this)}/>
                     {
                       this.state.addLevelForm ?
                       <LevelForm/>
@@ -627,7 +908,43 @@ export default class MainContainer extends React.Component {
                     }
                     {
                       this.state.showLevelRecords ?
-                      <LevelRecords CloseModifyForm={() => this.CloseLevelModifyForm()} delete={this.state.deleteStudent} ShowModifyForm={this.ShowLevelModifyForm.bind(this)} showModifyForm={this.state.showModifyForm} modify={this.state.modifyStudent} />
+                      <LevelRecords CloseModifyForm={() => this.CloseLevelModifyForm()}
+                        delete={this.state.deleteStudent}
+                        ShowModifyForm={this.ShowLevelModifyForm.bind(this)}
+                        showModifyForm={this.state.showModifyForm}
+                        modify={this.state.modifyStudent} />
+                      :
+                      undefined
+                    }
+                  </div>
+
+                  :
+                  undefined
+                }
+                {
+                  this.state.periodOption ?
+                  <div>
+                    <PeriodMenu
+                      ShowDeleteButton={() => this.ShowPeriodDeleteButton()}
+                      ShowModifyButton={() => this.ShowPeriodModifyButton()}
+                      MinimizeMenu={this.MinimizeMenu.bind(this)}
+                      isMenuMinimized={this.state.isMenuMinimized}
+                      ShowPeriodsRecords={this.ShowPeriodsRecords.bind(this)}
+                      AddPeriod={this.AddPeriod.bind(this)}/>
+                    {
+                      this.state.addPeriodForm ?
+                      <PeriodForm/>
+                      :
+                      undefined
+                    }
+                    {
+                      this.state.showPeriodRecords ?
+                      <StudentRecords
+                        CloseModifyForm={() => this.CloseStudentModifyForm()}
+                        delete={this.state.deleteStudent}
+                        ShowModifyForm={this.ShowStudentModifyForm.bind(this)}
+                        showModifyForm={this.state.showModifyForm}
+                        modify={this.state.modifyStudent} />
                       :
                       undefined
                     }

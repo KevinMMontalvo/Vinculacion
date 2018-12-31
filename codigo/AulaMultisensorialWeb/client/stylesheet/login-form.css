@@ -19,12 +19,14 @@
   height: 14vh;
   font-size: 2.2em;
   width: 90%;
+  text-transform: none;
 }
 
 #password {
   height: 14vh;
   font-size: 2.2em;
   width: 90%;
+  text-transform: none;
 }
 
 #username:focus {
