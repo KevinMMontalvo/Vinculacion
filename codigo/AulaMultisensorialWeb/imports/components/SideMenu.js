@@ -29,6 +29,12 @@ export default class SideMenu extends React.Component
 		this.props.MaximizeMenu();
 	}
 
+	PeriodOption()
+	{
+		this.props.PeriodOption();
+		this.props.MaximizeMenu();
+	}
+
 	ActivitiesMenu()
 	{
 		/*Aca podes probar lo que queras*/
@@ -47,7 +53,8 @@ export default class SideMenu extends React.Component
 						<div onClick={() => this.StudentOption()} id="option1" className="menu-option">Estudiantes</div>
 						<div onClick={() => this.TeacherOption()} id="option2" className="menu-option">Docentes</div>
 						<div onClick={() => this.LevelOption()} id="option3" className="menu-option">Niveles</div>
-						<div onClick={() => this.ActivitiesMenu()} id="option4" className="menu-option">Actividades
+						<div onClick={() => this.PeriodOption()} id="option4" className="menu-option">Periodos</div>
+						<div onClick={() => this.ActivitiesMenu()} id="option5" className="menu-option">Actividades
 						</div>
 					</div> : <div className="menu-icon"></div>}
 					<div className="menu-title">FUVIME</div>
@@ -57,7 +64,7 @@ export default class SideMenu extends React.Component
 								<div className="user-info-container">
 									<div className="user-icon-container"></div>
 									<div className="username-container">{this.props.user.name}</div>
-										<UserMenu Logout={this.Logout.bind(this)}/>
+										<UserMenu userId={this.props.user._id} Logout={this.Logout.bind(this)}/>
 								</div>
 							</div>
 							:

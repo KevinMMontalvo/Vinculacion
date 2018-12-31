@@ -68,3 +68,8 @@
   background-image: url(level.svg);
   background-size: 2vw;
 }
+
+#period-icon {
+  background-image: url(period.svg);
+  background-size: 2vw;
+}
