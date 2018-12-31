@@ -32,6 +32,7 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.buttonSetup = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
+            this.labelConfigurationInformation = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelTittle
@@ -68,7 +69,7 @@
             this.buttonSetup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSetup.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetup.ForeColor = System.Drawing.Color.White;
-            this.buttonSetup.Location = new System.Drawing.Point(193, 249);
+            this.buttonSetup.Location = new System.Drawing.Point(193, 220);
             this.buttonSetup.Margin = new System.Windows.Forms.Padding(0);
             this.buttonSetup.Name = "buttonSetup";
             this.buttonSetup.Size = new System.Drawing.Size(476, 56);
@@ -84,7 +85,7 @@
             this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonExit.ForeColor = System.Drawing.Color.White;
-            this.buttonExit.Location = new System.Drawing.Point(193, 382);
+            this.buttonExit.Location = new System.Drawing.Point(193, 321);
             this.buttonExit.Margin = new System.Windows.Forms.Padding(0);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(476, 56);
@@ -93,12 +94,23 @@
             this.buttonExit.UseVisualStyleBackColor = false;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
+            // labelConfigurationInformation
+            // 
+            this.labelConfigurationInformation.AutoSize = true;
+            this.labelConfigurationInformation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelConfigurationInformation.ForeColor = System.Drawing.Color.White;
+            this.labelConfigurationInformation.Location = new System.Drawing.Point(47, 494);
+            this.labelConfigurationInformation.Name = "labelConfigurationInformation";
+            this.labelConfigurationInformation.Size = new System.Drawing.Size(0, 17);
+            this.labelConfigurationInformation.TabIndex = 4;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
             this.ClientSize = new System.Drawing.Size(884, 561);
+            this.Controls.Add(this.labelConfigurationInformation);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonSetup);
             this.Controls.Add(this.buttonStart);
@@ -106,6 +118,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Main";
             this.Text = "Main";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
+            this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -117,5 +131,6 @@
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Button buttonSetup;
         private System.Windows.Forms.Button buttonExit;
+        private System.Windows.Forms.Label labelConfigurationInformation;
     }
 }

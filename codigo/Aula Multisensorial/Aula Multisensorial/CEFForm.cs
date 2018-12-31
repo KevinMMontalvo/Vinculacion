@@ -23,7 +23,6 @@ namespace Aula_Multisensorial
             chromiumWebBrowser.RegisterJsObject("studentsController", new StudentAccess());
             chromiumWebBrowser.RegisterJsObject("levelsController", new LevelAccess());
             chromiumWebBrowser.RegisterJsObject("teachersController", new TeacherAccess());
-            chromiumWebBrowser.RegisterJsObject("arduinoController", new ArduinoController());
             chromiumWebBrowser.RegisterJsObject("excelController",new ExcelImporter(this));
             chromiumWebBrowser.RegisterJsObject("activitiesController",new ActivitiesController(this));
         }

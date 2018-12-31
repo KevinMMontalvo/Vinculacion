@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Aula_Multisensorial.Utils;
+using System;
+using System.IO.Ports;
 using System.Windows.Forms;
 
 namespace Aula_Multisensorial.MatrixLED
@@ -15,8 +10,20 @@ namespace Aula_Multisensorial.MatrixLED
         public Main()
         {
             InitializeComponent();
-            
+            ControlBox = false;
             Visible = true;
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+            bool arduinoIsConnected = ArduinoController.GetInstance().StartConnection(ArduinoController.MATRIX_ARDUINO);
+
+            if (!arduinoIsConnected)
+            {
+                MessageBox.Show("No se pudo conectar con el dispositivo (Matriz de LED)");
+                Dispose();
+            }
+            ArduinoController
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -31,7 +38,12 @@ namespace Aula_Multisensorial.MatrixLED
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
-            Dispose();
+            Close();
+        }
+
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ArduinoController.GetInstance().CloseConnection(ArduinoController.MATRIX_ARDUINO);
         }
     }
 }
