@@ -8,6 +8,7 @@ namespace Aula_Multisensorial.MatrixLED
     {
         private static readonly Color GREEN_ENABLED = Color.FromArgb(43, 192, 162);
         private delegate void ControlEvent(object sender, EventArgs e);
+        private Form parentForm;
         private int[,] shapeBuffer = new int[4, 4];
         private string shapeConfiguration;
         private int colorConfiguration;
@@ -17,24 +18,27 @@ namespace Aula_Multisensorial.MatrixLED
         private int appearancesConfiguration;
         private int contadorIntervalo = 1;
 
-        public Configuration(string shapeConfiguration, int colorConfiguration, int sequenceConfiguration, int levelConfiguration, int brightnessConfiguration, int appearancesConfiguration)
+        public Configuration(Form parentForm, string shapeConfiguration, int colorConfiguration, int sequenceConfiguration, int levelConfiguration, int brightnessConfiguration, int appearancesConfiguration)
         {
             InitializeComponent();
+            this.parentForm = parentForm;
             this.shapeConfiguration = shapeConfiguration;
             this.colorConfiguration = colorConfiguration;
             this.sequenceConfiguration = sequenceConfiguration;
             this.levelConfiguration = levelConfiguration;
             this.brightnessConfiguration = brightnessConfiguration;
             this.appearancesConfiguration = appearancesConfiguration;
-            Visible = true;
+            
         }
 
         private void Configuration_Load(object sender, EventArgs e)
         {
+            ControlBox = false;
             ChangeButtonsEnableState(false);
             timer.Interval = 4200 - (200 * levelConfiguration);
             LoadShapeBuffer();
             timer.Start();
+            Visible = true;
         }
 
         private void buttonShape_Click(object sender, EventArgs e)
@@ -85,6 +89,11 @@ namespace Aula_Multisensorial.MatrixLED
             panelTools.Controls.Clear();
             AddAppearancesControls();
             AddAcceptAndCancepButtons(new ControlEvent(SendAppearancesConfiguration), new ControlEvent(GenericCancelEvent));
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            OpenParentForm();
         }
 
         private void ChangeButtonsEnableState(bool enable)
@@ -817,5 +826,12 @@ namespace Aula_Multisensorial.MatrixLED
             }
             SetRowBinaries(3, binary, color);
         }
+
+        private void OpenParentForm()
+        {
+            parentForm.Show();
+            Close();
+        }
+        
     }
 }

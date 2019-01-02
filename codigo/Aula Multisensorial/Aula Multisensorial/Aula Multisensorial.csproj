@@ -94,6 +94,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Access\AdministratorAccess.cs" />
     <Compile Include="Access\LevelAccess.cs" />
     <Compile Include="Access\PeriodAccess.cs" />
     <Compile Include="Access\StudentAccess.cs" />
@@ -103,6 +104,12 @@
     </Compile>
     <Compile Include="CEFForm.Designer.cs">
       <DependentUpon>CEFForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gloves\Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gloves\Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="MatrixLED\Configuration.cs">
       <SubType>Form</SubType>
@@ -118,6 +125,7 @@
     </Compile>
     <Compile Include="Model\Activity.cs" />
     <Compile Include="Model\ActivityType.cs" />
+    <Compile Include="Model\Administrator.cs" />
     <Compile Include="Model\Period.cs" />
     <Compile Include="Model\Student.cs" />
     <Compile Include="Model\Level.cs" />
@@ -130,6 +138,9 @@
     <Compile Include="Utils\ExcelImporter.cs" />
     <EmbeddedResource Include="CEFForm.resx">
       <DependentUpon>CEFForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gloves\Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MatrixLED\Configuration.resx">
       <DependentUpon>Configuration.cs</DependentUpon>
@@ -145,6 +156,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -160,7 +172,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\mano derecha.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mano izquierda.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

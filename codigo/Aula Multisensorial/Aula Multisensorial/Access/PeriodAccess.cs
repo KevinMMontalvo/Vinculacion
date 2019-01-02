@@ -94,7 +94,7 @@ namespace Aula_Multisensorial.Access
         /// <summary>
         /// Elimina a un periodo de la coleccion
         /// </summary>
-        /// <param name="id">String con el id del nivel a ser eliminado</param>
+        /// <param name="id">String con el id del periodo a ser eliminado</param>
         /// <returns>Retorna true si la eliminacion ha sido exitosa</returns>
         public bool DeletePeriod(string id)
         {
@@ -116,5 +116,40 @@ namespace Aula_Multisensorial.Access
             }
         }
 
+        /// <summary>
+        /// Hace que solo 1 periodo este visible (activo)
+        /// </summary>
+        /// <param name="id">String con el id del periodo que debe ser modificado a visible</param>
+        /// <returns>Retorna true si la operacion ha sido exitosa</returns>
+        public bool ChangeVisiblePeriod(string id)
+        {
+            FilterDefinition<Period> filterNewVisible = Builders<Period>.Filter.Eq("Id", id);
+            FilterDefinition<Period> filterVisiblePeriod = Builders<Period>.Filter.Eq("IsVisible", true);
+
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+
+            UpdateDefinition<Period> updateDefinitionMakeInvisible = Builders<Period>.Update.Set("IsVisible", false);
+            UpdateDefinition<Period> updateDefinitionMakeVisible = Builders<Period>.Update.Set("IsVisible", true);
+
+            // modifica para que los demans esten invisibles
+            UpdateResult updateResult = periodsCollection.UpdateMany(filterVisiblePeriod, updateDefinitionMakeInvisible, null, cancellationTokenSource.Token);
+
+            if (! updateResult.IsAcknowledged)
+            {
+                return false;
+            }
+            
+            // hace que 1 periodo sea visible
+            updateResult = periodsCollection.UpdateOne(filterNewVisible, updateDefinitionMakeVisible, null, cancellationTokenSource.Token);
+            if (updateResult.IsAcknowledged && updateResult.ModifiedCount == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

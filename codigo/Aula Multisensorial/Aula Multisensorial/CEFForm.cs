@@ -25,6 +25,7 @@ namespace Aula_Multisensorial
             chromiumWebBrowser.RegisterJsObject("teachersController", new TeacherAccess());
             chromiumWebBrowser.RegisterJsObject("excelController",new ExcelImporter(this));
             chromiumWebBrowser.RegisterJsObject("periodsController", new PeriodAccess());
+            chromiumWebBrowser.RegisterJsObject("adminsController", new AdministratorAccess());
             chromiumWebBrowser.RegisterJsObject("activitiesController",new ActivitiesController(this));
         }
 
@@ -39,11 +40,11 @@ namespace Aula_Multisensorial
             chromiumWebBrowser.Dock = DockStyle.Fill;
 
             //permite el acceso a archivos locales
-            BrowserSettings browserSettings = new BrowserSettings();
+            /*BrowserSettings browserSettings = new BrowserSettings();
             browserSettings.FileAccessFromFileUrls = CefState.Enabled;
             browserSettings.UniversalAccessFromFileUrls = CefState.Enabled;
             //browserSettings.Javascript = CefState.Enabled;
-            chromiumWebBrowser.BrowserSettings = browserSettings;
+            chromiumWebBrowser.BrowserSettings = browserSettings;*/
 
         }
 

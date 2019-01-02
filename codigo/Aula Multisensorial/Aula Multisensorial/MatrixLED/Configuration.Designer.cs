@@ -54,12 +54,14 @@
             this.button41 = new System.Windows.Forms.Button();
             this.button31 = new System.Windows.Forms.Button();
             this.button44 = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.panelSideMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelSideMenu
             // 
             this.panelSideMenu.BackColor = System.Drawing.Color.Black;
+            this.panelSideMenu.Controls.Add(this.buttonClose);
             this.panelSideMenu.Controls.Add(this.buttonAppearances);
             this.panelSideMenu.Controls.Add(this.buttonBrightness);
             this.panelSideMenu.Controls.Add(this.buttonLevel);
@@ -78,7 +80,7 @@
             this.buttonAppearances.FlatAppearance.BorderSize = 0;
             this.buttonAppearances.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
             this.buttonAppearances.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAppearances.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAppearances.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAppearances.ForeColor = System.Drawing.Color.White;
             this.buttonAppearances.Location = new System.Drawing.Point(0, 300);
             this.buttonAppearances.Name = "buttonAppearances";
@@ -94,7 +96,7 @@
             this.buttonBrightness.FlatAppearance.BorderSize = 0;
             this.buttonBrightness.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
             this.buttonBrightness.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonBrightness.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBrightness.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBrightness.ForeColor = System.Drawing.Color.White;
             this.buttonBrightness.Location = new System.Drawing.Point(0, 260);
             this.buttonBrightness.Name = "buttonBrightness";
@@ -110,7 +112,7 @@
             this.buttonLevel.FlatAppearance.BorderSize = 0;
             this.buttonLevel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
             this.buttonLevel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonLevel.ForeColor = System.Drawing.Color.White;
             this.buttonLevel.Location = new System.Drawing.Point(0, 220);
             this.buttonLevel.Name = "buttonLevel";
@@ -126,7 +128,7 @@
             this.buttonColors.FlatAppearance.BorderSize = 0;
             this.buttonColors.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
             this.buttonColors.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonColors.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonColors.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonColors.ForeColor = System.Drawing.Color.White;
             this.buttonColors.Location = new System.Drawing.Point(0, 140);
             this.buttonColors.Name = "buttonColors";
@@ -142,7 +144,7 @@
             this.buttonSequence.FlatAppearance.BorderSize = 0;
             this.buttonSequence.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
             this.buttonSequence.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSequence.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSequence.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSequence.ForeColor = System.Drawing.Color.White;
             this.buttonSequence.Location = new System.Drawing.Point(0, 180);
             this.buttonSequence.Name = "buttonSequence";
@@ -158,7 +160,7 @@
             this.buttonShape.FlatAppearance.BorderSize = 0;
             this.buttonShape.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
             this.buttonShape.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonShape.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonShape.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonShape.ForeColor = System.Drawing.Color.White;
             this.buttonShape.Location = new System.Drawing.Point(0, 100);
             this.buttonShape.Name = "buttonShape";
@@ -356,6 +358,22 @@
             this.button44.UseVisualStyleBackColor = false;
             this.button44.Click += new System.EventHandler(this.MatrixButtonsClickEvent);
             // 
+            // buttonClose
+            // 
+            this.buttonClose.BackColor = System.Drawing.Color.Black;
+            this.buttonClose.FlatAppearance.BorderSize = 0;
+            this.buttonClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
+            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(134)))), ((int)(((byte)(193)))));
+            this.buttonClose.Location = new System.Drawing.Point(-3, 490);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(226, 40);
+            this.buttonClose.TabIndex = 6;
+            this.buttonClose.Text = "Cerrar";
+            this.buttonClose.UseVisualStyleBackColor = false;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            // 
             // Configuration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -416,5 +434,6 @@
         private System.Windows.Forms.Button button41;
         private System.Windows.Forms.Button button31;
         private System.Windows.Forms.Button button44;
+        private System.Windows.Forms.Button buttonClose;
     }
 }

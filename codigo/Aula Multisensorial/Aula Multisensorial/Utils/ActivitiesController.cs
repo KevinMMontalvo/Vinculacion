@@ -18,17 +18,21 @@ namespace Aula_Multisensorial.Utils
             if (activity.Equals("Matrix"))
             {
                 mainForm.Invoke(new StartActivty(StartMatrixActivity));
-
             }
             else if (activity.Equals("Globe"))
             {
-
+                mainForm.Invoke(new StartActivty(StartGlovesActivity));
             }
         }
 
         private void StartMatrixActivity()
         {
             new Main();
+        }
+
+        private void StartGlovesActivity()
+        {
+            new Gloves.Main();
         }
     }
 }

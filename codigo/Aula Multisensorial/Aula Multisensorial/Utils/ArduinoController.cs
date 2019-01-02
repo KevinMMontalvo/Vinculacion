@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO.Ports;
 
 namespace Aula_Multisensorial.Utils
@@ -11,11 +12,11 @@ namespace Aula_Multisensorial.Utils
         public static readonly int RIGHT_HAND_ARDUINO = 1;
         public static readonly int LEFT_HAND_ARDUINO = 2;
 
-        private SerialPort[] serialPort;
+        private SerialPort[] serialPorts;
 
         private ArduinoController()
         {
-            serialPort = new SerialPort[3];
+            serialPorts = new SerialPort[3];
         }
 
         public static ArduinoController GetInstance()
@@ -40,7 +41,7 @@ namespace Aula_Multisensorial.Utils
 
                 if (int.Parse(id) == arduinoIndex)
                 {
-                    serialPort[arduinoIndex] = temporarySerialPort;
+                    serialPorts[arduinoIndex] = temporarySerialPort;
                     return true;
                 }
                 temporarySerialPort.Close();
@@ -50,9 +51,9 @@ namespace Aula_Multisensorial.Utils
 
         public bool SendMessage(int arduinoIndex, string message)
         {
-            if (serialPort[arduinoIndex].IsOpen)
+            if (serialPorts[arduinoIndex].IsOpen)
             {
-                serialPort[arduinoIndex].WriteLine(message);
+                serialPorts[arduinoIndex].Write(message);
                 return true;
             }
             else
@@ -61,13 +62,32 @@ namespace Aula_Multisensorial.Utils
             }
         }
 
+        public string GetMessage(int arduinoIndex)
+        {
+            return serialPorts[arduinoIndex].ReadLine();
+        }
+
+        public List<byte> GetMessageInBytes(int arduinoIndex)
+        {
+            List<byte> message = new List<byte>();
+            while (true)
+            {
+                message.Add((byte)serialPorts[arduinoIndex].ReadByte());
+                if (message[message.Count-1] ==  10)
+                {
+                    break;
+                }
+            }
+            return message;
+        }
+
         public bool CloseConnection(int arduinoIndex)
         {
-            if (serialPort[arduinoIndex] != null)
+            if (serialPorts[arduinoIndex] != null)
             {
-                serialPort[arduinoIndex].Close();
-                serialPort[arduinoIndex].Dispose();
-                serialPort[arduinoIndex] = null;
+                serialPorts[arduinoIndex].Close();
+                serialPorts[arduinoIndex].Dispose();
+                serialPorts[arduinoIndex] = null;
                 return true;
             }
             return false;

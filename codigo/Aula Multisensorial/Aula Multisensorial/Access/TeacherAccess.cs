@@ -92,7 +92,7 @@ namespace Aula_Multisensorial.Access
         }
 
         /// <summary>
-        /// Elimina un doente de la coleccion
+        /// Elimina un docente de la coleccion
         /// </summary>
         /// <param name="id">String con el id del docente a ser eliminado</param>
         /// <returns>Retorna true si la eliminacion ha sido exitosa</returns>
