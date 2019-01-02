@@ -61,7 +61,7 @@ export default class UserMenu extends React.Component {
 
     ShowSamePasswordMenssage()
   	{
-  		ButterToast.raise({
+  		this.tray.raise({
   			content: <Cinnamon.Crisp
   				className="butter-alert"
   				scheme={Cinnamon.Slim.SCHEME_DARK}
@@ -75,7 +75,7 @@ export default class UserMenu extends React.Component {
 
   	ShowNotTheSamePasswordMenssage()
   	{
-  		ButterToast.raise({
+  		this.tray.raise({
   			content: <Cinnamon.Crisp
   				className="butter-alert"
   				scheme={Cinnamon.Slim.SCHEME_DARK}
@@ -89,7 +89,7 @@ export default class UserMenu extends React.Component {
 
   	ShowPasswordNotMatchMenssage()
   	{
-  		ButterToast.raise({
+  		this.tray.raise({
   			content: <Cinnamon.Crisp
   				className="butter-alert"
   				scheme={Cinnamon.Slim.SCHEME_DARK}
@@ -103,7 +103,7 @@ export default class UserMenu extends React.Component {
 
     ShowModifySuccessMenssage()
   	{
-  		ButterToast.raise({
+  		this.tray.raise({
   			content: <Cinnamon.Crisp
   				className="butter-alert"
   				scheme={Cinnamon.Slim.SCHEME_DARK}

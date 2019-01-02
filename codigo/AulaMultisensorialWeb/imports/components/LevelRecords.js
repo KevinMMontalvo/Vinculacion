@@ -141,7 +141,7 @@ export default class LevelRecords extends React.Component {
       else {
         way = "Ascendente";
       }
-  		ButterToast.raise({
+  		this.tray.raise({
   			content: <Cinnamon.Crisp
   				className="butter-alert"
   				scheme={Cinnamon.Slim.SCHEME_DARK}
@@ -165,7 +165,7 @@ export default class LevelRecords extends React.Component {
     }
 
     ShowDeletedRegistry(){
-  		ButterToast.raise({
+  		this.tray.raise({
   			content: <Cinnamon.Crisp
   				className="butter-alert"
   				scheme={Cinnamon.Slim.SCHEME_DARK}
@@ -182,7 +182,7 @@ export default class LevelRecords extends React.Component {
     }
 
     ShowDeletedRegistry(){
-  		ButterToast.raise({
+  		this.tray.raise({
   			content: <Cinnamon.Crisp
   				className="butter-alert"
   				scheme={Cinnamon.Slim.SCHEME_DARK}

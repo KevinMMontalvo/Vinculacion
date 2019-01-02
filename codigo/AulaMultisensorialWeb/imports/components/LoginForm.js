@@ -14,7 +14,7 @@ export default class Main extends React.Component {
 
     ShowWarningMenssage(field)
   	{
-  		ButterToast.raise({
+  		this.tray.raise({
   			content: <Cinnamon.Crisp
   				className="butter-alert"
   				scheme={Cinnamon.Slim.SCHEME_BLUE}
@@ -27,7 +27,7 @@ export default class Main extends React.Component {
 
     ShowWrongUserOrPasswordMenssage()
   	{
-  		ButterToast.raise({
+  		this.tray.raise({
   			content: <Cinnamon.Crisp
   				className="butter-alert"
   				scheme={Cinnamon.Slim.SCHEME_BLUE}
@@ -80,6 +80,11 @@ export default class Main extends React.Component {
       return teachers;
     }
 
+    handleKeyPress = (event) => {
+      if(event.key == 'Enter'){
+        this.ValidateLogin();
+      }
+    }
 
     render() {
         return(
@@ -90,7 +95,7 @@ export default class Main extends React.Component {
                     <input id="username" placeholder="Usuario" className="horizontal-input" type="text"></input>
                   </div>
                   <div className="input-container">
-                    <input id="password" placeholder="Contraseña" className="horizontal-input" type="password"></input>
+                    <input onKeyPress={this.handleKeyPress} id="password" placeholder="Contraseña" className="horizontal-input" type="password"></input>
                   </div>
                   <div className="button-container">
                     <div onClick={() => this.ValidateLogin()} className="primary-button">Ingresar</div>
@@ -103,6 +108,7 @@ export default class Main extends React.Component {
       						horizontal: POS_RIGHT
       					}}
       					timeout={7500}
+                ref={tray => this.tray = tray}
       				/>
             </div>
         );

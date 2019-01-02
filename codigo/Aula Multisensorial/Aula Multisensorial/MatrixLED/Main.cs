@@ -23,7 +23,6 @@ namespace Aula_Multisensorial.MatrixLED
                 MessageBox.Show("No se pudo conectar con el dispositivo (Matriz de LED)");
                 Dispose();
             }
-            ArduinoController
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
