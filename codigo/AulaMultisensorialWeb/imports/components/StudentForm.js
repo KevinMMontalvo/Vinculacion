@@ -397,7 +397,7 @@ export default class StudentForm extends React.Component
 							<select id="gender-select">
 								<option value="" selected disabled hidden>Selecione el género del estudiante</option>
 								<option value="Masculino">Masculino</option>
-								<option value="Masculino">Femenino</option>
+								<option value="Femenino">Femenino</option>
 							</select>
 						</div>
 					</div>

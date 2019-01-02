@@ -13,7 +13,9 @@ import LevelRecords from '../components/LevelRecords';
 import PeriodMenu from '../components/PeriodMenu';
 import PeriodForm from '../components/PeriodForm';
 import PeriodRecords from '../components/PeriodRecords';
+import ActivePeriodForm from '../components/ActivePeriodForm';
 import ActivitiesMenu from '../components/ActivitiesMenu';
+
 
 var canvas;
 var c;
@@ -89,6 +91,7 @@ export default class MainContainer extends React.Component {
           activityOption: false,
           activePeriod: false,
           deleteStudent: false,
+          newActivePeriodForm: false,
         }
     }
 
@@ -113,6 +116,7 @@ export default class MainContainer extends React.Component {
         deleteStudent: false,
         activityOption: false,
         activePeriod: false,
+        newActivePeriodForm: false,
       });
       document.getElementById('main-title').innerHTML = "Estudiantes";
       document.getElementsByClassName('main-icon')[0].id = "student-icon";
@@ -137,6 +141,7 @@ export default class MainContainer extends React.Component {
         deleteStudent: false,
         activityOption: false,
         activePeriod: false,
+        newActivePeriodForm: false,
       });
     }
     ShowStudentRecords(){
@@ -159,6 +164,7 @@ export default class MainContainer extends React.Component {
         deleteStudent: false,
         activityOption: false,
         activePeriod: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -183,6 +189,7 @@ export default class MainContainer extends React.Component {
         deleteStudent: false,
         activityOption: false,
         activePeriod: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -207,6 +214,7 @@ export default class MainContainer extends React.Component {
         deleteStudent: true,
         activityOption: false,
         activePeriod: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -230,6 +238,7 @@ export default class MainContainer extends React.Component {
         activityOption: false,
         activePeriod: false,
         deleteStudent: false,
+        newActivePeriodForm: false,
       });
       document.getElementById('main-title').innerHTML = "Docentes";
       document.getElementsByClassName('main-icon')[0].id = "teacher-icon";
@@ -254,6 +263,7 @@ export default class MainContainer extends React.Component {
         activityOption: false,
         activePeriod: false,
         deleteStudent: false,
+        newActivePeriodForm: false,
       });
     }
     ShowTeachersRecords(){
@@ -276,6 +286,7 @@ export default class MainContainer extends React.Component {
         deleteStudent: false,
         activityOption: false,
         activePeriod: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -300,6 +311,7 @@ export default class MainContainer extends React.Component {
         activityOption: false,
         activePeriod: false,
         deleteStudent: false,
+        newActivePeriodForm: false,
       });
       document.getElementById('main-title').innerHTML = "Niveles";
       document.getElementsByClassName('main-icon')[0].id = "level-icon";
@@ -325,6 +337,7 @@ export default class MainContainer extends React.Component {
         activityOption: false,
         activePeriod: false,
         deleteStudent: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -348,6 +361,7 @@ export default class MainContainer extends React.Component {
         deleteStudent: false,
         activityOption: false,
         activePeriod: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -371,6 +385,7 @@ export default class MainContainer extends React.Component {
         activityOption: false,
         activePeriod: false,
         deleteStudent: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -394,6 +409,7 @@ export default class MainContainer extends React.Component {
         deleteStudent: false,
         activityOption: false,
         activePeriod: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -418,6 +434,7 @@ export default class MainContainer extends React.Component {
         deleteStudent: false,
         activityOption: false,
         activePeriod: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -442,6 +459,7 @@ export default class MainContainer extends React.Component {
         deleteStudent: false,
         activityOption: false,
         activePeriod: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -466,6 +484,7 @@ export default class MainContainer extends React.Component {
         deleteStudent: false,
         activityOption: false,
         activePeriod: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -490,6 +509,7 @@ export default class MainContainer extends React.Component {
         deleteStudent: true,
         activityOption: false,
         activePeriod: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -514,6 +534,7 @@ export default class MainContainer extends React.Component {
         deleteStudent: true,
         activityOption: false,
         activePeriod: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -538,6 +559,7 @@ export default class MainContainer extends React.Component {
         deleteStudent: true,
         activityOption: false,
         activePeriod: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -561,6 +583,7 @@ export default class MainContainer extends React.Component {
         activityOption: false,
         activePeriod: false,
         deleteStudent: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -584,6 +607,7 @@ export default class MainContainer extends React.Component {
         activityOption: false,
         activePeriod: false,
         deleteStudent: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -607,6 +631,7 @@ export default class MainContainer extends React.Component {
         activityOption: false,
         activePeriod: false,
         deleteStudent: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -630,6 +655,7 @@ export default class MainContainer extends React.Component {
         activityOption: false,
         activePeriod: false,
         deleteStudent: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -653,6 +679,7 @@ export default class MainContainer extends React.Component {
         activityOption: false,
         activePeriod: false,
         deleteStudent: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -676,6 +703,7 @@ export default class MainContainer extends React.Component {
         activityOption: false,
         activePeriod: false,
         deleteStudent: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -699,6 +727,7 @@ export default class MainContainer extends React.Component {
         activityOption: false,
         activePeriod: false,
         deleteStudent: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -722,6 +751,7 @@ export default class MainContainer extends React.Component {
         activityOption: false,
         activePeriod: false,
         deleteStudent: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -745,6 +775,7 @@ export default class MainContainer extends React.Component {
         activityOption: true,
         activePeriod: false,
         deleteStudent: false,
+        newActivePeriodForm: false,
       });
     }
 
@@ -768,6 +799,7 @@ export default class MainContainer extends React.Component {
         activityOption: false,
         activePeriod: false,
         deleteStudent: false,
+        newActivePeriodForm: false,
       });
       document.getElementById('main-title').innerHTML = "Periodos";
       document.getElementsByClassName('main-icon')[0].id = "period-icon";
@@ -793,6 +825,32 @@ export default class MainContainer extends React.Component {
         activityOption: false,
         activePeriod: true,
         deleteStudent: false,
+        newActivePeriodForm: false,
+      });
+    }
+
+    ShowActiveNewPeriodForm(period){
+      this.setState({
+        loginForm: false,
+        studentOption: false,
+        addStudentForm: false,
+        showStudentRecords: false,
+        teacherOption: false,
+        addTeacherForm: false,
+        showTeacherRecords: false,
+        levelOption: false,
+        addLevelForm: false,
+        showLevelRecords: false,
+        periodOption: true,
+        addPeriodForm: false,
+        showPeriodRecords: false,
+        showModifyForm: false,
+        modifyStudent: false,
+        activityOption: false,
+        activePeriod: false,
+        deleteStudent: false,
+        newActivePeriodForm: true,
+        periodToActive: period,
       });
     }
 
@@ -885,6 +943,7 @@ export default class MainContainer extends React.Component {
         activityOption: false,
         activePeriod: false,
         deleteStudent: false,
+        newActivePeriodForm: false,
       });
       document.getElementById('main-title').innerHTML = "Inicio de sesión";
       document.getElementsByClassName('login-icon')[0].id = "home-icon";
@@ -1031,7 +1090,14 @@ export default class MainContainer extends React.Component {
                         ShowModifyForm={this.ShowPeriodModifyForm.bind(this)}
                         showModifyForm={this.state.showModifyForm}
                         modify={this.state.modifyStudent}
-                        active={this.state.activePeriod}/>
+                        active={this.state.activePeriod}
+                        ShowActiveNewPeriodForm={this.ShowActiveNewPeriodForm.bind(this)}/>
+                      :
+                      undefined
+                    }
+                    {
+                      this.state.newActivePeriodForm ?
+                      <ActivePeriodForm periodToActive={this.state.periodToActive}/>
                       :
                       undefined
                     }

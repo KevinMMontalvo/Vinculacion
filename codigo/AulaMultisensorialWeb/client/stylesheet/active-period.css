@@ -1,0 +1,133 @@
+.active-period-form-container {
+  position: relative;
+  width: 65vw;
+  height: 60vh;
+  max-height: 60vh;
+  background-color: #1E1D21;
+  display: flex;
+  justify-content: center;
+  animation: fade-in 1s ease-out;
+}
+
+.student-level-container {
+  position: relative;
+  width: 65vw;
+  height: 5vh;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  animation: fade-in 1s ease-out;
+}
+
+.current-level-title {
+  padding-left: 2.5vw;
+  font-size: 1.15em;
+}
+
+.current-level-text {
+  padding-left: 2.5vw;
+  font-size: 1.1em;
+}
+
+.select-all-button {
+  width: 10vw;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  background-color: #000;
+  position: absolute;
+  right: 0;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.select-all-button:hover {
+  cursor: pointer;
+  background-color: #1C1C1C;
+}
+
+.change-level-title {
+  font-size: 1em;
+  width: 17.5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#period-level-select {
+  background-color: #333;
+  width: 60%;
+  border-color: #1E1D21;
+}
+
+#period-level-select:focus {
+  border-color: #2e86c1;
+}
+
+.change-level-button {
+  width: 24.5%;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #2e86c1 0%, #2bbea2 100%);
+  transition: 0.5s;
+}
+
+.change-level-button:hover {
+  font-size: 1.15em;
+  cursor: pointer;
+}
+
+.change-student-level-container {
+  position: relative;
+  width: 65vw;
+  height: auto;
+  background-color: #333;
+  display: flex;
+  animation: fade-in 1s ease-out;
+}
+
+.active-period-button-container {
+  position: relative;
+  width: 65vw;
+  height: 7.5vh;
+  display: flex;
+  top: 1vh;
+  justify-content: center;
+  animation: fade-in 1s ease-out;
+}
+
+.next-button {
+  width: 10vw;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2e86c1;
+  position: relative;
+  left: 0.5vw;
+  transition: 0.5s;
+}
+
+.next-button:hover {
+  cursor: pointer;
+  background-color: #2bbea2;
+}
+
+.back-button {
+  width: 10vw;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2e86c1;
+  position: relative;
+  right: 0.5vw;
+  transition: 0.5s;
+}
+
+.back-button:hover {
+  cursor: pointer;
+  background-color: #2bbea2;
+}

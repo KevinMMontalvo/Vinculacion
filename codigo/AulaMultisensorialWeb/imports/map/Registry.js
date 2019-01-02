@@ -115,6 +115,10 @@ export default class Registry extends React.Component {
       this.props.UpdateTable();
     }
 
+    ShowActiveNewPeriodForm(period){
+      this.props.ShowActiveNewPeriodForm(period);
+    }
+
     render() {
         return(
             <div>
@@ -315,7 +319,7 @@ export default class Registry extends React.Component {
                   }
                   {
                     this.props.active ?
-                    <div className="registry-active-button"></div>
+                    <div onClick={() => this.ShowActiveNewPeriodForm(this.props.periods)} className="registry-active-button"></div>
                     :
                     undefined
                   }

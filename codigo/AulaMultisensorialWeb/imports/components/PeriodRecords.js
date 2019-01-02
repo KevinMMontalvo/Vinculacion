@@ -184,6 +184,10 @@ export default class PeriodRecords extends React.Component {
       })
     }
 
+    ShowActiveNewPeriodForm(period){
+      this.props.ShowActiveNewPeriodForm(period);
+    }
+
     render() {
         return(
             <div>
@@ -219,8 +223,8 @@ export default class PeriodRecords extends React.Component {
                                       active={this.props.active}
                                       periods={periods}
                                       key={periods._id}
-                                      UpdateTable={this.UpdateTable.bind(this)}>
-
+                                      UpdateTable={this.UpdateTable.bind(this)}
+                                      ShowActiveNewPeriodForm={this.ShowActiveNewPeriodForm.bind(this)}>
                                     </Registry>;
                           })
                         }
