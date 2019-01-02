@@ -10,6 +10,7 @@ export default class LevelForm extends React.Component
 			emptyInputMessage: "Existen campos vacios: ",
 			successRegisteredMessage: "Registro completo",
 			successModifiedMessage: "Cambios realizados",
+			canNotCompleteTheActionMenssage: "No se pudo completar la acción",
 			emptyFields: true,
 		};
 	}
@@ -99,6 +100,19 @@ export default class LevelForm extends React.Component
 		});
 	}
 
+	CanNotCompleteTheActionMenssage()
+	{
+		ButterToast.raise({
+			content: <Cinnamon.Crisp
+				className="butter-alert"
+				scheme={Cinnamon.Slim.SCHEME_DARK}
+				content={() => <div>{"Vuelva a intentarlo"}</div>}
+				title={this.state.canNotCompleteTheActionMenssage}
+				icon={<div className="wrong-info-icon"></div>}
+			/>
+		});
+	}
+
 	ValidateEmptyInputs()
 	{
 		let levelName = document.getElementById('level-name-input').value;
@@ -165,9 +179,13 @@ export default class LevelForm extends React.Component
 			min_age: minAge,
 			max_age: maxAge,
 		};
-		levelsController.insertLevel(level);
-		this.ClearAllFields();
-		this.ShowSuccessMenssage();
+		if(levelsController.insertLevel(level)){
+			this.ClearAllFields();
+			this.ShowSuccessMenssage();
+		}
+		else{
+			this.CanNotCompleteTheActionMenssage();
+		}
 	}
 
 	ClearAllFields(){

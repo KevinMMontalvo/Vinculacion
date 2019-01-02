@@ -61,6 +61,27 @@
   animation: fade-in 1s ease-out;
 }
 
+.registry-active-button {
+  width: 4vw;
+  height: 4vw;
+  position: relative;
+  top: 0.5vh;
+  left: -1vw;
+  background-color: #333;
+  background-size: 1.5vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(active-w.svg);
+  opacity: 0.75;
+  transition: 0.5s;
+  animation: fade-in 1s ease-out;
+}
+
+.registry-active-button:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
 .registry-modify-button:hover {
   opacity: 1;
   cursor: pointer;

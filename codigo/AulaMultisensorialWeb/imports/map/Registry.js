@@ -51,6 +51,13 @@ export default class Registry extends React.Component {
       });
     }
 
+    ConvertStartDate() {
+      var startDate = new Date(this.props.periods.start_date);
+      this.setState({
+        startDate: startDate,
+      });
+    }
+
     componentWillMount(){
       if(this.props.show == "students"){
         this.CalculateAge();
@@ -58,6 +65,9 @@ export default class Registry extends React.Component {
       }
       if(this.props.show == "teachers"){
         this.SearchLevelName();
+      }
+      if(this.props.show == "periods"){
+        this.ConvertStartDate();
       }
     }
 
@@ -93,6 +103,13 @@ export default class Registry extends React.Component {
 
     DeleteTeacher(teacher) {
       teachersController.deleteTeacher(teacher._id);
+      this.onCloseModal();
+      this.props.ShowDeletedRegistry();
+      this.props.UpdateTable();
+    }
+
+    DeletePeriod(period) {
+      periodsController.deletePeriod(period._id);
       this.onCloseModal();
       this.props.ShowDeletedRegistry();
       this.props.UpdateTable();
@@ -252,6 +269,53 @@ export default class Registry extends React.Component {
                       </Modal>
                       <div onClick={() => this.ShowDeleteConfirmation()} className="registry-delete-button"></div>
                     </div>
+                    :
+                    undefined
+                  }
+                </div>
+                :
+                undefined
+              }
+
+
+              {
+                this.props.show == "periods" ?
+                <div className="registry">
+                  <div className="identifier-column">{this.props.periods.name.charAt(0)}</div>
+                  <div className="information-column">
+                    <div className="registry-row">
+                      <b>Nombre:</b> <p>{this.props.periods.name}</p>
+                    </div>
+                    <div className="registry-row">
+                      <b>Fecha de inicio:</b> <p>{this.state.startDate.getDate() + ' - ' + (this.state.startDate.getMonth() + 1) + ' - ' + this.state.startDate.getUTCFullYear()}</p>
+                    </div>
+                  </div>
+                  {
+                    this.props.modify ?
+                    <div onClick={() => this.ShowModifyForm(this.props.periods)} className="registry-modify-button"></div>
+                    :
+                    undefined
+                  }
+                  {
+                    this.props.delete ?
+                    <div>
+                      <Modal open={this.state.openDeleteModal} onClose={this.onCloseModal} center>
+                        <div className="delete-message-container">
+                          <p>¿Esta segur@ que desea eliminar este registro?</p>
+                          <div className="delete-mesagge-options">
+                            <div onClick={() => this.DeletePeriod(this.props.periods)} id="delete-ok" className="delete-mesasage-button">Si</div>
+                            <div onClick={() => this.onCloseModal()} id="delete-cancel" className="delete-mesasage-button">No</div>
+                          </div>
+                        </div>
+                      </Modal>
+                      <div onClick={() => this.ShowDeleteConfirmation()} className="registry-delete-button"></div>
+                    </div>
+                    :
+                    undefined
+                  }
+                  {
+                    this.props.active ?
+                    <div className="registry-active-button"></div>
                     :
                     undefined
                   }

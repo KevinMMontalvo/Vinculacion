@@ -1,30 +1,26 @@
 import React, { Component } from 'react';
-import TeacherForm from '../components/TeacherForm';
+import PeriodForm from '../components/PeriodForm';
 import Registry from '../map/Registry';
 import Filter, { Sort, FilterValue } from 'data-engine';
 import ButterToast, { Cinnamon, POS_BOTTOM, POS_RIGHT, POS_TOP } from 'butter-toast';
 
-export default class TeachersRecords extends React.Component {
+export default class PeriodRecords extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          teacher: [],
-          allTeachers: [],
+          period: [],
+          allPeriods: [],
           isDataLoaded: false,
           sortWay: 'des',
           sortAttribute: 'des',
           attributes: [
                         {
                           value: 'name',
-                          text: 'Nombre completo'
+                          text: 'Nombre del periodo'
                         },
                         {
-                          value: 'level_id',
-                          text: 'Nivel'
-                        },
-                        {
-                          value: 'speciality',
-                          text: 'Especialidad'
+                          value: 'start_date',
+                          text: 'Fecha de inicio'
                         },
                       ],
         }
@@ -33,8 +29,8 @@ export default class TeachersRecords extends React.Component {
     componentWillMount(){
       const { MongoClient, ObjectId } = require('mongodb');
       this.setState({
-        teachers: this.LoadTeachers(),
-        allTeachers: this.LoadTeachers(),
+        periods: this.LoadPeriods(),
+        allPeriods: this.LoadPeriods(),
       }, () => this.CheckLoadedData());
     }
 
@@ -43,17 +39,17 @@ export default class TeachersRecords extends React.Component {
     }
 
     CheckLoadedData(){
-      if(this.state.teachers.length > 0){
+      if(this.state.periods.length > 0){
         this.setState({
           isDataLoaded: true
         });
       }
     }
 
-    LoadTeachers() {
-      var teachersString = teachersController.getTeachers();
-      var teachers = JSON.parse(teachersString);
-      return teachers;
+    LoadPeriods() {
+      var periodsString = periodsController.getPeriods();
+      var periods = JSON.parse(periodsString);
+      return periods;
     }
 
     LoadAttributesInSelect(){
@@ -73,10 +69,10 @@ export default class TeachersRecords extends React.Component {
     SortData(){
       var attributeValue = document.getElementById('sort-select').value;
       var sortJsonArray = require('sort-json-array');
-      var teachersArray = this.state.teachers;
-      sortJsonArray(teachersArray, attributeValue,this.state.sortWay);
+      var periodsArray = this.state.periods;
+      sortJsonArray(periodsArray, attributeValue,this.state.sortWay);
       this.setState({
-        teachers: teachersArray,
+        periods: periodsArray,
       });
       var searchValue = document.getElementById('search-input').value;
       if(searchValue != ""){
@@ -106,30 +102,30 @@ export default class TeachersRecords extends React.Component {
     SearchData(){
       var attributeValue = document.getElementById('sort-select').value;
       var searchValue = document.getElementById('search-input').value;
-      var allTeachers = this.state.allTeachers;
+      var allPeriods = this.state.allPeriods;
       var searchResultArray = [];
       if(attributeValue == ""){
-        for (var i = 0; i < allTeachers.length; i++) {
+        for (var i = 0; i < allPeriods.length; i++) {
           for (var j = 0; j < this.state.attributes.length; j++) {
-            if (allTeachers[i][this.state.attributes[j].value].toString().toUpperCase().includes(searchValue.toString().toUpperCase())) {
-              searchResultArray.push(allTeachers[i]);
+            if (allPeriods[i][this.state.attributes[j].value].toString().toUpperCase().includes(searchValue.toString().toUpperCase())) {
+              searchResultArray.push(allPeriods[i]);
               break;
             }
           }
         }
       }
       else{
-        for (var i = 0; i < this.state.teachers.length; i++) {
-          if (allTeachers[i][attributeValue].toString().toUpperCase().includes(searchValue.toString().toUpperCase())) {
-            searchResultArray.push(allTeachers[i]);
+        for (var i = 0; i < this.state.periods.length; i++) {
+          if (allPeriods[i][attributeValue].toString().toUpperCase().includes(searchValue.toString().toUpperCase())) {
+            searchResultArray.push(allPeriods[i]);
           }
         }
       }
       if(searchValue == ""){
-        searchResultArray = allTeachers;
+        searchResultArray = allPeriods;
       }
       this.setState({
-        teachers: searchResultArray,
+        periods: searchResultArray,
       });
     }
 
@@ -157,10 +153,10 @@ export default class TeachersRecords extends React.Component {
         this.tray.dismissAll();
     }
 
-    ShowModifyForm(teacher){
+    ShowModifyForm(period){
       this.props.ShowModifyForm();
       this.setState({
-        teacherToModify: teacher,
+        periodToModify: period,
       });
     }
 
@@ -183,8 +179,8 @@ export default class TeachersRecords extends React.Component {
 
     UpdateTable(){
       this.setState({
-        teachers: this.LoadTeachers(),
-        allTeachers: this.LoadTeachers(),
+        periods: this.LoadPeriods(),
+        allPeriods: this.LoadPeriods(),
       })
     }
 
@@ -193,7 +189,7 @@ export default class TeachersRecords extends React.Component {
             <div>
               {
                 this.props.showModifyForm ?
-                  <TeacherForm UpdateTable={this.UpdateTable.bind(this)} CloseModifyForm={() => this.CloseModifyForm()} teacherToModify={this.state.teacherToModify}/>
+                  <PeriodForm UpdateTable={this.UpdateTable.bind(this)} CloseModifyForm={() => this.CloseModifyForm()} periodToModify={this.state.periodToModify}/>
                 :
                 <div>
                   <div className="record-tools">
@@ -212,16 +208,17 @@ export default class TeachersRecords extends React.Component {
                     {
                       this.state.isDataLoaded ?
                       <div>
-                        {this.state.teachers.map((teachers) =>
+                        {this.state.periods.map((periods) =>
                           {
                             return <Registry
-                                      show={"teachers"}
+                                      show={"periods"}
                                       ShowDeletedRegistry={() => this.ShowDeletedRegistry()}
                                       delete={this.props.delete}
                                       ShowModifyForm={this.ShowModifyForm.bind(this)}
                                       modify={this.props.modify}
-                                      teachers={teachers}
-                                      key={teachers._id}
+                                      active={this.props.active}
+                                      periods={periods}
+                                      key={periods._id}
                                       UpdateTable={this.UpdateTable.bind(this)}>
 
                                     </Registry>;

@@ -10,13 +10,14 @@ export default class PeriodForm extends React.Component
 		this.state = {
 			emptyInputMessage: "Existen campos vacios: ",
 			successRegisteredMessage: "Registro completo",
+			canNotCompleteTheActionMenssage: "No se pudo completar la acción",
 			emptyFields: true,
-			date: new Date(),
+			startDate: new Date(),
 			locate: "es-MX",
 		};
 	}
 
-	onChange = date => this.setState({ date });
+	onChange = startDate => this.setState({ startDate });
 	lang = "es-MX";
 
 	ValidateOnlyNumbers(evt)
@@ -67,7 +68,7 @@ export default class PeriodForm extends React.Component
 
 	ShowWarningMenssage(field)
 	{
-		ButterToast.raise({
+		this.tray.raise({
 			content: <Cinnamon.Crisp
 				className="butter-alert"
 				scheme={Cinnamon.Slim.SCHEME_DARK}
@@ -80,11 +81,11 @@ export default class PeriodForm extends React.Component
 
 	ShowSuccessMenssage()
 	{
-		ButterToast.raise({
+		this.tray.raise({
 			content: <Cinnamon.Crisp
 				className="butter-alert"
 				scheme={Cinnamon.Slim.SCHEME_DARK}
-				content={() => <div>{"Docente registrado"}</div>}
+				content={() => <div>{"Periodo registrado"}</div>}
 				title={this.state.successRegisteredMessage}
 				icon={<div className="alert-success-icon"></div>}
 			/>
@@ -93,13 +94,26 @@ export default class PeriodForm extends React.Component
 
 	ShowModifySuccessMenssage()
 	{
-		ButterToast.raise({
+		this.tray.raise({
 			content: <Cinnamon.Crisp
 				className="butter-alert"
 				scheme={Cinnamon.Slim.SCHEME_DARK}
 				content={() => <div>{"Registro modificado"}</div>}
 				title={this.state.successModifiedMessage}
 				icon={<div className="alert-success-icon"></div>}
+			/>
+		});
+	}
+
+	CanNotCompleteTheActionMenssage()
+	{
+		this.tray.raise({
+			content: <Cinnamon.Crisp
+				className="butter-alert"
+				scheme={Cinnamon.Slim.SCHEME_DARK}
+				content={() => <div>{"Vuelva a intentarlo"}</div>}
+				title={this.state.canNotCompleteTheActionMenssage}
+				icon={<div className="wrong-info-icon"></div>}
 			/>
 		});
 	}
@@ -111,26 +125,10 @@ export default class PeriodForm extends React.Component
 	ValidateEmptyInputs()
 	{
 		let name = document.getElementById('name-input').value;
-		let level_id = document.getElementById('level-select').value;
-		let speciality = document.getElementById('speciality-input').value;
-		let password = document.getElementById('password-input').value;
-
 		let validationArray = new Array();
 		if (name == "")
 		{
 			validationArray.push("name");
-		}
-		if (level_id == "")
-		{
-			validationArray.push("level");
-		}
-		if (speciality == "")
-		{
-			validationArray.push("speciality");
-		}
-		if (password == "")
-		{
-			validationArray.push("password");
 		}
 		return validationArray;
 	}
@@ -142,25 +140,10 @@ export default class PeriodForm extends React.Component
 		{
 			if (validationArray[i] == "name")
 			{
-				this.ShowWarningMenssage("Nombre y apellido");
-			}
-			if (validationArray[i] == "level")
-			{
-				this.ShowWarningMenssage("Nivel");
-			}
-			if (validationArray[i] == "speciality")
-			{
-				this.ShowWarningMenssage("Especialidad");
-			}
-			if (validationArray[i] == "password")
-			{
-				this.ShowWarningMenssage("Contraseña");
+				this.ShowWarningMenssage("Nombre del periodo");
 			}
 		}
-		if(!this.state.isTheSamePassword) {
-			this.ShowPasswordNotMatchMenssage();
-		}
-		if (validationArray.length == 0 && this.state.isTheSamePassword)
+		if (validationArray.length == 0)
 		{
 			if(this.props.periodToModify == undefined){
 				this.setState({
@@ -178,34 +161,31 @@ export default class PeriodForm extends React.Component
 	AddPeriod()
 	{
 		let name = document.getElementById('name-input').value;
-		let level_id = document.getElementById('level-select').value;
-		let speciality = document.getElementById('speciality-input').value;
-		let password = document.getElementById('password-input').value;
+		let startDate = this.state.startDate;
 		let period = {
 			name: name,
-			level_id: level_id,
-			speciality: speciality,
-			password: password
+			start_date: startDate,
+			is_visible: false,
 		};
-		periodsController.insertPeriod(period);
-		this.ClearAllFields();
-		this.ShowSuccessMenssage();
+		if(periodsController.insertPeriod(period)){
+			this.ClearAllFields();
+			this.ShowSuccessMenssage();
+		}
+		else{
+			this.CanNotCompleteTheActionMenssage();
+		}
 	}
 
 	ClearAllFields(){
 		document.getElementById('name-input').value = "";
-		document.getElementById('level-select').value = "";
-		document.getElementById('speciality-input').value = "";
-		document.getElementById('password-input').value = "";
-		document.getElementById('password-confirmation-input').value = "";
-		document.getElementById('password-confirmation-input').style.borderColor = "#333";
+		this.setState({
+			startDate: new Date(),
+		});
 	}
 
 	componentDidMount(){
 		if(this.props.periodToModify != undefined){
 			document.getElementById('name-input').value = this.props.periodToModify.name;
-			document.getElementById('level-select').value = this.props.periodToModify.level_id;
-			document.getElementById('speciality-input').value = this.props.periodToModify.speciality;
 		}
 	}
 
@@ -215,40 +195,17 @@ export default class PeriodForm extends React.Component
 
 	ModifyPeriod(){
 		let name = document.getElementById('name-input').value;
-		let level_id = document.getElementById('level-select').value;
-		let speciality = this.CapitalizeFirstLetter(document.getElementById('speciality-input').value.toString());
+		let startDate = this.state.startDate;
 		let period = {
 			_id: this.props.periodToModify._id,
 			name: name,
-			level_id: level_id,
-			speciality: speciality,
+			start_date: startDate,
 		};
 		periodsController.modifyPeriod(period);
 		this.ClearAllFields();
 		this.ShowModifySuccessMenssage();
 		this.props.CloseModifyForm();
 		this.props.UpdateTable();
-	}
-
-	VerifySamePassword(){
-		let password = document.getElementById('password-input').value;
-		let passwordToVerify = document.getElementById('password-confirmation-input').value;
-		if(passwordToVerify != "" && password != ""){
-			if (password == passwordToVerify) {
-				document.getElementById('password-confirmation-input').style.borderColor = "#2BBEA2";
-				this.ShowSamePasswordMenssage();
-				this.setState({
-					isTheSamePassword: true,
-				});
-			}
-			else {
-				document.getElementById('password-confirmation-input').style.borderColor = "#CD6155";
-				this.ShowNotTheSamePasswordMenssage();
-				this.setState({
-					isTheSamePassword: false,
-				});
-			}
-		}
 	}
 
 	render()
@@ -271,7 +228,7 @@ export default class PeriodForm extends React.Component
 						<div className="date-input-container">
 							<DatePicker
 								onChange={this.onChange}
-								value={this.state.date}
+								value={this.state.startDate}
 								locate={this.lang}
 							/>
 						</div>

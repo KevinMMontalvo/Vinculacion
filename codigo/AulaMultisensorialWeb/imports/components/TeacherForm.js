@@ -16,6 +16,7 @@ export default class TeacherForm extends React.Component
 			},],
 			emptyInputMessage: "Existen campos vacios: ",
 			successRegisteredMessage: "Registro completo",
+			canNotCompleteTheActionMenssage: "No se pudo completar la acción",
 			emptyFields: true,
 			isTheSamePassword: false,
 		};
@@ -69,7 +70,7 @@ export default class TeacherForm extends React.Component
 
 	ShowWarningMenssage(field)
 	{
-		ButterToast.raise({
+		this.tray.raise({
 			content: <Cinnamon.Crisp
 				className="butter-alert"
 				scheme={Cinnamon.Slim.SCHEME_DARK}
@@ -82,7 +83,7 @@ export default class TeacherForm extends React.Component
 
 	ShowSuccessMenssage()
 	{
-		ButterToast.raise({
+		this.tray.raise({
 			content: <Cinnamon.Crisp
 				className="butter-alert"
 				scheme={Cinnamon.Slim.SCHEME_DARK}
@@ -95,7 +96,7 @@ export default class TeacherForm extends React.Component
 
 	ShowModifySuccessMenssage()
 	{
-		ButterToast.raise({
+		this.tray.raise({
 			content: <Cinnamon.Crisp
 				className="butter-alert"
 				scheme={Cinnamon.Slim.SCHEME_DARK}
@@ -108,7 +109,7 @@ export default class TeacherForm extends React.Component
 
 	ShowSamePasswordMenssage()
 	{
-		ButterToast.raise({
+		this.tray.raise({
 			content: <Cinnamon.Crisp
 				className="butter-alert"
 				scheme={Cinnamon.Slim.SCHEME_DARK}
@@ -122,7 +123,7 @@ export default class TeacherForm extends React.Component
 
 	ShowNotTheSamePasswordMenssage()
 	{
-		ButterToast.raise({
+		this.tray.raise({
 			content: <Cinnamon.Crisp
 				className="butter-alert"
 				scheme={Cinnamon.Slim.SCHEME_DARK}
@@ -134,9 +135,22 @@ export default class TeacherForm extends React.Component
 		this.dismissAll();
 	}
 
+	CanNotCompleteTheActionMenssage()
+	{
+		this.tray.raise({
+			content: <Cinnamon.Crisp
+				className="butter-alert"
+				scheme={Cinnamon.Slim.SCHEME_DARK}
+				content={() => <div>{"Vuelva a intentarlo"}</div>}
+				title={this.state.canNotCompleteTheActionMenssage}
+				icon={<div className="wrong-info-icon"></div>}
+			/>
+		});
+	}
+
 	ShowPasswordNotMatchMenssage()
 	{
-		ButterToast.raise({
+		this.tray.raise({
 			content: <Cinnamon.Crisp
 				className="butter-alert"
 				scheme={Cinnamon.Slim.SCHEME_DARK}
@@ -231,9 +245,13 @@ export default class TeacherForm extends React.Component
 			speciality: speciality,
 			password: password
 		};
-		teachersController.insertTeacher(teacher);
-		this.ClearAllFields();
-		this.ShowSuccessMenssage();
+		if(teachersController.insertTeacher(teacher)){
+			this.ClearAllFields();
+			this.ShowSuccessMenssage();
+		}
+		else{
+			this.CanNotCompleteTheActionMenssage();
+		}
 	}
 
 	ClearAllFields(){

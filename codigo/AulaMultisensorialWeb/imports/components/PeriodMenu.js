@@ -20,13 +20,15 @@ export default class PeriodMenu extends React.Component {
         icons[1].id = 'min-add-icon';
         icons[2].id = 'min-modify-icon';
         icons[3].id = 'min-delete-icon';
+        icons[4].id = 'min-active-icon';
         texts[0].id = 'min-vizualize-text';
         texts[1].id = 'min-add-text';
         texts[2].id = 'min-modify-text';
         texts[3].id = 'min-delete-text';
+        texts[4].id = 'min-active-text';
         container[0].className = 'min-management-menu';
         menu[0].className = 'min-management-options';
-        for (var i = 0; i < 4; i++) {
+        for (var i = 0; i < 5; i++) {
           options[0].className = 'min-management-option';
           icons[0].className = 'min-management-icon';
           texts[0].className = 'min-management-text';
@@ -54,11 +56,16 @@ export default class PeriodMenu extends React.Component {
       this.props.ShowDeleteButton();
     }
 
+    ActivePeriod() {
+      this.MinimizeMenu();
+      this.props.ShowPeriodActiveButton();
+    }
+
     render() {
         return(
             <div>
               <div className="management-menu">
-                <div className="management-options">
+                <div id="period-management-options" className="management-options">
                   <div onClick={() => this.ShowPeriodsRecords()} id="visualize" className="management-option">
                     <div id="visualize-icon" className="management-icon"></div>
                     <div className="management-text">Periodos registrados</div>
@@ -74,6 +81,10 @@ export default class PeriodMenu extends React.Component {
                   <div onClick={() => this.DeletePeriod()} id="delete" className="management-option">
                     <div id="delete-icon" className="management-icon"></div>
                     <div className="management-text">Eliminar registros</div>
+                  </div>
+                  <div onClick={() => this.ActivePeriod()} id="active" className="management-option">
+                    <div id="active-icon" className="management-icon"></div>
+                    <div className="management-text">Selecionar periodo activo</div>
                   </div>
                 </div>
               </div>

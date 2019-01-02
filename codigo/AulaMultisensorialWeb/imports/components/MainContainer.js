@@ -12,6 +12,7 @@ import LevelForm from '../components/LevelForm';
 import LevelRecords from '../components/LevelRecords';
 import PeriodMenu from '../components/PeriodMenu';
 import PeriodForm from '../components/PeriodForm';
+import PeriodRecords from '../components/PeriodRecords';
 import ActivitiesMenu from '../components/ActivitiesMenu';
 
 var canvas;
@@ -86,6 +87,8 @@ export default class MainContainer extends React.Component {
           isMenuMinimized: false,
           showModifyForm: false,
           activityOption: false,
+          activePeriod: false,
+          deleteStudent: false,
         }
     }
 
@@ -109,6 +112,7 @@ export default class MainContainer extends React.Component {
         modifyStudent: false,
         deleteStudent: false,
         activityOption: false,
+        activePeriod: false,
       });
       document.getElementById('main-title').innerHTML = "Estudiantes";
       document.getElementsByClassName('main-icon')[0].id = "student-icon";
@@ -132,6 +136,7 @@ export default class MainContainer extends React.Component {
         modifyStudent: false,
         deleteStudent: false,
         activityOption: false,
+        activePeriod: false,
       });
     }
     ShowStudentRecords(){
@@ -153,6 +158,7 @@ export default class MainContainer extends React.Component {
         modifyStudent: false,
         deleteStudent: false,
         activityOption: false,
+        activePeriod: false,
       });
     }
 
@@ -176,6 +182,7 @@ export default class MainContainer extends React.Component {
         modifyStudent: true,
         deleteStudent: false,
         activityOption: false,
+        activePeriod: false,
       });
     }
 
@@ -199,6 +206,7 @@ export default class MainContainer extends React.Component {
         modifyStudent: false,
         deleteStudent: true,
         activityOption: false,
+        activePeriod: false,
       });
     }
 
@@ -220,6 +228,8 @@ export default class MainContainer extends React.Component {
         showModifyForm: false,
         modifyStudent: true,
         activityOption: false,
+        activePeriod: false,
+        deleteStudent: false,
       });
       document.getElementById('main-title').innerHTML = "Docentes";
       document.getElementsByClassName('main-icon')[0].id = "teacher-icon";
@@ -242,6 +252,8 @@ export default class MainContainer extends React.Component {
         showModifyForm: false,
         modifyStudent: true,
         activityOption: false,
+        activePeriod: false,
+        deleteStudent: false,
       });
     }
     ShowTeachersRecords(){
@@ -263,6 +275,7 @@ export default class MainContainer extends React.Component {
         modifyStudent: false,
         deleteStudent: false,
         activityOption: false,
+        activePeriod: false,
       });
     }
 
@@ -285,6 +298,8 @@ export default class MainContainer extends React.Component {
         showModifyForm: false,
         modifyStudent: true,
         activityOption: false,
+        activePeriod: false,
+        deleteStudent: false,
       });
       document.getElementById('main-title').innerHTML = "Niveles";
       document.getElementsByClassName('main-icon')[0].id = "level-icon";
@@ -308,6 +323,8 @@ export default class MainContainer extends React.Component {
         showModifyForm: false,
         modifyStudent: true,
         activityOption: false,
+        activePeriod: false,
+        deleteStudent: false,
       });
     }
 
@@ -330,6 +347,7 @@ export default class MainContainer extends React.Component {
         modifyStudent: false,
         deleteStudent: false,
         activityOption: false,
+        activePeriod: false,
       });
     }
 
@@ -351,6 +369,8 @@ export default class MainContainer extends React.Component {
         showModifyForm: false,
         modifyStudent: false,
         activityOption: false,
+        activePeriod: false,
+        deleteStudent: false,
       });
     }
 
@@ -373,6 +393,7 @@ export default class MainContainer extends React.Component {
         modifyStudent: false,
         deleteStudent: false,
         activityOption: false,
+        activePeriod: false,
       });
     }
 
@@ -396,6 +417,7 @@ export default class MainContainer extends React.Component {
         modifyStudent: true,
         deleteStudent: false,
         activityOption: false,
+        activePeriod: false,
       });
     }
 
@@ -404,7 +426,7 @@ export default class MainContainer extends React.Component {
         loginForm: false,
         studentOption: false,
         addStudentForm: false,
-        showStudentRecords: true,
+        showStudentRecords: false,
         teacherOption: false,
         addTeacherForm: false,
         showTeacherRecords: false,
@@ -419,6 +441,7 @@ export default class MainContainer extends React.Component {
         modifyStudent: true,
         deleteStudent: false,
         activityOption: false,
+        activePeriod: false,
       });
     }
 
@@ -442,6 +465,7 @@ export default class MainContainer extends React.Component {
         modifyStudent: true,
         deleteStudent: false,
         activityOption: false,
+        activePeriod: false,
       });
     }
 
@@ -465,6 +489,7 @@ export default class MainContainer extends React.Component {
         modifyStudent: false,
         deleteStudent: true,
         activityOption: false,
+        activePeriod: false,
       });
     }
 
@@ -488,6 +513,7 @@ export default class MainContainer extends React.Component {
         modifyStudent: false,
         deleteStudent: true,
         activityOption: false,
+        activePeriod: false,
       });
     }
 
@@ -511,6 +537,7 @@ export default class MainContainer extends React.Component {
         modifyStudent: false,
         deleteStudent: true,
         activityOption: false,
+        activePeriod: false,
       });
     }
 
@@ -532,6 +559,8 @@ export default class MainContainer extends React.Component {
         modifyStudent: true,
         showModifyForm: true,
         activityOption: false,
+        activePeriod: false,
+        deleteStudent: false,
       });
     }
 
@@ -553,6 +582,8 @@ export default class MainContainer extends React.Component {
         modifyStudent: true,
         showModifyForm: true,
         activityOption: false,
+        activePeriod: false,
+        deleteStudent: false,
       });
     }
 
@@ -574,6 +605,8 @@ export default class MainContainer extends React.Component {
         modifyStudent: true,
         showModifyForm: true,
         activityOption: false,
+        activePeriod: false,
+        deleteStudent: false,
       });
     }
 
@@ -595,6 +628,8 @@ export default class MainContainer extends React.Component {
         modifyStudent: true,
         showModifyForm: true,
         activityOption: false,
+        activePeriod: false,
+        deleteStudent: false,
       });
     }
 
@@ -616,6 +651,8 @@ export default class MainContainer extends React.Component {
         modifyStudent: true,
         showModifyForm: false,
         activityOption: false,
+        activePeriod: false,
+        deleteStudent: false,
       });
     }
 
@@ -637,6 +674,8 @@ export default class MainContainer extends React.Component {
         modifyStudent: true,
         showModifyForm: false,
         activityOption: false,
+        activePeriod: false,
+        deleteStudent: false,
       });
     }
 
@@ -658,6 +697,8 @@ export default class MainContainer extends React.Component {
         modifyStudent: true,
         showModifyForm: false,
         activityOption: false,
+        activePeriod: false,
+        deleteStudent: false,
       });
     }
 
@@ -679,6 +720,8 @@ export default class MainContainer extends React.Component {
         modifyStudent: true,
         showModifyForm: false,
         activityOption: false,
+        activePeriod: false,
+        deleteStudent: false,
       });
     }
 
@@ -700,6 +743,8 @@ export default class MainContainer extends React.Component {
         modifyStudent: false,
         showModifyForm: false,
         activityOption: true,
+        activePeriod: false,
+        deleteStudent: false,
       });
     }
 
@@ -721,9 +766,34 @@ export default class MainContainer extends React.Component {
         showModifyForm: false,
         modifyStudent: false,
         activityOption: false,
+        activePeriod: false,
+        deleteStudent: false,
       });
       document.getElementById('main-title').innerHTML = "Periodos";
       document.getElementsByClassName('main-icon')[0].id = "period-icon";
+    }
+
+    ShowPeriodActiveButton(){
+      this.setState({
+        loginForm: false,
+        studentOption: false,
+        addStudentForm: false,
+        showStudentRecords: false,
+        teacherOption: false,
+        addTeacherForm: false,
+        showTeacherRecords: false,
+        levelOption: false,
+        addLevelForm: false,
+        showLevelRecords: false,
+        periodOption: true,
+        addPeriodForm: false,
+        showPeriodRecords: true,
+        showModifyForm: false,
+        modifyStudent: false,
+        activityOption: false,
+        activePeriod: true,
+        deleteStudent: false,
+      });
     }
 
     MaximizeMenu(){
@@ -744,12 +814,25 @@ export default class MainContainer extends React.Component {
         texts[1].id = 'add-text';
         texts[2].id = 'modify-text';
         texts[3].id = 'delete-text';
+        if(icons.length > 4) {
+          icons[4].id = 'active-icon';
+          texts[4].id = 'active-text';
+        }
         container[0].className = 'management-menu';
         menu[0].className = 'management-options';
-        for (var i = 0; i < 4; i++) {
-          options[0].className = 'management-option';
-          icons[0].className = 'management-icon';
-          texts[0].className = 'management-text';
+        if(icons.length > 4) {
+          for (var i = 0; i < 5; i++) {
+            options[0].className = 'management-option';
+            icons[0].className = 'management-icon';
+            texts[0].className = 'management-text';
+          }
+        }
+        else {
+          for (var i = 0; i < 4; i++) {
+            options[0].className = 'management-option';
+            icons[0].className = 'management-icon';
+            texts[0].className = 'management-text';
+          }
         }
       }
     }
@@ -800,6 +883,8 @@ export default class MainContainer extends React.Component {
         modifyStudent: false,
         showModifyForm: false,
         activityOption: false,
+        activePeriod: false,
+        deleteStudent: false,
       });
       document.getElementById('main-title').innerHTML = "Inicio de sesión";
       document.getElementsByClassName('login-icon')[0].id = "home-icon";
@@ -930,7 +1015,8 @@ export default class MainContainer extends React.Component {
                       MinimizeMenu={this.MinimizeMenu.bind(this)}
                       isMenuMinimized={this.state.isMenuMinimized}
                       ShowPeriodsRecords={this.ShowPeriodsRecords.bind(this)}
-                      AddPeriod={this.AddPeriod.bind(this)}/>
+                      AddPeriod={this.AddPeriod.bind(this)}
+                      ShowPeriodActiveButton={this.ShowPeriodActiveButton.bind(this)}/>
                     {
                       this.state.addPeriodForm ?
                       <PeriodForm/>
@@ -939,12 +1025,13 @@ export default class MainContainer extends React.Component {
                     }
                     {
                       this.state.showPeriodRecords ?
-                      <StudentRecords
-                        CloseModifyForm={() => this.CloseStudentModifyForm()}
+                      <PeriodRecords
+                        CloseModifyForm={() => this.ClosePeriodModifyForm()}
                         delete={this.state.deleteStudent}
-                        ShowModifyForm={this.ShowStudentModifyForm.bind(this)}
+                        ShowModifyForm={this.ShowPeriodModifyForm.bind(this)}
                         showModifyForm={this.state.showModifyForm}
-                        modify={this.state.modifyStudent} />
+                        modify={this.state.modifyStudent}
+                        active={this.state.activePeriod}/>
                       :
                       undefined
                     }

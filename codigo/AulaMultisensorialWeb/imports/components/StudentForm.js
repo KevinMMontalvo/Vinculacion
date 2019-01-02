@@ -21,6 +21,7 @@ export default class StudentForm extends React.Component
 			emptyInputMessage: "Existen campos vacios: ",
 			successRegisteredMessage: "Registro completo",
 			successModifiedMessage: "Cambios realizados",
+			canNotCompleteTheActionMenssage: "No se pudo completar la acción",
 			techHelps: [],
 			emptyFields: true,
 		};
@@ -77,7 +78,7 @@ export default class StudentForm extends React.Component
 
 	ShowWarningMenssage(field)
 	{
-		ButterToast.raise({
+		this.tray.raise({
 			content: <Cinnamon.Crisp
 				className="butter-alert"
 				scheme={Cinnamon.Slim.SCHEME_BLUE}
@@ -90,7 +91,7 @@ export default class StudentForm extends React.Component
 
 	ShowAddSuccessMenssage()
 	{
-		ButterToast.raise({
+		this.tray.raise({
 			content: <Cinnamon.Crisp
 				className="butter-alert"
 				scheme={Cinnamon.Slim.SCHEME_DARK}
@@ -103,13 +104,26 @@ export default class StudentForm extends React.Component
 
 	ShowModifySuccessMenssage()
 	{
-		ButterToast.raise({
+		this.tray.raise({
 			content: <Cinnamon.Crisp
 				className="butter-alert"
 				scheme={Cinnamon.Slim.SCHEME_DARK}
 				content={() => <div>{"Registro modificado"}</div>}
 				title={this.state.successModifiedMessage}
 				icon={<div className="alert-success-icon"></div>}
+			/>
+		});
+	}
+
+	CanNotCompleteTheActionMenssage()
+	{
+		this.tray.raise({
+			content: <Cinnamon.Crisp
+				className="butter-alert"
+				scheme={Cinnamon.Slim.SCHEME_DARK}
+				content={() => <div>{"Vuelva a intentarlo"}</div>}
+				title={this.state.canNotCompleteTheActionMenssage}
+				icon={<div className="wrong-info-icon"></div>}
 			/>
 		});
 	}
@@ -252,9 +266,13 @@ export default class StudentForm extends React.Component
 			technical_helps: technical_helps,
 			percentage_of_disability: percentage_of_disability,
 		};
-		studentsController.insertStudent(student);
-		this.ClearAllFields();
-		this.ShowAddSuccessMenssage();
+		if(studentsController.insertStudent(student)){
+			this.ClearAllFields();
+			this.ShowAddSuccessMenssage();
+		}
+		else {
+			this.CanNotCompleteTheActionMenssage();
+		}
 	}
 
 	ModifyStudent(){
@@ -460,6 +478,7 @@ export default class StudentForm extends React.Component
 						horizontal: POS_RIGHT
 					}}
 					timeout={7500}
+					ref={tray => this.tray = tray}
 				/>
 			</div>);
 	}
