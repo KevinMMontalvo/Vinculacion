@@ -46,7 +46,93 @@ namespace Aula_Multisensorial.Gloves
         private void OnClickLabelEvent(object sender, EventArgs e)
         {
             Label label = (Label)sender;
-            
+
+            //valida que tiene que iniciar la actividad primero
+            if (buttonStart.Text.Equals("Iniciar"))
+            {
+                return;
+            }
+
+            if (label.Name.Equals("label1"))
+            {
+                ArduinoController.GetInstance().SendMessage(ArduinoController.LEFT_HAND_ARDUINO,"I1");
+                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
+                {
+                    //todo accion cuando se haya movido el dedo correcto
+                }
+            }
+            else if (label.Name.Equals("label2"))
+            {
+                ArduinoController.GetInstance().SendMessage(ArduinoController.LEFT_HAND_ARDUINO, "I2");
+                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
+                {
+                    //todo accion cuando se haya movido el dedo correcto
+                }
+            }
+            else if (label.Name.Equals("label3"))
+            {
+                ArduinoController.GetInstance().SendMessage(ArduinoController.LEFT_HAND_ARDUINO, "I3");
+                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
+                {
+                    //todo accion cuando se haya movido el dedo correcto
+                }
+            }
+            else if (label.Name.Equals("label4"))
+            {
+                ArduinoController.GetInstance().SendMessage(ArduinoController.LEFT_HAND_ARDUINO, "I4");
+                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
+                {
+                    //todo accion cuando se haya movido el dedo correcto
+                }
+            }
+            else if (label.Name.Equals("label5"))
+            {
+                ArduinoController.GetInstance().SendMessage(ArduinoController.LEFT_HAND_ARDUINO, "I5");
+                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
+                {
+                    //todo accion cuando se haya movido el dedo correcto
+                }
+            }
+            else if (label.Name.Equals("label6"))
+            {
+                ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D1");
+                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
+                {
+                    //todo accion cuando se haya movido el dedo correcto
+                }
+            }
+            else if (label.Name.Equals("label7"))
+            {
+                ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D2");
+                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
+                {
+                    //todo accion cuando se haya movido el dedo correcto
+                }
+            }
+            else if (label.Name.Equals("label8"))
+            {
+                ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D3");
+                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
+                {
+                    //todo accion cuando se haya movido el dedo correcto
+                }
+            }
+            else if (label.Name.Equals("label9"))
+            {
+                ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D4");
+                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
+                {
+                    //todo accion cuando se haya movido el dedo correcto
+                }
+            }
+            else if (label.Name.Equals("label10"))
+            {
+                ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D5");
+                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
+                {
+                    //todo accion cuando se haya movido el dedo correcto
+                }
+            }
         }
 
         private void HoverLabelEvent(object sender, EventArgs e)
@@ -60,6 +146,25 @@ namespace Aula_Multisensorial.Gloves
         {
             Label label = (Label)sender;
             label.BackColor = Color.White;
+        }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            if (buttonStart.Text.Equals("Iniciar"))
+            {
+                buttonStart.Text = "Terminar";
+                buttonExit.Enabled = false;
+            }
+            else if (buttonStart.Text.Equals("Terminar"))
+            {
+                buttonStart.Text = "Iniciar";
+                buttonExit.Enabled = true;
+            }
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

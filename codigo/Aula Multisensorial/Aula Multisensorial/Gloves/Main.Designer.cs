@@ -72,6 +72,7 @@
             this.buttonExit.TabIndex = 5;
             this.buttonExit.Text = "Salir";
             this.buttonExit.UseVisualStyleBackColor = false;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
             // buttonStart
             // 
@@ -87,6 +88,7 @@
             this.buttonStart.TabIndex = 4;
             this.buttonStart.Text = "Iniciar";
             this.buttonStart.UseVisualStyleBackColor = false;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // pictureBox1
             // 
@@ -214,6 +216,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
             this.ClientSize = new System.Drawing.Size(884, 561);
+            this.ControlBox = false;
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);

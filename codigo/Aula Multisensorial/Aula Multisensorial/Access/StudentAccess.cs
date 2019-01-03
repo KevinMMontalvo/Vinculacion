@@ -128,5 +128,32 @@ namespace Aula_Multisensorial.Access
                 return false;
             }
         }
+
+        /// <summary>
+        /// Cambia el level_id de un estudiante
+        /// </summary>
+        /// <param name="studentId">String con el ID del estudiante</param>
+        /// <param name="levelId">String con el ID del nuevo nivel</param>
+        /// <returns></returns>
+        public bool UpdateStudentLevel(string studentId, string levelId)
+        {
+            FilterDefinition<Student> filter = Builders<Student>.Filter.Eq("Id", studentId);
+
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+
+            UpdateDefinition<Student> updateDefinition = Builders<Student>.Update.Set("LevelId", levelId);
+
+            UpdateResult updateResult = studentsCollection.UpdateOne(filter, updateDefinition, null, cancellationTokenSource.Token);
+
+            if (updateResult.IsAcknowledged && updateResult.ModifiedCount == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

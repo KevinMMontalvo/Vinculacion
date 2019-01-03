@@ -110,6 +110,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
             this.ClientSize = new System.Drawing.Size(884, 561);
+            this.ControlBox = false;
             this.Controls.Add(this.labelConfigurationInformation);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonSetup);

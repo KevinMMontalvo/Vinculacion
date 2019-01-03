@@ -71,7 +71,6 @@ namespace Aula_Multisensorial.MatrixLED
                 buttonSetup.Enabled = true;
                 buttonExit.Enabled = true;
             }
-
         }
 
         private void buttonSetup_Click(object sender, EventArgs e)
