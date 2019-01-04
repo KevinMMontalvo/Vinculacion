@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Filter, { Sort, FilterValue } from 'data-engine';
 import ButterToast, { Cinnamon, POS_BOTTOM, POS_RIGHT, POS_TOP } from 'butter-toast';
+import Modal from 'react-responsive-modal';
 import StudentByLevel from '../map/StudentByLevel';
 
 export default class ActivePeriodForm extends React.Component {
@@ -12,6 +13,8 @@ export default class ActivePeriodForm extends React.Component {
           studentsByCurrentLevel: undefined,
           levelIndex: 0,
           areAllSelected: false,
+          selectedStudents: [],
+          studentsToChangeLevel: [],
         }
     }
 
@@ -49,6 +52,9 @@ export default class ActivePeriodForm extends React.Component {
     LoadStudents() {
   		var studentsString = studentsController.getStudents();
   		var students = JSON.parse(studentsString);
+      for (var i = 0; i < students.length; i++) {
+        students[i].changed = false;
+      }
   		return students;
   	}
 
@@ -89,19 +95,29 @@ export default class ActivePeriodForm extends React.Component {
           studentsByCurrentLevel.push(studentsToSeparate[i]);
         }
       }
+      let studentsToChangeLevel = this.state.studentsToChangeLevel;
+      for (var i = 0; i < studentsToChangeLevel.length; i++) {
+        this.CheckRemainingStudents(studentsToChangeLevel[i]._id);
+      }
       this.setState({
         studentsByCurrentLevel: studentsByCurrentLevel,
       });
     }
 
     SelectAll(){
+      let selectedStudents = [];
       for (var i = 0; i < this.state.studentsByCurrentLevel.length; i++) {
         document.getElementById(this.state.studentsByCurrentLevel[i]._id).className = "student-by-level-container-selected";
         document.getElementById(this.state.studentsByCurrentLevel[i]._id).childNodes[1].style.backgroundSize = "0.8vw";
         document.getElementById(this.state.studentsByCurrentLevel[i]._id).childNodes[1].style.backgroundColor = "#D0D3D4";
+        let student = {
+          _id: this.state.studentsByCurrentLevel[i]._id,
+        };
+        selectedStudents.push(student);
       }
       this.setState({
         areAllSelected: true,
+        selectedStudents: selectedStudents,
       });
     }
 
@@ -113,6 +129,7 @@ export default class ActivePeriodForm extends React.Component {
       }
       this.setState({
         areAllSelected: false,
+        selectedStudents: [],
       });
     }
 
@@ -145,6 +162,7 @@ export default class ActivePeriodForm extends React.Component {
           this.SeparateStudents();
         });
       }
+      this.onOpenDialogModal();
     }
 
     PreviousLevel() {
@@ -164,6 +182,77 @@ export default class ActivePeriodForm extends React.Component {
         levelSelect.remove(i);
       }
     }
+
+    SelectStudent(studentId){
+      let selectedStudents = this.state.selectedStudents;
+      let student = {
+        _id: studentId,
+      };
+      selectedStudents.push(student);
+      this.setState({
+        selectedStudents: selectedStudents,
+      });
+    }
+
+    UnselectStudent(studentId){
+      let selectedStudents = this.state.selectedStudents;
+      let spliceIndex = -1;
+      let student = {
+        _id: studentId,
+      };
+      for (var i = 0; i < selectedStudents.length; i++) {
+        if(selectedStudents[i]._id == studentId){
+          spliceIndex = i;
+          break;
+        }
+      }
+      selectedStudents.splice(spliceIndex, 1);
+      this.setState({
+        selectedStudents: selectedStudents,
+      });
+    }
+
+    Changelevel(){
+      let newLevel = document.getElementById('period-level-select').value;
+      let selectedStudents = this.state.selectedStudents;
+      let studentsToChangeLevel = this.state.studentsToChangeLevel;
+      for (var i = 0; i < selectedStudents.length; i++) {
+        selectedStudents[i].level_id = newLevel;
+        studentsToChangeLevel.push(selectedStudents[i]);
+        this.CheckRemainingStudents(selectedStudents[i]._id);
+      }
+
+      this.setState({
+        selectedStudents: [],
+        studentsToChangeLevel: studentsToChangeLevel,
+      });
+    }
+
+    CheckRemainingStudents(id){
+      let studentsByCurrentLevel = this.state.studentsByCurrentLevel;
+      for (var i = 0; i < studentsByCurrentLevel.length; i++) {
+        if(studentsByCurrentLevel[i]._id == id){
+          studentsByCurrentLevel[i].changed = true;
+        }
+      }
+      this.setState({
+        studentsByCurrentLevel: studentsByCurrentLevel,
+      });
+    }
+
+    ChangeStudentsLevel(){
+      for (var i = 0; i < this.state.studentsToChangeLevel.length; i++) {
+        studentsController.updateStudentLevel(this.state.studentsToChangeLevel[i]._id, this.state.studentsToChangeLevel[i].level_id);
+      }
+    }
+
+    onOpenDialogModal = () => {
+      this.setState({ openDialog: true });
+    };
+
+    onCloseDialogModal = () => {
+      this.setState({ openDialog: false });
+    };
 
     render() {
         return(
@@ -187,6 +276,8 @@ export default class ActivePeriodForm extends React.Component {
                         return <StudentByLevel
                                   studentsByCurrentLevel={studentsByCurrentLevel}
                                   key={studentsByCurrentLevel._id}
+                                  SelectStudent={this.SelectStudent.bind(this)}
+                                  UnselectStudent={this.UnselectStudent.bind(this)}
                                   CheckSelected={this.CheckSelected.bind(this)}>
                                 </StudentByLevel>
                       })
@@ -203,7 +294,7 @@ export default class ActivePeriodForm extends React.Component {
                 <select id="period-level-select">
   								<option value="" selected disabled hidden>Selecione el nivel del estudiante</option>
   							</select>
-                <div className="change-level-button">Cambiar</div>
+                <div onClick={() => this.Changelevel()} className="change-level-button">Cambiar</div>
               </div>
               <div className="active-period-button-container">
                 {this.state.levelIndex != 0 ?
@@ -212,11 +303,19 @@ export default class ActivePeriodForm extends React.Component {
                     undefined
                 }
                 {(this.state.levelIndex + 1) == this.state.levels.length ?
-                    <div className="next-button">Finalizar</div>
+                    <div onClick={() => this.ChangeStudentsLevel()} className="next-button">Finalizar</div>
                   :
                     <div onClick={() => this.NextLevel()} className="next-button">Siguiente</div>
                 }
               </div>
+              <Modal open={this.state.openDialog} onClose={this.onCloseDialogModal} center>
+                <div className="student-level-dialog-container">
+                  <p>Los estudiantes que no se hayan cambiado de nivel, se mantendran en el mismo nivel que se especifica</p>
+                  <div className="dialog-button-container">
+                    <div onClick={() => this.onCloseDialogModal()} className="dialog-button">Ok</div>
+                  </div>
+                </div>
+              </Modal>
             </div>
         );
     }
