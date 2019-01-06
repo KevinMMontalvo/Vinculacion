@@ -17,6 +17,7 @@ export default class TeacherForm extends React.Component
 			emptyInputMessage: "Existen campos vacios: ",
 			successRegisteredMessage: "Registro completo",
 			canNotCompleteTheActionMenssage: "No se pudo completar la acción",
+			successModifiedMessage: "Cambios realizados",
 			emptyFields: true,
 			isTheSamePassword: false,
 		};
@@ -96,7 +97,7 @@ export default class TeacherForm extends React.Component
 
 	ShowModifySuccessMenssage()
 	{
-		this.tray.raise({
+		ButterToast.raise({
 			content: <Cinnamon.Crisp
 				className="butter-alert"
 				scheme={Cinnamon.Slim.SCHEME_DARK}
@@ -171,8 +172,13 @@ export default class TeacherForm extends React.Component
 		let name = document.getElementById('name-input').value;
 		let level_id = document.getElementById('level-select').value;
 		let speciality = document.getElementById('speciality-input').value;
-		let password = document.getElementById('password-input').value;
-
+		if(this.props.teacherToModify == undefined){
+			let password = document.getElementById('password-input').value;
+			if (password == "")
+			{
+				validationArray.push("password");
+			}
+		}
 		let validationArray = new Array();
 		if (name == "")
 		{
@@ -185,10 +191,6 @@ export default class TeacherForm extends React.Component
 		if (speciality == "")
 		{
 			validationArray.push("speciality");
-		}
-		if (password == "")
-		{
-			validationArray.push("password");
 		}
 		return validationArray;
 	}
@@ -210,9 +212,11 @@ export default class TeacherForm extends React.Component
 			{
 				this.ShowWarningMenssage("Especialidad");
 			}
-			if (validationArray[i] == "password")
-			{
-				this.ShowWarningMenssage("Contraseña");
+			if(this.props.teacherToModify == undefined){
+				if (validationArray[i] == "password")
+				{
+					this.ShowWarningMenssage("Contraseña");
+				}
 			}
 		}
 		if(!this.state.isTheSamePassword) {
@@ -258,9 +262,11 @@ export default class TeacherForm extends React.Component
 		document.getElementById('name-input').value = "";
 		document.getElementById('level-select').value = "";
 		document.getElementById('speciality-input').value = "";
-		document.getElementById('password-input').value = "";
-		document.getElementById('password-confirmation-input').value = "";
-		document.getElementById('password-confirmation-input').style.borderColor = "#333";
+		if(this.props.teacherToModify == undefined){
+			document.getElementById('password-input').value = "";
+			document.getElementById('password-confirmation-input').value = "";
+			document.getElementById('password-confirmation-input').style.borderColor = "#333";
+		}
 	}
 
 	componentDidMount(){
@@ -268,6 +274,9 @@ export default class TeacherForm extends React.Component
 			document.getElementById('name-input').value = this.props.teacherToModify.name;
 			document.getElementById('level-select').value = this.props.teacherToModify.level_id;
 			document.getElementById('speciality-input').value = this.props.teacherToModify.speciality;
+			this.setState({
+				isTheSamePassword: true,
+			})
 		}
 		this.LoadLevelsInSelect();
 	}

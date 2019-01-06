@@ -92,6 +92,7 @@ export default class MainContainer extends React.Component {
           activePeriod: false,
           deleteStudent: false,
           newActivePeriodForm: false,
+          visblePeriod: undefined,
         }
     }
 
@@ -909,6 +910,7 @@ export default class MainContainer extends React.Component {
 
     componentDidMount(){
       this.InitializeSpaceCanvas();
+      this.GetActualPeriod();
     }
 
     SuccessfullLogin(user){
@@ -946,7 +948,19 @@ export default class MainContainer extends React.Component {
         newActivePeriodForm: false,
       });
       document.getElementById('main-title').innerHTML = "Inicio de sesión";
-      document.getElementsByClassName('login-icon')[0].id = "home-icon";
+      document.getElementsByClassName('main-icon')[0].id = "home-icon";
+    }
+
+    GetActualPeriod(){
+      var periodsString = periodsController.getPeriods();
+      var periods = JSON.parse(periodsString);
+      for (var i = 0; i < periods.length; i++) {
+        if(periods[i].is_visible){
+          this.setState({
+            visblePeriod: periods[i],
+          })
+        }
+      }
     }
 
     render() {
@@ -1097,7 +1111,7 @@ export default class MainContainer extends React.Component {
                     }
                     {
                       this.state.newActivePeriodForm ?
-                      <ActivePeriodForm periodToActive={this.state.periodToActive}/>
+                      <ActivePeriodForm GetActualPeriod={this.GetActualPeriod.bind(this)} PeriodOption={this.PeriodOption.bind(this)} periodToActive={this.state.periodToActive}/>
                       :
                       undefined
                     }
@@ -1119,6 +1133,14 @@ export default class MainContainer extends React.Component {
                     <LoginForm SuccessfullLogin={this.SuccessfullLogin.bind(this)}/>
                   :
                   undefined
+                }
+                {this.state.isLogged && this.state.visblePeriod != undefined ?
+                    <div className="actual-period-container">
+                      <b>Periodo actual:</b>
+                      <p>{this.state.visblePeriod.name}</p>
+                    </div>
+                  :
+                    undefined
                 }
               </div>
             </div>

@@ -15,6 +15,7 @@ export default class ActivePeriodForm extends React.Component {
           areAllSelected: false,
           selectedStudents: [],
           studentsToChangeLevel: [],
+          canNotCompleteTheActionMenssage: "No se pudo completar la acción",
         }
     }
 
@@ -38,6 +39,33 @@ export default class ActivePeriodForm extends React.Component {
         });
       }
     }
+
+    ShowStudentLevelWarning()
+  	{
+  		this.tray.raise({
+  			content: <Cinnamon.Crisp
+  				className="butter-alert"
+  				scheme={Cinnamon.Slim.SCHEME_DARK}
+  				content={() => <div>{"Los estudiantes que no hayan sido cambiados de nivel se mantendran en el mismo al finalizar el proceso de activación de periodo"}</div>}
+  				title={"Cambio de nivel"}
+  				icon={<div className="alert-success-icon"></div>}
+  			/>
+  		});
+  		this.dismissAll();
+  	}
+
+    CanNotCompleteTheActionMenssage()
+  	{
+  		this.tray.raise({
+  			content: <Cinnamon.Crisp
+  				className="butter-alert"
+  				scheme={Cinnamon.Slim.SCHEME_DARK}
+  				content={() => <div>{"Vuelva a intentarlo"}</div>}
+  				title={this.state.canNotCompleteTheActionMenssage}
+  				icon={<div className="wrong-info-icon"></div>}
+  			/>
+  		});
+  	}
 
     LoadLevels() {
       var levelsString = levelsController.getLevels();
@@ -162,7 +190,7 @@ export default class ActivePeriodForm extends React.Component {
           this.SeparateStudents();
         });
       }
-      this.onOpenDialogModal();
+      this.ShowStudentLevelWarning();
     }
 
     PreviousLevel() {
@@ -241,8 +269,14 @@ export default class ActivePeriodForm extends React.Component {
     }
 
     ChangeStudentsLevel(){
-      for (var i = 0; i < this.state.studentsToChangeLevel.length; i++) {
-        studentsController.updateStudentLevel(this.state.studentsToChangeLevel[i]._id, this.state.studentsToChangeLevel[i].level_id);
+      if(periodsController.changeVisiblePeriod(this.props.periodToActive._id)){
+        for (var i = 0; i < this.state.studentsToChangeLevel.length; i++) {
+          studentsController.updateStudentLevel(this.state.studentsToChangeLevel[i]._id, this.state.studentsToChangeLevel[i].level_id);
+        }
+        this.onOpenDialogModal();
+      }
+      else {
+        this.CanNotCompleteTheActionMenssage();
       }
     }
 
@@ -251,7 +285,10 @@ export default class ActivePeriodForm extends React.Component {
     };
 
     onCloseDialogModal = () => {
-      this.setState({ openDialog: false });
+      this.setState({ openDialog: false }, () => {
+        this.props.PeriodOption();
+        this.props.GetActualPeriod();
+      });
     };
 
     render() {
@@ -310,12 +347,20 @@ export default class ActivePeriodForm extends React.Component {
               </div>
               <Modal open={this.state.openDialog} onClose={this.onCloseDialogModal} center>
                 <div className="student-level-dialog-container">
-                  <p>Los estudiantes que no se hayan cambiado de nivel, se mantendran en el mismo nivel que se especifica</p>
+                  <p>{this.props.periodToActive.name} ahora consta como periodo actual</p>
                   <div className="dialog-button-container">
                     <div onClick={() => this.onCloseDialogModal()} className="dialog-button">Ok</div>
                   </div>
                 </div>
               </Modal>
+              <ButterToast
+                position={{
+                  vertical: POS_TOP,
+                  horizontal: POS_RIGHT
+                }}
+                timeout={7500}
+                ref={tray => this.tray = tray}
+              />
             </div>
         );
     }

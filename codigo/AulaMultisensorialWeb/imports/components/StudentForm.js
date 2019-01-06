@@ -104,7 +104,7 @@ export default class StudentForm extends React.Component
 
 	ShowModifySuccessMenssage()
 	{
-		this.tray.raise({
+		ButterToast.raise({
 			content: <Cinnamon.Crisp
 				className="butter-alert"
 				scheme={Cinnamon.Slim.SCHEME_DARK}

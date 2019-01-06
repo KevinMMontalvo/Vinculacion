@@ -11,6 +11,7 @@ export default class PeriodForm extends React.Component
 			emptyInputMessage: "Existen campos vacios: ",
 			successRegisteredMessage: "Registro completo",
 			canNotCompleteTheActionMenssage: "No se pudo completar la acción",
+			successModifiedMessage: "Cambios realizados",
 			emptyFields: true,
 			startDate: new Date(),
 			locate: "es-MX",
@@ -94,7 +95,7 @@ export default class PeriodForm extends React.Component
 
 	ShowModifySuccessMenssage()
 	{
-		this.tray.raise({
+		ButterToast.raise({
 			content: <Cinnamon.Crisp
 				className="butter-alert"
 				scheme={Cinnamon.Slim.SCHEME_DARK}
@@ -194,12 +195,14 @@ export default class PeriodForm extends React.Component
 	}
 
 	ModifyPeriod(){
+		console.log(this.props.periodToModify.is_visible);
 		let name = document.getElementById('name-input').value;
 		let startDate = this.state.startDate;
 		let period = {
 			_id: this.props.periodToModify._id,
 			name: name,
 			start_date: startDate,
+			is_visible: this.props.periodToModify.is_visible,
 		};
 		periodsController.modifyPeriod(period);
 		this.ClearAllFields();

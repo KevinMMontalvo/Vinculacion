@@ -301,7 +301,7 @@ export default class Registry extends React.Component {
                     undefined
                   }
                   {
-                    this.props.delete ?
+                    this.props.delete && !this.props.periods.is_visible ?
                     <div>
                       <Modal open={this.state.openDeleteModal} onClose={this.onCloseModal} center>
                         <div className="delete-message-container">
@@ -318,7 +318,7 @@ export default class Registry extends React.Component {
                     undefined
                   }
                   {
-                    this.props.active ?
+                    this.props.active && !this.props.periods.is_visible ?
                     <div onClick={() => this.ShowActiveNewPeriodForm(this.props.periods)} className="registry-active-button"></div>
                     :
                     undefined

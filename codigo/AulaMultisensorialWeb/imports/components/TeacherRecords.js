@@ -185,7 +185,7 @@ export default class TeachersRecords extends React.Component {
       this.setState({
         teachers: this.LoadTeachers(),
         allTeachers: this.LoadTeachers(),
-      })
+      }, () => this.LoadAttributesInSelect())
     }
 
     render() {

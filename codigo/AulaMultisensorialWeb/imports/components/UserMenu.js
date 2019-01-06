@@ -108,7 +108,7 @@ export default class UserMenu extends React.Component {
   				className="butter-alert"
   				scheme={Cinnamon.Slim.SCHEME_DARK}
   				content={() => <div>{"Nueva contraseña actualizada"}</div>}
-  				title={"Modificación completa"}
+  				title={"Actualización completa"}
   				icon={<div className="alert-success-icon"></div>}
   			/>
   		});
@@ -178,7 +178,7 @@ export default class UserMenu extends React.Component {
                 vertical: POS_TOP,
                 horizontal: POS_RIGHT
               }}
-              timeout={7500}
+              timeout={15000}
               ref={tray => this.tray = tray}
             />
           </div>

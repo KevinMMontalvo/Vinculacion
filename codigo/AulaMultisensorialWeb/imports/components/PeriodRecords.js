@@ -181,7 +181,7 @@ export default class PeriodRecords extends React.Component {
       this.setState({
         periods: this.LoadPeriods(),
         allPeriods: this.LoadPeriods(),
-      })
+      }, () => this.LoadAttributesInSelect())
     }
 
     ShowActiveNewPeriodForm(period){

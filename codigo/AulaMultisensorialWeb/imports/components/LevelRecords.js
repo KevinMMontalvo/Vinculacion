@@ -198,7 +198,7 @@ export default class LevelRecords extends React.Component {
       this.setState({
         levels: this.LoadLevels(),
         allLevels: this.LoadLevels(),
-      })
+      }, () => this.LoadAttributesInSelect())
     }
 
     render() {

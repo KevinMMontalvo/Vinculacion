@@ -74,16 +74,18 @@ export default class StudentsRecords extends React.Component {
 
     LoadAttributesInSelect(){
       var sortSelect = document.getElementById('sort-select');
-      for (var i = 0; i < this.state.attributes.length; i++) {
+      if(sortSelect != null){
+        for (var i = 0; i < this.state.attributes.length; i++) {
+          var option = document.createElement("option");
+          option.text = this.state.attributes[i].text;
+          option.value = this.state.attributes[i].value;
+          sortSelect.add(option);
+        }
         var option = document.createElement("option");
-        option.text = this.state.attributes[i].text;
-        option.value = this.state.attributes[i].value;
+        option.text = "Ningún atributo";
+        option.value = "";
         sortSelect.add(option);
       }
-      var option = document.createElement("option");
-      option.text = "Ningún atributo";
-      option.value = "";
-      sortSelect.add(option);
     }
 
     SortData(){
@@ -201,7 +203,7 @@ export default class StudentsRecords extends React.Component {
       this.setState({
         students: this.LoadStudents(),
         allStudents: this.LoadStudents(),
-      })
+      }, () => this.LoadAttributesInSelect())
     }
 
     render() {
