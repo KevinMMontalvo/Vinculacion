@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO.Ports;
+using System.Threading;
 
 namespace Aula_Multisensorial.Utils
 {
@@ -35,8 +36,16 @@ namespace Aula_Multisensorial.Utils
             foreach (string port in ports)
             {
                 SerialPort temporarySerialPort = new SerialPort(port, BAUD_RATE);
-                temporarySerialPort.Open();
+                try
+                {
+                    temporarySerialPort.Open();
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    continue;
+                }
                 temporarySerialPort.Write("ID");
+                Thread.Sleep(40);
                 string id = temporarySerialPort.ReadLine();
 
                 if (int.Parse(id) == arduinoIndex)
@@ -73,7 +82,7 @@ namespace Aula_Multisensorial.Utils
             while (true)
             {
                 message.Add((byte)serialPorts[arduinoIndex].ReadByte());
-                if (message[message.Count-1] ==  10)
+                if (message[message.Count - 1] == 10)
                 {
                     break;
                 }

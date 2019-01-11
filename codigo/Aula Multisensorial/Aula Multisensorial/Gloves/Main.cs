@@ -17,14 +17,14 @@ namespace Aula_Multisensorial.Gloves
 
         private void Main_Load(object sender, EventArgs e)
         {
-            /*bool connectionSuccessful = ArduinoController.GetInstance().StartConnection(ArduinoController.RIGHT_HAND_ARDUINO);
+            bool connectionSuccessful = ArduinoController.GetInstance().StartConnection(ArduinoController.RIGHT_HAND_ARDUINO);
             if (!connectionSuccessful)
             {
                 MessageBox.Show("No se pudo conectar con el guante derecho");
                 Close();
             }
 
-            connectionSuccessful = ArduinoController.GetInstance().StartConnection(ArduinoController.LEFT_HAND_ARDUINO);
+            /*connectionSuccessful = ArduinoController.GetInstance().StartConnection(ArduinoController.LEFT_HAND_ARDUINO);
             if (!connectionSuccessful)
             {
                 MessageBox.Show("No se pudo conectar con el guante izquierdo");
@@ -55,7 +55,8 @@ namespace Aula_Multisensorial.Gloves
 
             if (label.Name.Equals("label1"))
             {
-                ArduinoController.GetInstance().SendMessage(ArduinoController.LEFT_HAND_ARDUINO,"I1");
+                ArduinoController.GetInstance().SendMessage(ArduinoController.LEFT_HAND_ARDUINO, "I1");
+                Console.WriteLine(ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO));
                 if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
                 {
                     //todo accion cuando se haya movido el dedo correcto
@@ -95,42 +96,67 @@ namespace Aula_Multisensorial.Gloves
             }
             else if (label.Name.Equals("label6"))
             {
-                ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D1");
-                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
+                ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D5");
+                string recivedMessage = ArduinoController.GetInstance().GetMessage(ArduinoController.RIGHT_HAND_ARDUINO);
+                if (recivedMessage.ToString().Equals("BIEN\r"))
                 {
-                    //todo accion cuando se haya movido el dedo correcto
+                    Console.WriteLine("BIEN");
+                }
+                else
+                {
+                    Console.WriteLine("MAL");
                 }
             }
             else if (label.Name.Equals("label7"))
             {
-                ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D2");
-                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
+                ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D4");
+                string recivedMessage = ArduinoController.GetInstance().GetMessage(ArduinoController.RIGHT_HAND_ARDUINO);
+                if (recivedMessage.ToString().Equals("BIEN\r"))
                 {
-                    //todo accion cuando se haya movido el dedo correcto
+                    Console.WriteLine("BIEN");
+                }
+                else
+                {
+                    Console.WriteLine("MAL");
                 }
             }
             else if (label.Name.Equals("label8"))
             {
                 ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D3");
-                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
+                string recivedMessage = ArduinoController.GetInstance().GetMessage(ArduinoController.RIGHT_HAND_ARDUINO);
+                if (recivedMessage.ToString().Equals("BIEN\r"))
                 {
-                    //todo accion cuando se haya movido el dedo correcto
+                    Console.WriteLine("BIEN");
+                }
+                else
+                {
+                    Console.WriteLine("MAL");
                 }
             }
             else if (label.Name.Equals("label9"))
             {
-                ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D4");
-                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
+                ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D2");
+                string recivedMessage = ArduinoController.GetInstance().GetMessage(ArduinoController.RIGHT_HAND_ARDUINO);
+                if (recivedMessage.ToString().Equals("BIEN\r"))
                 {
-                    //todo accion cuando se haya movido el dedo correcto
+                    Console.WriteLine("BIEN");
+                }
+                else
+                {
+                    Console.WriteLine("MAL");
                 }
             }
             else if (label.Name.Equals("label10"))
             {
-                ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D5");
-                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
+                ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D1");
+                string recivedMessage = ArduinoController.GetInstance().GetMessage(ArduinoController.RIGHT_HAND_ARDUINO);
+                if (recivedMessage.ToString().Equals("BIEN\r"))
                 {
-                    //todo accion cuando se haya movido el dedo correcto
+                    Console.WriteLine("BIEN");
+                }
+                else
+                {
+                    Console.WriteLine("MAL");
                 }
             }
         }
