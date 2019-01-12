@@ -10,6 +10,18 @@
   transition: 0.5s;
 }
 
+#teacher1-management-options{
+  padding-top: 15vh;
+}
+
+#teacher2-management-options{
+  padding-top: 25vh;
+}
+
+#teacher3-management-options{
+  padding-top: 30vh;
+}
+
 #period-management-options {
  padding-top: 0vh;
 }

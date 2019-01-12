@@ -64,30 +64,65 @@ export default class PeriodMenu extends React.Component {
     render() {
         return(
             <div>
-              <div className="management-menu">
-                <div id="period-management-options" className="management-options">
-                  <div onClick={() => this.ShowPeriodsRecords()} id="visualize" className="management-option">
-                    <div id="visualize-icon" className="management-icon"></div>
-                    <div className="management-text">Periodos registrados</div>
-                  </div>
-                  <div onClick={() => this.AddPeriod()} id="add" className="management-option">
-                    <div id="add-icon" className="management-icon"></div>
-                    <div className="management-text">Registrar periodo</div>
-                  </div>
-                  <div onClick={() => this.ModifyPeriod()} id="modify" className="management-option">
-                    <div id="modify-icon" className="management-icon"></div>
-                    <div className="management-text">Modificar información</div>
-                  </div>
-                  <div onClick={() => this.DeletePeriod()} id="delete" className="management-option">
-                    <div id="delete-icon" className="management-icon"></div>
-                    <div className="management-text">Eliminar registros</div>
-                  </div>
-                  <div onClick={() => this.ActivePeriod()} id="active" className="management-option">
-                    <div id="active-icon" className="management-icon"></div>
-                    <div className="management-text">Selecionar periodo activo</div>
+              {
+                this.props.userType == "admin" ?
+                <div className="management-menu">
+                  <div id="period-management-options" className="management-options">
+                    <div onClick={() => this.ShowPeriodsRecords()} id="visualize" className="management-option">
+                      <div id="visualize-icon" className="management-icon"></div>
+                      <div className="management-text">Periodos registrados</div>
+                    </div>
+                    <div onClick={() => this.AddPeriod()} id="add" className="management-option">
+                      <div id="add-icon" className="management-icon"></div>
+                      <div className="management-text">Registrar periodo</div>
+                    </div>
+                    <div onClick={() => this.ModifyPeriod()} id="modify" className="management-option">
+                      <div id="modify-icon" className="management-icon"></div>
+                      <div className="management-text">Modificar información</div>
+                    </div>
+                    <div onClick={() => this.DeletePeriod()} id="delete" className="management-option">
+                      <div id="delete-icon" className="management-icon"></div>
+                      <div className="management-text">Eliminar registros</div>
+                    </div>
+                    <div onClick={() => this.ActivePeriod()} id="active" className="management-option">
+                      <div id="active-icon" className="management-icon"></div>
+                      <div className="management-text">Selecionar periodo activo</div>
+                    </div>
                   </div>
                 </div>
-              </div>
+                :
+                undefined
+              }
+              {
+                this.props.userType == "teacher" ?
+                <div className="management-menu">
+                  <div id="teacher3-management-options" className="management-options">
+                    <div onClick={() => this.ShowPeriodsRecords()} id="visualize" className="management-option">
+                      <div id="visualize-icon" className="management-icon"></div>
+                      <div className="management-text">Periodos registrados</div>
+                    </div>
+                    <div onClick={() => this.AddPeriod()} id="add" className="management-option" style={{display: "none"}}>
+                      <div id="add-icon" className="management-icon"></div>
+                      <div className="management-text">Registrar periodo</div>
+                    </div>
+                    <div onClick={() => this.ModifyPeriod()} id="modify" className="management-option" style={{display: "none"}}>
+                      <div id="modify-icon" className="management-icon"></div>
+                      <div className="management-text">Modificar información</div>
+                    </div>
+                    <div onClick={() => this.DeletePeriod()} id="delete" className="management-option" style={{display: "none"}}>
+                      <div id="delete-icon" className="management-icon"></div>
+                      <div className="management-text">Eliminar registros</div>
+                    </div>
+                    <div onClick={() => this.ActivePeriod()} id="active" className="management-option" style={{display: "none"}}>
+                      <div id="active-icon" className="management-icon"></div>
+                      <div className="management-text">Selecionar periodo activo</div>
+                    </div>
+                  </div>
+                </div>
+                :
+                undefined
+              }
+
             </div>
         );
     }

@@ -57,26 +57,58 @@ export default class LevelMenu extends React.Component {
     render() {
         return(
             <div>
-              <div className="management-menu">
-                <div className="management-options">
-                  <div onClick={() => this.ShowLevelsRecords()} id="visualize" className="management-option">
-                    <div id="visualize-icon" className="management-icon"></div>
-                    <div className="management-text">Niveles registrados</div>
-                  </div>
-                  <div onClick={() => this.AddLevel()} id="add" className="management-option">
-                    <div id="add-icon" className="management-icon"></div>
-                    <div className="management-text">Registrar niveles</div>
-                  </div>
-                  <div onClick={() => this.ModifyLevel()} id="modify" className="management-option">
-                    <div id="modify-icon" className="management-icon"></div>
-                    <div className="management-text">Modificar información</div>
-                  </div>
-                  <div onClick={() => this.DeleteLevel()} id="delete" className="management-option">
-                    <div id="delete-icon" className="management-icon"></div>
-                    <div className="management-text">Eliminar registros</div>
+              {
+                this.props.userType == "admin" ?
+                <div className="management-menu">
+                  <div className="management-options">
+                    <div onClick={() => this.ShowLevelsRecords()} id="visualize" className="management-option">
+                      <div id="visualize-icon" className="management-icon"></div>
+                      <div className="management-text">Niveles registrados</div>
+                    </div>
+                    <div onClick={() => this.AddLevel()} id="add" className="management-option">
+                      <div id="add-icon" className="management-icon"></div>
+                      <div className="management-text">Registrar niveles</div>
+                    </div>
+                    <div onClick={() => this.ModifyLevel()} id="modify" className="management-option">
+                      <div id="modify-icon" className="management-icon"></div>
+                      <div className="management-text">Modificar información</div>
+                    </div>
+                    <div onClick={() => this.DeleteLevel()} id="delete" className="management-option">
+                      <div id="delete-icon" className="management-icon"></div>
+                      <div className="management-text">Eliminar registros</div>
+                    </div>
                   </div>
                 </div>
-              </div>
+                :
+                undefined
+              }
+
+              {
+                this.props.userType == "teacher" ?
+                <div className="management-menu">
+                  <div id="teacher2-management-options" className="management-options">
+                    <div onClick={() => this.ShowLevelsRecords()} id="visualize" className="management-option">
+                      <div id="visualize-icon" className="management-icon"></div>
+                      <div className="management-text">Niveles registrados</div>
+                    </div>
+                    <div onClick={() => this.AddLevel()} id="add" className="management-option" style={{display: "none"}}>
+                      <div id="add-icon" className="management-icon"></div>
+                      <div className="management-text">Registrar niveles</div>
+                    </div>
+                    <div onClick={() => this.ModifyLevel()} id="modify" className="management-option" style={{display: "none"}}>
+                      <div id="modify-icon" className="management-icon"></div>
+                      <div className="management-text">Modificar información</div>
+                    </div>
+                    <div onClick={() => this.DeleteLevel()} id="delete" className="management-option" style={{display: "none"}}>
+                      <div id="delete-icon" className="management-icon"></div>
+                      <div className="management-text">Eliminar registros</div>
+                    </div>
+                  </div>
+                </div>
+                :
+                undefined
+              }
+
             </div>
         );
     }

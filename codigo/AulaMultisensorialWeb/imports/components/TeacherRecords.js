@@ -188,12 +188,16 @@ export default class TeachersRecords extends React.Component {
       }, () => this.LoadAttributesInSelect())
     }
 
+    ChangeUserLevel(name, level_id){
+      this.props.ChangeUserLevel(name, level_id);
+    }
+
     render() {
         return(
             <div>
               {
                 this.props.showModifyForm ?
-                  <TeacherForm UpdateTable={this.UpdateTable.bind(this)} CloseModifyForm={() => this.CloseModifyForm()} teacherToModify={this.state.teacherToModify}/>
+                  <TeacherForm ChangeUserLevel={this.ChangeUserLevel.bind(this)} UpdateTable={this.UpdateTable.bind(this)} CloseModifyForm={() => this.CloseModifyForm()} teacherToModify={this.state.teacherToModify}/>
                 :
                 <div>
                   <div className="record-tools">
@@ -222,8 +226,8 @@ export default class TeachersRecords extends React.Component {
                                       modify={this.props.modify}
                                       teachers={teachers}
                                       key={teachers._id}
-                                      UpdateTable={this.UpdateTable.bind(this)}>
-
+                                      UpdateTable={this.UpdateTable.bind(this)}
+                                      user={this.props.user}>
                                     </Registry>;
                           })
                         }

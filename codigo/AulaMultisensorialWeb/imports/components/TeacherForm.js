@@ -294,8 +294,10 @@ export default class TeacherForm extends React.Component
 			name: name,
 			level_id: level_id,
 			speciality: speciality,
+			password: this.props.teacherToModify.password
 		};
 		teachersController.modifyTeacher(teacher);
+		this.props.ChangeUserLevel(name, level_id);
 		this.ClearAllFields();
 		this.ShowModifySuccessMenssage();
 		this.props.CloseModifyForm();

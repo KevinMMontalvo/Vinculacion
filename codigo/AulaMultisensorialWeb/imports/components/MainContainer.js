@@ -53,9 +53,9 @@ function Star(x, y, dx, dy, radius) {
     if(this.y + this.radius > innerHeight || this.y - this.radius < 0){
       this.dy = -this.dy;
     }
-      this.x += this.dx;
-      this.y += this.dy;
-      this.draw();
+    this.x += this.dx;
+    this.y += this.dy;
+    this.draw();
   }
 }
 
@@ -69,945 +69,960 @@ function initializeSpaceCanvas(){
 
 
 export default class MainContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          loginForm: true,
-          isLogged: false,
-          studentOption: false,
-          addStudentForm: false,
-          showStudentRecords: false,
-          teacherOption: false,
-          addTeacherForm: false,
-          showTeacherRecords: false,
-          levelOption: false,
-          addLevelForm: false,
-          showLevelRecords: false,
-          periodOption: false,
-          addPeriodForm: false,
-          showPeriodRecords: false,
-          isMenuMinimized: false,
-          showModifyForm: false,
-          activityOption: false,
-          activePeriod: false,
-          deleteStudent: false,
-          newActivePeriodForm: false,
-          visblePeriod: undefined,
+  constructor(props) {
+    super(props);
+    this.state = {
+      loginForm: true,
+      isLogged: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      isMenuMinimized: false,
+      showModifyForm: false,
+      activityOption: false,
+      activePeriod: false,
+      deleteStudent: false,
+      newActivePeriodForm: false,
+      visblePeriod: undefined,
+    }
+  }
+
+
+  StudentOption(){
+    this.setState({
+      loginForm: false,
+      studentOption: true,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      showModifyForm: false,
+      modifyStudent: false,
+      deleteStudent: false,
+      activityOption: false,
+      activePeriod: false,
+      newActivePeriodForm: false,
+    });
+    document.getElementById('main-title').innerHTML = "Estudiantes";
+    document.getElementsByClassName('main-icon')[0].id = "student-icon";
+  }
+  AddStudent(){
+    this.setState({
+      loginForm: false,
+      studentOption: true,
+      addStudentForm: true,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      showModifyForm: false,
+      modifyStudent: false,
+      deleteStudent: false,
+      activityOption: false,
+      activePeriod: false,
+      newActivePeriodForm: false,
+    });
+  }
+  ShowStudentRecords(){
+    this.setState({
+      loginForm: false,
+      studentOption: true,
+      addStudentForm: false,
+      showStudentRecords: true,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      showModifyForm: false,
+      modifyStudent: false,
+      deleteStudent: false,
+      activityOption: false,
+      activePeriod: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  ShowStudentModifyButton(){
+    this.setState({
+      loginForm: false,
+      studentOption: true,
+      addStudentForm: false,
+      showStudentRecords: true,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      modifyStudent: true,
+      showModifyForm: false,
+      modifyStudent: true,
+      deleteStudent: false,
+      activityOption: false,
+      activePeriod: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  ShowStudentDeleteButton(){
+    this.setState({
+      loginForm: false,
+      studentOption: true,
+      addStudentForm: false,
+      showStudentRecords: true,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      modifyStudent: true,
+      showModifyForm: false,
+      modifyStudent: false,
+      deleteStudent: true,
+      activityOption: false,
+      activePeriod: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  TeacherOption(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: true,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      showModifyForm: false,
+      modifyStudent: true,
+      activityOption: false,
+      activePeriod: false,
+      deleteStudent: false,
+      newActivePeriodForm: false,
+    });
+    document.getElementById('main-title').innerHTML = "Docentes";
+    document.getElementsByClassName('main-icon')[0].id = "teacher-icon";
+  }
+  AddTeacher(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: true,
+      addTeacherForm: true,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      showModifyForm: false,
+      modifyStudent: true,
+      activityOption: false,
+      activePeriod: false,
+      deleteStudent: false,
+      newActivePeriodForm: false,
+    });
+  }
+  ShowTeachersRecords(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: true,
+      addTeacherForm: false,
+      showTeacherRecords: true,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      showModifyForm: false,
+      modifyStudent: false,
+      deleteStudent: false,
+      activityOption: false,
+      activePeriod: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+
+  LevelOption(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: true,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      showModifyForm: false,
+      modifyStudent: true,
+      activityOption: false,
+      activePeriod: false,
+      deleteStudent: false,
+      newActivePeriodForm: false,
+    });
+    document.getElementById('main-title').innerHTML = "Niveles";
+    document.getElementsByClassName('main-icon')[0].id = "level-icon";
+  }
+
+  AddLevel(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: true,
+      addLevelForm: true,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      showModifyForm: false,
+      modifyStudent: true,
+      activityOption: false,
+      activePeriod: false,
+      deleteStudent: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  ShowLevelsRecords(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: true,
+      levelOption: true,
+      addLevelForm: false,
+      showLevelRecords: true,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      showModifyForm: false,
+      modifyStudent: false,
+      deleteStudent: false,
+      activityOption: false,
+      activePeriod: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  AddPeriod(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: true,
+      addPeriodForm: true,
+      showPeriodRecords: false,
+      showModifyForm: false,
+      modifyStudent: false,
+      activityOption: false,
+      activePeriod: false,
+      deleteStudent: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  ShowPeriodsRecords(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: true,
+      addPeriodForm: false,
+      showPeriodRecords: true,
+      showModifyForm: false,
+      modifyStudent: false,
+      deleteStudent: false,
+      activityOption: false,
+      activePeriod: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  ShowLevelModifyButton(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: true,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: true,
+      addLevelForm: false,
+      showLevelRecords: true,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      modifyStudent: false,
+      showModifyForm: false,
+      modifyStudent: true,
+      deleteStudent: false,
+      activityOption: false,
+      activePeriod: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  ShowPeriodModifyButton(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: true,
+      addPeriodForm: false,
+      showPeriodRecords: true,
+      modifyStudent: false,
+      showModifyForm: false,
+      modifyStudent: true,
+      deleteStudent: false,
+      activityOption: false,
+      activePeriod: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  ShowTeacherModifyButton(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: true,
+      addTeacherForm: false,
+      showTeacherRecords: true,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      modifyStudent: false,
+      showModifyForm: false,
+      modifyStudent: true,
+      deleteStudent: false,
+      activityOption: false,
+      activePeriod: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  ShowLevelDeleteButton(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: true,
+      addLevelForm: false,
+      showLevelRecords: true,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      modifyStudent: false,
+      showModifyForm: false,
+      modifyStudent: false,
+      deleteStudent: true,
+      activityOption: false,
+      activePeriod: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  ShowTeacherDeleteButton(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: true,
+      addTeacherForm: false,
+      showTeacherRecords: true,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      modifyStudent: false,
+      showModifyForm: false,
+      modifyStudent: false,
+      deleteStudent: true,
+      activityOption: false,
+      activePeriod: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  ShowPeriodDeleteButton(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: true,
+      addPeriodForm: false,
+      showPeriodRecords: true,
+      modifyStudent: false,
+      showModifyForm: false,
+      modifyStudent: false,
+      deleteStudent: true,
+      activityOption: false,
+      activePeriod: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  ShowStudentModifyForm(){
+    this.setState({
+      loginForm: false,
+      studentOption: true,
+      addStudentForm: false,
+      showStudentRecords: true,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      modifyStudent: true,
+      showModifyForm: true,
+      activityOption: false,
+      activePeriod: false,
+      deleteStudent: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  ShowLevelModifyForm(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: true,
+      addLevelForm: false,
+      showLevelRecords: true,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      modifyStudent: true,
+      showModifyForm: true,
+      activityOption: false,
+      activePeriod: false,
+      deleteStudent: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  ShowTeacherModifyForm(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: true,
+      addTeacherForm: false,
+      showTeacherRecords: true,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      modifyStudent: true,
+      showModifyForm: true,
+      activityOption: false,
+      activePeriod: false,
+      deleteStudent: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  ShowPeriodModifyForm(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: true,
+      addPeriodForm: false,
+      showPeriodRecords: true,
+      modifyStudent: true,
+      showModifyForm: true,
+      activityOption: false,
+      activePeriod: false,
+      deleteStudent: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  CloseStudentModifyForm(){
+    this.setState({
+      loginForm: false,
+      studentOption: true,
+      addStudentForm: false,
+      showStudentRecords: true,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      modifyStudent: true,
+      showModifyForm: false,
+      activityOption: false,
+      activePeriod: false,
+      deleteStudent: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  CloseLevelModifyForm(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: true,
+      addLevelForm: false,
+      showLevelRecords: true,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      modifyStudent: true,
+      showModifyForm: false,
+      activityOption: false,
+      activePeriod: false,
+      deleteStudent: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  CloseTeacherModifyForm(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: true,
+      addTeacherForm: false,
+      showTeacherRecords: true,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      modifyStudent: true,
+      showModifyForm: false,
+      activityOption: false,
+      activePeriod: false,
+      deleteStudent: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  ClosePeriodModifyForm(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: true,
+      addPeriodForm: false,
+      showPeriodRecords: true,
+      modifyStudent: true,
+      showModifyForm: false,
+      activityOption: false,
+      activePeriod: false,
+      deleteStudent: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  ShowActivitiesMenu(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      modifyStudent: false,
+      showModifyForm: false,
+      activityOption: true,
+      activePeriod: false,
+      deleteStudent: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  PeriodOption(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: true,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      showModifyForm: false,
+      modifyStudent: false,
+      activityOption: false,
+      activePeriod: false,
+      deleteStudent: false,
+      newActivePeriodForm: false,
+    });
+    document.getElementById('main-title').innerHTML = "Periodos";
+    document.getElementsByClassName('main-icon')[0].id = "period-icon";
+  }
+
+  ShowPeriodActiveButton(){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: true,
+      addPeriodForm: false,
+      showPeriodRecords: true,
+      showModifyForm: false,
+      modifyStudent: false,
+      activityOption: false,
+      activePeriod: true,
+      deleteStudent: false,
+      newActivePeriodForm: false,
+    });
+  }
+
+  ShowActiveNewPeriodForm(period){
+    this.setState({
+      loginForm: false,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: true,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      showModifyForm: false,
+      modifyStudent: false,
+      activityOption: false,
+      activePeriod: false,
+      deleteStudent: false,
+      newActivePeriodForm: true,
+      periodToActive: period,
+    });
+  }
+
+  MaximizeMenu(){
+    if(this.state.isMenuMinimized){
+      this.setState({
+        isMenuMinimized: !this.state.isMenuMinimized,
+      });
+      var container = document.getElementsByClassName('min-management-menu');
+      var menu = document.getElementsByClassName('min-management-options');
+      var options = document.getElementsByClassName('min-management-option');
+      var icons = document.getElementsByClassName('min-management-icon');
+      var texts = document.getElementsByClassName('min-management-text');
+      icons[0].id = 'visualize-icon';
+      icons[1].id = 'add-icon';
+      icons[2].id = 'modify-icon';
+      icons[3].id = 'delete-icon';
+      texts[0].id = 'vizualize-text';
+      texts[1].id = 'add-text';
+      texts[2].id = 'modify-text';
+      texts[3].id = 'delete-text';
+      if(icons.length > 4) {
+        icons[4].id = 'active-icon';
+        texts[4].id = 'active-text';
+      }
+      container[0].className = 'management-menu';
+      menu[0].className = 'management-options';
+      if(icons.length > 4) {
+        for (var i = 0; i < 5; i++) {
+          options[0].className = 'management-option';
+          icons[0].className = 'management-icon';
+          texts[0].className = 'management-text';
         }
+      }
+      else {
+        for (var i = 0; i < 4; i++) {
+          options[0].className = 'management-option';
+          icons[0].className = 'management-icon';
+          texts[0].className = 'management-text';
+        }
+      }
     }
+  }
+
+  MinimizeMenu(value){
+    this.setState({
+      isMenuMinimized: value,
+    });
+  }
 
 
-    StudentOption(){
-      this.setState({
-        loginForm: false,
-        studentOption: true,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        showModifyForm: false,
-        modifyStudent: false,
-        deleteStudent: false,
-        activityOption: false,
-        activePeriod: false,
-        newActivePeriodForm: false,
-      });
-      document.getElementById('main-title').innerHTML = "Estudiantes";
-      document.getElementsByClassName('main-icon')[0].id = "student-icon";
-    }
-    AddStudent(){
-      this.setState({
-        loginForm: false,
-        studentOption: true,
-        addStudentForm: true,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        showModifyForm: false,
-        modifyStudent: false,
-        deleteStudent: false,
-        activityOption: false,
-        activePeriod: false,
-        newActivePeriodForm: false,
-      });
-    }
-    ShowStudentRecords(){
-      this.setState({
-        loginForm: false,
-        studentOption: true,
-        addStudentForm: false,
-        showStudentRecords: true,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        showModifyForm: false,
-        modifyStudent: false,
-        deleteStudent: false,
-        activityOption: false,
-        activePeriod: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    ShowStudentModifyButton(){
-      this.setState({
-        loginForm: false,
-        studentOption: true,
-        addStudentForm: false,
-        showStudentRecords: true,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        modifyStudent: true,
-        showModifyForm: false,
-        modifyStudent: true,
-        deleteStudent: false,
-        activityOption: false,
-        activePeriod: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    ShowStudentDeleteButton(){
-      this.setState({
-        loginForm: false,
-        studentOption: true,
-        addStudentForm: false,
-        showStudentRecords: true,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        modifyStudent: true,
-        showModifyForm: false,
-        modifyStudent: false,
-        deleteStudent: true,
-        activityOption: false,
-        activePeriod: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    TeacherOption(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: true,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        showModifyForm: false,
-        modifyStudent: true,
-        activityOption: false,
-        activePeriod: false,
-        deleteStudent: false,
-        newActivePeriodForm: false,
-      });
-      document.getElementById('main-title').innerHTML = "Docentes";
-      document.getElementsByClassName('main-icon')[0].id = "teacher-icon";
-    }
-    AddTeacher(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: true,
-        addTeacherForm: true,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        showModifyForm: false,
-        modifyStudent: true,
-        activityOption: false,
-        activePeriod: false,
-        deleteStudent: false,
-        newActivePeriodForm: false,
-      });
-    }
-    ShowTeachersRecords(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: true,
-        addTeacherForm: false,
-        showTeacherRecords: true,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        showModifyForm: false,
-        modifyStudent: false,
-        deleteStudent: false,
-        activityOption: false,
-        activePeriod: false,
-        newActivePeriodForm: false,
-      });
-    }
+  InitializeSpaceCanvas(){
+    initializeSpaceCanvas();
+  }
 
 
-    LevelOption(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: true,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        showModifyForm: false,
-        modifyStudent: true,
-        activityOption: false,
-        activePeriod: false,
-        deleteStudent: false,
-        newActivePeriodForm: false,
-      });
-      document.getElementById('main-title').innerHTML = "Niveles";
-      document.getElementsByClassName('main-icon')[0].id = "level-icon";
-    }
+  componentDidMount(){
+    this.InitializeSpaceCanvas();
+    this.GetActualPeriod();
+  }
 
-    AddLevel(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: true,
-        addLevelForm: true,
-        showLevelRecords: false,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        showModifyForm: false,
-        modifyStudent: true,
-        activityOption: false,
-        activePeriod: false,
-        deleteStudent: false,
-        newActivePeriodForm: false,
-      });
-    }
+  SuccessfullLogin(user){
+    this.setState({
+      isLogged: true,
+      loginForm: false,
+      user: user,
+    });
+    document.getElementById('main-title').innerHTML = "Bienvenido-a";
+    document.getElementsByClassName('main-icon')[0].id = "home-icon";
+  }
 
-    ShowLevelsRecords(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: true,
-        levelOption: true,
-        addLevelForm: false,
-        showLevelRecords: true,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        showModifyForm: false,
-        modifyStudent: false,
-        deleteStudent: false,
-        activityOption: false,
-        activePeriod: false,
-        newActivePeriodForm: false,
-      });
-    }
+  Logout(){
+    this.setState({
+      isLogged: false,
+      loginForm: true,
+      user: undefined,
+      studentOption: false,
+      addStudentForm: false,
+      showStudentRecords: false,
+      teacherOption: false,
+      addTeacherForm: false,
+      showTeacherRecords: false,
+      levelOption: false,
+      addLevelForm: false,
+      showLevelRecords: false,
+      periodOption: false,
+      addPeriodForm: false,
+      showPeriodRecords: false,
+      modifyStudent: false,
+      showModifyForm: false,
+      activityOption: false,
+      activePeriod: false,
+      deleteStudent: false,
+      newActivePeriodForm: false,
+    });
+    document.getElementById('main-title').innerHTML = "Inicio de sesión";
+    document.getElementsByClassName('main-icon')[0].id = "home-icon";
+  }
 
-    AddPeriod(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: true,
-        addPeriodForm: true,
-        showPeriodRecords: false,
-        showModifyForm: false,
-        modifyStudent: false,
-        activityOption: false,
-        activePeriod: false,
-        deleteStudent: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    ShowPeriodsRecords(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: true,
-        addPeriodForm: false,
-        showPeriodRecords: true,
-        showModifyForm: false,
-        modifyStudent: false,
-        deleteStudent: false,
-        activityOption: false,
-        activePeriod: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    ShowLevelModifyButton(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: true,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: true,
-        addLevelForm: false,
-        showLevelRecords: true,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        modifyStudent: false,
-        showModifyForm: false,
-        modifyStudent: true,
-        deleteStudent: false,
-        activityOption: false,
-        activePeriod: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    ShowPeriodModifyButton(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: true,
-        addPeriodForm: false,
-        showPeriodRecords: true,
-        modifyStudent: false,
-        showModifyForm: false,
-        modifyStudent: true,
-        deleteStudent: false,
-        activityOption: false,
-        activePeriod: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    ShowTeacherModifyButton(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: true,
-        addTeacherForm: false,
-        showTeacherRecords: true,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        modifyStudent: false,
-        showModifyForm: false,
-        modifyStudent: true,
-        deleteStudent: false,
-        activityOption: false,
-        activePeriod: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    ShowLevelDeleteButton(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: true,
-        addLevelForm: false,
-        showLevelRecords: true,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        modifyStudent: false,
-        showModifyForm: false,
-        modifyStudent: false,
-        deleteStudent: true,
-        activityOption: false,
-        activePeriod: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    ShowTeacherDeleteButton(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: true,
-        addTeacherForm: false,
-        showTeacherRecords: true,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        modifyStudent: false,
-        showModifyForm: false,
-        modifyStudent: false,
-        deleteStudent: true,
-        activityOption: false,
-        activePeriod: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    ShowPeriodDeleteButton(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: true,
-        addPeriodForm: false,
-        showPeriodRecords: true,
-        modifyStudent: false,
-        showModifyForm: false,
-        modifyStudent: false,
-        deleteStudent: true,
-        activityOption: false,
-        activePeriod: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    ShowStudentModifyForm(){
-      this.setState({
-        loginForm: false,
-        studentOption: true,
-        addStudentForm: false,
-        showStudentRecords: true,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        modifyStudent: true,
-        showModifyForm: true,
-        activityOption: false,
-        activePeriod: false,
-        deleteStudent: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    ShowLevelModifyForm(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: true,
-        addLevelForm: false,
-        showLevelRecords: true,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        modifyStudent: true,
-        showModifyForm: true,
-        activityOption: false,
-        activePeriod: false,
-        deleteStudent: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    ShowTeacherModifyForm(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: true,
-        addTeacherForm: false,
-        showTeacherRecords: true,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        modifyStudent: true,
-        showModifyForm: true,
-        activityOption: false,
-        activePeriod: false,
-        deleteStudent: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    ShowPeriodModifyForm(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: true,
-        addPeriodForm: false,
-        showPeriodRecords: true,
-        modifyStudent: true,
-        showModifyForm: true,
-        activityOption: false,
-        activePeriod: false,
-        deleteStudent: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    CloseStudentModifyForm(){
-      this.setState({
-        loginForm: false,
-        studentOption: true,
-        addStudentForm: false,
-        showStudentRecords: true,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        modifyStudent: true,
-        showModifyForm: false,
-        activityOption: false,
-        activePeriod: false,
-        deleteStudent: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    CloseLevelModifyForm(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: true,
-        addLevelForm: false,
-        showLevelRecords: true,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        modifyStudent: true,
-        showModifyForm: false,
-        activityOption: false,
-        activePeriod: false,
-        deleteStudent: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    CloseTeacherModifyForm(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: true,
-        addTeacherForm: false,
-        showTeacherRecords: true,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        modifyStudent: true,
-        showModifyForm: false,
-        activityOption: false,
-        activePeriod: false,
-        deleteStudent: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    ClosePeriodModifyForm(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: true,
-        addPeriodForm: false,
-        showPeriodRecords: true,
-        modifyStudent: true,
-        showModifyForm: false,
-        activityOption: false,
-        activePeriod: false,
-        deleteStudent: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    ShowActivitiesMenu(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        modifyStudent: false,
-        showModifyForm: false,
-        activityOption: true,
-        activePeriod: false,
-        deleteStudent: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    PeriodOption(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: true,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        showModifyForm: false,
-        modifyStudent: false,
-        activityOption: false,
-        activePeriod: false,
-        deleteStudent: false,
-        newActivePeriodForm: false,
-      });
-      document.getElementById('main-title').innerHTML = "Periodos";
-      document.getElementsByClassName('main-icon')[0].id = "period-icon";
-    }
-
-    ShowPeriodActiveButton(){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: true,
-        addPeriodForm: false,
-        showPeriodRecords: true,
-        showModifyForm: false,
-        modifyStudent: false,
-        activityOption: false,
-        activePeriod: true,
-        deleteStudent: false,
-        newActivePeriodForm: false,
-      });
-    }
-
-    ShowActiveNewPeriodForm(period){
-      this.setState({
-        loginForm: false,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: true,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        showModifyForm: false,
-        modifyStudent: false,
-        activityOption: false,
-        activePeriod: false,
-        deleteStudent: false,
-        newActivePeriodForm: true,
-        periodToActive: period,
-      });
-    }
-
-    MaximizeMenu(){
-      if(this.state.isMenuMinimized){
+  GetActualPeriod(){
+    var periodsString = periodsController.getPeriods();
+    var periods = JSON.parse(periodsString);
+    for (var i = 0; i < periods.length; i++) {
+      if(periods[i].is_visible){
         this.setState({
-          isMenuMinimized: !this.state.isMenuMinimized,
-        });
-        var container = document.getElementsByClassName('min-management-menu');
-        var menu = document.getElementsByClassName('min-management-options');
-        var options = document.getElementsByClassName('min-management-option');
-        var icons = document.getElementsByClassName('min-management-icon');
-        var texts = document.getElementsByClassName('min-management-text');
-        icons[0].id = 'visualize-icon';
-        icons[1].id = 'add-icon';
-        icons[2].id = 'modify-icon';
-        icons[3].id = 'delete-icon';
-        texts[0].id = 'vizualize-text';
-        texts[1].id = 'add-text';
-        texts[2].id = 'modify-text';
-        texts[3].id = 'delete-text';
-        if(icons.length > 4) {
-          icons[4].id = 'active-icon';
-          texts[4].id = 'active-text';
-        }
-        container[0].className = 'management-menu';
-        menu[0].className = 'management-options';
-        if(icons.length > 4) {
-          for (var i = 0; i < 5; i++) {
-            options[0].className = 'management-option';
-            icons[0].className = 'management-icon';
-            texts[0].className = 'management-text';
-          }
-        }
-        else {
-          for (var i = 0; i < 4; i++) {
-            options[0].className = 'management-option';
-            icons[0].className = 'management-icon';
-            texts[0].className = 'management-text';
-          }
-        }
+          visblePeriod: periods[i],
+        })
       }
     }
+  }
 
-    MinimizeMenu(value){
-      this.setState({
-        isMenuMinimized: value,
-      });
+  ChangeUserLevel(name, level_id){
+    let user = {
+      _id: this.state.user._id,
+      name: name,
+      type: "teacher",
+      level: level_id
     }
+    this.setState({
+      user: user,
+    });
+  }
 
 
-    InitializeSpaceCanvas(){
-      initializeSpaceCanvas();
-    }
+  render() {
+    return(
+      <div>
+        <canvas id="space-canvas">
 
-
-    componentDidMount(){
-      this.InitializeSpaceCanvas();
-      this.GetActualPeriod();
-    }
-
-    SuccessfullLogin(user){
-      this.setState({
-        isLogged: true,
-        loginForm: false,
-        user: user,
-      });
-      document.getElementById('main-title').innerHTML = "Bienvenido-a";
-      document.getElementsByClassName('main-icon')[0].id = "home-icon";
-    }
-
-    Logout(){
-      this.setState({
-        isLogged: false,
-        loginForm: true,
-        user: undefined,
-        studentOption: false,
-        addStudentForm: false,
-        showStudentRecords: false,
-        teacherOption: false,
-        addTeacherForm: false,
-        showTeacherRecords: false,
-        levelOption: false,
-        addLevelForm: false,
-        showLevelRecords: false,
-        periodOption: false,
-        addPeriodForm: false,
-        showPeriodRecords: false,
-        modifyStudent: false,
-        showModifyForm: false,
-        activityOption: false,
-        activePeriod: false,
-        deleteStudent: false,
-        newActivePeriodForm: false,
-      });
-      document.getElementById('main-title').innerHTML = "Inicio de sesión";
-      document.getElementsByClassName('main-icon')[0].id = "home-icon";
-    }
-
-    GetActualPeriod(){
-      var periodsString = periodsController.getPeriods();
-      var periods = JSON.parse(periodsString);
-      for (var i = 0; i < periods.length; i++) {
-        if(periods[i].is_visible){
-          this.setState({
-            visblePeriod: periods[i],
-          })
-        }
-      }
-    }
-
-    render() {
-        return(
-            <div>
-              <canvas id="space-canvas">
-
-              </canvas>
-              <SideMenu
-                Logout={this.Logout.bind(this)}
-                user={this.state.user}
-                isLogged={this.state.isLogged}
-                ShowActivitiesMenu={this.ShowActivitiesMenu.bind(this)}
-                MaximizeMenu={() => this.MaximizeMenu()}
-                PeriodOption={this.PeriodOption.bind(this)}
-                LevelOption={this.LevelOption.bind(this)}
-                TeacherOption={this.TeacherOption.bind(this)}
-                StudentOption={this.StudentOption.bind(this)}/>
-              <div className="main-container">
-                <div id="main-info" className="main-info">
-                  <div id="login-icon" className="main-icon"></div>
-                  <div id="main-title" className="main-title">Inicio sesión</div>
-                </div>
-                {
-                  this.state.studentOption ?
-                  <div>
-                    <StudentMenu
-                      ShowDeleteButton={() => this.ShowStudentDeleteButton()}
-                      ShowModifyButton={() => this.ShowStudentModifyButton()}
-                      MinimizeMenu={this.MinimizeMenu.bind(this)}
-                      isMenuMinimized={this.state.isMenuMinimized}
-                      ShowStudentRecords={this.ShowStudentRecords.bind(this)}
-                      AddStudent={this.AddStudent.bind(this)}/>
-                    {
-                      this.state.addStudentForm ?
-                      <StudentForm/>
-                      :
-                      undefined
-                    }
-                    {
-                      this.state.showStudentRecords ?
-                      <StudentRecords
-                        CloseModifyForm={() => this.CloseStudentModifyForm()}
-                        delete={this.state.deleteStudent}
-                        ShowModifyForm={this.ShowStudentModifyForm.bind(this)}
-                        showModifyForm={this.state.showModifyForm}
-                        modify={this.state.modifyStudent} />
+        </canvas>
+        <SideMenu
+          Logout={this.Logout.bind(this)}
+          user={this.state.user}
+          isLogged={this.state.isLogged}
+          ShowActivitiesMenu={this.ShowActivitiesMenu.bind(this)}
+          MaximizeMenu={() => this.MaximizeMenu()}
+          PeriodOption={this.PeriodOption.bind(this)}
+          LevelOption={this.LevelOption.bind(this)}
+          TeacherOption={this.TeacherOption.bind(this)}
+          StudentOption={this.StudentOption.bind(this)}/>
+          <div className="main-container">
+            <div id="main-info" className="main-info">
+              <div id="login-icon" className="main-icon"></div>
+              <div id="main-title" className="main-title">Inicio sesión</div>
+            </div>
+            {
+              this.state.studentOption ?
+              <div>
+                <StudentMenu
+                  ShowDeleteButton={() => this.ShowStudentDeleteButton()}
+                  ShowModifyButton={() => this.ShowStudentModifyButton()}
+                  MinimizeMenu={this.MinimizeMenu.bind(this)}
+                  isMenuMinimized={this.state.isMenuMinimized}
+                  ShowStudentRecords={this.ShowStudentRecords.bind(this)}
+                  AddStudent={this.AddStudent.bind(this)}
+                  userType={this.state.user.type}/>
+                  {
+                    this.state.addStudentForm ?
+                    <StudentForm/>
+                    :
+                    undefined
+                  }
+                  {
+                    this.state.showStudentRecords ?
+                    <StudentRecords
+                      CloseModifyForm={() => this.CloseStudentModifyForm()}
+                      delete={this.state.deleteStudent}
+                      ShowModifyForm={this.ShowStudentModifyForm.bind(this)}
+                      showModifyForm={this.state.showModifyForm}
+                      modify={this.state.modifyStudent}
+                      user={this.state.user}/>
                       :
                       undefined
                     }
@@ -1025,125 +1040,130 @@ export default class MainContainer extends React.Component {
                       MinimizeMenu={this.MinimizeMenu.bind(this)}
                       isMenuMinimized={this.state.isMenuMinimized}
                       ShowTeachersRecords={this.ShowTeachersRecords.bind(this)}
-                      AddTeacher={this.AddTeacher.bind(this)}/>
-                    {
-                      this.state.addTeacherForm ?
-                      <TeacherForm/>
-                      :
-                      undefined
-                    }
-                    {
-                      this.state.showTeacherRecords ?
-                      <TeacherRecords
-                        CloseModifyForm={() => this.CloseTeacherModifyForm()}
-                        delete={this.state.deleteStudent}
-                        ShowModifyForm={this.ShowTeacherModifyForm.bind(this)}
-                        showModifyForm={this.state.showModifyForm}
-                        modify={this.state.modifyStudent} />
-                      :
-                      undefined
-                    }
-                  </div>
+                      AddTeacher={this.AddTeacher.bind(this)}
+                      userType={this.state.user.type}/>
+                      {
+                        this.state.addTeacherForm ?
+                        <TeacherForm/>
+                        :
+                        undefined
+                      }
+                      {
+                        this.state.showTeacherRecords ?
+                        <TeacherRecords
+                          CloseModifyForm={() => this.CloseTeacherModifyForm()}
+                          delete={this.state.deleteStudent}
+                          ShowModifyForm={this.ShowTeacherModifyForm.bind(this)}
+                          showModifyForm={this.state.showModifyForm}
+                          modify={this.state.modifyStudent}
+                          ChangeUserLevel={this.ChangeUserLevel.bind(this)}
+                          user={this.state.user}/>
+                          :
+                          undefined
+                        }
+                      </div>
 
-                  :
-                  undefined
-                }
-                {
-                  this.state.levelOption ?
-                  <div>
-                    <LevelMenu
-                      ShowDeleteButton={() => this.ShowLevelDeleteButton()}
-                      ShowModifyButton={() => this.ShowLevelModifyButton()}
-                      MinimizeMenu={this.MinimizeMenu.bind(this)}
-                      isMenuMinimized={this.state.isMenuMinimized}
-                      ShowLevelsRecords={this.ShowLevelsRecords.bind(this)}
-                      AddLevel={this.AddLevel.bind(this)}/>
-                    {
-                      this.state.addLevelForm ?
-                      <LevelForm/>
                       :
                       undefined
                     }
                     {
-                      this.state.showLevelRecords ?
-                      <LevelRecords CloseModifyForm={() => this.CloseLevelModifyForm()}
-                        delete={this.state.deleteStudent}
-                        ShowModifyForm={this.ShowLevelModifyForm.bind(this)}
-                        showModifyForm={this.state.showModifyForm}
-                        modify={this.state.modifyStudent} />
-                      :
-                      undefined
-                    }
-                  </div>
+                      this.state.levelOption ?
+                      <div>
+                        <LevelMenu
+                          ShowDeleteButton={() => this.ShowLevelDeleteButton()}
+                          ShowModifyButton={() => this.ShowLevelModifyButton()}
+                          MinimizeMenu={this.MinimizeMenu.bind(this)}
+                          isMenuMinimized={this.state.isMenuMinimized}
+                          ShowLevelsRecords={this.ShowLevelsRecords.bind(this)}
+                          AddLevel={this.AddLevel.bind(this)}
+                          userType={this.state.user.type}/>
+                          {
+                            this.state.addLevelForm ?
+                            <LevelForm/>
+                            :
+                            undefined
+                          }
+                          {
+                            this.state.showLevelRecords ?
+                            <LevelRecords CloseModifyForm={() => this.CloseLevelModifyForm()}
+                              delete={this.state.deleteStudent}
+                              ShowModifyForm={this.ShowLevelModifyForm.bind(this)}
+                              showModifyForm={this.state.showModifyForm}
+                              modify={this.state.modifyStudent} />
+                              :
+                              undefined
+                            }
+                          </div>
 
-                  :
-                  undefined
-                }
-                {
-                  this.state.periodOption ?
-                  <div>
-                    <PeriodMenu
-                      ShowDeleteButton={() => this.ShowPeriodDeleteButton()}
-                      ShowModifyButton={() => this.ShowPeriodModifyButton()}
-                      MinimizeMenu={this.MinimizeMenu.bind(this)}
-                      isMenuMinimized={this.state.isMenuMinimized}
-                      ShowPeriodsRecords={this.ShowPeriodsRecords.bind(this)}
-                      AddPeriod={this.AddPeriod.bind(this)}
-                      ShowPeriodActiveButton={this.ShowPeriodActiveButton.bind(this)}/>
-                    {
-                      this.state.addPeriodForm ?
-                      <PeriodForm/>
-                      :
-                      undefined
-                    }
-                    {
-                      this.state.showPeriodRecords ?
-                      <PeriodRecords
-                        CloseModifyForm={() => this.ClosePeriodModifyForm()}
-                        delete={this.state.deleteStudent}
-                        ShowModifyForm={this.ShowPeriodModifyForm.bind(this)}
-                        showModifyForm={this.state.showModifyForm}
-                        modify={this.state.modifyStudent}
-                        active={this.state.activePeriod}
-                        ShowActiveNewPeriodForm={this.ShowActiveNewPeriodForm.bind(this)}/>
-                      :
-                      undefined
-                    }
-                    {
-                      this.state.newActivePeriodForm ?
-                      <ActivePeriodForm GetActualPeriod={this.GetActualPeriod.bind(this)} PeriodOption={this.PeriodOption.bind(this)} periodToActive={this.state.periodToActive}/>
-                      :
-                      undefined
-                    }
-                  </div>
+                          :
+                          undefined
+                        }
+                        {
+                          this.state.periodOption ?
+                          <div>
+                            <PeriodMenu
+                              ShowDeleteButton={() => this.ShowPeriodDeleteButton()}
+                              ShowModifyButton={() => this.ShowPeriodModifyButton()}
+                              MinimizeMenu={this.MinimizeMenu.bind(this)}
+                              isMenuMinimized={this.state.isMenuMinimized}
+                              ShowPeriodsRecords={this.ShowPeriodsRecords.bind(this)}
+                              AddPeriod={this.AddPeriod.bind(this)}
+                              ShowPeriodActiveButton={this.ShowPeriodActiveButton.bind(this)}
+                              userType={this.state.user.type}/>
+                              {
+                                this.state.addPeriodForm ?
+                                <PeriodForm/>
+                                :
+                                undefined
+                              }
+                              {
+                                this.state.showPeriodRecords ?
+                                <PeriodRecords
+                                  CloseModifyForm={() => this.ClosePeriodModifyForm()}
+                                  delete={this.state.deleteStudent}
+                                  ShowModifyForm={this.ShowPeriodModifyForm.bind(this)}
+                                  showModifyForm={this.state.showModifyForm}
+                                  modify={this.state.modifyStudent}
+                                  active={this.state.activePeriod}
+                                  ShowActiveNewPeriodForm={this.ShowActiveNewPeriodForm.bind(this)}/>
+                                  :
+                                  undefined
+                                }
+                                {
+                                  this.state.newActivePeriodForm ?
+                                  <ActivePeriodForm GetActualPeriod={this.GetActualPeriod.bind(this)} PeriodOption={this.PeriodOption.bind(this)} periodToActive={this.state.periodToActive}/>
+                                  :
+                                  undefined
+                                }
+                              </div>
 
-                  :
-                  undefined
-                }
-                {
-                  this.state.activityOption ?
-                  <div>
-                    <ActivitiesMenu/>
-                  </div>
-                  :
-                  undefined
-                }
-                {
-                  this.state.loginForm ?
-                    <LoginForm SuccessfullLogin={this.SuccessfullLogin.bind(this)}/>
-                  :
-                  undefined
-                }
-                {this.state.isLogged && this.state.visblePeriod != undefined ?
-                    <div className="actual-period-container">
-                      <b>Periodo actual:</b>
-                      <p>{this.state.visblePeriod.name}</p>
-                    </div>
-                  :
-                    undefined
-                }
-              </div>
-            </div>
-        );
-    }
-}
+                              :
+                              undefined
+                            }
+                            {
+                              this.state.activityOption ?
+                              <div>
+                                <ActivitiesMenu/>
+                              </div>
+                              :
+                              undefined
+                            }
+                            {
+                              this.state.loginForm ?
+                              <LoginForm SuccessfullLogin={this.SuccessfullLogin.bind(this)}/>
+                              :
+                              undefined
+                            }
+                            {this.state.isLogged && this.state.visblePeriod != undefined ?
+                              <div className="actual-period-container">
+                                <b>Periodo actual:</b>
+                                <p>{this.state.visblePeriod.name}</p>
+                              </div>
+                              :
+                              undefined
+                            }
+                          </div>
+                        </div>
+                      );
+                    }
+                  }
