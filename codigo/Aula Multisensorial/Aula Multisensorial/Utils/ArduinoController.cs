@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Ports;
 using System.Threading;
 
@@ -12,6 +13,7 @@ namespace Aula_Multisensorial.Utils
         public static readonly int MATRIX_ARDUINO = 0;
         public static readonly int RIGHT_HAND_ARDUINO = 1;
         public static readonly int LEFT_HAND_ARDUINO = 2;
+        public static readonly int HEART_ARDUINO = 3;
 
         private SerialPort[] serialPorts;
 
@@ -45,11 +47,14 @@ namespace Aula_Multisensorial.Utils
                     continue;
                 }
                 temporarySerialPort.Write("ID");
-                Thread.Sleep(40);
+                Thread.Sleep(3000);
+                temporarySerialPort.Write("ID");
+                Thread.Sleep(100);
                 string id = temporarySerialPort.ReadLine();
 
                 if (int.Parse(id) == arduinoIndex)
                 {
+                    temporarySerialPort.DiscardInBuffer();
                     serialPorts[arduinoIndex] = temporarySerialPort;
                     return true;
                 }
@@ -73,7 +78,18 @@ namespace Aula_Multisensorial.Utils
 
         public string GetMessage(int arduinoIndex)
         {
-            return serialPorts[arduinoIndex].ReadLine();
+            if (serialPorts[arduinoIndex].IsOpen)
+            {
+                try
+                {
+                    return serialPorts[arduinoIndex].ReadLine();
+                }
+                catch (IOException)
+                {
+                    return null;
+                }
+            }
+            return null;
         }
 
         public List<byte> GetMessageInBytes(int arduinoIndex)
@@ -97,6 +113,15 @@ namespace Aula_Multisensorial.Utils
                 serialPorts[arduinoIndex].Close();
                 serialPorts[arduinoIndex].Dispose();
                 serialPorts[arduinoIndex] = null;
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsPortOpen(int arduinoIndex)
+        {
+            if (serialPorts[arduinoIndex] != null && serialPorts[arduinoIndex].IsOpen)
+            {
                 return true;
             }
             return false;

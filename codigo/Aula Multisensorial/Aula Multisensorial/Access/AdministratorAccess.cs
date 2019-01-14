@@ -41,8 +41,8 @@ namespace Aula_Multisensorial.Access
         /// <summary>
         /// Inserta un administrador a la coleccion
         /// </summary>
-        /// <param name="administrator">Diccionario con los datos del docente a ser insertado</param>
-        /// <returns>Reterona verdadero si la insercio fue exitosa</returns>
+        /// <param name="administrator">Diccionario con los datos del administrador a ser insertado</param>
+        /// <returns>Reterona verdadero si la insercion fue exitosa</returns>
         public bool InsertAdministrator(Dictionary<string, object> administrator)
         {
             BsonDocument document = new BsonDocument(administrator);

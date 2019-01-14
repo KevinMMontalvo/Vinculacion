@@ -17,11 +17,15 @@ namespace Aula_Multisensorial.Gloves
 
         private void Main_Load(object sender, EventArgs e)
         {
-            bool connectionSuccessful = ArduinoController.GetInstance().StartConnection(ArduinoController.RIGHT_HAND_ARDUINO);
+            bool connectionSuccessful = ConnectGlobe(ArduinoController.RIGHT_HAND_ARDUINO);
             if (!connectionSuccessful)
             {
-                MessageBox.Show("No se pudo conectar con el guante derecho");
-                Close();
+                Shown += new EventHandler(new ControlEvent(ShownFormEvent)); // Cierra el formulario automaticamente
+                return;
+            }
+            else
+            {
+                AddClickEvents();
             }
 
             /*connectionSuccessful = ArduinoController.GetInstance().StartConnection(ArduinoController.LEFT_HAND_ARDUINO);
@@ -30,17 +34,7 @@ namespace Aula_Multisensorial.Gloves
                 MessageBox.Show("No se pudo conectar con el guante izquierdo");
                 Close();
             }*/
-            AddClickEvents();
-        }
 
-        private void AddClickEvents()
-        {
-            for (int i = 1; i <= 10; i++)
-            {
-                Controls["label" + i].Click += new EventHandler(new ControlEvent(OnClickLabelEvent));
-                Controls["label" + i].MouseHover += new EventHandler(new ControlEvent(HoverLabelEvent));
-                Controls["label" + i].MouseLeave += new EventHandler(new ControlEvent(MouseLeaveEvent));
-            }
         }
 
         private void OnClickLabelEvent(object sender, EventArgs e)
@@ -55,109 +49,43 @@ namespace Aula_Multisensorial.Gloves
 
             if (label.Name.Equals("label1"))
             {
-                ArduinoController.GetInstance().SendMessage(ArduinoController.LEFT_HAND_ARDUINO, "I1");
-                Console.WriteLine(ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO));
-                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
-                {
-                    //todo accion cuando se haya movido el dedo correcto
-                }
+                DoFingerActivity(ArduinoController.LEFT_HAND_ARDUINO, "I1");
             }
             else if (label.Name.Equals("label2"))
             {
-                ArduinoController.GetInstance().SendMessage(ArduinoController.LEFT_HAND_ARDUINO, "I2");
-                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
-                {
-                    //todo accion cuando se haya movido el dedo correcto
-                }
+                DoFingerActivity(ArduinoController.LEFT_HAND_ARDUINO, "I2");
             }
             else if (label.Name.Equals("label3"))
             {
-                ArduinoController.GetInstance().SendMessage(ArduinoController.LEFT_HAND_ARDUINO, "I3");
-                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
-                {
-                    //todo accion cuando se haya movido el dedo correcto
-                }
+                DoFingerActivity(ArduinoController.LEFT_HAND_ARDUINO, "I3");
             }
             else if (label.Name.Equals("label4"))
             {
-                ArduinoController.GetInstance().SendMessage(ArduinoController.LEFT_HAND_ARDUINO, "I4");
-                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
-                {
-                    //todo accion cuando se haya movido el dedo correcto
-                }
+                DoFingerActivity(ArduinoController.LEFT_HAND_ARDUINO, "I4");
             }
             else if (label.Name.Equals("label5"))
             {
-                ArduinoController.GetInstance().SendMessage(ArduinoController.LEFT_HAND_ARDUINO, "I5");
-                if (ArduinoController.GetInstance().GetMessage(ArduinoController.LEFT_HAND_ARDUINO).Equals("BIEN"))
-                {
-                    //todo accion cuando se haya movido el dedo correcto
-                }
+                DoFingerActivity(ArduinoController.LEFT_HAND_ARDUINO, "I5");
             }
             else if (label.Name.Equals("label6"))
             {
-                ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D5");
-                string recivedMessage = ArduinoController.GetInstance().GetMessage(ArduinoController.RIGHT_HAND_ARDUINO);
-                if (recivedMessage.ToString().Equals("BIEN\r"))
-                {
-                    Console.WriteLine("BIEN");
-                }
-                else
-                {
-                    Console.WriteLine("MAL");
-                }
+                DoFingerActivity(ArduinoController.RIGHT_HAND_ARDUINO, "D5");
             }
             else if (label.Name.Equals("label7"))
             {
-                ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D4");
-                string recivedMessage = ArduinoController.GetInstance().GetMessage(ArduinoController.RIGHT_HAND_ARDUINO);
-                if (recivedMessage.ToString().Equals("BIEN\r"))
-                {
-                    Console.WriteLine("BIEN");
-                }
-                else
-                {
-                    Console.WriteLine("MAL");
-                }
+                DoFingerActivity(ArduinoController.RIGHT_HAND_ARDUINO, "D4");
             }
             else if (label.Name.Equals("label8"))
             {
-                ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D3");
-                string recivedMessage = ArduinoController.GetInstance().GetMessage(ArduinoController.RIGHT_HAND_ARDUINO);
-                if (recivedMessage.ToString().Equals("BIEN\r"))
-                {
-                    Console.WriteLine("BIEN");
-                }
-                else
-                {
-                    Console.WriteLine("MAL");
-                }
+                DoFingerActivity(ArduinoController.RIGHT_HAND_ARDUINO, "D3");
             }
             else if (label.Name.Equals("label9"))
             {
-                ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D2");
-                string recivedMessage = ArduinoController.GetInstance().GetMessage(ArduinoController.RIGHT_HAND_ARDUINO);
-                if (recivedMessage.ToString().Equals("BIEN\r"))
-                {
-                    Console.WriteLine("BIEN");
-                }
-                else
-                {
-                    Console.WriteLine("MAL");
-                }
+                DoFingerActivity(ArduinoController.RIGHT_HAND_ARDUINO, "D2");
             }
             else if (label.Name.Equals("label10"))
             {
-                ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "D1");
-                string recivedMessage = ArduinoController.GetInstance().GetMessage(ArduinoController.RIGHT_HAND_ARDUINO);
-                if (recivedMessage.ToString().Equals("BIEN\r"))
-                {
-                    Console.WriteLine("BIEN");
-                }
-                else
-                {
-                    Console.WriteLine("MAL");
-                }
+                DoFingerActivity(ArduinoController.RIGHT_HAND_ARDUINO, "D1");
             }
         }
 
@@ -176,10 +104,23 @@ namespace Aula_Multisensorial.Gloves
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            bool correctOperation = true;
             if (buttonStart.Text.Equals("Iniciar"))
             {
-                buttonStart.Text = "Terminar";
-                buttonExit.Enabled = false;
+                if (!ArduinoController.GetInstance().IsPortOpen(ArduinoController.RIGHT_HAND_ARDUINO) && !ConnectGlobe(ArduinoController.RIGHT_HAND_ARDUINO))
+                {
+                    correctOperation = false;
+                }
+                /*if (!ArduinoController.GetInstance().IsPortOpen(ArduinoController.LEFT_HAND_ARDUINO) && !ConnectGlobe(ArduinoController.LEFT_HAND_ARDUINO))
+                {
+                    correctOperation = false;
+                }*/
+
+                if (correctOperation)
+                {
+                    buttonStart.Text = "Terminar";
+                    buttonExit.Enabled = false;
+                }
             }
             else if (buttonStart.Text.Equals("Terminar"))
             {
@@ -191,6 +132,67 @@ namespace Aula_Multisensorial.Gloves
         private void buttonExit_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Dispose();
+        }
+
+        /// <summary>
+        /// Este metodo es el evento de cierre del formulario cuando no pasa la validacion de inicio
+        /// </summary>
+        private void ShownFormEvent(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void AddClickEvents()
+        {
+            for (int i = 1; i <= 10; i++)
+            {
+                Controls["label" + i].Click += new EventHandler(new ControlEvent(OnClickLabelEvent));
+                Controls["label" + i].MouseHover += new EventHandler(new ControlEvent(HoverLabelEvent));
+                Controls["label" + i].MouseLeave += new EventHandler(new ControlEvent(MouseLeaveEvent));
+            }
+        }
+
+        private void DoFingerActivity(int arduinoIndex, string message)
+        {
+            ArduinoController.GetInstance().SendMessage(arduinoIndex, message);
+            string recivedMessage = ArduinoController.GetInstance().GetMessage(ArduinoController.RIGHT_HAND_ARDUINO);
+            if (recivedMessage == null)
+            {
+                MessageBox.Show("Ha ocurrido un problema de conexion con el guante, revise que los guantes esten bien conectados");
+                buttonStart.Text = "Iniciar";
+                buttonExit.Enabled = true;
+            }
+            else if (recivedMessage.ToString().Equals("BIEN\r"))
+            {
+                MessageBox.Show("BIEN");
+            }
+            else if (recivedMessage.ToString().Equals("MAL\r"))
+            {
+                MessageBox.Show("MAL");
+            }
+            else
+            {
+                MessageBox.Show("Ha ocurrido un problema de comunicacion con el guante, vuelva a reintentar la actividad");
+            }
+        }
+
+        private bool ConnectGlobe(int arduinoIndex)
+        {
+            bool connectionSuccessful = ArduinoController.GetInstance().StartConnection(ArduinoController.RIGHT_HAND_ARDUINO);
+            if (!connectionSuccessful && arduinoIndex == ArduinoController.RIGHT_HAND_ARDUINO)
+            {
+                MessageBox.Show("No se pudo conectar con el guante derecho");
+            }
+            else if (!connectionSuccessful && arduinoIndex == ArduinoController.LEFT_HAND_ARDUINO)
+            {
+                MessageBox.Show("No se pudo conectar con el guante izquierdo");
+            }
+            return connectionSuccessful;
         }
     }
 }

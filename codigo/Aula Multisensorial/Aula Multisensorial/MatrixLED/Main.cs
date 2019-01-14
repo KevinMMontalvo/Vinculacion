@@ -33,13 +33,13 @@ namespace Aula_Multisensorial.MatrixLED
         {
             bool connectionSuccessful = ArduinoController.GetInstance().StartConnection(ArduinoController.MATRIX_ARDUINO);
 
-            if (!connectionSuccessful)
+            /*if (!connectionSuccessful)
             {
                 MessageBox.Show("No se pudo conectar con el dispositivo (Matriz de LED)");
                 Close();
-            }
+            }*/
 
-            try
+            /*try
             {
                 LoadShapeConfiguration();
                 LoadColorConfiguration();
@@ -52,7 +52,7 @@ namespace Aula_Multisensorial.MatrixLED
             {
                 MessageBox.Show(ex.Message);
                 Close();
-            }
+            }*/
 
             ShowConfigurationInformation();
         }
@@ -75,7 +75,8 @@ namespace Aula_Multisensorial.MatrixLED
 
         private void buttonSetup_Click(object sender, EventArgs e)
         {
-            Configuration configuration = new Configuration(this, shapeConfiguration, colorConfiguration, sequenceConfiguration, levelConfiguration, brightnessConfiguration, appearancesConfiguration);
+            //Configuration configuration = new Configuration(this, shapeConfiguration, colorConfiguration, sequenceConfiguration, levelConfiguration, brightnessConfiguration, appearancesConfiguration);
+            Configuration configuration = new Configuration(this, "1111111100000000", 5, 3, 3, 4, 5);
             configuration.Show();
             Hide();
         }

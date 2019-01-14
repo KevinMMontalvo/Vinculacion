@@ -1,8 +1,5 @@
 ﻿using Aula_Multisensorial.Gloves;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Aula_Multisensorial
@@ -17,7 +14,7 @@ namespace Aula_Multisensorial
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CEFForm());
+            Application.Run(new Main());
         }
     }
 }
