@@ -55,9 +55,9 @@ export default class ActivitiesMenu extends React.Component {
                     <div id="turn-off-icon" className="management-icon"></div>
                     <div className="management-text">Apagar</div>
                   </div>
+                </div>
               </div>
             </div>
-          </div>
         );
     }
 }

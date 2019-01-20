@@ -211,24 +211,24 @@ export default class PeriodRecords extends React.Component {
                   <div className="record-container">
                     {
                       this.state.isDataLoaded ?
-                      <div>
-                        {this.state.periods.map((periods) =>
-                          {
-                            return <Registry
-                                      show={"periods"}
-                                      ShowDeletedRegistry={() => this.ShowDeletedRegistry()}
-                                      delete={this.props.delete}
-                                      ShowModifyForm={this.ShowModifyForm.bind(this)}
-                                      modify={this.props.modify}
-                                      active={this.props.active}
-                                      periods={periods}
-                                      key={periods._id}
-                                      UpdateTable={this.UpdateTable.bind(this)}
-                                      ShowActiveNewPeriodForm={this.ShowActiveNewPeriodForm.bind(this)}>
-                                    </Registry>;
-                          })
-                        }
-                      </div>
+                        <div>
+                          {this.state.periods.map((periods) =>
+                            {
+                              return <Registry
+                                show={"periods"}
+                                ShowDeletedRegistry={() => this.ShowDeletedRegistry()}
+                                delete={this.props.delete}
+                                ShowModifyForm={this.ShowModifyForm.bind(this)}
+                                modify={this.props.modify}
+                                active={this.props.active}
+                                periods={periods}
+                                key={periods._id}
+                                UpdateTable={this.UpdateTable.bind(this)}
+                                ShowActiveNewPeriodForm={this.ShowActiveNewPeriodForm.bind(this)}>
+                              </Registry>;
+                            })
+                          }
+                        </div>
                       :
                       undefined
                     }

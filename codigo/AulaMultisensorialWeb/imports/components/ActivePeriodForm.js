@@ -298,7 +298,7 @@ export default class ActivePeriodForm extends React.Component {
                 <b className="current-level-title">Nivel actual de los estudiantes: </b>
                 <p className="current-level-text">{this.state.levels[this.state.levelIndex].name}</p>
                 {this.state.areAllSelected ?
-                <div onClick={() => this.UnselectAll()} className="select-all-button">Deselecionar todos</div>
+                  <div onClick={() => this.UnselectAll()} className="select-all-button">Deselecionar todos</div>
                 :
                 <div onClick={() => this.SelectAll()} className="select-all-button">Selecionar todos</div>
                 }
@@ -309,21 +309,21 @@ export default class ActivePeriodForm extends React.Component {
                   <div>
                     {this.state.studentsByCurrentLevel != undefined ?
                       this.state.studentsByCurrentLevel.map((studentsByCurrentLevel) =>
-                      {
-                        return <StudentByLevel
-                                  studentsByCurrentLevel={studentsByCurrentLevel}
-                                  key={studentsByCurrentLevel._id}
-                                  SelectStudent={this.SelectStudent.bind(this)}
-                                  UnselectStudent={this.UnselectStudent.bind(this)}
-                                  CheckSelected={this.CheckSelected.bind(this)}>
-                                </StudentByLevel>
-                      })
-                      :
+                        {
+                          return <StudentByLevel
+                            studentsByCurrentLevel={studentsByCurrentLevel}
+                            key={studentsByCurrentLevel._id}
+                            SelectStudent={this.SelectStudent.bind(this)}
+                            UnselectStudent={this.UnselectStudent.bind(this)}
+                            CheckSelected={this.CheckSelected.bind(this)}>
+                          </StudentByLevel>
+                        })
+                    :
                       undefined
                     }
                   </div>
                 :
-                undefined
+                  undefined
                 }
               </div>
               <div className="change-student-level-container">
@@ -335,14 +335,14 @@ export default class ActivePeriodForm extends React.Component {
               </div>
               <div className="active-period-button-container">
                 {this.state.levelIndex != 0 ?
-                    <div onClick={() => this.PreviousLevel()} className="back-button">Anterior</div>
-                  :
+                  <div onClick={() => this.PreviousLevel()} className="back-button">Anterior</div>
+                :
                     undefined
                 }
                 {(this.state.levelIndex + 1) == this.state.levels.length ?
-                    <div onClick={() => this.ChangeStudentsLevel()} className="next-button">Finalizar</div>
-                  :
-                    <div onClick={() => this.NextLevel()} className="next-button">Siguiente</div>
+                  <div onClick={() => this.ChangeStudentsLevel()} className="next-button">Finalizar</div>
+                :
+                <div onClick={() => this.NextLevel()} className="next-button">Siguiente</div>
                 }
               </div>
               <Modal open={this.state.openDialog} onClose={this.onCloseDialogModal} center>

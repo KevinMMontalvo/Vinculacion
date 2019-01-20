@@ -195,7 +195,6 @@ export default class PeriodForm extends React.Component
 	}
 
 	ModifyPeriod(){
-		console.log(this.props.periodToModify.is_visible);
 		let name = document.getElementById('name-input').value;
 		let startDate = this.state.startDate;
 		let period = {
@@ -204,16 +203,21 @@ export default class PeriodForm extends React.Component
 			start_date: startDate,
 			is_visible: this.props.periodToModify.is_visible,
 		};
-		periodsController.modifyPeriod(period);
-		this.ClearAllFields();
-		this.ShowModifySuccessMenssage();
-		this.props.CloseModifyForm();
-		this.props.UpdateTable();
+		if(periodsController.modifyPeriod(period)){
+			this.ClearAllFields();
+			this.ShowModifySuccessMenssage();
+			this.props.CloseModifyForm();
+			this.props.UpdateTable();
+		}
+		else{
+			this.CanNotCompleteTheActionMenssage();
+		}
 	}
 
 	render()
 	{
-		return (<div>
+		return (
+			<div>
 				<div className="student-form">
 					<div className="form-container">
 						<p className="input-label">Nombre del periodo</p>
@@ -221,8 +225,8 @@ export default class PeriodForm extends React.Component
 							<p className="input-label">Nombre</p>
 							<div className="input-container">
 								<input id="name-input"
-								       onKeyPress={() => this.ValidateOnlyLetters(event)} placeholder="Nombre del periodo"
-								       className="horizontal-input"/>
+									onKeyPress={() => this.ValidateOnlyLetters(event)} placeholder="Nombre del periodo"
+								className="horizontal-input"/>
 							</div>
 						</div>
 					</div>
@@ -242,7 +246,7 @@ export default class PeriodForm extends React.Component
 								this.props.periodToModify != undefined ?
 									<div>Modificar Registro</div>
 								:
-									<div>Completar Registro</div>
+								<div>Completar Registro</div>
 							}
 						</div>
 					</div>
@@ -256,6 +260,7 @@ export default class PeriodForm extends React.Component
 					timeout={7500}
 					ref={tray => this.tray = tray}
 				/>
-			</div>);
+			</div>
+		);
 	}
 }

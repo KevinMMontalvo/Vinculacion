@@ -140,35 +140,35 @@ export default class UserMenu extends React.Component {
               onClose={this.onCloseOptionsModal} center>
               {
                 this.state.showOptions ?
-                <div className="advanced-menu-options-container">
-                  <div className="advanced-menu-title">Opciones de usuario</div>
-                  <div id="import-excel" className="advanced-menu-option-container-g">Importar excel (.xlsx)</div>
-                  <div onClick={() => this.ShowChangePasswordForm()} id="change-password" className="advanced-menu-option-container-b">Cambiar contraseña</div>
-                  <div onClick={() => this.Logout()} id="logout" className="advanced-menu-option-container-b">Cerrar sesión</div>
-                </div>
+                  <div className="advanced-menu-options-container">
+                    <div className="advanced-menu-title">Opciones de usuario</div>
+                    <div id="import-excel" className="advanced-menu-option-container-g">Importar excel (.xlsx)</div>
+                    <div onClick={() => this.ShowChangePasswordForm()} id="change-password" className="advanced-menu-option-container-b">Cambiar contraseña</div>
+                    <div onClick={() => this.Logout()} id="logout" className="advanced-menu-option-container-b">Cerrar sesión</div>
+                  </div>
                 :
                 undefined
               }
               {
                 this.state.changePasswordForm ?
-                <div className="change-password-container">
+                  <div className="change-password-container">
                     <div className="advanced-menu-title">Cambiar contraseña</div>
                     <div className="input-container">
     									<input onBlur={() => this.VerifySamePassword()} id="password-input"
-    									       placeholder="Nueva contraseña"
-    									       className="horizontal-input-user-options"
-    											 	 type="password"/>
+                        placeholder="Nueva contraseña"
+                        className="horizontal-input-user-options"
+             type="password"/>
     								</div>
     								<div className="input-container">
     									<input onKeyDown={() => this.VerifySamePassword()} onKeyUp={() => this.VerifySamePassword()} onKeyPress={() => this.VerifySamePassword()} id="password-confirmation-input"
-    									       placeholder="Confirmar contraseña"
-    									       className="horizontal-input-user-options"
-    											 	 type="password"/>
+                        placeholder="Confirmar contraseña"
+                        className="horizontal-input-user-options"
+             type="password"/>
     								</div>
                     <div className="button-container">
                       <div onClick={() => this.ChangePassword()} className="change-password-button">Aceptar</div>
                     </div>
-                </div>
+                  </div>
                 :
                 undefined
               }

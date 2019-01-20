@@ -296,12 +296,16 @@ export default class TeacherForm extends React.Component
 			speciality: speciality,
 			password: this.props.teacherToModify.password
 		};
-		teachersController.modifyTeacher(teacher);
-		this.props.ChangeUserLevel(name, level_id);
-		this.ClearAllFields();
-		this.ShowModifySuccessMenssage();
-		this.props.CloseModifyForm();
-		this.props.UpdateTable();
+		if(teachersController.modifyTeacher(teacher)){
+			this.props.ChangeUserInfo(name, level_id);
+			this.ClearAllFields();
+			this.ShowModifySuccessMenssage();
+			this.props.CloseModifyForm();
+			this.props.UpdateTable();
+		}
+		else{
+			this.CanNotCompleteTheActionMenssage();
+		}
 	}
 
 	LoadLevels() {
@@ -347,7 +351,8 @@ export default class TeacherForm extends React.Component
 
 	render()
 	{
-		return (<div>
+		return (
+			<div>
 				<div className="student-form">
 					<div className="form-container">
 						<p className="input-label">Nombre del docente</p>
@@ -355,8 +360,8 @@ export default class TeacherForm extends React.Component
 							<p className="input-label">Nombre</p>
 							<div className="input-container">
 								<input id="name-input"
-								       onKeyPress={() => this.ValidateOnlyLetters(event)} placeholder="Nombre y apellido del docente"
-								       className="horizontal-input"/>
+									onKeyPress={() => this.ValidateOnlyLetters(event)} placeholder="Nombre y apellido del docente"
+								className="horizontal-input"/>
 							</div>
 						</div>
 					</div>
@@ -372,29 +377,29 @@ export default class TeacherForm extends React.Component
 						<p className="input-label">Especialidad</p>
 						<div className="input-container">
 							<input id="speciality-input"
-							       onKeyPress={() => this.ValidateOnlyLetters(event)} placeholder="Especialidad del docente"
-							       className="horizontal-input"/>
+								onKeyPress={() => this.ValidateOnlyLetters(event)} placeholder="Especialidad del docente"
+							className="horizontal-input"/>
 						</div>
 					</div>
 					{
 						this.props.teacherToModify == undefined ?
-						<div>
-							<div className="form-container">
-								<p className="input-label">Información de la cuenta</p>
-								<div className="input-container">
-									<input onBlur={() => this.VerifySamePassword()} id="password-input"
-									       placeholder="Contraseña"
-									       className="horizontal-input"
-											 	 type="password"/>
-								</div>
-								<div className="input-container">
-									<input onKeyDown={() => this.VerifySamePassword()} onKeyUp={() => this.VerifySamePassword()} onKeyPress={() => this.VerifySamePassword()} id="password-confirmation-input"
-									       placeholder="Confirmar contraseña"
-									       className="horizontal-input"
-											 	 type="password"/>
+							<div>
+								<div className="form-container">
+									<p className="input-label">Información de la cuenta</p>
+									<div className="input-container">
+										<input onBlur={() => this.VerifySamePassword()} id="password-input"
+											placeholder="Contraseña"
+											className="horizontal-input"
+										type="password"/>
+									</div>
+									<div className="input-container">
+										<input onKeyDown={() => this.VerifySamePassword()} onKeyUp={() => this.VerifySamePassword()} onKeyPress={() => this.VerifySamePassword()} id="password-confirmation-input"
+											placeholder="Confirmar contraseña"
+											className="horizontal-input"
+										type="password"/>
+									</div>
 								</div>
 							</div>
-						</div>
 						:
 						undefined
 					}
@@ -404,7 +409,7 @@ export default class TeacherForm extends React.Component
 								this.props.teacherToModify != undefined ?
 									<div>Modificar Registro</div>
 								:
-									<div>Completar Registro</div>
+								<div>Completar Registro</div>
 							}
 						</div>
 					</div>
@@ -418,6 +423,7 @@ export default class TeacherForm extends React.Component
 					timeout={7500}
 					ref={tray => this.tray = tray}
 				/>
-			</div>);
+			</div>
+		);
 	}
 }

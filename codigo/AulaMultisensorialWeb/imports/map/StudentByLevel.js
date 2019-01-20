@@ -36,7 +36,7 @@ export default class StudentByLevel extends React.Component {
                   <div className="student-name-container">{this.props.studentsByCurrentLevel.names + " " + this.props.studentsByCurrentLevel.surnames}</div>
                   <div className="student-selector-button"></div>
                 </div>
-                :
+              :
                 undefined
               }
             </div>

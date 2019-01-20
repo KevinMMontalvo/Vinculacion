@@ -212,54 +212,58 @@ export default class LevelForm extends React.Component
 			min_age: minAge,
 			max_age: maxAge,
 		};
-		levelsController.modifyLevel(level);
-		this.ClearAllFields();
-		this.ShowModifySuccessMenssage();
-		this.props.CloseModifyForm();
-		this.props.UpdateTable();
+		if(levelsController.modifyLevel(level)){
+			this.ClearAllFields();
+			this.ShowModifySuccessMenssage();
+			this.props.CloseModifyForm();
+			this.props.UpdateTable();
+		}
+		else{
+			this.CanNotCompleteTheActionMenssage();
+		}
 	}
 
 	render()
 	{
 		return (<div>
-				<div className="student-form">
-					<div className="form-container">
-						<p className="input-label">Nombre</p>
-						<div className="input-container">
-							<input id="level-name-input"
-							       onKeyPress={() => this.ValidateOnlyLetters(event)}
-										 placeholder="Nombre del nivel"
-							       className="horizontal-input"/>
-						</div>
+			<div className="student-form">
+				<div className="form-container">
+					<p className="input-label">Nombre</p>
+					<div className="input-container">
+						<input id="level-name-input"
+							onKeyPress={() => this.ValidateOnlyLetters(event)}
+							placeholder="Nombre del nivel"
+						className="horizontal-input"/>
 					</div>
-					<div className="form-container">
-						<p className="input-label">Rango de edades</p>
-						<div id="vertical-input" className="student-input">
-							<input id="min-age-input" onKeyPress={() => this.ValidateOnlyNumbers(event)}
-							       placeholder="Edad mínima" className="vertical-input" maxLength="2"></input>
-							<input id="max-age-input" onKeyPress={() => this.ValidateOnlyNumbers(event)}
-							       placeholder="Edad máxima" className="vertical-input" maxLength="2"></input>
-						</div>
-					</div>
-					<div className="button-container">
-						<div onClick={() => this.CheckWarningMessages()} className="secondary-button">
-							{
-								this.props.levelToModify != undefined ?
-									<div>Modificar Registro</div>
-								:
-									<div>Completar Registro</div>
-							}
-						</div>
-					</div>
-					<div className="separator"></div>
 				</div>
-				<ButterToast
-					position={{
+				<div className="form-container">
+					<p className="input-label">Rango de edades</p>
+					<div id="vertical-input" className="student-input">
+						<input id="min-age-input" onKeyPress={() => this.ValidateOnlyNumbers(event)}
+						placeholder="Edad mínima" className="vertical-input" maxLength="2"></input>
+						<input id="max-age-input" onKeyPress={() => this.ValidateOnlyNumbers(event)}
+						placeholder="Edad máxima" className="vertical-input" maxLength="2"></input>
+					</div>
+				</div>
+				<div className="button-container">
+					<div onClick={() => this.CheckWarningMessages()} className="secondary-button">
+						{
+							this.props.levelToModify != undefined ?
+								<div>Modificar Registro</div>
+							:
+							<div>Completar Registro</div>
+						}
+					</div>
+				</div>
+				<div className="separator"></div>
+			</div>
+			<ButterToast
+				position={{
 						vertical: POS_TOP,
 						horizontal: POS_RIGHT
-					}}
-					timeout={7500}
-				/>
-			</div>);
+				}}
+				timeout={7500}
+			/>
+		</div>);
 	}
 }
