@@ -152,8 +152,6 @@ namespace Aula_Multisensorial.MatrixLED
             string byteFilasInferiores = GetRowBinaries(4) + GetRowBinaries(3);
 
             shapeConfiguration = byteFilasSuperiores + byteFilasInferiores; //guarda la configuracion en el form
-            Console.WriteLine("Arriba " + Convert.ToInt32(byteFilasSuperiores, 2));
-            Console.WriteLine("äbajo " + Convert.ToInt32(byteFilasInferiores, 2));
             return "" + (char)Convert.ToInt32(byteFilasSuperiores, 2) + (char)Convert.ToInt32(byteFilasInferiores, 2);
         }
 
@@ -327,7 +325,7 @@ namespace Aula_Multisensorial.MatrixLED
         {
             NumericUpDown numericUpDown = (NumericUpDown)panelTools.Controls["numericUpDownColor"];
             colorConfiguration = (int)numericUpDown.Value;
-            Console.WriteLine(numericUpDown.Value);
+            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "C-0" + colorConfiguration);
             panelTools.Controls.Clear();
         }
 
@@ -367,7 +365,7 @@ namespace Aula_Multisensorial.MatrixLED
         {
             ComboBox comboBox = (ComboBox)panelTools.Controls["comboBox"];
             sequenceConfiguration = comboBox.SelectedIndex;
-            Console.WriteLine(comboBox.SelectedIndex);
+            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "S-0" + sequenceConfiguration);
             LoadShapeBuffer();
             panelTools.Controls.Clear();
         }
@@ -398,7 +396,16 @@ namespace Aula_Multisensorial.MatrixLED
             NumericUpDown numericUpDown = (NumericUpDown)panelTools.Controls["numericUpDown"];
             levelConfiguration = (int)numericUpDown.Value;
             timer.Interval = 4200 - (200 * levelConfiguration);
-            Console.WriteLine(numericUpDown.Value);
+
+            if (levelConfiguration<11)
+            {
+                ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "N-0" + (levelConfiguration - 1));
+            }
+            else
+            {
+                ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "N-" + (levelConfiguration - 1));
+            }
+
             panelTools.Controls.Clear();
         }
 
@@ -432,7 +439,7 @@ namespace Aula_Multisensorial.MatrixLED
         {
             NumericUpDown numericUpDown = (NumericUpDown)panelTools.Controls["numericUpDown"];
             brightnessConfiguration = (int)numericUpDown.Value;
-            Console.WriteLine(numericUpDown.Value);
+            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "L-0" + brightnessConfiguration);
             panelTools.Controls.Clear();
             timer.Start();
         }
@@ -484,7 +491,7 @@ namespace Aula_Multisensorial.MatrixLED
         {
             NumericUpDown numericUpDown = (NumericUpDown)panelTools.Controls["numericUpDown"];
             appearancesConfiguration = (int)numericUpDown.Value;
-            Console.WriteLine(numericUpDown.Value);
+            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "A-0" + (appearancesConfiguration/10-1));
             panelTools.Controls.Clear();
         }
 

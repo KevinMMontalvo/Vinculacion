@@ -21,6 +21,7 @@ namespace Aula_Multisensorial.MatrixLED
         private int levelConfiguration;
         private int brightnessConfiguration;
         private int appearancesConfiguration;
+        private delegate void ControlEvent(object sender, EventArgs e);
 
         public Main()
         {
@@ -36,7 +37,8 @@ namespace Aula_Multisensorial.MatrixLED
             if (!connectionSuccessful)
             {
                 MessageBox.Show("No se pudo conectar con el dispositivo (Matriz de LED)");
-                Close();
+                Shown += new EventHandler(new ControlEvent(ShownFormEvent)); // Cierra el formulario automaticamente
+                return;
             }
 
             try
@@ -47,14 +49,13 @@ namespace Aula_Multisensorial.MatrixLED
                 LoadLevelConfiguration();
                 LoadBrightnessConfiguration();
                 LoadAppearancesConfiguration();
+                ShowConfigurationInformation();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error en la configuracion");
-                Close();
+                MessageBox.Show(ex.Message);
+                Shown += new EventHandler(new ControlEvent(ShownFormEvent)); // Cierra el formulario automaticamente
             }
-
-            ShowConfigurationInformation();
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -89,15 +90,27 @@ namespace Aula_Multisensorial.MatrixLED
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             ArduinoController.GetInstance().CloseConnection(ArduinoController.MATRIX_ARDUINO);
+            Dispose();
         }
 
         private void LoadShapeConfiguration()
         {
+            bool commandSendedProperly;
             List<byte> configuration;
-            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, SHAPE_CONFIG_CODE);
-            configuration = ArduinoController.GetInstance().GetMessageInBytes(ArduinoController.MATRIX_ARDUINO);
 
-            if (configuration[0] != 70 || configuration.Count != 6)
+            commandSendedProperly = ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, SHAPE_CONFIG_CODE);
+            if (!commandSendedProperly)
+            {
+                throw new Exception("Error en la conexion con la Matriz LED");
+            }
+
+            configuration = ArduinoController.GetInstance().GetMessageInBytes(ArduinoController.MATRIX_ARDUINO);
+            if (configuration==null)
+            {
+                throw new Exception("Error en la conexion con la Matriz LED");
+            }
+
+            if (configuration[0] != 'F' || configuration.Count != 6)
             {
                 throw new Exception("Error CRITICO en la sincronizacion de la configuracion con la Matriz LED");
             }
@@ -110,14 +123,26 @@ namespace Aula_Multisensorial.MatrixLED
 
         private void LoadColorConfiguration()
         {
+            bool commandSendedProperly;
             string configuration;
-            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, COLOR_CONFIG_CODE);
+
+            commandSendedProperly = ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, COLOR_CONFIG_CODE);
+            if (!commandSendedProperly)
+            {
+                throw new Exception("Error en la conexion con la Matriz LED");
+            }
+
             configuration = ArduinoController.GetInstance().GetMessage(ArduinoController.MATRIX_ARDUINO);
+            if (configuration == null)
+            {
+                throw new Exception("Error en la conexion con la Matriz LED");
+            }
+
             string[] configurationStrings = configuration.Split('-');
 
             if (!configurationStrings[0].Equals("C") || configurationStrings.Length != 2 || configurationStrings[1].Length != 3 || !configurationStrings[1].Substring(0, 1).Equals("0"))
             {
-                throw new Exception("Error CRITICO en la sincronizacion de la configuracion con la Matriz LED");
+                throw new Exception();
             }
 
             colorConfiguration = int.Parse(configurationStrings[1]);
@@ -125,14 +150,26 @@ namespace Aula_Multisensorial.MatrixLED
 
         private void LoadSequenceConfiguration()
         {
+            bool commandSendedProperly;
             string configuration;
-            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, SEQUENCE_CONFIG_CODE);
+
+            commandSendedProperly = ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, SEQUENCE_CONFIG_CODE);
+            if (!commandSendedProperly)
+            {
+                throw new Exception("Error en la conexion con la Matriz LED");
+            }
+
             configuration = ArduinoController.GetInstance().GetMessage(ArduinoController.MATRIX_ARDUINO);
+            if (configuration == null)
+            {
+                throw new Exception("Error en la conexion con la Matriz LED");
+            }
+
             string[] configurationStrings = configuration.Split('-');
 
             if (!configurationStrings[0].Equals("S") || configurationStrings.Length != 2 || configurationStrings[1].Length != 3 || !configurationStrings[1].Substring(0, 1).Equals("0"))
             {
-                throw new Exception("Error CRITICO en la sincronizacion de la configuracion con la Matriz LED");
+                throw new Exception();
             }
 
             sequenceConfiguration = int.Parse(configurationStrings[1]);
@@ -140,9 +177,21 @@ namespace Aula_Multisensorial.MatrixLED
 
         private void LoadLevelConfiguration()
         {
+            bool commandSendedProperly;
             string configuration;
-            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, LEVEL_CONFIG_CODE);
+
+            commandSendedProperly = ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, LEVEL_CONFIG_CODE);
+            if (!commandSendedProperly)
+            {
+                throw new Exception("Error en la conexion con la Matriz LED");
+            }
+
             configuration = ArduinoController.GetInstance().GetMessage(ArduinoController.MATRIX_ARDUINO);
+            if (configuration == null)
+            {
+                throw new Exception("Error en la conexion con la Matriz LED");
+            }
+
             string[] configurationStrings = configuration.Split('-');
 
             if (!configurationStrings[0].Equals("N") || configurationStrings.Length != 2 || configurationStrings[1].Length != 3)
@@ -155,9 +204,21 @@ namespace Aula_Multisensorial.MatrixLED
 
         private void LoadBrightnessConfiguration()
         {
+            bool commandSendedProperly;
             string configuration;
-            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, BRIGHTNESS_CONFIG_CODE);
+
+            commandSendedProperly = ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, BRIGHTNESS_CONFIG_CODE);
+            if (!commandSendedProperly)
+            {
+                throw new Exception("Error en la conexion con la Matriz LED");
+            }
+
             configuration = ArduinoController.GetInstance().GetMessage(ArduinoController.MATRIX_ARDUINO);
+            if (configuration == null)
+            {
+                throw new Exception("Error en la conexion con la Matriz LED");
+            }
+
             string[] configurationStrings = configuration.Split('-');
 
             if (!configurationStrings[0].Equals("L") || configurationStrings.Length != 2 || configurationStrings[1].Length != 3 || !configurationStrings[1].Substring(0, 1).Equals("0"))
@@ -170,9 +231,21 @@ namespace Aula_Multisensorial.MatrixLED
 
         private void LoadAppearancesConfiguration()
         {
+            bool commandSendedProperly;
             string configuration;
-            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, APPEARANCES_CONFIG_CODE);
+
+            commandSendedProperly = ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, APPEARANCES_CONFIG_CODE);
+            if (!commandSendedProperly)
+            {
+                throw new Exception("Error en la conexion con la Matriz LED");
+            }
+
             configuration = ArduinoController.GetInstance().GetMessage(ArduinoController.MATRIX_ARDUINO);
+            if (configuration == null)
+            {
+                throw new Exception("Error en la conexion con la Matriz LED");
+            }
+
             string[] configurationStrings = configuration.Split('-');
 
             if (!configurationStrings[0].Equals("A") || configurationStrings.Length != 2 || configurationStrings[1].Length != 3)
@@ -225,6 +298,14 @@ namespace Aula_Multisensorial.MatrixLED
             label.Text += "\nNivel de Brillo: " + brightnessConfiguration;
             label.Text += "\nProbabilidad de aparición: " + (appearancesConfiguration + 1) * 10 + "%";
             Controls.Add(label);
+        }
+
+        /// <summary>
+        /// Este metodo es el evento de cierre del formulario cuando no pasa la validacion de inicio
+        /// </summary>
+        private void ShownFormEvent(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
