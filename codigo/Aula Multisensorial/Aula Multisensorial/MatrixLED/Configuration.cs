@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Aula_Multisensorial.Utils;
 
 namespace Aula_Multisensorial.MatrixLED
 {
@@ -28,7 +29,7 @@ namespace Aula_Multisensorial.MatrixLED
             this.levelConfiguration = levelConfiguration;
             this.brightnessConfiguration = brightnessConfiguration;
             this.appearancesConfiguration = appearancesConfiguration;
-            
+
         }
 
         private void Configuration_Load(object sender, EventArgs e)
@@ -121,7 +122,9 @@ namespace Aula_Multisensorial.MatrixLED
 
         private void SendShapeConfiguration(object sender, EventArgs e)
         {
-            Console.WriteLine(GetBytes());
+            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "F-" + GetBytes());
+
+            Console.WriteLine("F-" + GetBytes());
             panelTools.Controls.Clear();
             ChangeButtonsEnableState(false);
             LoadShapeBuffer();
@@ -149,7 +152,8 @@ namespace Aula_Multisensorial.MatrixLED
             string byteFilasInferiores = GetRowBinaries(4) + GetRowBinaries(3);
 
             shapeConfiguration = byteFilasSuperiores + byteFilasInferiores; //guarda la configuracion en el form
-
+            Console.WriteLine("Arriba " + Convert.ToInt32(byteFilasSuperiores, 2));
+            Console.WriteLine("äbajo " + Convert.ToInt32(byteFilasInferiores, 2));
             return "" + (char)Convert.ToInt32(byteFilasSuperiores, 2) + (char)Convert.ToInt32(byteFilasInferiores, 2);
         }
 
@@ -479,7 +483,7 @@ namespace Aula_Multisensorial.MatrixLED
         private void SendAppearancesConfiguration(object sender, EventArgs e)
         {
             NumericUpDown numericUpDown = (NumericUpDown)panelTools.Controls["numericUpDown"];
-            appearancesConfiguration = (int) numericUpDown.Value;
+            appearancesConfiguration = (int)numericUpDown.Value;
             Console.WriteLine(numericUpDown.Value);
             panelTools.Controls.Clear();
         }
@@ -832,6 +836,6 @@ namespace Aula_Multisensorial.MatrixLED
             parentForm.Show();
             Close();
         }
-        
+
     }
 }

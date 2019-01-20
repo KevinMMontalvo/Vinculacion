@@ -9,12 +9,12 @@ namespace Aula_Multisensorial.MatrixLED
 {
     public partial class Main : Form
     {
-        private static readonly string SHAPE_CONFIG_CODE = "CF";
-        private static readonly string COLOR_CONFIG_CODE = "CC";
-        private static readonly string SEQUENCE_CONFIG_CODE = "CS";
-        private static readonly string LEVEL_CONFIG_CODE = "CN";
-        private static readonly string BRIGHTNESS_CONFIG_CODE = "CB";
-        private static readonly string APPEARANCES_CONFIG_CODE = "CA";
+        private static readonly string SHAPE_CONFIG_CODE = "CF-";
+        private static readonly string COLOR_CONFIG_CODE = "CC-";
+        private static readonly string SEQUENCE_CONFIG_CODE = "CS-";
+        private static readonly string LEVEL_CONFIG_CODE = "CN-";
+        private static readonly string BRIGHTNESS_CONFIG_CODE = "CB-";
+        private static readonly string APPEARANCES_CONFIG_CODE = "CA-";
         private string shapeConfiguration;
         private int colorConfiguration;
         private int sequenceConfiguration;
@@ -33,13 +33,13 @@ namespace Aula_Multisensorial.MatrixLED
         {
             bool connectionSuccessful = ArduinoController.GetInstance().StartConnection(ArduinoController.MATRIX_ARDUINO);
 
-            /*if (!connectionSuccessful)
+            if (!connectionSuccessful)
             {
                 MessageBox.Show("No se pudo conectar con el dispositivo (Matriz de LED)");
                 Close();
-            }*/
+            }
 
-            /*try
+            try
             {
                 LoadShapeConfiguration();
                 LoadColorConfiguration();
@@ -50,9 +50,9 @@ namespace Aula_Multisensorial.MatrixLED
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error en la configuracion");
                 Close();
-            }*/
+            }
 
             ShowConfigurationInformation();
         }
@@ -75,8 +75,8 @@ namespace Aula_Multisensorial.MatrixLED
 
         private void buttonSetup_Click(object sender, EventArgs e)
         {
-            //Configuration configuration = new Configuration(this, shapeConfiguration, colorConfiguration, sequenceConfiguration, levelConfiguration, brightnessConfiguration, appearancesConfiguration);
-            Configuration configuration = new Configuration(this, "1111111100000000", 5, 3, 3, 4, 5);
+            Configuration configuration = new Configuration(this, shapeConfiguration, colorConfiguration, sequenceConfiguration, levelConfiguration, brightnessConfiguration, appearancesConfiguration);
+            //Configuration configuration = new Configuration(this, "1111111100000000", 5, 3, 3, 4, 5);
             configuration.Show();
             Hide();
         }
@@ -175,7 +175,7 @@ namespace Aula_Multisensorial.MatrixLED
             configuration = ArduinoController.GetInstance().GetMessage(ArduinoController.MATRIX_ARDUINO);
             string[] configurationStrings = configuration.Split('-');
 
-            if (!configurationStrings[0].Equals("A") || configurationStrings.Length != 2 || configurationStrings[1].Length != 3 || !configurationStrings[1].Substring(0, 1).Equals("0"))
+            if (!configurationStrings[0].Equals("A") || configurationStrings.Length != 2 || configurationStrings[1].Length != 3)
             {
                 throw new Exception("Error CRITICO en la sincronizacion de la configuracion con la Matriz LED");
             }
@@ -221,7 +221,7 @@ namespace Aula_Multisensorial.MatrixLED
                     label.Text += "Rotación Cuadrada Antihoraria";
                     break;
             }
-            label.Text += "\nNivel de rapidez: " + (4200 - (200 * levelConfiguration)) / 1000F + " segundos";
+            label.Text += "\nNivel de rapidez: " + (4200 - (200 * levelConfiguration)) / 1000F + " segundos - Nivel " + levelConfiguration;
             label.Text += "\nNivel de Brillo: " + brightnessConfiguration;
             label.Text += "\nProbabilidad de aparición: " + (appearancesConfiguration + 1) * 10 + "%";
             Controls.Add(label);

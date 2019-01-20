@@ -9,7 +9,7 @@ namespace Aula_Multisensorial.Utils
     class ArduinoController
     {
         private static ArduinoController instance = null;
-        private static readonly int BAUD_RATE = 9600;
+        private static readonly int BAUD_RATE = 115200;
         public static readonly int MATRIX_ARDUINO = 0;
         public static readonly int RIGHT_HAND_ARDUINO = 1;
         public static readonly int LEFT_HAND_ARDUINO = 2;
@@ -42,14 +42,12 @@ namespace Aula_Multisensorial.Utils
                 {
                     temporarySerialPort.Open();
                 }
-                catch (UnauthorizedAccessException ex)
+                catch (UnauthorizedAccessException)
                 {
                     continue;
                 }
                 temporarySerialPort.Write("ID");
                 Thread.Sleep(3000);
-                temporarySerialPort.Write("ID");
-                Thread.Sleep(100);
                 string id = temporarySerialPort.ReadLine();
 
                 if (int.Parse(id) == arduinoIndex)
