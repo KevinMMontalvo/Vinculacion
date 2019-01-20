@@ -211,7 +211,7 @@ export default class StudentsRecords extends React.Component {
       <div>
         {
           this.props.showModifyForm ?
-          <StudentForm UpdateTable={this.UpdateTable.bind(this)} CloseModifyForm={() => this.CloseModifyForm()} studentToModify={this.state.studentToModify}/>
+            <StudentForm UpdateTable={this.UpdateTable.bind(this)} CloseModifyForm={() => this.CloseModifyForm()} studentToModify={this.state.studentToModify}/>
           :
           <div>
             <div className="record-tools">
@@ -229,23 +229,23 @@ export default class StudentsRecords extends React.Component {
             <div className="record-container">
               {
                 this.state.isDataLoaded ?
-                <div>
-                  {this.state.students.map((students) =>
-                    {
-                      return <Registry
-                        show={"students"}
-                        ShowDeletedRegistry={() => this.ShowDeletedRegistry()}
-                        delete={this.props.delete}
-                        ShowModifyForm={this.ShowModifyForm.bind(this)}
-                        modify={this.props.modify}
-                        students={students}
-                        key={students._id}
-                        UpdateTable={this.UpdateTable.bind(this)}
-                        user={this.props.user}>
-                      </Registry>
-                    })
-                  }
-                </div>
+                  <div>
+                    {this.state.students.map((students) =>
+                      {
+                        return <Registry
+                          show={"students"}
+                          ShowDeletedRegistry={() => this.ShowDeletedRegistry()}
+                          delete={this.props.delete}
+                          ShowModifyForm={this.ShowModifyForm.bind(this)}
+                          modify={this.props.modify}
+                          students={students}
+                          key={students._id}
+                          UpdateTable={this.UpdateTable.bind(this)}
+                          user={this.props.user}>
+                        </Registry>
+                      })
+                    }
+                  </div>
                 :
                 undefined
               }

@@ -224,22 +224,22 @@ export default class LevelRecords extends React.Component {
                   <div className="record-container">
                     {
                       this.state.isDataLoaded ?
-                      <div>
-                        {this.state.levels.map((levels) =>
-                          {
-                            return <Registry
-                                      show={"levels"}
-                                      ShowDeletedRegistry={() => this.ShowDeletedRegistry()}
-                                      delete={this.props.delete}
-                                      ShowModifyForm={this.ShowModifyForm.bind(this)}
-                                      modify={this.props.modify}
-                                      levels={levels}
-                                      key={levels._id}
-                                      UpdateTable={this.UpdateTable.bind(this)}>
-                                    </Registry>;
-                          })
-                        }
-                      </div>
+                        <div>
+                          {this.state.levels.map((levels) =>
+                            {
+                              return <Registry
+                                show={"levels"}
+                                ShowDeletedRegistry={() => this.ShowDeletedRegistry()}
+                                delete={this.props.delete}
+                                ShowModifyForm={this.ShowModifyForm.bind(this)}
+                                modify={this.props.modify}
+                                levels={levels}
+                                key={levels._id}
+                                UpdateTable={this.UpdateTable.bind(this)}>
+                              </Registry>;
+                            })
+                          }
+                        </div>
                       :
                       undefined
                     }

@@ -59,51 +59,51 @@ export default class TeacherMenu extends React.Component {
             <div>
               {
                 this.props.userType == "admin" ?
-                <div className="management-menu">
-                  <div className="management-options">
-                    <div onClick={() => this.ShowTeachersRecords()} id="visualize" className="management-option">
-                      <div id="visualize-icon" className="management-icon"></div>
-                      <div className="management-text">Docentes registrados</div>
-                    </div>
-                    <div onClick={() => this.AddTeacher()} id="add" className="management-option">
-                      <div id="add-icon" className="management-icon"></div>
-                      <div className="management-text">Registrar docentes</div>
-                    </div>
-                    <div onClick={() => this.ModifyTeacher()} id="modify" className="management-option">
-                      <div id="modify-icon" className="management-icon"></div>
-                      <div className="management-text">Modificar información</div>
-                    </div>
-                    <div onClick={() => this.DeleteTeacher()} id="delete" className="management-option">
-                      <div id="delete-icon" className="management-icon"></div>
-                      <div className="management-text">Eliminar registros</div>
+                  <div className="management-menu">
+                    <div className="management-options">
+                      <div onClick={() => this.ShowTeachersRecords()} id="visualize" className="management-option">
+                        <div id="visualize-icon" className="management-icon"></div>
+                        <div className="management-text">Docentes registrados</div>
+                      </div>
+                      <div onClick={() => this.AddTeacher()} id="add" className="management-option">
+                        <div id="add-icon" className="management-icon"></div>
+                        <div className="management-text">Registrar docentes</div>
+                      </div>
+                      <div onClick={() => this.ModifyTeacher()} id="modify" className="management-option">
+                        <div id="modify-icon" className="management-icon"></div>
+                        <div className="management-text">Modificar información</div>
+                      </div>
+                      <div onClick={() => this.DeleteTeacher()} id="delete" className="management-option">
+                        <div id="delete-icon" className="management-icon"></div>
+                        <div className="management-text">Eliminar registros</div>
+                      </div>
                     </div>
                   </div>
-                </div>
                 :
                   undefined
               }
               {
                 this.props.userType == "teacher" ?
-                <div className="management-menu">
-                  <div id="teacher1-management-options" className="management-options">
-                    <div onClick={() => this.ShowTeachersRecords()} id="visualize" className="management-option">
-                      <div id="visualize-icon" className="management-icon"></div>
-                      <div className="management-text">Docentes registrados</div>
-                    </div>
-                    <div onClick={() => this.AddTeacher()} id="add" className="management-option">
-                      <div id="add-icon" className="management-icon"></div>
-                      <div className="management-text">Registrar docentes</div>
-                    </div>
-                    <div onClick={() => this.ModifyTeacher()} id="modify" className="management-option">
-                      <div id="modify-icon" className="management-icon"></div>
-                      <div className="management-text">Modificar información</div>
-                    </div>
-                    <div onClick={() => this.DeleteTeacher()} id="delete" className="management-option" style={{display: "none"}}>
-                      <div id="delete-icon" className="management-icon"></div>
-                      <div className="management-text">Eliminar registros</div>
+                  <div className="management-menu">
+                    <div id="teacher1-management-options" className="management-options">
+                      <div onClick={() => this.ShowTeachersRecords()} id="visualize" className="management-option">
+                        <div id="visualize-icon" className="management-icon"></div>
+                        <div className="management-text">Docentes registrados</div>
+                      </div>
+                      <div onClick={() => this.AddTeacher()} id="add" className="management-option">
+                        <div id="add-icon" className="management-icon"></div>
+                        <div className="management-text">Registrar docentes</div>
+                      </div>
+                      <div onClick={() => this.ModifyTeacher()} id="modify" className="management-option">
+                        <div id="modify-icon" className="management-icon"></div>
+                        <div className="management-text">Modificar información</div>
+                      </div>
+                      <div onClick={() => this.DeleteTeacher()} id="delete" className="management-option" style={{display: "none"}}>
+                        <div id="delete-icon" className="management-icon"></div>
+                        <div className="management-text">Eliminar registros</div>
+                      </div>
                     </div>
                   </div>
-                </div>
                 :
                   undefined
               }

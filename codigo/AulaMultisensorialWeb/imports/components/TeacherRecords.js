@@ -188,8 +188,8 @@ export default class TeachersRecords extends React.Component {
       }, () => this.LoadAttributesInSelect())
     }
 
-    ChangeUserLevel(name, level_id){
-      this.props.ChangeUserLevel(name, level_id);
+    ChangeUserInfo(name, level_id){
+      this.props.ChangeUserInfo(name, level_id);
     }
 
     render() {
@@ -197,7 +197,7 @@ export default class TeachersRecords extends React.Component {
             <div>
               {
                 this.props.showModifyForm ?
-                  <TeacherForm ChangeUserLevel={this.ChangeUserLevel.bind(this)} UpdateTable={this.UpdateTable.bind(this)} CloseModifyForm={() => this.CloseModifyForm()} teacherToModify={this.state.teacherToModify}/>
+                  <TeacherForm ChangeUserInfo={this.ChangeUserInfo.bind(this)} UpdateTable={this.UpdateTable.bind(this)} CloseModifyForm={() => this.CloseModifyForm()} teacherToModify={this.state.teacherToModify}/>
                 :
                 <div>
                   <div className="record-tools">
@@ -215,23 +215,23 @@ export default class TeachersRecords extends React.Component {
                   <div className="record-container">
                     {
                       this.state.isDataLoaded ?
-                      <div>
-                        {this.state.teachers.map((teachers) =>
-                          {
-                            return <Registry
-                                      show={"teachers"}
-                                      ShowDeletedRegistry={() => this.ShowDeletedRegistry()}
-                                      delete={this.props.delete}
-                                      ShowModifyForm={this.ShowModifyForm.bind(this)}
-                                      modify={this.props.modify}
-                                      teachers={teachers}
-                                      key={teachers._id}
-                                      UpdateTable={this.UpdateTable.bind(this)}
-                                      user={this.props.user}>
-                                    </Registry>;
-                          })
-                        }
-                      </div>
+                        <div>
+                          {this.state.teachers.map((teachers) =>
+                            {
+                              return <Registry
+                                show={"teachers"}
+                                ShowDeletedRegistry={() => this.ShowDeletedRegistry()}
+                                delete={this.props.delete}
+                                ShowModifyForm={this.ShowModifyForm.bind(this)}
+                                modify={this.props.modify}
+                                teachers={teachers}
+                                key={teachers._id}
+                                UpdateTable={this.UpdateTable.bind(this)}
+                                user={this.props.user}>
+                              </Registry>;
+                            })
+                          }
+                        </div>
                       :
                       undefined
                     }

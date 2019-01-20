@@ -306,11 +306,15 @@ export default class StudentForm extends React.Component
 			technical_helps: technical_helps,
 			percentage_of_disability: percentage_of_disability,
 		};
-		studentsController.modifyStudent(student);
-		this.ClearAllFields();
-		this.ShowModifySuccessMenssage();
-		this.props.CloseModifyForm();
-		this.props.UpdateTable();
+		if(studentsController.modifyStudent(student)){
+			this.ClearAllFields();
+			this.ShowModifySuccessMenssage();
+			this.props.CloseModifyForm();
+			this.props.UpdateTable();
+		}
+		else {
+			this.CanNotCompleteTheActionMenssage();
+		}
 	}
 
 
@@ -376,19 +380,20 @@ export default class StudentForm extends React.Component
 
 	render()
 	{
-		return (<div>
+		return (
+			<div>
 				<div className="student-form">
 					<div className="form-container">
 						<p className="input-label">Nombre del estudiante</p>
 						<div id="vertical-input" className="student-input">
 							<input id="first-name-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-							       placeholder="Primer nombre" className="vertical-input"></input>
+							placeholder="Primer nombre" className="vertical-input"></input>
 							<input id="second-name-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-							       placeholder="Segundo nombre" className="vertical-input"></input>
+							placeholder="Segundo nombre" className="vertical-input"></input>
 							<input id="lastname-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-							       placeholder="Apellido paterno" className="vertical-input"></input>
+							placeholder="Apellido paterno" className="vertical-input"></input>
 							<input id="mothers-lastname-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-							       placeholder="Apellido materno" className="vertical-input"></input>
+							placeholder="Apellido materno" className="vertical-input"></input>
 						</div>
 					</div>
 					<div className="form-container">
@@ -439,24 +444,24 @@ export default class StudentForm extends React.Component
 						<p className="input-label">Porcentaje de discapacidad</p>
 						<div className="input-container">
 							<input id="percentage-of-disability-input" maxLength="2"
-							       onKeyPress={() => this.ValidateOnlyNumbers(event)} placeholder="%"
-							       className="horizontal-input"/>
+								onKeyPress={() => this.ValidateOnlyNumbers(event)} placeholder="%"
+							className="horizontal-input"/>
 						</div>
 					</div>
 					<div className="form-container">
 						<p className="input-label">Ayudas técnicas</p>
 						<div className="tech-help-input-container">
 							<input id="technical-help-input" placeholder="Tipo de ayuda"
-							       className="vertical-input"></input>
+							className="vertical-input"></input>
 							<div onClick={() => this.AddTechnicalHelp()} className="add-tech-help-button"></div>
 							<div className="added-tech-help-container">
 								<div className="tech-helps-title">Ayudas técnicas del estudiante</div>
 								{this.state.techHelps.map((techHelps) =>
-								{
-									return <TechnicalHelp remove={true}
-									                      RemoveTechnicalHelp={this.RemoveTechnicalHelp.bind(this)}
-									                      techHelps={techHelps} key={techHelps._id}></TechnicalHelp>;
-								})}
+									{
+										return <TechnicalHelp remove={true}
+											RemoveTechnicalHelp={this.RemoveTechnicalHelp.bind(this)}
+											techHelps={techHelps} key={techHelps._id}></TechnicalHelp>;
+									})}
 							</div>
 						</div>
 					</div>
@@ -466,7 +471,7 @@ export default class StudentForm extends React.Component
 								this.props.studentToModify != undefined ?
 									<div>Modificar Registro</div>
 								:
-									<div>Completar Registro</div>
+								<div>Completar Registro</div>
 							}
 						</div>
 					</div>
@@ -480,6 +485,7 @@ export default class StudentForm extends React.Component
 					timeout={7500}
 					ref={tray => this.tray = tray}
 				/>
-			</div>);
+			</div>
+		);
 	}
 }

@@ -48,7 +48,8 @@ export default class SideMenu extends React.Component
 
 	render()
 	{
-		return (<div>
+		return (
+			<div>
 				<div className="side-menu">
 					{this.props.isLogged ? <div className="menu-options">
 						<div onClick={() => this.StudentOption()} id="option1" className="menu-option">Estudiantes</div>
@@ -59,19 +60,20 @@ export default class SideMenu extends React.Component
 						</div>
 					</div> : <div className="menu-icon"></div>}
 					<div className="menu-title">FUVIME</div>
-						{
-							this.props.user != undefined ?
+					{
+						this.props.user != undefined ?
 							<div>
 								<div className="user-info-container">
 									<div className="user-icon-container"></div>
 									<div className="username-container">{this.props.user.name}</div>
-										<UserMenu userId={this.props.user._id} Logout={this.Logout.bind(this)}/>
+									<UserMenu userId={this.props.user._id} Logout={this.Logout.bind(this)}/>
 								</div>
 							</div>
-							:
-							undefined
-						}
-					</div>
-			</div>);
+						:
+						undefined
+					}
+				</div>
+			</div>
+		);
 	}
 }
