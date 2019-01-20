@@ -1,5 +1,4 @@
-﻿using Aula_Multisensorial.MatrixLED;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Aula_Multisensorial.Utils
 {
@@ -23,16 +22,25 @@ namespace Aula_Multisensorial.Utils
             {
                 mainForm.Invoke(new StartActivty(StartGlovesActivity));
             }
+            else if (activity.Equals("CardiacSensor"))
+            {
+                mainForm.Invoke(new StartActivty(StartCardiacSensorActivity));
+            }
         }
 
         private void StartMatrixActivity()
         {
-            new Main();
+            new MatrixLED.Main();
         }
 
         private void StartGlovesActivity()
         {
             new Gloves.Main();
+        }
+
+        private void StartCardiacSensorActivity()
+        {
+
         }
     }
 }

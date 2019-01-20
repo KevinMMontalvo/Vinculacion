@@ -188,12 +188,14 @@ export default class StudentForm extends React.Component
 		}
 		if (validationArray.length == 0)
 		{
-			if(this.props.studentToModify == undefined){
+			if (this.props.studentToModify == undefined)
+			{
 				this.setState({
 					emptyFields: false,
 				}, () => this.AddStudent());
 			}
-			else{
+			else
+			{
 				this.setState({
 					emptyFields: false,
 				}, () => this.ModifyStudent());
@@ -246,13 +248,16 @@ export default class StudentForm extends React.Component
 		let condition = document.getElementById('condition-select').value;
 		let technical_helps = this.state.techHelps;
 		let percentage_of_disability = document.getElementById('percentage-of-disability-input').value;
-		if (percentage_of_disability == ""){
+		if (percentage_of_disability == "")
+		{
 			percentage_of_disability = 0;
 		}
-		else {
+		else
+		{
 			percentage_of_disability = parseInt(percentage_of_disability);
 		}
-		if(technical_helps == ""){
+		if (technical_helps == "")
+		{
 			technical_helps = new Array();
 		}
 		let student = {
@@ -266,18 +271,21 @@ export default class StudentForm extends React.Component
 			technical_helps: technical_helps,
 			percentage_of_disability: percentage_of_disability,
 		};
-		if(studentsController.insertStudent(student)){
+		if (studentsController.insertStudent(student))
+		{
 			this.ClearAllFields();
 			this.ShowAddSuccessMenssage();
 			logController.insertLog(this.CreateLog(this.props.user._id, "Successfully registered student"));
 		}
-		else {
+		else
+		{
 			this.CanNotCompleteTheActionMenssage();
 			logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully registered student"));
 		}
 	}
 
-	ModifyStudent(){
+	ModifyStudent()
+	{
 		let names = this.CapitalizeFirstLetter(document.getElementById('first-name-input').value.toString()) + " " + this.CapitalizeFirstLetter(document.getElementById('second-name-input').value.toString());
 		let surnames = this.CapitalizeFirstLetter(document.getElementById('lastname-input').value.toString()) + " " + this.CapitalizeFirstLetter(document.getElementById('mothers-lastname-input').value.toString());
 		let level_id = document.getElementById('level-select').value;
@@ -287,13 +295,16 @@ export default class StudentForm extends React.Component
 		let condition = document.getElementById('condition-select').value;
 		let technical_helps = this.state.techHelps;
 		let percentage_of_disability = document.getElementById('percentage-of-disability-input').value;
-		if (percentage_of_disability == ""){
+		if (percentage_of_disability == "")
+		{
 			percentage_of_disability = 0;
 		}
-		else {
+		else
+		{
 			percentage_of_disability = parseInt(percentage_of_disability);
 		}
-		if(technical_helps == ""){
+		if (technical_helps == "")
+		{
 			technical_helps = new Array();
 		}
 		let student = {
@@ -308,21 +319,23 @@ export default class StudentForm extends React.Component
 			technical_helps: technical_helps,
 			percentage_of_disability: percentage_of_disability,
 		};
-		if(studentsController.modifyStudent(student)){
+		if (studentsController.modifyStudent(student))
+		{
 			this.ClearAllFields();
 			this.ShowModifySuccessMenssage();
 			this.props.CloseModifyForm();
 			this.props.UpdateTable();
 			logController.insertLog(this.CreateLog(this.props.user._id, "Successfully modified student"));
 		}
-		else {
+		else
+		{
 			this.CanNotCompleteTheActionMenssage();
 			logController.insertLog(this.CreateLog(this.props.user._id, "Successfully modified student"));
 		}
 	}
 
-
-	ClearAllFields(){
+	ClearAllFields()
+	{
 		document.getElementById('first-name-input').value = "";
 		document.getElementById('second-name-input').value = "";
 		document.getElementById('lastname-input').value = "";
@@ -338,12 +351,15 @@ export default class StudentForm extends React.Component
 		});
 	}
 
-	CapitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+	CapitalizeFirstLetter(string)
+	{
+		return string.charAt(0).toUpperCase() + string.slice(1);
 	}
 
-	componentDidMount(){
-		if(this.props.studentToModify != undefined){
+	componentDidMount()
+	{
+		if (this.props.studentToModify != undefined)
+		{
 			var names = this.props.studentToModify.names.split(" ");
 			document.getElementById('first-name-input').value = names[0];
 			document.getElementById('second-name-input').value = names[1];
@@ -362,18 +378,22 @@ export default class StudentForm extends React.Component
 		this.LoadLevelsInSelect();
 	}
 
-	LoadLevels() {
+	LoadLevels()
+	{
 		var levelsString = levelsController.getLevels();
 		var levels = JSON.parse(levelsString);
 		return levels;
 	}
 
-	LoadLevelsInSelect(){
+	LoadLevelsInSelect()
+	{
 		this.setState({
 			levels: this.LoadLevels(),
-		},() => {
+		}, () =>
+		{
 			var levelSelect = document.getElementById('level-select');
-			for (var i = 0; i < this.state.levels.length; i++) {
+			for (var i = 0; i < this.state.levels.length; i++)
+			{
 				var option = document.createElement("option");
 				option.text = this.state.levels[i].name;
 				option.value = this.state.levels[i]._id;
@@ -382,7 +402,8 @@ export default class StudentForm extends React.Component
 		});
 	}
 
-	CreateLog(userId, action){
+	CreateLog(userId, action)
+	{
 		let log = {
 			user_id: userId,
 			action: action,
@@ -393,20 +414,19 @@ export default class StudentForm extends React.Component
 
 	render()
 	{
-		return (
-			<div>
+		return (<div>
 				<div className="student-form">
 					<div className="form-container">
 						<p className="input-label">Nombre del estudiante</p>
 						<div id="vertical-input" className="student-input">
 							<input id="first-name-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-							placeholder="Primer nombre" className="vertical-input"></input>
+							       placeholder="Primer nombre" className="vertical-input"></input>
 							<input id="second-name-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-							placeholder="Segundo nombre" className="vertical-input"></input>
+							       placeholder="Segundo nombre" className="vertical-input"></input>
 							<input id="lastname-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-							placeholder="Apellido paterno" className="vertical-input"></input>
+							       placeholder="Apellido paterno" className="vertical-input"></input>
 							<input id="mothers-lastname-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-							placeholder="Apellido materno" className="vertical-input"></input>
+							       placeholder="Apellido materno" className="vertical-input"></input>
 						</div>
 					</div>
 					<div className="form-container">
@@ -457,35 +477,31 @@ export default class StudentForm extends React.Component
 						<p className="input-label">Porcentaje de discapacidad</p>
 						<div className="input-container">
 							<input id="percentage-of-disability-input" maxLength="2"
-								onKeyPress={() => this.ValidateOnlyNumbers(event)} placeholder="%"
-							className="horizontal-input"/>
+							       onKeyPress={() => this.ValidateOnlyNumbers(event)} placeholder="%"
+							       className="horizontal-input"/>
 						</div>
 					</div>
 					<div className="form-container">
 						<p className="input-label">Ayudas técnicas</p>
 						<div className="tech-help-input-container">
 							<input id="technical-help-input" placeholder="Tipo de ayuda"
-							className="vertical-input"></input>
+							       className="vertical-input"></input>
 							<div onClick={() => this.AddTechnicalHelp()} className="add-tech-help-button"></div>
 							<div className="added-tech-help-container">
 								<div className="tech-helps-title">Ayudas técnicas del estudiante</div>
 								{this.state.techHelps.map((techHelps) =>
-									{
-										return <TechnicalHelp remove={true}
-											RemoveTechnicalHelp={this.RemoveTechnicalHelp.bind(this)}
-											techHelps={techHelps} key={techHelps._id}></TechnicalHelp>;
-									})}
+								{
+									return <TechnicalHelp remove={true}
+									                      RemoveTechnicalHelp={this.RemoveTechnicalHelp.bind(this)}
+									                      techHelps={techHelps} key={techHelps._id}></TechnicalHelp>;
+								})}
 							</div>
 						</div>
 					</div>
 					<div className="button-container">
 						<div onClick={() => this.CheckWarningMessages()} className="secondary-button">
-							{
-								this.props.studentToModify != undefined ?
-									<div>Modificar Registro</div>
-								:
-								<div>Completar Registro</div>
-							}
+							{this.props.studentToModify != undefined ? <div>Modificar Registro</div> :
+								<div>Completar Registro</div>}
 						</div>
 					</div>
 					<div className="separator"></div>
@@ -498,7 +514,6 @@ export default class StudentForm extends React.Component
 					timeout={7500}
 					ref={tray => this.tray = tray}
 				/>
-			</div>
-		);
+			</div>);
 	}
 }
