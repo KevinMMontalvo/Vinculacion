@@ -25,7 +25,7 @@ namespace Aula_Multisensorial.Access
         /// Obtiene todos los logs de la coleccion
         /// </summary>
         /// <returns>string de JSON con todos los logs, en caso de fallo retorna null</returns>
-        public string GetAdministrators()
+        public string GetLogs()
         {
             try
             {
@@ -44,7 +44,7 @@ namespace Aula_Multisensorial.Access
         /// </summary>
         /// <param name="log">Diccionario con los datos del logs a ser insertado</param>
         /// <returns>Reterona verdadero si la insercion fue exitosa</returns>
-        public bool InsertAdministrator(Dictionary<string, object> log)
+        public bool InsertLog(Dictionary<string, object> log)
         {
             BsonDocument document = new BsonDocument(log);
 

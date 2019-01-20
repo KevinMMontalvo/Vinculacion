@@ -14,7 +14,7 @@ namespace Aula_Multisensorial
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MatrixLED.Main());
+            Application.Run(new CEFForm());
         }
     }
 }
