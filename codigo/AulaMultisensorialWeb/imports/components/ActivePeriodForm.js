@@ -271,12 +271,19 @@ export default class ActivePeriodForm extends React.Component {
     ChangeStudentsLevel(){
       if(periodsController.changeVisiblePeriod(this.props.periodToActive._id)){
         for (var i = 0; i < this.state.studentsToChangeLevel.length; i++) {
-          studentsController.updateStudentLevel(this.state.studentsToChangeLevel[i]._id, this.state.studentsToChangeLevel[i].level_id);
+          if(studentsController.updateStudentLevel(this.state.studentsToChangeLevel[i]._id, this.state.studentsToChangeLevel[i].level_id)){
+            logController.insertLog(this.CreateLog(this.props.user._id, "Successfully updated student's level"));
+          }
+          else {
+            logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully updated student's level"));
+          }
         }
         this.onOpenDialogModal();
+        logController.insertLog(this.CreateLog(this.props.user._id, "Successfully activated period"));
       }
       else {
         this.CanNotCompleteTheActionMenssage();
+        logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully activated period"));
       }
     }
 
@@ -290,6 +297,15 @@ export default class ActivePeriodForm extends React.Component {
         this.props.GetActualPeriod();
       });
     };
+
+    CreateLog(userId, action){
+      let log = {
+        user_id: userId,
+        action: action,
+        date: new Date(),
+      };
+      return log;
+    }
 
     render() {
         return(

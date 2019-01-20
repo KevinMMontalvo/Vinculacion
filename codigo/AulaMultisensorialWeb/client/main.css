@@ -167,7 +167,6 @@ body {
   color: #FFF;
   height: 5vh;
   font-size: 1em;
-  text-transform: capitalize;
 }
 
 .horizontal-input:focus {
@@ -198,7 +197,6 @@ textarea {
   height: 10vh;
   resize: none;
   font-size: 1.0em;
-  text-transform: capitalize;
 }
 
 textarea:focus {
@@ -264,7 +262,6 @@ textarea:focus {
   color: #FFF;
   font-size: 1.0em;
   margin-left: 1vw;
-  text-transform: capitalize;
 }
 
 .vertical-input:focus {

@@ -38,8 +38,8 @@ export default class SideMenu extends React.Component
 	ActivitiesMenu()
 	{
 		/*Aca podes probar lo que queras*/
-		//this.props.ShowActivitiesMenu();
-		activitiesController.startMatrizActivity("Globe");
+		this.props.ShowActivitiesMenu();
+		//activitiesController.startMatrizActivity("Globe");
 	}
 
 	Logout(){

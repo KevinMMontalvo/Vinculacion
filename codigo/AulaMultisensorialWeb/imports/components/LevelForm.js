@@ -182,9 +182,11 @@ export default class LevelForm extends React.Component
 		if(levelsController.insertLevel(level)){
 			this.ClearAllFields();
 			this.ShowSuccessMenssage();
+			logController.insertLog(this.CreateLog(this.props.user._id, "Successfully registered level"));
 		}
 		else{
 			this.CanNotCompleteTheActionMenssage();
+			logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully registered level"));
 		}
 	}
 
@@ -217,11 +219,22 @@ export default class LevelForm extends React.Component
 			this.ShowModifySuccessMenssage();
 			this.props.CloseModifyForm();
 			this.props.UpdateTable();
+			logController.insertLog(this.CreateLog(this.props.user._id, "Successfully modified level"));
 		}
 		else{
 			this.CanNotCompleteTheActionMenssage();
+			logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully modified level"));
 		}
 	}
+
+	CreateLog(userId, action){
+    let log = {
+      user_id: userId,
+      action: action,
+      date: new Date(),
+    };
+    return log;
+  }
 
 	render()
 	{

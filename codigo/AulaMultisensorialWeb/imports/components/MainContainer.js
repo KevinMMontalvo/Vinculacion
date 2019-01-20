@@ -209,7 +209,7 @@ export default class MainContainer extends React.Component {
       periodOption: false,
       addPeriodForm: false,
       showPeriodRecords: false,
-      modify: true,
+      modify: false,
       showModifyForm: false,
       delete: true,
       activityOption: false,
@@ -1005,7 +1005,8 @@ export default class MainContainer extends React.Component {
                   userType={this.state.user.type}/>
                 {
                   this.state.addStudentForm ?
-                    <StudentForm/>
+                    <StudentForm
+                      user={this.state.user}/>
                   :
                     undefined
                 }
@@ -1039,7 +1040,8 @@ export default class MainContainer extends React.Component {
                   userType={this.state.user.type}/>
                 {
                   this.state.addTeacherForm ?
-                    <TeacherForm/>
+                    <TeacherForm
+                      user={this.state.user}/>
                   :
                   undefined
                 }
@@ -1074,7 +1076,8 @@ export default class MainContainer extends React.Component {
                   userType={this.state.user.type}/>
                 {
                   this.state.addLevelForm ?
-                    <LevelForm/>
+                    <LevelForm
+                      user={this.state.user}/>
                   :
                   undefined
                 }
@@ -1084,7 +1087,8 @@ export default class MainContainer extends React.Component {
                       delete={this.state.delete}
                       ShowModifyForm={this.ShowLevelModifyForm.bind(this)}
                       showModifyForm={this.state.showModifyForm}
-                      modify={this.state.modify} />
+                      modify={this.state.modify}
+                      user={this.state.user}/>
                   :
                   undefined
                 }
@@ -1107,7 +1111,8 @@ export default class MainContainer extends React.Component {
                   userType={this.state.user.type}/>
                 {
                   this.state.addPeriodForm ?
-                    <PeriodForm/>
+                    <PeriodForm
+                      user={this.state.user}/>
                   :
                   undefined
                 }
@@ -1120,13 +1125,18 @@ export default class MainContainer extends React.Component {
                       showModifyForm={this.state.showModifyForm}
                       modify={this.state.modify}
                       active={this.state.activePeriod}
-                      ShowActiveNewPeriodForm={this.ShowActiveNewPeriodForm.bind(this)}/>
+                      ShowActiveNewPeriodForm={this.ShowActiveNewPeriodForm.bind(this)}
+                      user={this.state.user}/>
                   :
                   undefined
                 }
                 {
                   this.state.newActivePeriodForm ?
-                    <ActivePeriodForm GetActualPeriod={this.GetActualPeriod.bind(this)} PeriodOption={this.PeriodOption.bind(this)} periodToActive={this.state.periodToActive}/>
+                    <ActivePeriodForm
+                      GetActualPeriod={this.GetActualPeriod.bind(this)}
+                      PeriodOption={this.PeriodOption.bind(this)}
+                      periodToActive={this.state.periodToActive}
+                      user={this.state.user}/>
                   :
                   undefined
                 }

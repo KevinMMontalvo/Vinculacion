@@ -252,9 +252,11 @@ export default class TeacherForm extends React.Component
 		if(teachersController.insertTeacher(teacher)){
 			this.ClearAllFields();
 			this.ShowSuccessMenssage();
+			logController.insertLog(this.CreateLog(this.props.user._id, "Successfully registered teacher"));
 		}
 		else{
 			this.CanNotCompleteTheActionMenssage();
+			logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully registered teacher"));
 		}
 	}
 
@@ -302,9 +304,11 @@ export default class TeacherForm extends React.Component
 			this.ShowModifySuccessMenssage();
 			this.props.CloseModifyForm();
 			this.props.UpdateTable();
+			logController.insertLog(this.CreateLog(this.props.user._id, "Successfully modified teacher"));
 		}
 		else{
 			this.CanNotCompleteTheActionMenssage();
+			logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully modified teacher"));
 		}
 	}
 
@@ -348,6 +352,15 @@ export default class TeacherForm extends React.Component
 			}
 		}
 	}
+
+	CreateLog(userId, action){
+    let log = {
+      user_id: userId,
+      action: action,
+      date: new Date(),
+    };
+    return log;
+  }
 
 	render()
 	{

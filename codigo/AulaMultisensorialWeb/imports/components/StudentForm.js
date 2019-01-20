@@ -269,9 +269,11 @@ export default class StudentForm extends React.Component
 		if(studentsController.insertStudent(student)){
 			this.ClearAllFields();
 			this.ShowAddSuccessMenssage();
+			logController.insertLog(this.CreateLog(this.props.user._id, "Successfully registered student"));
 		}
 		else {
 			this.CanNotCompleteTheActionMenssage();
+			logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully registered student"));
 		}
 	}
 
@@ -311,9 +313,11 @@ export default class StudentForm extends React.Component
 			this.ShowModifySuccessMenssage();
 			this.props.CloseModifyForm();
 			this.props.UpdateTable();
+			logController.insertLog(this.CreateLog(this.props.user._id, "Successfully modified student"));
 		}
 		else {
 			this.CanNotCompleteTheActionMenssage();
+			logController.insertLog(this.CreateLog(this.props.user._id, "Successfully modified student"));
 		}
 	}
 
@@ -376,6 +380,15 @@ export default class StudentForm extends React.Component
 				levelSelect.add(option);
 			}
 		});
+	}
+
+	CreateLog(userId, action){
+		let log = {
+			user_id: userId,
+			action: action,
+			date: new Date(),
+		};
+		return log;
 	}
 
 	render()

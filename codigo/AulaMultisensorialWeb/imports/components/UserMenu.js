@@ -29,6 +29,7 @@ export default class UserMenu extends React.Component {
 
     Logout(){
       this.props.Logout();
+      logController.insertLog(this.CreateLog(this.props.userId, "Logout"));
     }
 
     ShowChangePasswordForm() {
@@ -114,6 +115,19 @@ export default class UserMenu extends React.Component {
   		});
   	}
 
+    CanNotCompleteTheActionMenssage()
+  	{
+  		this.tray.raise({
+  			content: <Cinnamon.Crisp
+  				className="butter-alert"
+  				scheme={Cinnamon.Slim.SCHEME_DARK}
+  				content={() => <div>{"Vuelva a intentarlo"}</div>}
+  				title={this.state.canNotCompleteTheActionMenssage}
+  				icon={<div className="wrong-info-icon"></div>}
+  			/>
+  		});
+  	}
+
     dismissAll = () => {
   			this.tray.dismissAll();
   	}
@@ -121,15 +135,30 @@ export default class UserMenu extends React.Component {
     ChangePassword(){
       if(this.state.isTheSamePassword){
         let newPassword = document.getElementById('password-input').value;
-        teachersController.changeTeacherPassword(this.props.userId, newPassword);
-        this.onCloseOptionsModal();
-        this.ShowModifySuccessMenssage();
+        if(teachersController.changeTeacherPassword(this.props.userId, newPassword)){
+          this.onCloseOptionsModal();
+          this.ShowModifySuccessMenssage();
+          logController.insertLog(this.CreateLog(this.props.userId, "Successfully changed teacher's password"));
+        }
+        else {
+          this.CanNotCompleteTheActionMenssage();
+          logController.insertLog(this.CreateLog(this.props.userId, "Not successfully changed teacher's password"));
+        }
       }
 
       else {
         this.ShowPasswordNotMatchMenssage();
       }
     }
+
+    CreateLog(userId, action){
+  		let log = {
+  			user_id: userId,
+  			action: action,
+  			date: new Date(),
+  		};
+  		return log;
+  	}
 
     render() {
         return(

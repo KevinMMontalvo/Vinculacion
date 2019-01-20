@@ -206,7 +206,11 @@ export default class LevelRecords extends React.Component {
             <div>
               {
                 this.props.showModifyForm ?
-                  <LevelForm UpdateTable={this.UpdateTable.bind(this)} CloseModifyForm={() => this.CloseModifyForm()} levelToModify={this.state.levelToModify}/>
+                  <LevelForm
+                    UpdateTable={this.UpdateTable.bind(this)}
+                    CloseModifyForm={() => this.CloseModifyForm()}
+                    levelToModify={this.state.levelToModify}
+                    user={this.state.user}/>
                 :
                 <div>
                   <div className="record-tools">

@@ -193,7 +193,11 @@ export default class PeriodRecords extends React.Component {
             <div>
               {
                 this.props.showModifyForm ?
-                  <PeriodForm UpdateTable={this.UpdateTable.bind(this)} CloseModifyForm={() => this.CloseModifyForm()} periodToModify={this.state.periodToModify}/>
+                  <PeriodForm
+                    UpdateTable={this.UpdateTable.bind(this)}
+                    CloseModifyForm={() => this.CloseModifyForm()}
+                    periodToModify={this.state.periodToModify}
+                    user={this.state.user}/>
                 :
                 <div>
                   <div className="record-tools">

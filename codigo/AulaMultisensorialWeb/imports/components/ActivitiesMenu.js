@@ -34,26 +34,34 @@ export default class ActivitiesMenu extends React.Component {
       }
     }
 
-    TurnOn(){
-      arduinoController.sendMessage("ON:")
+    MatrixActivity(){
+
     }
 
-    TurnOff()   {
-      arduinoController.sendMessage("OFF:")
+    GlovesActivity(){
+
+    }
+
+    CardiacSensorActivity(){
+
     }
 
     render() {
         return(
             <div>
-              <div className="management-menu">
-                <div className="management-options">
-                  <div onClick={() => this.TurnOn()} id="visualize" className="management-option">
-                    <div id="turn-on-icon" className="management-icon"></div>
-                    <div className="management-text">Encender</div>
+              <div className="activities-menu">
+                <div className="activities-options">
+                  <div onClick={() => this.MatrixActivity()} id="matrix" className="activity-option">
+                    <div id="matrix-icon" className="activity-icon"></div>
+                    <div className="activity-text">Matriz</div>
                   </div>
-                  <div onClick={() => this.TurnOff()} id="add" className="management-option">
-                    <div id="turn-off-icon" className="management-icon"></div>
-                    <div className="management-text">Apagar</div>
+                  <div onClick={() => this.GlovesActivity()} id="gloves" className="activity-option">
+                    <div id="gloves-icon" className="activity-icon"></div>
+                    <div className="activity-text">Guantes</div>
+                  </div>
+                  <div onClick={() => this.CardiacSensorActivity()} id="cardiac-sensor" className="activity-option">
+                    <div id="cardiac-sensor-icon" className="activity-icon"></div>
+                    <div className="activity-text">Sensor cardíaco</div>
                   </div>
                 </div>
               </div>

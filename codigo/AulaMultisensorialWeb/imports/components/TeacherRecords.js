@@ -197,7 +197,12 @@ export default class TeachersRecords extends React.Component {
             <div>
               {
                 this.props.showModifyForm ?
-                  <TeacherForm ChangeUserInfo={this.ChangeUserInfo.bind(this)} UpdateTable={this.UpdateTable.bind(this)} CloseModifyForm={() => this.CloseModifyForm()} teacherToModify={this.state.teacherToModify}/>
+                  <TeacherForm
+                    ChangeUserInfo={this.ChangeUserInfo.bind(this)}
+                    UpdateTable={this.UpdateTable.bind(this)}
+                    CloseModifyForm={() => this.CloseModifyForm()}
+                    teacherToModify={this.state.teacherToModify}
+                    user={this.props.user}/>
                 :
                 <div>
                   <div className="record-tools">

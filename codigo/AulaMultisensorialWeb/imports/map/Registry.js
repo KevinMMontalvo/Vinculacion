@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
 import Modal from 'react-responsive-modal';
 import TechnicalHelp from '../map/TechnicalHelp';
+import ButterToast, { Cinnamon, POS_BOTTOM, POS_RIGHT, POS_TOP } from 'butter-toast';
 
 export default class Registry extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
           age: 0,
+          canNotCompleteTheActionMenssage: "No se pudo completar la acción",
         }
     }
+
+    CanNotCompleteTheActionMenssage()
+  	{
+  		this.tray.raise({
+  			content: <Cinnamon.Crisp
+  				className="butter-alert"
+  				scheme={Cinnamon.Slim.SCHEME_DARK}
+  				content={() => <div>{"Vuelva a intentarlo"}</div>}
+  				title={this.state.canNotCompleteTheActionMenssage}
+  				icon={<div className="wrong-info-icon"></div>}
+  			/>
+  		});
+  	}
 
     CalculateAge() {
       var birthdate = new Date(this.props.students.birthdate);
@@ -88,35 +103,68 @@ export default class Registry extends React.Component {
     }
 
     DeleteStudent(student) {
-      studentsController.deleteStudent(student._id);
-      this.onCloseModal();
-      this.props.ShowDeletedRegistry();
-      this.props.UpdateTable();
+      if(studentsController.deleteStudent(student._id)){
+        this.onCloseModal();
+        this.props.ShowDeletedRegistry();
+        this.props.UpdateTable();
+        logController.insertLog(this.CreateLog(this.props.user._id, "Successfully deleted student"));
+      }
+      else {
+        this.CanNotCompleteTheActionMenssage();
+        logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully deleted student"));
+      }
     }
 
     DeleteLevel(level) {
-      levelsController.deleteLevel(level._id);
-      this.onCloseModal();
-      this.props.ShowDeletedRegistry();
-      this.props.UpdateTable();
+      if(levelsController.deleteLevel(level._id)){
+        this.onCloseModal();
+        this.props.ShowDeletedRegistry();
+        this.props.UpdateTable();
+        logController.insertLog(this.CreateLog(this.props.user._id, "Successfully deleted level"));
+      }
+      else {
+        this.CanNotCompleteTheActionMenssage();
+        logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully deleted level"));
+      }
     }
 
     DeleteTeacher(teacher) {
-      teachersController.deleteTeacher(teacher._id);
-      this.onCloseModal();
-      this.props.ShowDeletedRegistry();
-      this.props.UpdateTable();
+      if(teachersController.deleteTeacher(teacher._id)){
+        this.onCloseModal();
+        this.props.ShowDeletedRegistry();
+        this.props.UpdateTable();
+        logController.insertLog(this.CreateLog(this.props.user._id, "Successfully deleted teacher"));
+      }
+      else {
+        this.CanNotCompleteTheActionMenssage();
+        logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully deleted teacher"));
+      }
     }
 
     DeletePeriod(period) {
-      periodsController.deletePeriod(period._id);
-      this.onCloseModal();
-      this.props.ShowDeletedRegistry();
-      this.props.UpdateTable();
+      if(periodsController.deletePeriod(period._id)){
+        this.onCloseModal();
+        this.props.ShowDeletedRegistry();
+        this.props.UpdateTable();
+        logController.insertLog(this.CreateLog(this.props.user._id, "Successfully deleted period"));
+      }
+      else {
+        this.CanNotCompleteTheActionMenssage();
+        logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully deleted period"));
+      }
     }
 
     ShowActiveNewPeriodForm(period){
       this.props.ShowActiveNewPeriodForm(period);
+    }
+
+    CreateLog(userId, action){
+      let log = {
+        user_id: userId,
+        action: action,
+        date: new Date(),
+      };
+      return log;
     }
 
     render() {
@@ -558,6 +606,14 @@ export default class Registry extends React.Component {
                 :
                 undefined
               }
+              <ButterToast
+      					position={{
+      						vertical: POS_TOP,
+      						horizontal: POS_RIGHT
+      					}}
+      					timeout={7500}
+      					ref={tray => this.tray = tray}
+      				/>
             </div>
         );
     }

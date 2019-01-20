@@ -42,6 +42,8 @@ export default class Main extends React.Component {
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
     let user = null;
+    let teachers = this.LoadTeachers();
+    let administrators = this.LoadAdministrators();
     if(username == ""){
       this.ShowWarningMenssage("Usuario");
     }
@@ -51,7 +53,6 @@ export default class Main extends React.Component {
     if(username != "" && password != ""){
       if(adminsController.validateAdministratorLogin(username,  password)){
         this.props.SuccessfullLogin();
-        let administrators = this.LoadAdministrators();
         for (var i = 0; i < administrators.length; i++) {
           if(username == administrators[i].name){
             user = {
@@ -62,11 +63,12 @@ export default class Main extends React.Component {
             break;
           }
         }
+        logController.insertLog(this.CreateLog(user._id, "Successfull login"));
         this.SendUser(user);
+        return;
       }
       if(teachersController.validateTeacherLogin(username,  password)){
         this.props.SuccessfullLogin();
-        let teachers = this.LoadTeachers();
         for (var i = 0; i < teachers.length; i++) {
           if(username == teachers[i].name){
             user = {
@@ -78,10 +80,40 @@ export default class Main extends React.Component {
             break;
           }
         }
+        logController.insertLog(this.CreateLog(user._id, "Successfull login"));
         this.SendUser(user);
+        return;
       }
       else {
         this.ShowWrongUserOrPasswordMenssage();
+        for (var i = 0; i < teachers.length; i++) {
+          if(username == teachers[i].name){
+            user = {
+              _id: teachers[i]._id,
+              name: teachers[i].name,
+              level: teachers[i].level_id,
+              type: "teacher"
+            };
+            break;
+          }
+        }
+        for (var i = 0; i < administrators.length; i++) {
+          if(username == administrators[i].name){
+            user = {
+              _id: administrators[i]._id,
+              name: administrators[i].name,
+              type: "admin"
+            };
+            break;
+          }
+        }
+        if(user != null){
+          logController.insertLog(this.CreateLog(user._id, "Not successfull login"));
+        }
+        else {
+          logController.insertLog(this.CreateLog("", "Not successfull login"));
+        }
+        return;
       }
     }
   }
@@ -106,6 +138,15 @@ export default class Main extends React.Component {
     if(event.key == 'Enter'){
       this.ValidateLogin();
     }
+  }
+
+  CreateLog(userId, action){
+    let log = {
+      user_id: userId,
+      action: action,
+      date: new Date(),
+    };
+    return log;
   }
 
   render() {
