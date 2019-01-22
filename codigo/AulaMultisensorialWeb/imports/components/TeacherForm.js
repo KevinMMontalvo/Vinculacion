@@ -252,11 +252,11 @@ export default class TeacherForm extends React.Component
 		if(teachersController.insertTeacher(teacher)){
 			this.ClearAllFields();
 			this.ShowSuccessMenssage();
-			logController.insertLog(this.CreateLog(this.props.user._id, "Successfully registered teacher"));
+			logController.insertLog(this.CreateLog(this.props.user._id, "Profesor registrado exitosamente"));
 		}
 		else{
 			this.CanNotCompleteTheActionMenssage();
-			logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully registered teacher"));
+			logController.insertLog(this.CreateLog(this.props.user._id, "Fallo en el registro del profesor"));
 		}
 	}
 
@@ -304,11 +304,11 @@ export default class TeacherForm extends React.Component
 			this.ShowModifySuccessMenssage();
 			this.props.CloseModifyForm();
 			this.props.UpdateTable();
-			logController.insertLog(this.CreateLog(this.props.user._id, "Successfully modified teacher"));
+			logController.insertLog(this.CreateLog(this.props.user._id, "Profesor registrado exitosamente"));
 		}
 		else{
 			this.CanNotCompleteTheActionMenssage();
-			logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully modified teacher"));
+			logController.insertLog(this.CreateLog(this.props.user._id, "Fallo en el registro del profesor"));
 		}
 	}
 

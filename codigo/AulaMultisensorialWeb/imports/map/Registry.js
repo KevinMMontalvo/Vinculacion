@@ -107,11 +107,11 @@ export default class Registry extends React.Component {
         this.onCloseModal();
         this.props.ShowDeletedRegistry();
         this.props.UpdateTable();
-        logController.insertLog(this.CreateLog(this.props.user._id, "Successfully deleted student"));
+        logController.insertLog(this.CreateLog(this.props.user._id, "Estudiante borrado exitosamente"));
       }
       else {
         this.CanNotCompleteTheActionMenssage();
-        logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully deleted student"));
+        logController.insertLog(this.CreateLog(this.props.user._id, "Fallo en borrar estiudiante"));
       }
     }
 
@@ -120,11 +120,11 @@ export default class Registry extends React.Component {
         this.onCloseModal();
         this.props.ShowDeletedRegistry();
         this.props.UpdateTable();
-        logController.insertLog(this.CreateLog(this.props.user._id, "Successfully deleted level"));
+        logController.insertLog(this.CreateLog(this.props.user._id, "Nivel borrado exitosamente"));
       }
       else {
         this.CanNotCompleteTheActionMenssage();
-        logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully deleted level"));
+        logController.insertLog(this.CreateLog(this.props.user._id, "Fallo en borrar nivel"));
       }
     }
 
@@ -133,11 +133,11 @@ export default class Registry extends React.Component {
         this.onCloseModal();
         this.props.ShowDeletedRegistry();
         this.props.UpdateTable();
-        logController.insertLog(this.CreateLog(this.props.user._id, "Successfully deleted teacher"));
+        logController.insertLog(this.CreateLog(this.props.user._id, "Profesor borrado exitosamente"));
       }
       else {
         this.CanNotCompleteTheActionMenssage();
-        logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully deleted teacher"));
+        logController.insertLog(this.CreateLog(this.props.user._id, "Fallo en borrar profesor"));
       }
     }
 
@@ -146,11 +146,11 @@ export default class Registry extends React.Component {
         this.onCloseModal();
         this.props.ShowDeletedRegistry();
         this.props.UpdateTable();
-        logController.insertLog(this.CreateLog(this.props.user._id, "Successfully deleted period"));
+        logController.insertLog(this.CreateLog(this.props.user._id, "Periodo borrado exitosamente"));
       }
       else {
         this.CanNotCompleteTheActionMenssage();
-        logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully deleted period"));
+        logController.insertLog(this.CreateLog(this.props.user._id, "Fallo en borrar periodo"));
       }
     }
 

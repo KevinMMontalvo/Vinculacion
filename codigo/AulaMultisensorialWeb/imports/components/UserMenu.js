@@ -29,7 +29,7 @@ export default class UserMenu extends React.Component {
 
     Logout(){
       this.props.Logout();
-      logController.insertLog(this.CreateLog(this.props.userId, "Logout"));
+      logController.insertLog(this.CreateLog(this.props.userId, "Cierre de sesión"));
     }
 
     ShowChangePasswordForm() {
@@ -138,11 +138,11 @@ export default class UserMenu extends React.Component {
         if(teachersController.changeTeacherPassword(this.props.userId, newPassword)){
           this.onCloseOptionsModal();
           this.ShowModifySuccessMenssage();
-          logController.insertLog(this.CreateLog(this.props.userId, "Successfully changed teacher's password"));
+          logController.insertLog(this.CreateLog(this.props.userId, "Contraseña del profesor cambiada exitosamente"));
         }
         else {
           this.CanNotCompleteTheActionMenssage();
-          logController.insertLog(this.CreateLog(this.props.userId, "Not successfully changed teacher's password"));
+          logController.insertLog(this.CreateLog(this.props.userId, "Fallo en el cambio de la contraseña del profesor"));
         }
       }
 

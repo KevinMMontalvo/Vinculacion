@@ -171,11 +171,11 @@ export default class PeriodForm extends React.Component
 		if(periodsController.insertPeriod(period)){
 			this.ClearAllFields();
 			this.ShowSuccessMenssage();
-			logController.insertLog(this.CreateLog(this.props.user._id, "Successfully registered period"));
+			logController.insertLog(this.CreateLog(this.props.user._id, "Periodo registrado exitosamente"));
 		}
 		else{
 			this.CanNotCompleteTheActionMenssage();
-			logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully registered period"));
+			logController.insertLog(this.CreateLog(this.props.user._id, "Fallo en el registro del periodo"));
 		}
 	}
 
@@ -210,11 +210,11 @@ export default class PeriodForm extends React.Component
 			this.ShowModifySuccessMenssage();
 			this.props.CloseModifyForm();
 			this.props.UpdateTable();
-			logController.insertLog(this.CreateLog(this.props.user._id, "Successfully modified period"));
+			logController.insertLog(this.CreateLog(this.props.user._id, "Periodo modificado exitosamente"));
 		}
 		else{
 			this.CanNotCompleteTheActionMenssage();
-			logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully modified period"));
+			logController.insertLog(this.CreateLog(this.props.user._id, "Fallo en la modificación del periodo"));
 		}
 	}
 

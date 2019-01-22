@@ -63,7 +63,7 @@ export default class Main extends React.Component {
             break;
           }
         }
-        logController.insertLog(this.CreateLog(user._id, "Successfull login"));
+        logController.insertLog(this.CreateLog(user._id, "Ingreso exitoso"));
         this.SendUser(user);
         return;
       }
@@ -80,7 +80,7 @@ export default class Main extends React.Component {
             break;
           }
         }
-        logController.insertLog(this.CreateLog(user._id, "Successfull login"));
+        logController.insertLog(this.CreateLog(user._id, "Ingreso exitoso"));
         this.SendUser(user);
         return;
       }
@@ -108,10 +108,10 @@ export default class Main extends React.Component {
           }
         }
         if(user != null){
-          logController.insertLog(this.CreateLog(user._id, "Not successfull login"));
+          logController.insertLog(this.CreateLog(user._id, "Ingreso no exitoso"));
         }
         else {
-          logController.insertLog(this.CreateLog("", "Not successfull login"));
+          logController.insertLog(this.CreateLog("", "Ingreso no exitoso"));
         }
         return;
       }

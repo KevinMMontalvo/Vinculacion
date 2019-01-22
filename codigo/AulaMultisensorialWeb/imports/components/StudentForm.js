@@ -275,12 +275,12 @@ export default class StudentForm extends React.Component
 		{
 			this.ClearAllFields();
 			this.ShowAddSuccessMenssage();
-			logController.insertLog(this.CreateLog(this.props.user._id, "Successfully registered student"));
+			logController.insertLog(this.CreateLog(this.props.user._id, "Estudiante registrado exitosamente"));
 		}
 		else
 		{
 			this.CanNotCompleteTheActionMenssage();
-			logController.insertLog(this.CreateLog(this.props.user._id, "Not successfully registered student"));
+			logController.insertLog(this.CreateLog(this.props.user._id, "Fallo en el registro del estudiante"));
 		}
 	}
 
@@ -325,12 +325,12 @@ export default class StudentForm extends React.Component
 			this.ShowModifySuccessMenssage();
 			this.props.CloseModifyForm();
 			this.props.UpdateTable();
-			logController.insertLog(this.CreateLog(this.props.user._id, "Successfully modified student"));
+			logController.insertLog(this.CreateLog(this.props.user._id, "Estudiante modificado exitosamente"));
 		}
 		else
 		{
 			this.CanNotCompleteTheActionMenssage();
-			logController.insertLog(this.CreateLog(this.props.user._id, "Successfully modified student"));
+			logController.insertLog(this.CreateLog(this.props.user._id, "Fallo en la modificación del estudiante"));
 		}
 	}
 
