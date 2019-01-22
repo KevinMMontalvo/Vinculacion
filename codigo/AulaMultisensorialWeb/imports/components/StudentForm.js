@@ -415,105 +415,105 @@ export default class StudentForm extends React.Component
 	render()
 	{
 		return (<div>
-				<div className="student-form">
-					<div className="form-container">
-						<p className="input-label">Nombre del estudiante</p>
-						<div id="vertical-input" className="student-input">
-							<input id="first-name-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-							       placeholder="Primer nombre" className="vertical-input"></input>
-							<input id="second-name-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-							       placeholder="Segundo nombre" className="vertical-input"></input>
-							<input id="lastname-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-							       placeholder="Apellido paterno" className="vertical-input"></input>
-							<input id="mothers-lastname-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
-							       placeholder="Apellido materno" className="vertical-input"></input>
-						</div>
+			<div className="student-form">
+				<div className="form-container">
+					<p className="input-label">Nombre del estudiante</p>
+					<div id="vertical-input" className="student-input">
+						<input id="first-name-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
+						placeholder="Primer nombre" className="vertical-input"></input>
+						<input id="second-name-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
+						placeholder="Segundo nombre" className="vertical-input"></input>
+						<input id="lastname-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
+						placeholder="Apellido paterno" className="vertical-input"></input>
+						<input id="mothers-lastname-input" onKeyPress={() => this.ValidateOnlyLetters(event)}
+						placeholder="Apellido materno" className="vertical-input"></input>
 					</div>
-					<div className="form-container">
-						<p className="input-label">Género</p>
-						<div className="input-container">
-							<select id="gender-select">
-								<option value="" selected disabled hidden>Selecione el género del estudiante</option>
-								<option value="Masculino">Masculino</option>
-								<option value="Femenino">Femenino</option>
-							</select>
-						</div>
+				</div>
+				<div className="form-container">
+					<p className="input-label">Género</p>
+					<div className="input-container">
+						<select id="gender-select">
+							<option value="" selected disabled hidden>Selecione el género del estudiante</option>
+							<option value="Masculino">Masculino</option>
+							<option value="Femenino">Femenino</option>
+						</select>
 					</div>
-					<div className="form-container">
-						<p className="input-label">Fecha de nacimiento</p>
-						<div className="date-input-container">
-							<DatePicker
-								onChange={this.onChange}
-								value={this.state.date}
-								locate={this.lang}
-							/>
-						</div>
+				</div>
+				<div className="form-container">
+					<p className="input-label">Fecha de nacimiento</p>
+					<div className="date-input-container">
+						<DatePicker
+							onChange={this.onChange}
+							value={this.state.date}
+							locate={this.lang}
+						/>
 					</div>
-					<div className="form-container">
-						<p className="input-label">Diagnóstico</p>
-						<div className="input-container">
-							<textarea id="diagnostic-input" placeholder="Observaciones sobre el estudiante"></textarea>
-						</div>
+				</div>
+				<div className="form-container">
+					<p className="input-label">Diagnóstico</p>
+					<div className="input-container">
+						<textarea id="diagnostic-input" placeholder="Observaciones sobre el estudiante"></textarea>
 					</div>
-					<div className="form-container">
-						<p className="input-label">Condición</p>
-						<div className="input-container">
-							<select id="condition-select">
-								<option value="" selected disabled hidden>Selecione la condición del estudiante</option>
-								<option value="Cívil">Civíl</option>
-								<option value="Militar">Militar</option>
-							</select>
-						</div>
+				</div>
+				<div className="form-container">
+					<p className="input-label">Condición</p>
+					<div className="input-container">
+						<select id="condition-select">
+							<option value="" selected disabled hidden>Selecione la condición del estudiante</option>
+							<option value="Civíl">Civíl</option>
+							<option value="Militar">Militar</option>
+						</select>
 					</div>
-					<div className="form-container">
-						<p className="input-label">Nivel</p>
-						<div className="input-container">
-							<select id="level-select">
-								<option value="" selected disabled hidden>Selecione el nivel del estudiante</option>
-							</select>
-						</div>
+				</div>
+				<div className="form-container">
+					<p className="input-label">Nivel</p>
+					<div className="input-container">
+						<select id="level-select">
+							<option value="" selected disabled hidden>Selecione el nivel del estudiante</option>
+						</select>
 					</div>
-					<div className="form-container">
-						<p className="input-label">Porcentaje de discapacidad</p>
-						<div className="input-container">
-							<input id="percentage-of-disability-input" maxLength="2"
-							       onKeyPress={() => this.ValidateOnlyNumbers(event)} placeholder="%"
-							       className="horizontal-input"/>
-						</div>
+				</div>
+				<div className="form-container">
+					<p className="input-label">Porcentaje de discapacidad</p>
+					<div className="input-container">
+						<input id="percentage-of-disability-input" maxLength="2"
+							onKeyPress={() => this.ValidateOnlyNumbers(event)} placeholder="%"
+						className="horizontal-input"/>
 					</div>
-					<div className="form-container">
-						<p className="input-label">Ayudas técnicas</p>
-						<div className="tech-help-input-container">
-							<input id="technical-help-input" placeholder="Tipo de ayuda"
-							       className="vertical-input"></input>
-							<div onClick={() => this.AddTechnicalHelp()} className="add-tech-help-button"></div>
-							<div className="added-tech-help-container">
-								<div className="tech-helps-title">Ayudas técnicas del estudiante</div>
-								{this.state.techHelps.map((techHelps) =>
+				</div>
+				<div className="form-container">
+					<p className="input-label">Ayudas técnicas</p>
+					<div className="tech-help-input-container">
+						<input id="technical-help-input" placeholder="Tipo de ayuda"
+						className="vertical-input"></input>
+						<div onClick={() => this.AddTechnicalHelp()} className="add-tech-help-button"></div>
+						<div className="added-tech-help-container">
+							<div className="tech-helps-title">Ayudas técnicas del estudiante</div>
+							{this.state.techHelps.map((techHelps) =>
 								{
 									return <TechnicalHelp remove={true}
-									                      RemoveTechnicalHelp={this.RemoveTechnicalHelp.bind(this)}
-									                      techHelps={techHelps} key={techHelps._id}></TechnicalHelp>;
+										RemoveTechnicalHelp={this.RemoveTechnicalHelp.bind(this)}
+										techHelps={techHelps} key={techHelps._id}></TechnicalHelp>;
 								})}
-							</div>
 						</div>
 					</div>
-					<div className="button-container">
-						<div onClick={() => this.CheckWarningMessages()} className="secondary-button">
-							{this.props.studentToModify != undefined ? <div>Modificar Registro</div> :
-								<div>Completar Registro</div>}
-						</div>
-					</div>
-					<div className="separator"></div>
 				</div>
-				<ButterToast
-					position={{
+				<div className="button-container">
+					<div onClick={() => this.CheckWarningMessages()} className="secondary-button">
+						{this.props.studentToModify != undefined ? <div>Modificar Registro</div> :
+						<div>Completar Registro</div>}
+					</div>
+				</div>
+				<div className="separator"></div>
+			</div>
+			<ButterToast
+				position={{
 						vertical: POS_TOP,
 						horizontal: POS_RIGHT
-					}}
-					timeout={7500}
-					ref={tray => this.tray = tray}
-				/>
-			</div>);
+				}}
+				timeout={7500}
+				ref={tray => this.tray = tray}
+			/>
+		</div>);
 	}
 }

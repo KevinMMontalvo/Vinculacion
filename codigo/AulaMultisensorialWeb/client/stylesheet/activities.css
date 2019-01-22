@@ -60,19 +60,19 @@
 
 #matrix {
   background-color: #1BAB8F;
-  animation: grow-up 0.5s ease-in;
+  animation: slide-grow-up 0.5s ease-in;
 }
 
 #gloves{
   background-color: #138D75;
-  animation: grow-up 0.5s ease-in;
+  animation: slide-grow-up 0.5s ease-in;
   animation-delay: 0.5s;
   animation-fill-mode: backwards;
 }
 
 #cardiac-sensor{
   background-color: #0D6453;
-  animation: grow-up 0.5s ease-in;
+  animation: slide-grow-up 0.5s ease-in;
   animation-delay: 0.75s;
   animation-fill-mode: backwards;
 }

@@ -74,8 +74,5 @@ export default class SideMenu extends React.Component
 
 /*
 TODO
-Civil tilde incorrecta
 campo de fecha no se limpia, consultar cambio de formato
-ayudas tecnicas no parecen como estan escritos
-ejecutar 'meteor update --patch' para actualizar la version de meteor del proyecto
  */
