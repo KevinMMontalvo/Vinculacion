@@ -51,27 +51,45 @@ export default class ActivitiesMenu extends React.Component
 	{
 		activitiesController.startMatrizActivity("CardiacSensor");
 	}
+	ActivitiesReport()
+	{
+		this.props.ActivitiesReport();
+	}
 
 	render()
 	{
 		return (<div>
-				<div className="activities-menu">
-					<div className="activities-options">
-						<div onClick={() => this.MatrixActivity()} id="matrix" className="activity-option">
-							<div id="matrix-icon" className="activity-icon"></div>
-							<div className="activity-text">Matriz</div>
+			<div className="activities-menu">
+				<div className="activities-column">
+					<div className="activity-row">
+						<div className="activities-options">
+							<div onClick={() => this.ActivitiesReport()}
+								id="activity-report"
+							className="activity-option">
+								<div id="report-icon" className="report-icon"></div>
+								<div className="report-text">Reporte de actividades</div>
+							</div>
 						</div>
-						<div onClick={() => this.GlovesActivity()} id="gloves" className="activity-option">
-							<div id="gloves-icon" className="activity-icon"></div>
-							<div className="activity-text">Guantes</div>
-						</div>
-						<div onClick={() => this.CardiacSensorActivity()} id="cardiac-sensor"
-						     className="activity-option">
-							<div id="cardiac-sensor-icon" className="activity-icon"></div>
-							<div className="activity-text">Sensor cardíaco</div>
+					</div>
+					<div className="activity-row">
+						<div className="activities-options">
+							<div onClick={() => this.MatrixActivity()} id="matrix" className="activity-option">
+								<div id="matrix-icon" className="activity-icon"></div>
+								<div className="activity-text">Matriz</div>
+							</div>
+							<div onClick={() => this.GlovesActivity()} id="gloves" className="activity-option">
+								<div id="gloves-icon" className="activity-icon"></div>
+								<div className="activity-text">Guantes</div>
+							</div>
+							<div onClick={() => this.CardiacSensorActivity()} id="cardiac-sensor"
+							className="activity-option">
+								<div id="cardiac-sensor-icon" className="activity-icon"></div>
+								<div className="activity-text">Sensor cardíaco</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>);
+			</div>
+		</div>);
 	}
 }

@@ -16,7 +16,7 @@
   color: #FFF;
   position: relative;
   top: 7vh;
-  animation: fade-in 0.5s ease-in;
+  animation: rubber-band 1.5s ease-in;
   animation-fill-mode: backwards;
   animation-delay: 1.75s;
 }

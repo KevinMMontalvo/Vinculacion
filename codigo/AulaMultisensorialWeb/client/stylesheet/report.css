@@ -1,0 +1,8 @@
+.report-container {
+  width: 70vw;
+  height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFF;
+}

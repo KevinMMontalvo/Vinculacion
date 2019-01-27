@@ -24,8 +24,10 @@
 }
 
 .main-title {
-  font-size: 2.0em;
-  margin-left: 0.5vw;
+  font-size: 1.8em;
+  height: 4vw;
+  display: flex;
+  align-items: center;
   animation: slide-left 1s;
   animation-fill-mode: backwards;
   animation-delay: 1.5s;
@@ -35,8 +37,6 @@
 .main-icon {
   width: 4vw;
   height: 4vw;
-  background-color: #F4F6F6;
-  border-radius: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: 2vw;
@@ -46,31 +46,36 @@
 }
 
 #login-icon {
-  background-image: url(login.svg);
+  background-image: url(login-w.svg);
 }
 
 #home-icon {
-  background-image: url(home.svg);
+  background-image: url(home-w.svg);
   background-size: 2.0vw;
 }
 
 #student-icon {
-  background-image: url(student.svg);
+  background-image: url(student-w.svg);
   background-size: 1.5vw;
 }
 
 #teacher-icon {
-  background-image: url(teacher.svg);
-  background-size: 2.5vw;
+  background-image: url(teacher-w.svg);
+  background-size: 2.0vw;
 }
 
 #level-icon {
-  background-image: url(level.svg);
+  background-image: url(level-w.svg);
   background-size: 2vw;
 }
 
 #period-icon {
-  background-image: url(period.svg);
+  background-image: url(period-w.svg);
+  background-size: 1.75vw;
+}
+
+#activities-icon {
+  background-image: url(activities-w.svg);
   background-size: 2vw;
 }
 
