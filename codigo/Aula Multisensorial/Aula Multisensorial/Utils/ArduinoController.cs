@@ -37,6 +37,7 @@ namespace Aula_Multisensorial.Utils
 
             foreach (string port in ports)
             {
+                string id = "-1";
                 SerialPort temporarySerialPort = new SerialPort(port, BAUD_RATE);
                 try
                 {
@@ -46,17 +47,42 @@ namespace Aula_Multisensorial.Utils
                 {
                     continue;
                 }
-                temporarySerialPort.Write("ID");
-                Thread.Sleep(3000);
-                string id = temporarySerialPort.ReadLine();
 
-                if (int.Parse(id) == arduinoIndex)
+                //Establece el tiempo de respuesta de lectura a 3 s para la conexion
+                temporarySerialPort.ReadTimeout = 3000;
+
+                //3 intentos de conexion
+                for (int i = 0; i < 3; i++)
                 {
-                    temporarySerialPort.DiscardInBuffer();
-                    serialPorts[arduinoIndex] = temporarySerialPort;
-                    return true;
+                    try
+                    {
+                        temporarySerialPort.Write("ID");
+                        id = temporarySerialPort.ReadLine();
+                        break;
+                    }
+                    catch (Exception)
+                    {
+                        temporarySerialPort.DiscardInBuffer();
+                        temporarySerialPort.DiscardOutBuffer();
+                    }
                 }
-                temporarySerialPort.Close();
+
+                //vuelve a establecer un tiempo de respuesta indefinido
+                temporarySerialPort.ReadTimeout = SerialPort.InfiniteTimeout;
+
+                try
+                {
+                    if (int.Parse(id) == arduinoIndex)
+                    {
+                        temporarySerialPort.DiscardInBuffer();
+                        serialPorts[arduinoIndex] = temporarySerialPort;
+                        return true;
+                    }
+                    temporarySerialPort.Close();
+                }
+                catch (Exception)
+                {
+                }
             }
             return false;
         }

@@ -131,6 +131,8 @@ namespace Aula_Multisensorial.MatrixLED
             timer.Start();
         }
 
+        
+
         private void MatrixButtonsClickEvent(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -148,11 +150,14 @@ namespace Aula_Multisensorial.MatrixLED
 
         private string GetBytes()
         {
-            string byteFilasSuperiores = GetRowBinaries(2) + GetRowBinaries(1);
-            string byteFilasInferiores = GetRowBinaries(4) + GetRowBinaries(3);
+            string byteFila1 = GetRowBinaries(1);
+            string byteFila2 = GetRowBinaries(2);
+            string byteFila3 = GetRowBinaries(3);
+            string byteFila4 = GetRowBinaries(4);
 
-            shapeConfiguration = byteFilasSuperiores + byteFilasInferiores; //guarda la configuracion en el form
-            return "" + (char)Convert.ToInt32(byteFilasSuperiores, 2) + (char)Convert.ToInt32(byteFilasInferiores, 2);
+            shapeConfiguration = byteFila2+byteFila1+byteFila4+byteFila3; //guarda la configuracion en el form
+
+            return "" + (char)Convert.ToInt32(byteFila1, 2) + (char)Convert.ToInt32(byteFila2, 2) + (char)Convert.ToInt32(byteFila3, 2) + (char)Convert.ToInt32(byteFila4, 2);
         }
 
         private string GetRowBinaries(int row)
@@ -325,7 +330,7 @@ namespace Aula_Multisensorial.MatrixLED
         {
             NumericUpDown numericUpDown = (NumericUpDown)panelTools.Controls["numericUpDownColor"];
             colorConfiguration = (int)numericUpDown.Value;
-            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "C-0" + colorConfiguration);
+            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "C-000" + colorConfiguration);
             panelTools.Controls.Clear();
         }
 
@@ -365,7 +370,7 @@ namespace Aula_Multisensorial.MatrixLED
         {
             ComboBox comboBox = (ComboBox)panelTools.Controls["comboBox"];
             sequenceConfiguration = comboBox.SelectedIndex;
-            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "S-0" + sequenceConfiguration);
+            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "S-000" + sequenceConfiguration);
             LoadShapeBuffer();
             panelTools.Controls.Clear();
         }
@@ -399,11 +404,11 @@ namespace Aula_Multisensorial.MatrixLED
 
             if (levelConfiguration<11)
             {
-                ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "N-0" + (levelConfiguration - 1));
+                ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "N-000" + (levelConfiguration - 1));
             }
             else
             {
-                ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "N-" + (levelConfiguration - 1));
+                ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "N-00" + (levelConfiguration - 1));
             }
 
             panelTools.Controls.Clear();
@@ -439,7 +444,7 @@ namespace Aula_Multisensorial.MatrixLED
         {
             NumericUpDown numericUpDown = (NumericUpDown)panelTools.Controls["numericUpDown"];
             brightnessConfiguration = (int)numericUpDown.Value;
-            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "L-0" + brightnessConfiguration);
+            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "L-000" + brightnessConfiguration);
             panelTools.Controls.Clear();
             timer.Start();
         }
@@ -491,7 +496,7 @@ namespace Aula_Multisensorial.MatrixLED
         {
             NumericUpDown numericUpDown = (NumericUpDown)panelTools.Controls["numericUpDown"];
             appearancesConfiguration = (int)numericUpDown.Value;
-            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "A-0" + (appearancesConfiguration/10-1));
+            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "A-000" + (appearancesConfiguration/10-1));
             panelTools.Controls.Clear();
         }
 
