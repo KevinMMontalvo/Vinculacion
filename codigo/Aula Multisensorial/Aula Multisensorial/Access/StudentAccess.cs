@@ -11,7 +11,7 @@ namespace Aula_Multisensorial.Access
 {
     class StudentAccess
     {
-        private readonly CancellationTokenSource cancellationTokenSource;
+        private CancellationTokenSource cancellationTokenSource;
         private readonly IMongoCollection<Student> studentsCollection;
 
         public StudentAccess()
@@ -29,7 +29,9 @@ namespace Aula_Multisensorial.Access
         {
             try
             {
-                List<Student> studentsList = studentsCollection.Find(_ => true).ToList(cancellationTokenSource.Token);
+                cancellationTokenSource = new CancellationTokenSource();
+                cancellationTokenSource.CancelAfter(2500);
+                List<Student> studentsList = studentsCollection.Find(_ => true).ToList();
                 return Newtonsoft.Json.JsonConvert.SerializeObject(studentsList);
             }
             catch (Exception e)
@@ -56,6 +58,8 @@ namespace Aula_Multisensorial.Access
 
             try
             {
+                cancellationTokenSource = new CancellationTokenSource();
+                cancellationTokenSource.CancelAfter(2500);
                 studentsCollection.InsertOne(BsonSerializer.Deserialize<Student>(document), null, cancellationTokenSource.Token);
                 return true;
             }
@@ -87,6 +91,9 @@ namespace Aula_Multisensorial.Access
 
             Student objectStudent = BsonSerializer.Deserialize<Student>(document); //JSON → Objeto Student
 
+
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(2500);
             ReplaceOneResult result = studentsCollection.ReplaceOne(filter, objectStudent, null, cancellationTokenSource.Token);
 
             //validacion de la ejecucion correcta de la modificacion
@@ -109,6 +116,8 @@ namespace Aula_Multisensorial.Access
         {
             FilterDefinition<Student> filter = Builders<Student>.Filter.Eq("Id", id);
 
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(2500);
             DeleteResult deleteResult = studentsCollection.DeleteOne(filter, cancellationTokenSource.Token);
 
             //validacion de la ejecucion correcta de la eliminacion
@@ -134,6 +143,8 @@ namespace Aula_Multisensorial.Access
 
             UpdateDefinition<Student> updateDefinition = Builders<Student>.Update.Set("LevelId", levelId);
 
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(2500);
             UpdateResult updateResult = studentsCollection.UpdateOne(filter, updateDefinition, null, cancellationTokenSource.Token);
 
             if (updateResult.IsAcknowledged && updateResult.ModifiedCount == 1)
@@ -152,11 +163,15 @@ namespace Aula_Multisensorial.Access
 
             FilterDefinition<Student> filter = Builders<Student>.Filter.Eq("LevelId", levelId);
 
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(2500);
             return studentsCollection.Find(filter).ToList(cancellationTokenSource.Token);
         }
 
         public List<Student> GetStudentsByFilter(BsonDocument query)
         {
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(2500);
             return studentsCollection.Find(query).ToList(cancellationTokenSource.Token);
         }
     }

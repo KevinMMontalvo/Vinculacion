@@ -274,6 +274,15 @@ namespace Aula_Multisensorial.Access
             return StructurePieJSON(register);
         }
 
+        public DateTime[] GetMaxMinDates()
+        {
+            BsonDocument sortDefinition = new BsonDocument();
+            sortDefinition.Add("datetime",-1);
+            List<GlobeActivityRegister> globeActivities = activitiesCollection.Find(_ => true).Sort(sortDefinition).Limit(1).ToList();
+            Console.WriteLine(globeActivities[0].Datetime);
+            return null;
+        }
+
         public bool InsertActivity(GlobeActivityRegister activity)
         {
 

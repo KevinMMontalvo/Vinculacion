@@ -48,7 +48,9 @@ export default class ActivitiesMenu extends React.Component
 		var levels = ["Primero De Básica","Segundo De Básica"];
 		var periods =["Periodo 2019 - 2020","periodo asdas"];
 		var genders = ["Masculino", "Femenino"];
-		console.log(globeActivitiesController.getPieChartDataCollective(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0),2,18,genders,levels,periods,fingers));
+		//console.log(globeActivitiesController.getPieChartDataCollective(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0),2,18,genders,levels,periods,fingers));
+
+		console.log(globeActivitiesController.getMaxMinDates());
 	}
 
 	GlovesActivity()
