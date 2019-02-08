@@ -39,7 +39,9 @@ export default class ActivitiesMenu extends React.Component
 
 	MatrixActivity()
 	{
-		activitiesController.startMatrizActivity("Matrix");
+		//activitiesController.startMatrizActivity("Matrix");
+		var fingers = ["D1", "D2", "I5"];
+		console.log(globeActivitiesController.getPieChartDataIndividual(new Date(2017,1,1,0,0,0,0),new Date(2020,1,4,0,0,0,0),"5c43ff326beb3040fcd14d3c",fingers))
 	}
 
 	GlovesActivity()

@@ -1,5 +1,8 @@
-﻿using Aula_Multisensorial.Utils;
+﻿using Aula_Multisensorial.Access;
+using Aula_Multisensorial.Model;
+using Aula_Multisensorial.Utils;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -7,6 +10,7 @@ namespace Aula_Multisensorial.Gloves
 {
     public partial class Main : Form
     {
+        private readonly string teacherId;
         private delegate void ControlEvent(object sender, EventArgs e);
 
         public Main()
@@ -193,6 +197,21 @@ namespace Aula_Multisensorial.Gloves
                 MessageBox.Show("No se pudo conectar con el guante izquierdo");
             }
             return connectionSuccessful;
+        }
+
+        private void LoadStudentsList()
+        {
+            List<Student> students = new StudentAccess().GetStudentsByTeacherLevel(teacherId);
+
+            foreach (Student student in students)
+            {
+                comboBoxStudents.Items.Add(student);
+            }
+
+            comboBoxStudents.ValueMember = "Id";
+            comboBoxStudents.DisplayMember = "Name";
+
+
         }
     }
 }

@@ -173,5 +173,11 @@ namespace Aula_Multisensorial.Access
             }
 
         }
+
+        public Teacher GetTeacherById(string teacherId)
+        {
+            FilterDefinition<Teacher> filter = Builders<Teacher>.Filter.Eq("_id", teacherId);
+            return teachersCollection.Find(filter).First();
+        }
     }
 }

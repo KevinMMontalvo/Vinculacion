@@ -11,11 +11,13 @@ namespace Aula_Multisensorial.Access
 {
     class StudentAccess
     {
-        private static readonly int TIMEOUT = 2000; //Tiempo de respuesta maximo
+        private readonly CancellationTokenSource cancellationTokenSource;
         private readonly IMongoCollection<Student> studentsCollection;
 
         public StudentAccess()
         {
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(2500);
             studentsCollection = DatabaseConnection.GetInstance().Database.GetCollection<Student>("students");
         }
 
@@ -27,7 +29,7 @@ namespace Aula_Multisensorial.Access
         {
             try
             {
-                List<Student> studentsList = studentsCollection.Find(_ => true).ToList();
+                List<Student> studentsList = studentsCollection.Find(_ => true).ToList(cancellationTokenSource.Token);
                 return Newtonsoft.Json.JsonConvert.SerializeObject(studentsList);
             }
             catch (Exception e)
@@ -51,9 +53,6 @@ namespace Aula_Multisensorial.Access
             {
                 document.Set("technical_helps", new BsonArray());
             }
-
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             try
             {
@@ -88,9 +87,6 @@ namespace Aula_Multisensorial.Access
 
             Student objectStudent = BsonSerializer.Deserialize<Student>(document); //JSON → Objeto Student
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
-
             ReplaceOneResult result = studentsCollection.ReplaceOne(filter, objectStudent, null, cancellationTokenSource.Token);
 
             //validacion de la ejecucion correcta de la modificacion
@@ -112,9 +108,6 @@ namespace Aula_Multisensorial.Access
         public bool DeleteStudent(string id)
         {
             FilterDefinition<Student> filter = Builders<Student>.Filter.Eq("Id", id);
-
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             DeleteResult deleteResult = studentsCollection.DeleteOne(filter, cancellationTokenSource.Token);
 
@@ -139,9 +132,6 @@ namespace Aula_Multisensorial.Access
         {
             FilterDefinition<Student> filter = Builders<Student>.Filter.Eq("Id", studentId);
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
-
             UpdateDefinition<Student> updateDefinition = Builders<Student>.Update.Set("LevelId", levelId);
 
             UpdateResult updateResult = studentsCollection.UpdateOne(filter, updateDefinition, null, cancellationTokenSource.Token);
@@ -154,6 +144,20 @@ namespace Aula_Multisensorial.Access
             {
                 return false;
             }
+        }
+
+        public List<Student> GetStudentsByTeacherLevel(string teacherId)
+        {
+            string levelId = new TeacherAccess().GetTeacherById(teacherId).LevelId;
+
+            FilterDefinition<Student> filter = Builders<Student>.Filter.Eq("LevelId", levelId);
+
+            return studentsCollection.Find(filter).ToList(cancellationTokenSource.Token);
+        }
+
+        public List<Student> GetStudentsByFilter(BsonDocument query)
+        {
+            return studentsCollection.Find(query).ToList(cancellationTokenSource.Token);
         }
     }
 }

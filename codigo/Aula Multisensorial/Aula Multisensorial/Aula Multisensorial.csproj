@@ -95,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Access\AdministratorAccess.cs" />
+    <Compile Include="Access\GlobeActivityRegisterAccess.cs" />
     <Compile Include="Access\LevelAccess.cs" />
     <Compile Include="Access\LogAccess.cs" />
     <Compile Include="Access\PeriodAccess.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="Model\Activity.cs" />
     <Compile Include="Model\ActivityType.cs" />
     <Compile Include="Model\Administrator.cs" />
+    <Compile Include="Model\GlobeActivityRegisters.cs" />
     <Compile Include="Model\Log.cs" />
     <Compile Include="Model\Period.cs" />
     <Compile Include="Model\Student.cs" />

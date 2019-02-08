@@ -43,6 +43,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.comboBoxStudents = new System.Windows.Forms.ComboBox();
+            this.labelNombre = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -65,7 +67,7 @@
             this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonExit.ForeColor = System.Drawing.Color.White;
-            this.buttonExit.Location = new System.Drawing.Point(538, 485);
+            this.buttonExit.Location = new System.Drawing.Point(510, 534);
             this.buttonExit.Margin = new System.Windows.Forms.Padding(0);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(238, 56);
@@ -81,7 +83,7 @@
             this.buttonStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonStart.ForeColor = System.Drawing.Color.White;
-            this.buttonStart.Location = new System.Drawing.Point(72, 485);
+            this.buttonStart.Location = new System.Drawing.Point(144, 534);
             this.buttonStart.Margin = new System.Windows.Forms.Padding(0);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(238, 56);
@@ -93,7 +95,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Aula_Multisensorial.Properties.Resources.mano_izquierda;
-            this.pictureBox1.Location = new System.Drawing.Point(72, 107);
+            this.pictureBox1.Location = new System.Drawing.Point(76, 156);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(335, 350);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -103,7 +105,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::Aula_Multisensorial.Properties.Resources.mano_derecha;
-            this.pictureBox2.Location = new System.Drawing.Point(461, 107);
+            this.pictureBox2.Location = new System.Drawing.Point(465, 156);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(335, 350);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -113,7 +115,7 @@
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(86, 294);
+            this.label1.Location = new System.Drawing.Point(90, 343);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 23);
             this.label1.TabIndex = 9;
@@ -123,7 +125,7 @@
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(163, 154);
+            this.label2.Location = new System.Drawing.Point(167, 203);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(43, 20);
             this.label2.TabIndex = 10;
@@ -133,7 +135,7 @@
             // label3
             // 
             this.label3.BackColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(231, 137);
+            this.label3.Location = new System.Drawing.Point(235, 186);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 23);
             this.label3.TabIndex = 11;
@@ -143,7 +145,7 @@
             // label4
             // 
             this.label4.BackColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(294, 154);
+            this.label4.Location = new System.Drawing.Point(298, 203);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 23);
             this.label4.TabIndex = 12;
@@ -153,7 +155,7 @@
             // label5
             // 
             this.label5.BackColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(358, 195);
+            this.label5.Location = new System.Drawing.Point(362, 244);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 23);
             this.label5.TabIndex = 13;
@@ -163,7 +165,7 @@
             // label6
             // 
             this.label6.BackColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(462, 195);
+            this.label6.Location = new System.Drawing.Point(466, 244);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(48, 23);
             this.label6.TabIndex = 14;
@@ -173,7 +175,7 @@
             // label7
             // 
             this.label7.BackColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(528, 155);
+            this.label7.Location = new System.Drawing.Point(532, 204);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(47, 23);
             this.label7.TabIndex = 15;
@@ -183,7 +185,7 @@
             // label8
             // 
             this.label8.BackColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(593, 147);
+            this.label8.Location = new System.Drawing.Point(597, 196);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(47, 23);
             this.label8.TabIndex = 16;
@@ -193,7 +195,7 @@
             // label9
             // 
             this.label9.BackColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(659, 163);
+            this.label9.Location = new System.Drawing.Point(663, 212);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(47, 23);
             this.label9.TabIndex = 17;
@@ -203,20 +205,42 @@
             // label10
             // 
             this.label10.BackColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(736, 294);
+            this.label10.Location = new System.Drawing.Point(740, 343);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(47, 23);
             this.label10.TabIndex = 18;
             this.label10.Text = "Pulgar";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // comboBoxStudents
+            // 
+            this.comboBoxStudents.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxStudents.FormattingEnabled = true;
+            this.comboBoxStudents.Location = new System.Drawing.Point(277, 88);
+            this.comboBoxStudents.Name = "comboBoxStudents";
+            this.comboBoxStudents.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxStudents.TabIndex = 19;
+            // 
+            // labelNombre
+            // 
+            this.labelNombre.AutoSize = true;
+            this.labelNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNombre.ForeColor = System.Drawing.Color.White;
+            this.labelNombre.Location = new System.Drawing.Point(72, 88);
+            this.labelNombre.Name = "labelNombre";
+            this.labelNombre.Size = new System.Drawing.Size(173, 20);
+            this.labelNombre.TabIndex = 20;
+            this.labelNombre.Text = "Nombre del estudiante:";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
-            this.ClientSize = new System.Drawing.Size(884, 561);
+            this.ClientSize = new System.Drawing.Size(884, 629);
             this.ControlBox = false;
+            this.Controls.Add(this.labelNombre);
+            this.Controls.Add(this.comboBoxStudents);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -261,5 +285,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox comboBoxStudents;
+        private System.Windows.Forms.Label labelNombre;
     }
 }

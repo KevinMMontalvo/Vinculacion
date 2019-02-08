@@ -75,4 +75,5 @@ export default class SideMenu extends React.Component
 /*
 TODO
 campo de fecha no se limpia, consultar cambio de formato
+probar metodos find con errores de conexion
  */
