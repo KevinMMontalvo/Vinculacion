@@ -101,15 +101,15 @@ namespace Aula_Multisensorial.Access
 
             //filtro de rango de fechas de nacimiento a partir de las edades
             BsonDocument birthdateFilter = new BsonDocument();
-            if (minAge > 0)
-            {
-                DateTime minBirthdate = new DateTime(DateTime.Today.Year - minAge, DateTime.Today.Month, DateTime.Today.Day);
-                birthdateFilter.Add("$gte", minBirthdate);
-            }
             if (maxAge > 0)
             {
                 DateTime maxBirthdate = new DateTime(DateTime.Today.Year - maxAge, DateTime.Today.Month, DateTime.Today.Day);
-                birthdateFilter.Add("$lte", maxAge);
+                birthdateFilter.Add("$gte", maxBirthdate);
+            }
+            if (minAge > 0)
+            {
+                DateTime minBirthdate = new DateTime(DateTime.Today.Year - minAge, DateTime.Today.Month, DateTime.Today.Day);
+                birthdateFilter.Add("$lte", minBirthdate);
             }
 
             // filtro de genero
@@ -189,20 +189,19 @@ namespace Aula_Multisensorial.Access
         {
             // crea el filtro de busqueda de los estudiantes
             BsonDocument query = new BsonDocument();
-
             BsonArray andConditions = new BsonArray();
 
             //filtro de rango de fechas de nacimiento a partir de las edades
             BsonDocument birthdateFilter = new BsonDocument();
-            if (minAge > 0)
-            {
-                DateTime minBirthdate = new DateTime(DateTime.Today.Year - minAge, DateTime.Today.Month, DateTime.Today.Day);
-                birthdateFilter.Add("$gte", minBirthdate);
-            }
             if (maxAge > 0)
             {
                 DateTime maxBirthdate = new DateTime(DateTime.Today.Year - maxAge, DateTime.Today.Month, DateTime.Today.Day);
-                birthdateFilter.Add("$lte", maxAge);
+                birthdateFilter.Add("$gte", maxBirthdate);
+            }
+            if (minAge > 0)
+            {
+                DateTime minBirthdate = new DateTime(DateTime.Today.Year - minAge, DateTime.Today.Month, DateTime.Today.Day);
+                birthdateFilter.Add("$lte", minBirthdate);
             }
 
             // filtro de genero
@@ -265,17 +264,14 @@ namespace Aula_Multisensorial.Access
 
             /*Group*/
             BsonDocument group = new BsonDocument();
-            group.Add("_id", "$datetime");
+            group.Add("_id", "null");
             group.Add("values", new BsonDocument("$push", "$value"));
-
-            /*Sort*/
-            BsonDocument sort = new BsonDocument("_id", 1);
 
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
             cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
 
-            List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).Sort(sort).ToList(cancellationTokenSource.Token);
-            return StructureBarJSON(registers);
+            BsonDocument register = activitiesCollection.Aggregate().Match(match).Group(group).ToList(cancellationTokenSource.Token)[0];
+            return StructurePieJSON(register);
         }
 
         public bool InsertActivity(GlobeActivityRegister activity)
@@ -306,7 +302,7 @@ namespace Aula_Multisensorial.Access
             JArray array = new JArray();
 
             JArray headersArray = new JArray();
-            headersArray.Add(new JValue("Estudiante"));
+            headersArray.Add(new JValue("Fechas"));
             headersArray.Add(new JValue("Aciertos"));
             headersArray.Add(new JValue("Errores"));
             array.Add(headersArray);

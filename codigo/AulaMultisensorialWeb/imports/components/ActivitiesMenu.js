@@ -41,7 +41,14 @@ export default class ActivitiesMenu extends React.Component
 	{
 		//activitiesController.startMatrizActivity("Matrix");
 		var fingers = ["D1", "D2", "I5"];
-		console.log(globeActivitiesController.getPieChartDataIndividual(new Date(2017,1,1,0,0,0,0),new Date(2020,1,4,0,0,0,0),"5c43ff326beb3040fcd14d3c",fingers))
+
+		//ejemplo individuales
+		//console.log(globeActivitiesController.getPieChartDataIndividual(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0), "5c43ff326beb3040fcd14d3c", fingers));
+
+		var levels = ["Primero De Básica","Segundo De Básica"];
+		var periods =["Periodo 2019 - 2020","periodo asdas"];
+		var genders = ["Masculino", "Femenino"];
+		console.log(globeActivitiesController.getPieChartDataCollective(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0),2,18,genders,levels,periods,fingers));
 	}
 
 	GlovesActivity()
@@ -53,6 +60,7 @@ export default class ActivitiesMenu extends React.Component
 	{
 		activitiesController.startMatrizActivity("CardiacSensor");
 	}
+
 	ActivitiesReport()
 	{
 		this.props.ActivitiesReport();
@@ -66,8 +74,8 @@ export default class ActivitiesMenu extends React.Component
 					<div className="activity-row">
 						<div className="activities-options">
 							<div onClick={() => this.ActivitiesReport()}
-								id="activity-report"
-							className="activity-option">
+							     id="activity-report"
+							     className="activity-option">
 								<div id="report-icon" className="report-icon"></div>
 								<div className="report-text">Reporte de actividades</div>
 							</div>
@@ -84,7 +92,7 @@ export default class ActivitiesMenu extends React.Component
 								<div className="activity-text">Guantes</div>
 							</div>
 							<div onClick={() => this.CardiacSensorActivity()} id="cardiac-sensor"
-							className="activity-option">
+							     className="activity-option">
 								<div id="cardiac-sensor-icon" className="activity-icon"></div>
 								<div className="activity-text">Sensor cardíaco</div>
 							</div>
