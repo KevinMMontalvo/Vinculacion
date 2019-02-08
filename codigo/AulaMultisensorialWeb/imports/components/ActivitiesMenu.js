@@ -50,7 +50,7 @@ export default class ActivitiesMenu extends React.Component
 		var genders = ["Masculino", "Femenino"];
 		//console.log(globeActivitiesController.getPieChartDataCollective(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0),2,18,genders,levels,periods,fingers));
 
-		console.log(globeActivitiesController.getMaxMinDates());
+		console.log(globeActivitiesController.getGlobalMaxMinActivityDates());
 	}
 
 	GlovesActivity()

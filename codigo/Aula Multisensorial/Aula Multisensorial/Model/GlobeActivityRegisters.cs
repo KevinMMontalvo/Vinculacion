@@ -24,6 +24,14 @@ namespace Aula_Multisensorial.Model
         [JsonProperty(PropertyName = "datetime")]
         public DateTime Datetime { get; set; }
 
+        [BsonElement("level")]
+        [JsonProperty(PropertyName = "level")]
+        public string Level { get; set; }
+
+        [BsonElement("period")]
+        [JsonProperty(PropertyName = "period")]
+        public string Period { get; set; }
+
         [BsonElement("value")]
         [JsonProperty(PropertyName = "value")]
         public string Value { get; set; }
@@ -32,12 +40,14 @@ namespace Aula_Multisensorial.Model
         {
         }
 
-        public GlobeActivityRegister(string id, string studentId, string finger, DateTime datetime, string value)
+        public GlobeActivityRegister(string id, string studentId, string finger, DateTime datetime, string level, string period, string value)
         {
             Id = id;
             StudentId = studentId;
             Finger = finger;
             Datetime = datetime;
+            Level = level;
+            Period = period;
             Value = value;
         }
     }

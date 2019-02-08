@@ -138,7 +138,7 @@ namespace Aula_Multisensorial.Access
             BsonArray studentsFilter = new BsonArray();
             foreach (Student student in filteredStudents)
             {
-                studentsFilter.Add(new BsonDocument("student_id",student.Id));
+                studentsFilter.Add(new BsonDocument("student_id", student.Id));
             }
 
             //filtro de niveles
@@ -274,13 +274,31 @@ namespace Aula_Multisensorial.Access
             return StructurePieJSON(register);
         }
 
-        public DateTime[] GetMaxMinDates()
+        public string GetStudentMaxMinActivityDates(string studentId)
         {
-            BsonDocument sortDefinition = new BsonDocument();
-            sortDefinition.Add("datetime",-1);
-            List<GlobeActivityRegister> globeActivities = activitiesCollection.Find(_ => true).Sort(sortDefinition).Limit(1).ToList();
-            Console.WriteLine(globeActivities[0].Datetime);
-            return null;
+            JObject response = new JObject();
+
+            FilterDefinition<GlobeActivityRegister> filter = Builders<GlobeActivityRegister>.Filter.Eq("student_id", studentId);
+            GlobeActivityRegister minDateRegister = activitiesCollection.Find(filter).Sort(new BsonDocument("datetime", 1)).Limit(1).ToList()[0];
+            GlobeActivityRegister maxDateRegister = activitiesCollection.Find(filter).Sort(new BsonDocument("datetime", -1)).Limit(1).ToList()[0];
+
+            response.Add("minDate", minDateRegister.Datetime.ToLocalTime().ToString("yyyy-MM-dd"));
+            response.Add("maxDate", maxDateRegister.Datetime.ToLocalTime().ToString("yyyy-MM-dd"));
+
+            return response.ToString();
+        }
+
+        public string GetGlobalMaxMinActivityDates()
+        {
+            JObject response = new JObject();
+
+            GlobeActivityRegister minDateRegister = activitiesCollection.Find(new BsonDocument()).Sort(new BsonDocument("datetime", 1)).Limit(1).ToList()[0];
+            GlobeActivityRegister maxDateRegister = activitiesCollection.Find(new BsonDocument()).Sort(new BsonDocument("datetime", -1)).Limit(1).ToList()[0];
+
+            response.Add("minDate", minDateRegister.Datetime.ToLocalTime().ToString("yyyy-MM-dd"));
+            response.Add("maxDate", maxDateRegister.Datetime.ToLocalTime().ToString("yyyy-MM-dd"));
+
+            return response.ToString();
         }
 
         public bool InsertActivity(GlobeActivityRegister activity)
@@ -303,7 +321,7 @@ namespace Aula_Multisensorial.Access
 
         private string StructureBarJSON(List<BsonDocument> activitiesList)
         {
-            BsonArray values;
+            
             JArray dataArray;
 
             int successCount;
@@ -321,7 +339,7 @@ namespace Aula_Multisensorial.Access
                 dataArray = new JArray();
                 successCount = 0;
                 errorsCount = 0;
-                values = activity.GetElement("values").Value.AsBsonArray;
+                BsonArray values = activity.GetElement("values").Value.AsBsonArray;
                 foreach (string value in values)
                 {
                     if (value.Equals("Bien"))
