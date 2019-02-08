@@ -1217,7 +1217,8 @@ export default class MainContainer extends React.Component {
           }
           {
             this.state.activitiesReport ?
-              <ActivitiesReport/>
+              <ActivitiesReport
+                user={this.state.user}/>
             :
             undefined
           }

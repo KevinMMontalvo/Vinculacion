@@ -1,0 +1,115 @@
+.activity-picker {
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.activity-picker-option {
+  width: 14vh;
+  height: 14vh;
+  background-color: #333;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  transition: 0.5s;
+}
+
+.activity-picker-option:hover {
+  background-color: #2980B9;
+  cursor: pointer;
+}
+
+.activity-picker-icon {
+  width: 100%;
+  height: 60%;
+  background-position: center;
+  background-size: 5vh;
+  background-repeat: no-repeat;
+}
+
+#matrix-picker {
+  background-image: url(matrix-w.svg);
+}
+
+#globes-picker {
+  background-image: url(gloves-w.svg);
+}
+
+#sensor-picker {
+  background-image: url(cardiac-sensor-w.svg);
+}
+
+.activity-picker-text {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8em;
+}
+
+.hands-picker-container {
+  width: 100%;
+  height: 15vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10vw;
+}
+
+.hand-picker{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 12vw;
+  width: 15vw;
+  height: 15vw;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  display: flex;
+  background-color: #111;
+}
+
+.finger-1 {
+  width: 3.25vw;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.5;
+}
+
+.finger-2 {
+  width: 2.5vw;
+  height: 100%;
+  background-color: #333;
+  opacity: 0.5;
+}
+
+.finger-3 {
+  width: 2.25vw;
+  height: 100%;
+  background-color: #AAA;
+  opacity: 0.5;
+}
+
+.finger-4 {
+  width: 2.75vw;
+  height: 100%;
+  background-color: #CCC;
+  opacity: 0.5;
+}
+
+.finger-5 {
+  width: 4.25vw;
+  height: 100%;
+  background-color: #BBB;
+  opacity: 0.5;
+}
+
+#left-hand-picker{
+  background-image: url(left-hand-w.svg);
+}
+
+#right-hand-picker{
+  background-image: url(right-hand-w.svg);
+}
