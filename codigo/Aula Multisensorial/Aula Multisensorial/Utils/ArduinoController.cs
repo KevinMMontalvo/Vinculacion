@@ -9,7 +9,7 @@ namespace Aula_Multisensorial.Utils
     class ArduinoController
     {
         private static ArduinoController instance = null;
-        private static readonly int BAUD_RATE = 115200;
+        private static readonly int BAUD_RATE = 9600;
         public static readonly int MATRIX_ARDUINO = 0;
         public static readonly int RIGHT_HAND_ARDUINO = 1;
         public static readonly int LEFT_HAND_ARDUINO = 2;
