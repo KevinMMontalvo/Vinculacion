@@ -114,6 +114,7 @@ namespace Aula_Multisensorial.Gloves
                 {
                     buttonStart.Text = "Terminar";
                     buttonExit.Enabled = false;
+                    comboBoxStudents.Enabled = false;
                     buttonStart.BackColor = Color.DarkRed;
                     AddClickEvents();
                 }
@@ -122,6 +123,7 @@ namespace Aula_Multisensorial.Gloves
             {
                 buttonStart.Text = "Iniciar";
                 buttonExit.Enabled = true;
+                comboBoxStudents.Enabled = true;
                 buttonStart.BackColor = Color.Green;
                 RemoveClickEvents();
                 ArduinoController.GetInstance().CloseConnection(ArduinoController.RIGHT_HAND_ARDUINO);
