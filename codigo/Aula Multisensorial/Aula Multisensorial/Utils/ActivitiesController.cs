@@ -5,40 +5,40 @@ namespace Aula_Multisensorial.Utils
     class ActivitiesController
     {
         private readonly Form mainForm;
-        private delegate void StartActivty();
+        private delegate void StartActivty(string teacherId);
 
         public ActivitiesController(Form mainForm)
         {
             this.mainForm = mainForm;
         }
 
-        public void StartMatrizActivity(string activity)
+        public void StartMatrizActivity(string activity, string teacherId)
         {
             if (activity.Equals("Matrix"))
             {
-                mainForm.Invoke(new StartActivty(StartMatrixActivity));
+                mainForm.Invoke(new StartActivty(StartMatrixActivity), teacherId);
             }
             else if (activity.Equals("Globe"))
             {
-                mainForm.Invoke(new StartActivty(StartGlovesActivity));
+                mainForm.Invoke(new StartActivty(StartGlovesActivity), teacherId);
             }
             else if (activity.Equals("CardiacSensor"))
             {
-                mainForm.Invoke(new StartActivty(StartCardiacSensorActivity));
+                mainForm.Invoke(new StartActivty(StartCardiacSensorActivity), teacherId);
             }
         }
 
-        private void StartMatrixActivity()
+        private void StartMatrixActivity(string teacherId)
         {
-            new MatrixLED.Main();
+            new MatrixLED.Main(teacherId);
         }
 
-        private void StartGlovesActivity()
+        private void StartGlovesActivity(string teacherId)
         {
-            new Gloves.Main();
+            new Gloves.Main(teacherId);
         }
 
-        private void StartCardiacSensorActivity()
+        private void StartCardiacSensorActivity(string teacherId)
         {
 
         }

@@ -13,32 +13,16 @@ namespace Aula_Multisensorial.Gloves
         private readonly string teacherId;
         private delegate void ControlEvent(object sender, EventArgs e);
 
-        public Main()
+        public Main(string teacherId)
         {
             InitializeComponent();
+            this.teacherId = teacherId;
             Visible = true;
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
-            bool connectionSuccessful = ConnectGlobe(ArduinoController.RIGHT_HAND_ARDUINO);
-            if (!connectionSuccessful)
-            {
-                Shown += new EventHandler(new ControlEvent(ShownFormEvent)); // Cierra el formulario automaticamente
-                return;
-            }
-            else
-            {
-                AddClickEvents();
-            }
-
-            /*connectionSuccessful = ArduinoController.GetInstance().StartConnection(ArduinoController.LEFT_HAND_ARDUINO);
-            if (!connectionSuccessful)
-            {
-                MessageBox.Show("No se pudo conectar con el guante izquierdo");
-                Close();
-            }*/
-
+            LoadStudentsList();
         }
 
         private void OnClickLabelEvent(object sender, EventArgs e)
@@ -109,27 +93,39 @@ namespace Aula_Multisensorial.Gloves
         private void buttonStart_Click(object sender, EventArgs e)
         {
             bool correctOperation = true;
+
+            if (comboBoxStudents.SelectedIndex == -1)
+            {
+                return;
+            }
+
             if (buttonStart.Text.Equals("Iniciar"))
             {
                 if (!ArduinoController.GetInstance().IsPortOpen(ArduinoController.RIGHT_HAND_ARDUINO) && !ConnectGlobe(ArduinoController.RIGHT_HAND_ARDUINO))
                 {
                     correctOperation = false;
                 }
-                /*if (!ArduinoController.GetInstance().IsPortOpen(ArduinoController.LEFT_HAND_ARDUINO) && !ConnectGlobe(ArduinoController.LEFT_HAND_ARDUINO))
+                if (!ArduinoController.GetInstance().IsPortOpen(ArduinoController.LEFT_HAND_ARDUINO) && !ConnectGlobe(ArduinoController.LEFT_HAND_ARDUINO))
                 {
                     correctOperation = false;
-                }*/
+                }
 
                 if (correctOperation)
                 {
                     buttonStart.Text = "Terminar";
                     buttonExit.Enabled = false;
+                    buttonStart.BackColor = Color.DarkRed;
+                    AddClickEvents();
                 }
             }
             else if (buttonStart.Text.Equals("Terminar"))
             {
                 buttonStart.Text = "Iniciar";
                 buttonExit.Enabled = true;
+                buttonStart.BackColor = Color.Green;
+                RemoveClickEvents();
+                ArduinoController.GetInstance().CloseConnection(ArduinoController.RIGHT_HAND_ARDUINO);
+                ArduinoController.GetInstance().CloseConnection(ArduinoController.LEFT_HAND_ARDUINO);
             }
         }
 
@@ -143,14 +139,6 @@ namespace Aula_Multisensorial.Gloves
             Dispose();
         }
 
-        /// <summary>
-        /// Este metodo es el evento de cierre del formulario cuando no pasa la validacion de inicio
-        /// </summary>
-        private void ShownFormEvent(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         private void AddClickEvents()
         {
             for (int i = 1; i <= 10; i++)
@@ -158,6 +146,16 @@ namespace Aula_Multisensorial.Gloves
                 Controls["label" + i].Click += new EventHandler(new ControlEvent(OnClickLabelEvent));
                 Controls["label" + i].MouseHover += new EventHandler(new ControlEvent(HoverLabelEvent));
                 Controls["label" + i].MouseLeave += new EventHandler(new ControlEvent(MouseLeaveEvent));
+            }
+        }
+
+        private void RemoveClickEvents()
+        {
+            for (int i = 1; i <= 10; i++)
+            {
+                Controls["label" + i].Click -= new EventHandler(new ControlEvent(OnClickLabelEvent));
+                Controls["label" + i].MouseHover -= new EventHandler(new ControlEvent(HoverLabelEvent));
+                Controls["label" + i].MouseLeave -= new EventHandler(new ControlEvent(MouseLeaveEvent));
             }
         }
 
@@ -209,9 +207,7 @@ namespace Aula_Multisensorial.Gloves
             }
 
             comboBoxStudents.ValueMember = "Id";
-            comboBoxStudents.DisplayMember = "Name";
-
-
+            comboBoxStudents.DisplayMember = "Fullname";
         }
     }
 }

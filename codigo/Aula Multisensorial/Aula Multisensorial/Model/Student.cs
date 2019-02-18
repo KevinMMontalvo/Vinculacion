@@ -48,6 +48,8 @@ namespace Aula_Multisensorial.Model
         [JsonProperty(PropertyName = "percentage_of_disability")]
         public int DisabilityPercentage { get; set; }
 
+        public string FullName => $"{Names} {Surnames}";
+
         public Student()
         {
         }

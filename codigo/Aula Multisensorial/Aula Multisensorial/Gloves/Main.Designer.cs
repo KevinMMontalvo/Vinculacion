@@ -78,7 +78,7 @@
             // 
             // buttonStart
             // 
-            this.buttonStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(134)))), ((int)(((byte)(193)))));
+            this.buttonStart.BackColor = System.Drawing.Color.Green;
             this.buttonStart.FlatAppearance.BorderSize = 0;
             this.buttonStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -218,7 +218,7 @@
             this.comboBoxStudents.FormattingEnabled = true;
             this.comboBoxStudents.Location = new System.Drawing.Point(277, 88);
             this.comboBoxStudents.Name = "comboBoxStudents";
-            this.comboBoxStudents.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxStudents.Size = new System.Drawing.Size(392, 24);
             this.comboBoxStudents.TabIndex = 19;
             // 
             // labelNombre

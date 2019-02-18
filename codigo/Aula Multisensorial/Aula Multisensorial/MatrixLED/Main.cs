@@ -15,6 +15,7 @@ namespace Aula_Multisensorial.MatrixLED
         private static readonly string LEVEL_CONFIG_CODE = "CN-";
         private static readonly string BRIGHTNESS_CONFIG_CODE = "CB-";
         private static readonly string APPEARANCES_CONFIG_CODE = "CA-";
+        private readonly string teacherId;
         private string shapeConfiguration;
         private int colorConfiguration;
         private int sequenceConfiguration;
@@ -23,9 +24,10 @@ namespace Aula_Multisensorial.MatrixLED
         private int appearancesConfiguration;
         private delegate void ControlEvent(object sender, EventArgs e);
 
-        public Main()
+        public Main(string teacherId)
         {
             InitializeComponent();
+            this.teacherId = teacherId;
             ControlBox = false;
             Visible = true;
         }
@@ -65,12 +67,14 @@ namespace Aula_Multisensorial.MatrixLED
                 buttonStart.Text = "Terminar";
                 buttonSetup.Enabled = false;
                 buttonExit.Enabled = false;
+                buttonStart.BackColor = Color.DarkRed;
             }
             else if (buttonStart.Text.Equals("Terminar"))
             {
                 buttonStart.Text = "Iniciar";
                 buttonSetup.Enabled = true;
                 buttonExit.Enabled = true;
+                buttonStart.BackColor = Color.Green;
             }
         }
 

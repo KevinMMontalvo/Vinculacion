@@ -2,10 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf6ce076-847d-40a9-a101-46c52b689462" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Access/TeacherAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Access/TeacherAccess.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Aula Multisensorial.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Aula Multisensorial.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Gloves/Main.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Gloves/Main.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Gloves/Main.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Gloves/Main.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/MatrixLED/Main.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/MatrixLED/Main.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/MatrixLED/Main.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/MatrixLED/Main.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Model/Student.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Model/Student.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Utils/ActivitiesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Utils/ActivitiesController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/packages.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imports/components/ActivitiesMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/components/ActivitiesMenu.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -16,8 +24,31 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/imports/components/ActivitiesMenu.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="10" column="18" lean-forward="true" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+              <folding>
+                <element signature="e#1931#2015#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/imports/components/ActivitiesMenu.js" />
+      </list>
+    </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="260" />
@@ -31,6 +62,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -38,11 +70,26 @@
               <item name="AulaMultisensorialWeb" type="b2602c69:ProjectViewProjectNode" />
               <item name="AulaMultisensorialWeb" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="AulaMultisensorialWeb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AulaMultisensorialWeb" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AulaMultisensorialWeb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AulaMultisensorialWeb" type="462c0819:PsiDirectoryNode" />
+              <item name="imports" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AulaMultisensorialWeb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AulaMultisensorialWeb" type="462c0819:PsiDirectoryNode" />
+              <item name="imports" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -94,15 +141,18 @@
       <option name="presentableId" value="Default" />
       <updated>1549819054206</updated>
       <workItem from="1549819056764" duration="65000" />
-      <workItem from="1549910666027" duration="246000" />
+      <workItem from="1549910666027" duration="1047000" />
+      <workItem from="1550248645819" duration="5064000" />
+      <workItem from="1550501585757" duration="604000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="311000" />
+    <option name="totallyTimeSpent" value="6780000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17913593" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -125,5 +175,29 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/components/SideMenu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/components/ActivitiesMenu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="18" lean-forward="true" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+          <folding>
+            <element signature="e#1931#2015#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

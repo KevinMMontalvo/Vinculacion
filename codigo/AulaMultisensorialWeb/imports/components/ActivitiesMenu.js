@@ -55,7 +55,7 @@ export default class ActivitiesMenu extends React.Component
 
 	GlovesActivity()
 	{
-		activitiesController.startMatrizActivity("Globe");
+		activitiesController.startMatrizActivity("Globe","5c1bbb3f75c6cf37a489efcb");
 	}
 
 	CardiacSensorActivity()
