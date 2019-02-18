@@ -1,4 +1,6 @@
-﻿using Aula_Multisensorial.Utils;
+﻿using Aula_Multisensorial.Access;
+using Aula_Multisensorial.Model;
+using Aula_Multisensorial.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -52,6 +54,7 @@ namespace Aula_Multisensorial.MatrixLED
                 LoadBrightnessConfiguration();
                 LoadAppearancesConfiguration();
                 ShowConfigurationInformation();
+                LoadStudentsList();
             }
             catch (Exception ex)
             {
@@ -62,6 +65,11 @@ namespace Aula_Multisensorial.MatrixLED
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            if (comboBoxStudents.SelectedIndex == -1)
+            {
+                return;
+            }
+
             if (buttonStart.Text.Equals("Iniciar"))
             {
                 buttonStart.Text = "Terminar";
@@ -310,6 +318,19 @@ namespace Aula_Multisensorial.MatrixLED
         private void ShownFormEvent(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void LoadStudentsList()
+        {
+            List<Student> students = new StudentAccess().GetStudentsByTeacherLevel(teacherId);
+
+            foreach (Student student in students)
+            {
+                comboBoxStudents.Items.Add(student);
+            }
+
+            comboBoxStudents.ValueMember = "Id";
+            comboBoxStudents.DisplayMember = "Fullname";
         }
     }
 }

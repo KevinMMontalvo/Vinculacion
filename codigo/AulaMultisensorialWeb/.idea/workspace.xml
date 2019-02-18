@@ -3,17 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bf6ce076-847d-40a9-a101-46c52b689462" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Access/TeacherAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Access/TeacherAccess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Aula Multisensorial.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Aula Multisensorial.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Gloves/Main.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Gloves/Main.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Gloves/Main.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Gloves/Main.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/MatrixLED/Main.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/MatrixLED/Main.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/MatrixLED/Main.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/MatrixLED/Main.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Model/Student.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Model/Student.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Utils/ActivitiesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Utils/ActivitiesController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imports/components/ActivitiesMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/components/ActivitiesMenu.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -143,12 +132,12 @@
       <workItem from="1549819056764" duration="65000" />
       <workItem from="1549910666027" duration="1047000" />
       <workItem from="1550248645819" duration="5064000" />
-      <workItem from="1550501585757" duration="604000" />
+      <workItem from="1550501585757" duration="1203000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6780000" />
+    <option name="totallyTimeSpent" value="7379000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />

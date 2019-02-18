@@ -11,6 +11,7 @@ namespace Aula_Multisensorial.Access
 {
     class TeacherAccess
     {
+        private CancellationTokenSource cancellationTokenSource;
         private static readonly int TIMEOUT = 2000; //Tiempo de respuesta maximo
         private readonly IMongoCollection<Teacher> teachersCollection;
 
@@ -177,7 +178,9 @@ namespace Aula_Multisensorial.Access
         public Teacher GetTeacherById(string teacherId)
         {
             FilterDefinition<Teacher> filter = Builders<Teacher>.Filter.Eq("Id", teacherId);
-            return teachersCollection.Find(filter).First();
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(2500);
+            return teachersCollection.Find(filter).ToList(cancellationTokenSource.Token)[0];
         }
     }
 }

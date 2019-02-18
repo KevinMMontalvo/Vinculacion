@@ -11,6 +11,7 @@ namespace Aula_Multisensorial.Access
 {
     class LevelAccess
     {
+        private CancellationTokenSource cancellationTokenSource;
         private static readonly int TIMEOUT = 2000; //Tiempo de respuesta maximo
         private readonly IMongoCollection<Level> levelsCollection;
 
@@ -116,6 +117,14 @@ namespace Aula_Multisensorial.Access
             {
                 return false;
             }
+        }
+
+        public Level GetLevelById(string levelId)
+        {
+            FilterDefinition<Level> filter = Builders<Level>.Filter.Eq("Id", levelId);
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(2500);
+            return levelsCollection.Find(filter).ToList(cancellationTokenSource.Token)[0];
         }
 
     }

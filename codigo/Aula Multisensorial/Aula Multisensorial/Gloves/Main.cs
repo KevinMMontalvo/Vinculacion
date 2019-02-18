@@ -159,9 +159,17 @@ namespace Aula_Multisensorial.Gloves
             }
         }
 
-        private void DoFingerActivity(int arduinoIndex, string message)
+        private void DoFingerActivity(int arduinoIndex, string fingerMessage)
         {
-            ArduinoController.GetInstance().SendMessage(arduinoIndex, message);
+
+            GlobeActivityRegister globeActivity = new GlobeActivityRegister();
+            globeActivity.StudentId = comboBoxStudents.SelectedValue.ToString();
+            globeActivity.Finger = fingerMessage;
+            globeActivity.Datetime = DateTime.Now;
+            globeActivity.Level = new TeacherAccess().GetTeacherById(teacherId).LevelId;
+            globeActivity.Period = new PeriodAccess().GetActivePeriod().Name;
+
+            ArduinoController.GetInstance().SendMessage(arduinoIndex, fingerMessage);
             string recivedMessage = ArduinoController.GetInstance().GetMessage(ArduinoController.RIGHT_HAND_ARDUINO);
             if (recivedMessage == null)
             {
@@ -171,10 +179,14 @@ namespace Aula_Multisensorial.Gloves
             }
             else if (recivedMessage.ToString().Equals("BIEN\r"))
             {
+                globeActivity.Value = "Bien";
+                new GlobeActivityRegisterAccess().InsertActivity(globeActivity);
                 MessageBox.Show("BIEN");
             }
             else if (recivedMessage.ToString().Equals("MAL\r"))
             {
+                globeActivity.Value = "Mal";
+                new GlobeActivityRegisterAccess().InsertActivity(globeActivity);
                 MessageBox.Show("MAL");
             }
             else

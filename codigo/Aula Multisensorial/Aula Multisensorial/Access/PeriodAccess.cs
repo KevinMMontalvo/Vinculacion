@@ -151,5 +151,13 @@ namespace Aula_Multisensorial.Access
                 return false;
             }
         }
+        
+        public Period GetActivePeriod()
+        {
+            FilterDefinition<Period> filter = Builders<Period>.Filter.Eq("IsVisible", true);
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(TIMEOUT);
+            return periodsCollection.Find(filter).ToList(cancellationTokenSource.Token)[0];
+        }
     }
 }

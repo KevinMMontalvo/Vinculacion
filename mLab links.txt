@@ -6,7 +6,7 @@ mongo ds041167.mlab.com:41167/aula-multisensorial -u <dbuser> -p <dbpassword>
 
 To connect using a driver via the standard MongoDB URI
 
-mongodb://<dbuser>:<dbpassword>@ds041167.mlab.com:41167/aula-multisensorial
+mongodb://kevin:admin123@ds041167.mlab.com:41167/aula-multisensorial
 
 
 user: kevin

@@ -16,8 +16,6 @@ namespace Aula_Multisensorial.Access
 
         public StudentAccess()
         {
-            cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(2500);
             studentsCollection = DatabaseConnection.GetInstance().Database.GetCollection<Student>("students");
         }
 
@@ -173,6 +171,14 @@ namespace Aula_Multisensorial.Access
             cancellationTokenSource = new CancellationTokenSource();
             cancellationTokenSource.CancelAfter(2500);
             return studentsCollection.Find(query).ToList(cancellationTokenSource.Token);
+        }
+
+        public Student GetStudentById(string studentId)
+        {
+            FilterDefinition<Student> filter = Builders<Student>.Filter.Eq("Id", studentId);
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(2500);
+            return studentsCollection.Find(filter).ToList(cancellationTokenSource.Token)[0];
         }
     }
 }

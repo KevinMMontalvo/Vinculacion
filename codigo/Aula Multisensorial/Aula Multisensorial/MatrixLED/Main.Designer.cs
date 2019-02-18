@@ -33,6 +33,8 @@
             this.buttonSetup = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
             this.labelConfigurationInformation = new System.Windows.Forms.Label();
+            this.labelNombre = new System.Windows.Forms.Label();
+            this.comboBoxStudents = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // labelTittle
@@ -40,7 +42,7 @@
             this.labelTittle.AutoSize = true;
             this.labelTittle.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTittle.ForeColor = System.Drawing.Color.White;
-            this.labelTittle.Location = new System.Drawing.Point(298, 33);
+            this.labelTittle.Location = new System.Drawing.Point(298, 22);
             this.labelTittle.Name = "labelTittle";
             this.labelTittle.Size = new System.Drawing.Size(266, 29);
             this.labelTittle.TabIndex = 0;
@@ -53,7 +55,7 @@
             this.buttonStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonStart.ForeColor = System.Drawing.Color.White;
-            this.buttonStart.Location = new System.Drawing.Point(193, 118);
+            this.buttonStart.Location = new System.Drawing.Point(193, 153);
             this.buttonStart.Margin = new System.Windows.Forms.Padding(0);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(476, 56);
@@ -69,7 +71,7 @@
             this.buttonSetup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSetup.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSetup.ForeColor = System.Drawing.Color.White;
-            this.buttonSetup.Location = new System.Drawing.Point(193, 220);
+            this.buttonSetup.Location = new System.Drawing.Point(193, 244);
             this.buttonSetup.Margin = new System.Windows.Forms.Padding(0);
             this.buttonSetup.Name = "buttonSetup";
             this.buttonSetup.Size = new System.Drawing.Size(476, 56);
@@ -85,7 +87,7 @@
             this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonExit.ForeColor = System.Drawing.Color.White;
-            this.buttonExit.Location = new System.Drawing.Point(193, 321);
+            this.buttonExit.Location = new System.Drawing.Point(193, 337);
             this.buttonExit.Margin = new System.Windows.Forms.Padding(0);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(476, 56);
@@ -104,6 +106,26 @@
             this.labelConfigurationInformation.Size = new System.Drawing.Size(0, 17);
             this.labelConfigurationInformation.TabIndex = 4;
             // 
+            // labelNombre
+            // 
+            this.labelNombre.AutoSize = true;
+            this.labelNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNombre.ForeColor = System.Drawing.Color.White;
+            this.labelNombre.Location = new System.Drawing.Point(64, 86);
+            this.labelNombre.Name = "labelNombre";
+            this.labelNombre.Size = new System.Drawing.Size(173, 20);
+            this.labelNombre.TabIndex = 21;
+            this.labelNombre.Text = "Nombre del estudiante:";
+            // 
+            // comboBoxStudents
+            // 
+            this.comboBoxStudents.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxStudents.FormattingEnabled = true;
+            this.comboBoxStudents.Location = new System.Drawing.Point(243, 86);
+            this.comboBoxStudents.Name = "comboBoxStudents";
+            this.comboBoxStudents.Size = new System.Drawing.Size(392, 24);
+            this.comboBoxStudents.TabIndex = 22;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -111,6 +133,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
             this.ClientSize = new System.Drawing.Size(884, 561);
             this.ControlBox = false;
+            this.Controls.Add(this.comboBoxStudents);
+            this.Controls.Add(this.labelNombre);
             this.Controls.Add(this.labelConfigurationInformation);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonSetup);
@@ -133,5 +157,7 @@
         private System.Windows.Forms.Button buttonSetup;
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Label labelConfigurationInformation;
+        private System.Windows.Forms.Label labelNombre;
+        private System.Windows.Forms.ComboBox comboBoxStudents;
     }
 }
