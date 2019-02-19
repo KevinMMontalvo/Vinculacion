@@ -96,9 +96,16 @@
     <Compile Include="Access\GlobeActivityRegisterAccess.cs" />
     <Compile Include="Access\LevelAccess.cs" />
     <Compile Include="Access\LogAccess.cs" />
+    <Compile Include="Access\MatrixActivityRegisterAccess.cs" />
     <Compile Include="Access\PeriodAccess.cs" />
     <Compile Include="Access\StudentAccess.cs" />
     <Compile Include="Access\TeacherAccess.cs" />
+    <Compile Include="CardiacSensor\Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CardiacSensor\Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
     <Compile Include="CEFForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,8 +133,9 @@
     <Compile Include="Model\Activity.cs" />
     <Compile Include="Model\ActivityType.cs" />
     <Compile Include="Model\Administrator.cs" />
-    <Compile Include="Model\GlobeActivityRegisters.cs" />
+    <Compile Include="Model\GlobeActivityRegister.cs" />
     <Compile Include="Model\Log.cs" />
+    <Compile Include="Model\MatrixActivityRegister.cs" />
     <Compile Include="Model\Period.cs" />
     <Compile Include="Model\Student.cs" />
     <Compile Include="Model\Level.cs" />

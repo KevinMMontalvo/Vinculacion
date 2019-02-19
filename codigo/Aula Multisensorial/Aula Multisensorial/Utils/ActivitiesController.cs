@@ -12,7 +12,7 @@ namespace Aula_Multisensorial.Utils
             this.mainForm = mainForm;
         }
 
-        public void StartMatrizActivity(string activity, string teacherId)
+        public void StartActivity(string activity, string teacherId)
         {
             if (activity.Equals("Matrix"))
             {

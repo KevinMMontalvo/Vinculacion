@@ -168,7 +168,7 @@ namespace Aula_Multisensorial.Gloves
             globeActivity.StudentId = comboBoxStudents.SelectedValue.ToString();
             globeActivity.Finger = fingerMessage;
             globeActivity.Datetime = DateTime.Now;
-            globeActivity.Level = new TeacherAccess().GetTeacherById(teacherId).LevelId;
+            globeActivity.Level = new LevelAccess().GetLevelById(new TeacherAccess().GetTeacherById(teacherId).LevelId).Name;
             globeActivity.Period = new PeriodAccess().GetActivePeriod().Name;
 
             ArduinoController.GetInstance().SendMessage(arduinoIndex, fingerMessage);
