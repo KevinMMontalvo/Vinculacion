@@ -145,6 +145,9 @@
     <Compile Include="Utils\ActivitiesController.cs" />
     <Compile Include="Utils\ArduinoController.cs" />
     <Compile Include="Utils\DatabaseConnection.cs" />
+    <EmbeddedResource Include="CardiacSensor\Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CEFForm.resx">
       <DependentUpon>CEFForm.cs</DependentUpon>
     </EmbeddedResource>
