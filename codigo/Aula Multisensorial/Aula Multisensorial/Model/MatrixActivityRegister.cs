@@ -36,12 +36,12 @@ namespace Aula_Multisensorial.Model
         [JsonProperty(PropertyName = "color_configuration")]
         public int ColorConfiguration { get; set; }
 
-        [BsonElement("shape_configuration")]
-        [JsonProperty(PropertyName = "shape_configuration")]
+        [BsonElement("sequence_configuration")]
+        [JsonProperty(PropertyName = "sequence_configuration")]
         public int SequenceConfiguration { get; set; }
 
-        [BsonElement("shape_configuration")]
-        [JsonProperty(PropertyName = "shape_configuration")]
+        [BsonElement("level_configuration")]
+        [JsonProperty(PropertyName = "level_configuration")]
         public int LevelConfiguration { get; set; }
 
         [BsonElement("appearances_configuration")]

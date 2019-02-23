@@ -89,7 +89,7 @@ namespace Aula_Multisensorial.Utils
 
         public bool SendMessage(int arduinoIndex, string message)
         {
-            if (serialPorts[arduinoIndex].IsOpen)
+            if (serialPorts[arduinoIndex] != null && serialPorts[arduinoIndex].IsOpen)
             {
                 serialPorts[arduinoIndex].Write(message);
                 return true;
@@ -102,7 +102,7 @@ namespace Aula_Multisensorial.Utils
 
         public string GetMessage(int arduinoIndex)
         {
-            if (serialPorts[arduinoIndex].IsOpen)
+            if (serialPorts[arduinoIndex]!=null && serialPorts[arduinoIndex].IsOpen)
             {
                 try
                 {
@@ -134,6 +134,8 @@ namespace Aula_Multisensorial.Utils
         {
             if (serialPorts[arduinoIndex] != null)
             {
+                serialPorts[arduinoIndex].DiscardInBuffer();
+                serialPorts[arduinoIndex].DiscardOutBuffer();
                 serialPorts[arduinoIndex].Close();
                 serialPorts[arduinoIndex].Dispose();
                 serialPorts[arduinoIndex] = null;

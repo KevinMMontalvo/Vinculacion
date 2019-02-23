@@ -52,6 +52,7 @@ namespace Aula_Multisensorial
         private void CEFForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Cef.Shutdown();
+            Dispose();
         }
     }
 }

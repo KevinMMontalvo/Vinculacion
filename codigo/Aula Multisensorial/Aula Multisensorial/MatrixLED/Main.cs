@@ -4,7 +4,7 @@ using Aula_Multisensorial.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO.Ports;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Aula_Multisensorial.MatrixLED
@@ -18,13 +18,15 @@ namespace Aula_Multisensorial.MatrixLED
         private static readonly string BRIGHTNESS_CONFIG_CODE = "CB-";
         private static readonly string APPEARANCES_CONFIG_CODE = "CA-";
         private readonly string teacherId;
+        private delegate string GetSelectedComboBoxText();
+        private delegate void ChangeActivityState();
+        private delegate void ControlEvent(object sender, EventArgs e);
         private string shapeConfiguration;
         private int colorConfiguration;
         private int sequenceConfiguration;
         private int levelConfiguration;
         private int brightnessConfiguration;
         private int appearancesConfiguration;
-        private delegate void ControlEvent(object sender, EventArgs e);
 
         public Main(string teacherId)
         {
@@ -36,24 +38,16 @@ namespace Aula_Multisensorial.MatrixLED
 
         private void Main_Load(object sender, EventArgs e)
         {
-            /*bool connectionSuccessful = ArduinoController.GetInstance().StartConnection(ArduinoController.MATRIX_ARDUINO);
-
-            if (!connectionSuccessful)
+            if (!ConnectMatrix())
             {
                 MessageBox.Show("No se pudo conectar con el dispositivo (Matriz de LED)");
                 Shown += new EventHandler(new ControlEvent(ShownFormEvent)); // Cierra el formulario automaticamente
                 return;
-            }*/
+            }
 
             try
             {
-                /*LoadShapeConfiguration();
-                LoadColorConfiguration();
-                LoadSequenceConfiguration();
-                LoadLevelConfiguration();
-                LoadBrightnessConfiguration();
-                LoadAppearancesConfiguration();
-                ShowConfigurationInformation();*/
+                LoadConfigurations();
                 LoadStudentsList();
             }
             catch (Exception ex)
@@ -72,20 +66,25 @@ namespace Aula_Multisensorial.MatrixLED
 
             if (buttonStart.Text.Equals("Iniciar"))
             {
-                buttonStart.Text = "Terminar";
-                buttonSetup.Enabled = false;
-                buttonExit.Enabled = false;
-                comboBoxStudents.Enabled = false;
-                buttonStart.BackColor = Color.DarkRed;
-                ReceiveMessages();
+                bool connectionSuccessful = true;
+                if (!ArduinoController.GetInstance().IsPortOpen(ArduinoController.MATRIX_ARDUINO))
+                {
+                    connectionSuccessful = ArduinoController.GetInstance().StartConnection(ArduinoController.MATRIX_ARDUINO);
+                }
+
+                //al enviar el comando END pone la matriz en su estado inicial
+                if (connectionSuccessful && ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "END"))
+                {    
+                    StartReading();
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo conectar con el dispositivo (Matriz de LED)");
+                }
             }
             else if (buttonStart.Text.Equals("Terminar"))
             {
-                buttonStart.Text = "Iniciar";
-                buttonSetup.Enabled = true;
-                buttonExit.Enabled = true;
-                comboBoxStudents.Enabled = true;
-                buttonStart.BackColor = Color.Green;
+                StopReading();
             }
         }
 
@@ -108,6 +107,22 @@ namespace Aula_Multisensorial.MatrixLED
             Dispose();
         }
 
+        private bool ConnectMatrix()
+        {
+            return ArduinoController.GetInstance().StartConnection(ArduinoController.MATRIX_ARDUINO);
+        }
+
+        private void LoadConfigurations()
+        {
+            LoadShapeConfiguration();
+            LoadColorConfiguration();
+            LoadSequenceConfiguration();
+            LoadLevelConfiguration();
+            LoadBrightnessConfiguration();
+            LoadAppearancesConfiguration();
+            ShowConfigurationInformation();
+        }
+
         private void LoadShapeConfiguration()
         {
             bool commandSendedProperly;
@@ -120,7 +135,7 @@ namespace Aula_Multisensorial.MatrixLED
             }
 
             configuration = ArduinoController.GetInstance().GetMessageInBytes(ArduinoController.MATRIX_ARDUINO);
-            if (configuration==null)
+            if (configuration == null)
             {
                 throw new Exception("Error en la conexion con la Matriz LED");
             }
@@ -277,7 +292,7 @@ namespace Aula_Multisensorial.MatrixLED
             label.AutoSize = true;
             label.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label.ForeColor = Color.White;
-            label.Location = new Point(200, 400);
+            label.Location = new Point(200, 420);
             label.Name = "label";
             label.Size = new Size(24, 20);
             label.Text = "Número de colores: " + colorConfiguration + "\nSecuencia de movimiento: ";
@@ -311,7 +326,7 @@ namespace Aula_Multisensorial.MatrixLED
             }
             label.Text += "\nNivel de rapidez: " + (4200 - (200 * levelConfiguration)) / 1000F + " segundos - Nivel " + levelConfiguration;
             label.Text += "\nNivel de Brillo: " + brightnessConfiguration;
-            label.Text += "\nProbabilidad de aparición: " + (appearancesConfiguration + 1) * 10 + "%";
+            label.Text += "\nProbabilidad de aparición: " + appearancesConfiguration * 10 + "%";
             Controls.Add(label);
         }
 
@@ -336,26 +351,87 @@ namespace Aula_Multisensorial.MatrixLED
             comboBoxStudents.DisplayMember = "Fullname";
         }
 
+        private async void StartReading()
+        {
+            bool messageSended = ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "START");
+            if (messageSended)
+            {
+                Task readVaules = new Task(ReceiveMessages);
+                readVaules.Start();
+                SetStartActivity();
+            }
+        }
+
+        private void StopReading()
+        {
+            SetEndActivity();
+            ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "END");
+            ArduinoController.GetInstance().CloseConnection(ArduinoController.MATRIX_ARDUINO);
+        }
         private void ReceiveMessages()
         {
             string message;
-            MatrixActivityRegister matrixActivity = new MatrixActivityRegister();
-            matrixActivity.StudentId = comboBoxStudents.SelectedValue.ToString();
-            matrixActivity.Datetime = DateTime.Now;
-            matrixActivity.Level = new LevelAccess().GetLevelById(new TeacherAccess().GetTeacherById(teacherId).LevelId).Name;
-            matrixActivity.Period = new PeriodAccess().GetActivePeriod().Name;
-            matrixActivity.ShapeConfiguration = shapeConfiguration;
-            matrixActivity.ColorConfiguration = colorConfiguration;
-            matrixActivity.SequenceConfiguration = sequenceConfiguration;
-            matrixActivity.LevelConfiguration = levelConfiguration;
-            matrixActivity.AppearancesConfiguration = appearancesConfiguration;
+            MatrixActivityRegister matrixActivity;
 
             do
             {
+                matrixActivity = new MatrixActivityRegister();
+                matrixActivity.StudentId = (string)Invoke(new GetSelectedComboBoxText(GetComboBoxStudentsText)); // para acceder a elementos de la GUI desde el hilo
+                matrixActivity.Datetime = DateTime.Now;
+                matrixActivity.Level = new LevelAccess().GetLevelById(new TeacherAccess().GetTeacherById(teacherId).LevelId).Name;
+                matrixActivity.Period = new PeriodAccess().GetActivePeriod().Name;
+                matrixActivity.ShapeConfiguration = shapeConfiguration;
+                matrixActivity.ColorConfiguration = colorConfiguration;
+                matrixActivity.SequenceConfiguration = sequenceConfiguration;
+                matrixActivity.LevelConfiguration = levelConfiguration;
+                matrixActivity.AppearancesConfiguration = appearancesConfiguration;
+
                 message = ArduinoController.GetInstance().GetMessage(ArduinoController.MATRIX_ARDUINO);
+                if (message == null && !ArduinoController.GetInstance().IsPortOpen(ArduinoController.MATRIX_ARDUINO)) // errror de conexion
+                {
+                    MessageBox.Show("Ha ocurrido un problema de conexion con la matriz, revise que la matriz este bien conectada");
+                    Invoke(new ChangeActivityState(SetEndActivity));
+                    break;
+                }
+                else if(message == null) // terminado por el usuario
+                {
+                    break;
+                }
+                else if (message.Equals("BIEN\r"))
+                {
+                    matrixActivity.Value = "Bien";
+                }
+                else if (message.Equals("MAL\r"))
+                {
+                    matrixActivity.Value = "Mal";
+                }
                 new MatrixActivityRegisterAccess().InsertActivity(matrixActivity);
-                
             } while (buttonStart.Text.Equals("Terminar"));
         }
+
+        private string GetComboBoxStudentsText()
+        {
+            Student selectedStudent = (Student)comboBoxStudents.SelectedItem;
+            return selectedStudent.Id;
+        }
+
+        private void SetStartActivity()
+        {
+            buttonStart.Text = "Terminar";
+            buttonSetup.Enabled = false;
+            buttonExit.Enabled = false;
+            comboBoxStudents.Enabled = false;
+            buttonStart.BackColor = Color.DarkRed;
+        }
+
+        private void SetEndActivity()
+        {
+            buttonStart.Text = "Iniciar";
+            buttonSetup.Enabled = true;
+            buttonExit.Enabled = true;
+            comboBoxStudents.Enabled = true;
+            buttonStart.BackColor = Color.Green;
+        }
+
     }
 }
