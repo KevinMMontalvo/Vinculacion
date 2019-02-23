@@ -132,7 +132,7 @@ namespace Aula_Multisensorial.Utils
 
         public bool CloseConnection(int arduinoIndex)
         {
-            if (serialPorts[arduinoIndex] != null)
+            if (serialPorts[arduinoIndex].IsOpen && serialPorts[arduinoIndex] != null)
             {
                 serialPorts[arduinoIndex].DiscardInBuffer();
                 serialPorts[arduinoIndex].DiscardOutBuffer();

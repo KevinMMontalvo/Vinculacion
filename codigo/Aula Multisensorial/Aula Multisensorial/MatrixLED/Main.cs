@@ -40,7 +40,6 @@ namespace Aula_Multisensorial.MatrixLED
         {
             if (!ConnectMatrix())
             {
-                MessageBox.Show("No se pudo conectar con el dispositivo (Matriz de LED)");
                 Shown += new EventHandler(new ControlEvent(ShownFormEvent)); // Cierra el formulario automaticamente
                 return;
             }
@@ -74,7 +73,7 @@ namespace Aula_Multisensorial.MatrixLED
 
                 //al enviar el comando END pone la matriz en su estado inicial
                 if (connectionSuccessful && ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "END"))
-                {    
+                {
                     StartReading();
                 }
                 else
@@ -90,10 +89,13 @@ namespace Aula_Multisensorial.MatrixLED
 
         private void buttonSetup_Click(object sender, EventArgs e)
         {
-            Configuration configuration = new Configuration(this, shapeConfiguration, colorConfiguration, sequenceConfiguration, levelConfiguration, brightnessConfiguration, appearancesConfiguration);
-            //Configuration configuration = new Configuration(this, "1111111100000000", 5, 3, 3, 4, 5);
-            configuration.Show();
-            Hide();
+            if (ConnectMatrix())
+            {
+                Configuration configuration = new Configuration(this, shapeConfiguration, colorConfiguration, sequenceConfiguration, levelConfiguration, brightnessConfiguration, appearancesConfiguration);
+                //Configuration configuration = new Configuration(this, "1111111100000000", 5, 3, 3, 4, 5);
+                configuration.Show();
+                Hide();
+            }
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -109,10 +111,19 @@ namespace Aula_Multisensorial.MatrixLED
 
         private bool ConnectMatrix()
         {
-            return ArduinoController.GetInstance().StartConnection(ArduinoController.MATRIX_ARDUINO);
+            if (ArduinoController.GetInstance().IsPortOpen(ArduinoController.MATRIX_ARDUINO))
+            {
+                return true;
+            }
+            bool connectionSuccessful = ArduinoController.GetInstance().StartConnection(ArduinoController.MATRIX_ARDUINO);
+            if (!connectionSuccessful)
+            {
+                MessageBox.Show("No se pudo conectar con el dispositivo (Matriz de LED)");
+            }
+            return connectionSuccessful;
         }
 
-        private void LoadConfigurations()
+        public void LoadConfigurations()
         {
             LoadShapeConfiguration();
             LoadColorConfiguration();
@@ -327,6 +338,11 @@ namespace Aula_Multisensorial.MatrixLED
             label.Text += "\nNivel de rapidez: " + (4200 - (200 * levelConfiguration)) / 1000F + " segundos - Nivel " + levelConfiguration;
             label.Text += "\nNivel de Brillo: " + brightnessConfiguration;
             label.Text += "\nProbabilidad de aparición: " + appearancesConfiguration * 10 + "%";
+
+            if (Controls["label"] != null)
+            {
+                Controls["label"].Dispose();
+            }
             Controls.Add(label);
         }
 
@@ -368,6 +384,7 @@ namespace Aula_Multisensorial.MatrixLED
             ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "END");
             ArduinoController.GetInstance().CloseConnection(ArduinoController.MATRIX_ARDUINO);
         }
+
         private void ReceiveMessages()
         {
             string message;
@@ -393,7 +410,7 @@ namespace Aula_Multisensorial.MatrixLED
                     Invoke(new ChangeActivityState(SetEndActivity));
                     break;
                 }
-                else if(message == null) // terminado por el usuario
+                else if (message == null) // terminado por el usuario
                 {
                     break;
                 }

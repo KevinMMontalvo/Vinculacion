@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bf6ce076-847d-40a9-a101-46c52b689462" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/CEFForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/CEFForm.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/MatrixLED/Main.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/MatrixLED/Main.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Utils/ArduinoController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Utils/ArduinoController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -129,12 +124,12 @@
       <workItem from="1550501585757" duration="1804000" />
       <workItem from="1550573282938" duration="2449000" />
       <workItem from="1550843517741" duration="616000" />
-      <workItem from="1550933934405" duration="1803000" />
+      <workItem from="1550933934405" duration="3001000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12848000" />
+    <option name="totallyTimeSpent" value="14046000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
