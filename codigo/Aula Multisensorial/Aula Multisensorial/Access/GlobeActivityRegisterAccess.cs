@@ -53,6 +53,11 @@ namespace Aula_Multisensorial.Access
             cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).Sort(sort).ToList(cancellationTokenSource.Token);
+
+            if (registers.Count > 0) //valida de que haya por lo menos 1 registro
+            {
+                return new JObject().ToString();
+            }
             return StructureBarJSON(registers);
         }
 
@@ -88,8 +93,13 @@ namespace Aula_Multisensorial.Access
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
             cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
 
-            BsonDocument registers = activitiesCollection.Aggregate().Match(match).Group(group).ToList(cancellationTokenSource.Token)[0];
-            return StructurePieJSON(registers);
+            List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).ToList(cancellationTokenSource.Token);
+
+            if (registers.Count > 0) //valida de que haya por lo menos 1 registro
+            {
+                return new JObject().ToString();
+            }
+            return StructurePieJSON(registers[0]);
         }
 
         public string GetBarChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods, object[] fingers)
@@ -182,6 +192,11 @@ namespace Aula_Multisensorial.Access
             cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).Sort(sort).ToList(cancellationTokenSource.Token);
+
+            if (registers.Count > 0) //valida de que haya por lo menos 1 registro
+            {
+                return new JObject().ToString();
+            }
             return StructureBarJSON(registers);
         }
 
@@ -270,8 +285,13 @@ namespace Aula_Multisensorial.Access
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
             cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
 
-            BsonDocument register = activitiesCollection.Aggregate().Match(match).Group(group).ToList(cancellationTokenSource.Token)[0];
-            return StructurePieJSON(register);
+            List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).ToList(cancellationTokenSource.Token);
+            if (registers.Count < 0) //valida de que haya por lo menos 1 registro
+            {
+                return new JObject().ToString();
+            }
+
+            return StructurePieJSON(registers[0]);
         }
 
         public string GetStudentMaxMinActivityDates(string studentId)
@@ -316,7 +336,6 @@ namespace Aula_Multisensorial.Access
 
         public bool InsertActivity(GlobeActivityRegister activity)
         {
-
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
             cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
 

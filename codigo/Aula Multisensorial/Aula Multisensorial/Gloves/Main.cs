@@ -167,7 +167,7 @@ namespace Aula_Multisensorial.Gloves
             GlobeActivityRegister globeActivity = new GlobeActivityRegister();
             globeActivity.StudentId = comboBoxStudents.SelectedValue.ToString();
             globeActivity.Finger = fingerMessage;
-            globeActivity.Datetime = DateTime.Now;
+            globeActivity.Datetime = DateTime.Now.Date; //solo fecha para poder agrupar
             globeActivity.Level = new LevelAccess().GetLevelById(new TeacherAccess().GetTeacherById(teacherId).LevelId).Name;
             globeActivity.Period = new PeriodAccess().GetActivePeriod().Name;
 

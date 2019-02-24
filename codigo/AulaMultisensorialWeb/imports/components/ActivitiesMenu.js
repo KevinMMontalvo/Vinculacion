@@ -39,20 +39,32 @@ export default class ActivitiesMenu extends React.Component
 
 	MatrixActivity()
 	{
-		//activitiesController.startMatrizActivity("Matrix");
 		var fingers = ["D1", "D2", "I5"];
 
 		//ejemplo individuales
 		//console.log(globeActivitiesController.getPieChartDataIndividual(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0), "5c43ff326beb3040fcd14d3c", fingers));
 
-		var levels = ["Primero De Básica","Segundo De Básica"];
+		var levels = ["Primero De Básica","Segundo De Básica","Septimo De Básica"];
 		var periods =["Periodo 2019 - 2020","periodo asdas"];
 		var genders = ["Masculino", "Femenino"];
+		//ejemplo colectivo
 		//console.log(globeActivitiesController.getPieChartDataCollective(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0),2,18,genders,levels,periods,fingers));
 
-		console.log(globeActivitiesController.getStudentMaxMinActivityDates("5c3ddc133705124014bd58d9"));
+		//console.log(globeActivitiesController.getGlobalMaxMinActivityDates());
 
 		//activitiesController.startActivity("Matrix","5c1bbb3f75c6cf37a489efcb");
+
+		/*
+		Matriz
+		 */
+
+		//ejemplo individual
+		//console.log(matrixActivitiesController.getBarChartDataIndividual(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0), "5c43ff326beb3040fcd14d3c"));
+		//console.log(matrixActivitiesController.getPieChartDataIndividual(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0), "5c43ff326beb3040fcd14d3c"));
+
+
+		//ejemplo colectivo
+		console.log(matrixActivitiesController.getPieChartDataCollective(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0),2,18,genders,levels,periods));
 	}
 
 	GlovesActivity()

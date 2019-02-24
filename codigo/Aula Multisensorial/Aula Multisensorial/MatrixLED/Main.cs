@@ -394,7 +394,7 @@ namespace Aula_Multisensorial.MatrixLED
             {
                 matrixActivity = new MatrixActivityRegister();
                 matrixActivity.StudentId = (string)Invoke(new GetSelectedComboBoxText(GetComboBoxStudentsText)); // para acceder a elementos de la GUI desde el hilo
-                matrixActivity.Datetime = DateTime.Now;
+                matrixActivity.Datetime = DateTime.Now.Date; //solo fecha para poder agrupar
                 matrixActivity.Level = new LevelAccess().GetLevelById(new TeacherAccess().GetTeacherById(teacherId).LevelId).Name;
                 matrixActivity.Period = new PeriodAccess().GetActivePeriod().Name;
                 matrixActivity.ShapeConfiguration = shapeConfiguration;
