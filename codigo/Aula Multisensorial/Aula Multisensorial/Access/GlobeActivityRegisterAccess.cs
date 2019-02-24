@@ -54,7 +54,7 @@ namespace Aula_Multisensorial.Access
 
             List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).Sort(sort).ToList(cancellationTokenSource.Token);
 
-            if (registers.Count > 0) //valida de que haya por lo menos 1 registro
+            if (registers.Count == 0) //valida de que haya por lo menos 1 registro
             {
                 return new JObject().ToString();
             }
@@ -95,7 +95,7 @@ namespace Aula_Multisensorial.Access
 
             List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).ToList(cancellationTokenSource.Token);
 
-            if (registers.Count > 0) //valida de que haya por lo menos 1 registro
+            if (registers.Count == 0) //valida de que haya por lo menos 1 registro
             {
                 return new JObject().ToString();
             }
@@ -193,7 +193,7 @@ namespace Aula_Multisensorial.Access
 
             List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).Sort(sort).ToList(cancellationTokenSource.Token);
 
-            if (registers.Count > 0) //valida de que haya por lo menos 1 registro
+            if (registers.Count == 0) //valida de que haya por lo menos 1 registro
             {
                 return new JObject().ToString();
             }
@@ -286,7 +286,7 @@ namespace Aula_Multisensorial.Access
             cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).ToList(cancellationTokenSource.Token);
-            if (registers.Count < 0) //valida de que haya por lo menos 1 registro
+            if (registers.Count == 0) //valida de que haya por lo menos 1 registro
             {
                 return new JObject().ToString();
             }

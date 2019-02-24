@@ -48,7 +48,7 @@ namespace Aula_Multisensorial.Access
 
             List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).Sort(sort).ToList(cancellationTokenSource.Token);
 
-            if (registers.Count > 0) //valida de que haya por lo menos 1 registro
+            if (registers.Count == 0) //valida de que haya por lo menos 1 registro
             {
                 return new JObject().ToString();
             }
@@ -81,7 +81,7 @@ namespace Aula_Multisensorial.Access
 
             List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).ToList(cancellationTokenSource.Token);
 
-            if (registers.Count > 0) //valida de que haya por lo menos 1 registro
+            if (registers.Count == 0) //valida de que haya por lo menos 1 registro
             {
                 return new JObject().ToString();
             }
@@ -171,7 +171,7 @@ namespace Aula_Multisensorial.Access
 
             List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).Sort(sort).ToList(cancellationTokenSource.Token);
 
-            if (registers.Count > 0) //valida de que haya por lo menos 1 registro
+            if (registers.Count == 0) //valida de que haya por lo menos 1 registro
             {
                 return new JObject().ToString();
             }
@@ -274,7 +274,7 @@ namespace Aula_Multisensorial.Access
 
             minDateResponse = activitiesCollection.Find(filter).Sort(new BsonDocument("datetime", 1)).Limit(1).ToList();
 
-            if (minDateResponse.Count > 0) //valida que por lo menos haya 1 registro
+            if (minDateResponse.Count == 0) //valida que por lo menos haya 1 registro
             {
                 MatrixActivityRegister minDateRegister = minDateResponse[0];
                 MatrixActivityRegister maxDateRegister = activitiesCollection.Find(filter).Sort(new BsonDocument("datetime", -1)).Limit(1).ToList()[0];
