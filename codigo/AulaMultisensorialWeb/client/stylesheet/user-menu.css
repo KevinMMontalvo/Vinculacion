@@ -1,5 +1,5 @@
 .advanced-menu-options-container {
-  width: 40vw;
+  width: 25vw;
   height: auto;
 }
 
@@ -15,13 +15,15 @@
   color: #333;
   font-size: 1.4em;
   font-weight: bold;
+  position: relative;
+  top: -3vh;
 }
 
 .styles_modal__gNwvD {
   padding-left: 0;
   padding-right: 0;
-  padding-top: 0.15vh;
-  padding-bottom: 0;
+  padding-top: 2.5vh;
+  padding-bottom: 2vh;
 }
 
 .advanced-menu-sub-title {
@@ -47,19 +49,19 @@
 }
 
 #change-password {
-  background-position: 5vw 1.75vh;
+  background-position: 2.5vw 1.75vh;
   background-size: 6vh;
   background-image: url(change-password-w.svg);
 }
 
 #import-excel {
-  background-position: 5.5vw 1.25vh;
+  background-position: 2.5vw 1.25vh;
   background-size: 4.5vh;
   background-image: url(excel-w.svg);
 }
 
 #logout {
-  background-position: 5.5vw 1.25vh;
+  background-position: 2.5vw 1.25vh;
   background-size: 4.5vh;
   background-image: url(logout-w.svg);
 }

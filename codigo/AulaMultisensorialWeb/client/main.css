@@ -109,6 +109,7 @@ textarea:focus {
 
 .primary-button {
   background: linear-gradient(to right, #2e86c1 0%, #2bbea2 100%);
+  background-repeat: no-repeat;
   width: 90%;
   height: 100%;
   display: flex;
@@ -120,9 +121,8 @@ textarea:focus {
 }
 
 .primary-button:hover {
-  width: 92.5%;
+  filter: brightness(1.1);
   cursor: pointer;
-  background-color: #248ED5;
 }
 
 .secondary-button {
@@ -138,9 +138,8 @@ textarea:focus {
 }
 
 .secondary-button:hover {
-  width: 88%;
+  filter: brightness(1.1);
   cursor: pointer;
-  background-color: #248ED5;
 }
 
 .vertical-input {
@@ -173,6 +172,15 @@ textarea:focus {
   width: 100%;
   height: auto;
   margin-bottom: 2vh;
+}
+
+.animated-form-container {
+  width: 100%;
+  height: auto;
+  margin-bottom: 2vh;
+  position: relative;
+  animation: slide-in-left 0.75s;
+  transition: 0.5s;
 }
 
 .input-label {
@@ -268,9 +276,9 @@ select:focus {
 }
 
 .alert-warning-icon {
-  background-image: url(warning-y.svg);
+  background-image: url(warning-w.svg);
   background-position: center;
-  background-size: 2vw;
+  background-size: 0.3vw;
   background-repeat: no-repeat;
   width: 100%;
   height: 100%;
@@ -307,8 +315,47 @@ select:focus {
   box-shadow: none;
   background-color: #000;
   color: #FFF;
+  border-radius: 0px;
+  text-align: center;
+  opacity: 0.9;
 }
 
 .butter-alert.style__Div-sc-1url3us-0.jtQObZ div.content {
   color: #FFF;
+}
+
+.option-button {
+  width: auto;
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
+  height: 5vh;
+  background-color: #2980B9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.option-button:hover {
+  filter: brightness(1.1);
+  cursor: pointer;
+}
+
+.option-input-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 4vh;
+  margin-bottom: 4vh;
+}
+
+.option-input-text {
+  width: auto;
+  height: 5vh;
+  margin-left: 1.5vw;
+  margin-right: 1.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

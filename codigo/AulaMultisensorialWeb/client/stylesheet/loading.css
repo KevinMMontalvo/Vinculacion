@@ -1,6 +1,7 @@
 .loading-container {
   width: auto;
-  height: auto;
+  padding-top: 20vh;
+  height: 55vh;
 }
 
 .loading-text {

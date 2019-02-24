@@ -1,0 +1,40 @@
+.chart-container {
+  width: 70vw;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5vh;
+}
+
+.chart-info {
+  opacity: 0.9;
+  animation: bounce-in-left 1s;
+  transition: 0.5s;
+  background-color: #100E11;
+}
+.chart-info:hover {
+  opacity: 1;
+}
+
+.chart-title {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.5vh;
+  padding-bottom: 0.5vh;
+  font-size: 1.1em;
+}
+
+.chart-subtitle {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.75vh;
+  padding-bottom: 0.75vh;
+  font-size: 0.85em;
+}

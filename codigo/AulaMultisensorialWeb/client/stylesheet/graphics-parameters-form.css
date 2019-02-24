@@ -1,3 +1,9 @@
+.graphics-form {
+  width: 70vw;
+  height: auto;
+  animation: fade-in 1s;
+}
+
 .activity-picker {
   width: 100%;
   height: 15vh;
@@ -20,12 +26,36 @@
   cursor: pointer;
 }
 
+.activity-picker-option-selected {
+  width: 14vh;
+  height: 14vh;
+  background-color: #2980B9;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  transition: 0.5s;
+}
+
+.activity-picker-option-selected:hover {
+  background-color: #2980B9;
+  cursor: pointer;
+}
+
 .activity-picker-icon {
   width: 100%;
   height: 60%;
   background-position: center;
   background-size: 5vh;
   background-repeat: no-repeat;
+}
+
+.activity-picker-text {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75em;
 }
 
 #matrix-picker {
@@ -40,9 +70,61 @@
   background-image: url(cardiac-sensor-w.svg);
 }
 
-.activity-picker-text {
+.graphic-picker {
   width: 100%;
-  height: 40%;
+  height: 15vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.graphic-picker-option {
+  width: 14vh;
+  height: 14vh;
+  background-color: #333;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  transition: 0.5s;
+}
+
+.graphic-picker-option:hover {
+  background-color: #2980B9;
+  cursor: pointer;
+}
+
+.graphic-picker-option-selected {
+  width: 14vh;
+  height: 14vh;
+  background-color: #2980B9;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  transition: 0.5s;
+}
+
+.graphic-picker-option-selected:hover {
+  background-color: #2980B9;
+  cursor: pointer;
+}
+
+.graphic-picker-icon {
+  width: 100%;
+  height: 70%;
+  background-position: center;
+  background-size: 5vh;
+  background-repeat: no-repeat;
+}
+
+#bar-picker {
+  background-image: url(bar-w.svg);
+}
+
+#pie-picker {
+  background-image: url(pie-w.svg);
+}
+
+.graphic-picker-text {
+  width: 100%;
+  height: 30%;
   display: flex;
   text-align: center;
   justify-content: center;
@@ -56,7 +138,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 10vw;
 }
 
 .hand-picker{
@@ -68,42 +149,141 @@
   margin-left: 1vw;
   margin-right: 1vw;
   display: flex;
-  background-color: #111;
 }
 
 .finger-1 {
   width: 3.25vw;
   height: 100%;
-  background-color: #000;
-  opacity: 0.5;
 }
 
 .finger-2 {
   width: 2.5vw;
-  height: 100%;
-  background-color: #333;
-  opacity: 0.5;
+  height: 100;
 }
 
 .finger-3 {
   width: 2.25vw;
   height: 100%;
-  background-color: #AAA;
-  opacity: 0.5;
 }
 
 .finger-4 {
   width: 2.75vw;
   height: 100%;
-  background-color: #CCC;
-  opacity: 0.5;
 }
 
 .finger-5 {
   width: 4.25vw;
   height: 100%;
-  background-color: #BBB;
-  opacity: 0.5;
+}
+
+.l-selected-finger-1 {
+  width: 1vw;
+  height: 1vw;
+  border-radius: 100%;
+  background-color: #2980B9;
+  position: relative;
+  top: 4.8vw;
+  left: 1.2vw;
+  transition: 0.1s;
+}
+
+.l-selected-finger-2 {
+  width: 1vw;
+  height: 1vw;
+  border-radius: 100%;
+  background-color: #2980B9;
+  position: relative;
+  top: 2.2vw;
+  left: 0.4vw;
+  transition: 0.1s;
+}
+
+.l-selected-finger-3 {
+  width: 1vw;
+  height: 1vw;
+  border-radius: 100%;
+  background-color: #2980B9;
+  position: relative;
+  top: 1.25vw;
+  left: 0.65vw;
+  transition: 0.1s;
+}
+
+.l-selected-finger-4 {
+  width: 1vw;
+  height: 1vw;
+  border-radius: 100%;
+  background-color: #2980B9;
+  position: relative;
+  top: 2.1vw;
+  left: 1.6vw;
+  transition: 0.1s;
+}
+
+.l-selected-finger-5 {
+  width: 1vw;
+  height: 1vw;
+  border-radius: 100%;
+  background-color: #2980B9;
+  position: relative;
+  top: 7.5vw;
+  left: 2.2vw;
+  transition: 0.1s;
+}
+
+.r-selected-finger-1 {
+  width: 1vw;
+  height: 1vw;
+  border-radius: 100%;
+  background-color: #2980B9;
+  position: relative;
+  top: 4.8vw;
+  left: 1.1vw;
+  transition: 0.1s;
+}
+
+.r-selected-finger-2 {
+  width: 1vw;
+  height: 1vw;
+  border-radius: 100%;
+  background-color: #2980B9;
+  position: relative;
+  top: 2vw;
+  left: 1.1vw;
+  transition: 0.1s;
+}
+
+.r-selected-finger-3 {
+  width: 1vw;
+  height: 1vw;
+  border-radius: 100%;
+  background-color: #2980B9;
+  position: relative;
+  top: 1.25vw;
+  left: 0.55vw;
+  transition: 0.1s;
+}
+
+.r-selected-finger-4 {
+  width: 1vw;
+  height: 1vw;
+  border-radius: 100%;
+  background-color: #2980B9;
+  position: relative;
+  top: 2.1vw;
+  left: 0.1vw;
+  transition: 0.1s;
+}
+
+.r-selected-finger-5 {
+  width: 1vw;
+  height: 1vw;
+  border-radius: 100%;
+  background-color: #2980B9;
+  position: relative;
+  top: 7.5vw;
+  left: 1vw;
+  transition: 0.1s;
 }
 
 #left-hand-picker{
@@ -112,4 +292,53 @@
 
 #right-hand-picker{
   background-image: url(right-hand-w.svg);
+}
+
+.checkbox-panel{
+  width: 14.5vw;
+  height: 7.5vw;
+  position: absolute;
+  right: 3vw;
+}
+
+.checkbox-container {
+  width: 100%;
+  height: 27.33%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  transition: 0.5s;
+}
+
+.checkbox-button {
+  width: 2vw;
+  height: 100%;
+  background-color: #333;
+  position: relative;
+  left: 0.5vw;
+  transition: 0.5s;
+  background-image: url(check-w.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 0.75vw;
+}
+
+.checkbox-text {
+  width: 11.5vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-indent: 1vw;
+  transition: 0.5s;
+  font-size: 0.8em;
+}
+
+.checkbox-container:hover {
+  cursor: pointer;
+}
+
+.checkbox-container:hover div.checkbox-button {
+  background-color: #2980B9;
 }

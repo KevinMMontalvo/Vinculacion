@@ -95,19 +95,19 @@
 
 #matrix {
   background-color: #138D75;
-  animation: jack-in-the-box 1s ease-in;
+  animation: flip-in-y 1s ease-in;
 }
 
 #gloves{
   background-color: #0D6453;
-  animation: jack-in-the-box 1s ease-in;
+  animation: flip-in-y 1s ease-in;
   animation-delay: 0.5s;
   animation-fill-mode: backwards;
 }
 
 #cardiac-sensor{
   background-color: #055042;
-  animation: jack-in-the-box 1.25s ease-in;
+  animation: flip-in-y 1.25s ease-in;
   animation-delay: 0.75s;
   animation-fill-mode: backwards;
 }
@@ -119,7 +119,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: flip-in-y 1s;
+  animation: flip-in-y 0.75s;
   animation-delay: 0.15s;
   animation-fill-mode: backwards;
 }

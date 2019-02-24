@@ -49,7 +49,8 @@ export default class SideMenu extends React.Component
 
 	render()
 	{
-		return (<div>
+		return (
+			<div>
 				<div className="side-menu">
 					{this.props.isLogged ? <div className="menu-options">
 						<div onClick={() => this.StudentOption()} id="option1" className="menu-option">Estudiantes</div>
@@ -68,7 +69,8 @@ export default class SideMenu extends React.Component
 						</div>
 					</div> : undefined}
 				</div>
-			</div>);
+			</div>
+		);
 	}
 }
 
