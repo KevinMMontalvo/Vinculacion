@@ -276,27 +276,40 @@ namespace Aula_Multisensorial.Access
 
         public string GetStudentMaxMinActivityDates(string studentId)
         {
+            List<GlobeActivityRegister> minDateResponse;
+
             JObject response = new JObject();
 
             FilterDefinition<GlobeActivityRegister> filter = Builders<GlobeActivityRegister>.Filter.Eq("student_id", studentId);
-            GlobeActivityRegister minDateRegister = activitiesCollection.Find(filter).Sort(new BsonDocument("datetime", 1)).Limit(1).ToList()[0];
-            GlobeActivityRegister maxDateRegister = activitiesCollection.Find(filter).Sort(new BsonDocument("datetime", -1)).Limit(1).ToList()[0];
 
-            response.Add("minDate", minDateRegister.Datetime.ToLocalTime().ToString("yyyy-MM-dd"));
-            response.Add("maxDate", maxDateRegister.Datetime.ToLocalTime().ToString("yyyy-MM-dd"));
+            minDateResponse = activitiesCollection.Find(filter).Sort(new BsonDocument("datetime", 1)).Limit(1).ToList();
+
+            if (minDateResponse.Count > 0) //valida que por lo menos haya 1 registro
+            {
+                GlobeActivityRegister minDateRegister = minDateResponse[0];
+                GlobeActivityRegister maxDateRegister = activitiesCollection.Find(filter).Sort(new BsonDocument("datetime", -1)).Limit(1).ToList()[0];
+                response.Add("minDate", minDateRegister.Datetime.ToLocalTime().ToString("yyyy-MM-dd"));
+                response.Add("maxDate", maxDateRegister.Datetime.ToLocalTime().ToString("yyyy-MM-dd"));
+            }
 
             return response.ToString();
         }
 
         public string GetGlobalMaxMinActivityDates()
         {
+            List<GlobeActivityRegister> minDateResponse;
+
             JObject response = new JObject();
 
-            GlobeActivityRegister minDateRegister = activitiesCollection.Find(new BsonDocument()).Sort(new BsonDocument("datetime", 1)).Limit(1).ToList()[0];
-            GlobeActivityRegister maxDateRegister = activitiesCollection.Find(new BsonDocument()).Sort(new BsonDocument("datetime", -1)).Limit(1).ToList()[0];
+            minDateResponse = activitiesCollection.Find(new BsonDocument()).Sort(new BsonDocument("datetime", 1)).Limit(1).ToList();
 
-            response.Add("minDate", minDateRegister.Datetime.ToLocalTime().ToString("yyyy-MM-dd"));
-            response.Add("maxDate", maxDateRegister.Datetime.ToLocalTime().ToString("yyyy-MM-dd"));
+            if (minDateResponse.Count > 0) //valida que por lo menos haya 1 registro
+            {
+                GlobeActivityRegister minDateRegister = minDateResponse[0];
+                GlobeActivityRegister maxDateRegister = activitiesCollection.Find(new BsonDocument()).Sort(new BsonDocument("datetime", -1)).Limit(1).ToList()[0];
+                response.Add("minDate", minDateRegister.Datetime.ToLocalTime().ToString("yyyy-MM-dd"));
+                response.Add("maxDate", maxDateRegister.Datetime.ToLocalTime().ToString("yyyy-MM-dd"));
+            }
 
             return response.ToString();
         }
@@ -321,7 +334,7 @@ namespace Aula_Multisensorial.Access
 
         private string StructureBarJSON(List<BsonDocument> activitiesList)
         {
-            
+
             JArray dataArray;
 
             int successCount;
