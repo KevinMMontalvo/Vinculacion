@@ -55,6 +55,32 @@ export default class ActivitiesReport extends React.Component {
     return maxValue;
   }
 
+  ChangeGlovesChartType(type){
+    let parameters = this.state.parameters;
+    let data;
+    let maxValue = 0;
+    parameters.graphicType = type;
+    if(parameters.graphicType == "bar"){
+      data = JSON.parse(globeActivitiesController.getBarChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.fingers));
+      maxValue = this.GetMaxValue(data);
+    }
+    if(parameters.graphicType == "pie"){
+      data = JSON.parse(globeActivitiesController.getPieChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.fingers));
+    }
+    this.setState({
+      parameters: parameters,
+      data: data,
+      maxValue: maxValue,
+    });
+  }
+
+  NewGraphic(){
+    this.setState({
+      showReportForm: true,
+      showGraphicResult: false,
+    });
+  }
+
   render() {
     return(
       <div>
@@ -74,7 +100,9 @@ export default class ActivitiesReport extends React.Component {
                 <GraphicResult
                   parameters={this.state.parameters}
                   data={this.state.data}
-                  maxValue={this.state.maxValue}/>
+                  maxValue={this.state.maxValue}
+                  ChangeGlovesChartType={this.ChangeGlovesChartType.bind(this)}
+                  NewGraphic={this.NewGraphic.bind(this)}/>
               :
               undefined
           }

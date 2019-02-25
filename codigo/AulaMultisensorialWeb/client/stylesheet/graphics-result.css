@@ -4,13 +4,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 5vh;
+  margin-top: 2.5vh;
+  z-index: 4 !important;
+  transition: 0s;
 }
 
 .chart-info {
   opacity: 0.9;
   animation: bounce-in-left 1s;
-  transition: 0.5s;
   background-color: #100E11;
 }
 .chart-info:hover {
@@ -19,22 +20,180 @@
 
 .chart-title {
   width: 100%;
-  height: auto;
+  height: 5vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 0.5vh;
-  padding-bottom: 0.5vh;
   font-size: 1.1em;
 }
 
 .chart-subtitle {
   width: 100%;
-  height: auto;
+  height: 5vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 0.75vh;
-  padding-bottom: 0.75vh;
   font-size: 0.85em;
+}
+
+.return-new-graphic-container {
+  width: 15vw;
+  height: 5vh;
+  background-color: #333;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.25s;
+}
+
+.return-new-graphic-container:hover{
+  background-color: #138D75;
+  cursor: pointer;
+}
+
+.return-new-graphic-icon {
+  width: 4vw;
+  height: 5vh;
+  background-image: url(return-w.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 2.5vh;
+}
+
+.return-new-graphic-text {
+  width: 11vw;
+  height: 5vh;
+  display: flex;
+  text-indent: 1.5vw;
+  align-items: center;
+  font-size: 0.9em;
+}
+
+.graphic-settings-container {
+  width: 15vw;
+  height: 5vh;
+  background-color: #333;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.25s;
+}
+
+.graphic-settings-container:hover {
+  cursor: pointer;
+  background-color: #2980B9;
+}
+
+.graphic-settings-icon {
+  width: 4vw;
+  height: 5vh;
+  background-image: url(menu-w.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 2vh;
+}
+
+.graphic-settings-text {
+  width: 11vw;
+  height: 5vh;
+  display: flex;
+  text-indent: 0vw;
+  align-items: center;
+  font-size: 0.85em;
+}
+
+.chart-info-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+}
+
+.graphic-settings-container:hover div.individual-gloves-chart-menu {
+  display: block;
+}
+
+.individual-gloves-chart-menu {
+  width: 15vw;
+  height: auto;
+  position: absolute;
+  background-color: #333;
+  top: 5vh;
+  left: 0;
+  z-index: 999 !important;
+  display: none;
+}
+
+.individual-gloves-chart-menu-option {
+  width: 100%;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.individual-gloves-chart-menu-option:hover {
+  cursor: pointer;
+}
+
+.individual-gloves-chart-menu-option-selected {
+  width: 0.5vw;
+  height: 100%;
+  transition: 0.25s;
+}
+
+.individual-gloves-chart-menu-option:hover div.individual-gloves-chart-menu-option-selected {
+  background-color: #2980B9;
+}
+
+.individual-gloves-chart-menu-option-text {
+  width: calc(14.5vw - 4vh);
+  height: 100%;
+  font-size: 0.9em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-indent: 4vh;
+}
+
+.individual-gloves-chart-menu-option-icon {
+  width: 4vh;
+  height: 100%;
+  background-image: url(next-w.svg);
+  background-position: center;
+  background-size: 0.75vh;
+  background-repeat: no-repeat;
+}
+
+.individual-gloves-chart-submenu-container {
+  width: 15vw;
+  height: auto;
+  position: absolute;
+  left: 15vw;
+  display: none;
+}
+
+.individual-gloves-chart-submenu-option {
+  width: 100%;
+  height: 5vh;
+}
+
+.individual-gloves-chart-menu-option:hover div.individual-gloves-chart-submenu-container{
+  display: block;
+}
+
+.individual-gloves-chart-submenu-option-text {
+  width: 100%;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9em;
+  transition: 0.25s;
+  background-color: #333;
+}
+
+.individual-gloves-chart-submenu-option-text:hover {
+  color: #2980B9;
 }

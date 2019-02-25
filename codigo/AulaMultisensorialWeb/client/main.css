@@ -65,7 +65,7 @@ body {
   outline: none;
   border-bottom: solid 6px;
   border-color: #2980B9;
-  width: 88%;
+  width: 86%;
   background-color: transparent;
 }
 
@@ -95,7 +95,7 @@ textarea:focus {
   outline: none;
   border-bottom: solid 4px;
   border-color: #2980B9;
-  width: 88%;
+  width: 86%;
   background-color: transparent;
 }
 
