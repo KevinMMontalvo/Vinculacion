@@ -109,6 +109,14 @@ namespace Aula_Multisensorial.MatrixLED
             Dispose();
         }
 
+        /// <summary>
+        /// Este metodo es el evento de cierre del formulario cuando no pasa la validacion de inicio
+        /// </summary>
+        private void ShownFormEvent(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         private bool ConnectMatrix()
         {
             if (ArduinoController.GetInstance().IsPortOpen(ArduinoController.MATRIX_ARDUINO))
@@ -344,14 +352,6 @@ namespace Aula_Multisensorial.MatrixLED
                 Controls["label"].Dispose();
             }
             Controls.Add(label);
-        }
-
-        /// <summary>
-        /// Este metodo es el evento de cierre del formulario cuando no pasa la validacion de inicio
-        /// </summary>
-        private void ShownFormEvent(object sender, EventArgs e)
-        {
-            Close();
         }
 
         private void LoadStudentsList()

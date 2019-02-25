@@ -133,6 +133,7 @@
     <Compile Include="Model\Activity.cs" />
     <Compile Include="Model\ActivityType.cs" />
     <Compile Include="Model\Administrator.cs" />
+    <Compile Include="Model\CardiacSensorActivityRegister.cs" />
     <Compile Include="Model\GlobeActivityRegister.cs" />
     <Compile Include="Model\Log.cs" />
     <Compile Include="Model\MatrixActivityRegister.cs" />

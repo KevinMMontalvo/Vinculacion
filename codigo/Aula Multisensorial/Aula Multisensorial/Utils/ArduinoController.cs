@@ -19,7 +19,7 @@ namespace Aula_Multisensorial.Utils
 
         private ArduinoController()
         {
-            serialPorts = new SerialPort[3];
+            serialPorts = new SerialPort[5];
         }
 
         public static ArduinoController GetInstance()
@@ -132,7 +132,7 @@ namespace Aula_Multisensorial.Utils
 
         public bool CloseConnection(int arduinoIndex)
         {
-            if (serialPorts[arduinoIndex].IsOpen && serialPorts[arduinoIndex] != null)
+            if (serialPorts[arduinoIndex] != null && serialPorts[arduinoIndex].IsOpen)
             {
                 serialPorts[arduinoIndex].DiscardInBuffer();
                 serialPorts[arduinoIndex].DiscardOutBuffer();

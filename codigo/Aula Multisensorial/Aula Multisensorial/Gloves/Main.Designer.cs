@@ -44,7 +44,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.comboBoxStudents = new System.Windows.Forms.ComboBox();
-            this.labelNombre = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -221,16 +221,16 @@
             this.comboBoxStudents.Size = new System.Drawing.Size(392, 24);
             this.comboBoxStudents.TabIndex = 19;
             // 
-            // labelNombre
+            // labelName
             // 
-            this.labelNombre.AutoSize = true;
-            this.labelNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNombre.ForeColor = System.Drawing.Color.White;
-            this.labelNombre.Location = new System.Drawing.Point(72, 88);
-            this.labelNombre.Name = "labelNombre";
-            this.labelNombre.Size = new System.Drawing.Size(173, 20);
-            this.labelNombre.TabIndex = 20;
-            this.labelNombre.Text = "Nombre del estudiante:";
+            this.labelName.AutoSize = true;
+            this.labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelName.ForeColor = System.Drawing.Color.White;
+            this.labelName.Location = new System.Drawing.Point(72, 88);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(173, 20);
+            this.labelName.TabIndex = 20;
+            this.labelName.Text = "Nombre del estudiante:";
             // 
             // Main
             // 
@@ -239,7 +239,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
             this.ClientSize = new System.Drawing.Size(884, 629);
             this.ControlBox = false;
-            this.Controls.Add(this.labelNombre);
+            this.Controls.Add(this.labelName);
             this.Controls.Add(this.comboBoxStudents);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
@@ -286,6 +286,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox comboBoxStudents;
-        private System.Windows.Forms.Label labelNombre;
+        private System.Windows.Forms.Label labelName;
     }
 }

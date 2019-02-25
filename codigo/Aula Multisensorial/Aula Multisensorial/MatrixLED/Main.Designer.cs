@@ -33,7 +33,7 @@
             this.buttonSetup = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
             this.labelConfigurationInformation = new System.Windows.Forms.Label();
-            this.labelNombre = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
             this.comboBoxStudents = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -106,16 +106,16 @@
             this.labelConfigurationInformation.Size = new System.Drawing.Size(0, 17);
             this.labelConfigurationInformation.TabIndex = 4;
             // 
-            // labelNombre
+            // labelName
             // 
-            this.labelNombre.AutoSize = true;
-            this.labelNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNombre.ForeColor = System.Drawing.Color.White;
-            this.labelNombre.Location = new System.Drawing.Point(64, 86);
-            this.labelNombre.Name = "labelNombre";
-            this.labelNombre.Size = new System.Drawing.Size(173, 20);
-            this.labelNombre.TabIndex = 21;
-            this.labelNombre.Text = "Nombre del estudiante:";
+            this.labelName.AutoSize = true;
+            this.labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelName.ForeColor = System.Drawing.Color.White;
+            this.labelName.Location = new System.Drawing.Point(64, 86);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(173, 20);
+            this.labelName.TabIndex = 21;
+            this.labelName.Text = "Nombre del estudiante:";
             // 
             // comboBoxStudents
             // 
@@ -134,7 +134,7 @@
             this.ClientSize = new System.Drawing.Size(884, 561);
             this.ControlBox = false;
             this.Controls.Add(this.comboBoxStudents);
-            this.Controls.Add(this.labelNombre);
+            this.Controls.Add(this.labelName);
             this.Controls.Add(this.labelConfigurationInformation);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonSetup);
@@ -157,7 +157,7 @@
         private System.Windows.Forms.Button buttonSetup;
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Label labelConfigurationInformation;
-        private System.Windows.Forms.Label labelNombre;
+        private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.ComboBox comboBoxStudents;
     }
 }

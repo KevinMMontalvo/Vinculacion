@@ -74,7 +74,7 @@ export default class ActivitiesMenu extends React.Component
 
 	CardiacSensorActivity()
 	{
-		activitiesController.startActivity("CardiacSensor");
+		activitiesController.startActivity("CardiacSensor","5c1bbb3f75c6cf37a489efcb");
 	}
 
 	ActivitiesReport()

@@ -31,6 +31,9 @@
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
             this.labelTittle = new System.Windows.Forms.Label();
+            this.labelPPM = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
+            this.comboBoxStudents = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // buttonExit
@@ -47,6 +50,7 @@
             this.buttonExit.TabIndex = 6;
             this.buttonExit.Text = "Salir";
             this.buttonExit.UseVisualStyleBackColor = false;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
             // buttonStart
             // 
@@ -55,13 +59,14 @@
             this.buttonStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonStart.ForeColor = System.Drawing.Color.White;
-            this.buttonStart.Location = new System.Drawing.Point(162, 144);
+            this.buttonStart.Location = new System.Drawing.Point(162, 152);
             this.buttonStart.Margin = new System.Windows.Forms.Padding(0);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(476, 56);
             this.buttonStart.TabIndex = 5;
             this.buttonStart.Text = "Iniciar";
             this.buttonStart.UseVisualStyleBackColor = false;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // labelTittle
             // 
@@ -74,6 +79,37 @@
             this.labelTittle.TabIndex = 4;
             this.labelTittle.Text = "Actividad de Sensor Cardiaco";
             // 
+            // labelPPM
+            // 
+            this.labelPPM.AutoSize = true;
+            this.labelPPM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPPM.ForeColor = System.Drawing.Color.White;
+            this.labelPPM.Location = new System.Drawing.Point(192, 374);
+            this.labelPPM.Name = "labelPPM";
+            this.labelPPM.Size = new System.Drawing.Size(181, 20);
+            this.labelPPM.TabIndex = 22;
+            this.labelPPM.Text = "Pulsaciones por minuto: ";
+            // 
+            // labelName
+            // 
+            this.labelName.AutoSize = true;
+            this.labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelName.ForeColor = System.Drawing.Color.White;
+            this.labelName.Location = new System.Drawing.Point(11, 89);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(173, 20);
+            this.labelName.TabIndex = 24;
+            this.labelName.Text = "Nombre del estudiante:";
+            // 
+            // comboBoxStudents
+            // 
+            this.comboBoxStudents.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxStudents.FormattingEnabled = true;
+            this.comboBoxStudents.Location = new System.Drawing.Point(216, 89);
+            this.comboBoxStudents.Name = "comboBoxStudents";
+            this.comboBoxStudents.Size = new System.Drawing.Size(392, 24);
+            this.comboBoxStudents.TabIndex = 23;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -81,12 +117,17 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.labelName);
+            this.Controls.Add(this.comboBoxStudents);
+            this.Controls.Add(this.labelPPM);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.labelTittle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Main";
             this.Text = "Main";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
+            this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -97,5 +138,8 @@
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Label labelTittle;
+        private System.Windows.Forms.Label labelPPM;
+        private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.ComboBox comboBoxStudents;
     }
 }

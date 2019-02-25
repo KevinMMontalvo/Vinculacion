@@ -40,7 +40,7 @@ namespace Aula_Multisensorial.Utils
 
         private void StartCardiacSensorActivity(string teacherId)
         {
-
+            new CardiacSensor.Main(teacherId);
         }
     }
 }
