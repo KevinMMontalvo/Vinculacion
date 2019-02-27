@@ -179,7 +179,7 @@ namespace Aula_Multisensorial.Access
         {
             FilterDefinition<Teacher> filter = Builders<Teacher>.Filter.Eq("Id", teacherId);
             cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(2500);
+            cancellationTokenSource.CancelAfter(5000);
             return teachersCollection.Find(filter).ToList(cancellationTokenSource.Token)[0];
         }
     }

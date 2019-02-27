@@ -41,10 +41,14 @@ namespace Aula_Multisensorial.Utils
                 SerialPort temporarySerialPort = new SerialPort(port, BAUD_RATE);
                 try
                 {
+                    temporarySerialPort.Close();
                     temporarySerialPort.Open();
+                    temporarySerialPort.DiscardInBuffer();
+                    temporarySerialPort.DiscardOutBuffer();
                 }
-                catch (UnauthorizedAccessException)
+                catch (UnauthorizedAccessException e)
                 {
+                    Console.WriteLine(e.StackTrace);
                     continue;
                 }
 
@@ -58,6 +62,10 @@ namespace Aula_Multisensorial.Utils
                     {
                         temporarySerialPort.Write("ID");
                         id = temporarySerialPort.ReadLine();
+                        if (id.Equals(""))
+                        {
+                            continue;
+                        }
                         break;
                     }
                     catch (Exception)
@@ -80,8 +88,9 @@ namespace Aula_Multisensorial.Utils
                     }
                     temporarySerialPort.Close();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    Console.WriteLine(e.StackTrace);
                 }
             }
             return false;
@@ -102,7 +111,7 @@ namespace Aula_Multisensorial.Utils
 
         public string GetMessage(int arduinoIndex)
         {
-            if (serialPorts[arduinoIndex]!=null && serialPorts[arduinoIndex].IsOpen)
+            if (serialPorts[arduinoIndex] != null && serialPorts[arduinoIndex].IsOpen)
             {
                 try
                 {

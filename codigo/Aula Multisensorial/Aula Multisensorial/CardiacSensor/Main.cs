@@ -14,6 +14,9 @@ namespace Aula_Multisensorial.CardiacSensor
         private readonly string teacherId;
         private delegate string GetSelectedComboBoxText();
         private delegate void ChangeActivityState();
+        private delegate void SetText(string text);
+        bool firstValueTaked = false;
+        bool secondValueTaked = false;
 
         public Main(string teacherId)
         {
@@ -24,7 +27,7 @@ namespace Aula_Multisensorial.CardiacSensor
 
         private void Main_Load(object sender, EventArgs e)
         {
-            labelPPM.Text = "";
+            ClearLabels();
             LoadStudentsList();
         }
 
@@ -43,14 +46,19 @@ namespace Aula_Multisensorial.CardiacSensor
 
             if (buttonStart.Text.Equals("Iniciar"))
             {
+                ClearLabels();
                 if (ConnectCardiacSensor())
                 {
                     StartReading();
                 }
             }
-            else if (buttonStart.Text.Equals("Terminar"))
+            else if (buttonStart.Text.Equals("Tomar Medida") && firstValueTaked)
             {
-                StopReading();
+                SetStartActivity();
+            }
+            else if (buttonStart.Text.Equals("Terminar") && secondValueTaked)
+            {
+                SetEndActivity();
             }
         }
 
@@ -80,6 +88,14 @@ namespace Aula_Multisensorial.CardiacSensor
             buttonStart.BackColor = Color.DarkRed;
         }
 
+        private void SetTakeSecondMeasure()
+        {
+            buttonStart.Text = "Tomar Medida";
+            buttonExit.Enabled = false;
+            comboBoxStudents.Enabled = false;
+            buttonStart.BackColor = Color.DarkRed;
+        }
+
         private void SetEndActivity()
         {
             buttonStart.Text = "Iniciar";
@@ -104,19 +120,18 @@ namespace Aula_Multisensorial.CardiacSensor
 
         private async void StartReading()
         {
-            bool messageSended = ArduinoController.GetInstance().SendMessage(ArduinoController.HEART_ARDUINO, "START");
+            bool messageSended = ArduinoController.GetInstance().SendMessage(ArduinoController.HEART_ARDUINO, "ON");
             if (messageSended)
             {
                 Task readVaules = new Task(ReceiveMessages);
                 readVaules.Start();
-                SetStartActivity();
+                SetTakeSecondMeasure();
             }
         }
 
         private void StopReading()
         {
-            SetEndActivity();
-            ArduinoController.GetInstance().SendMessage(ArduinoController.HEART_ARDUINO, "END");
+            ArduinoController.GetInstance().SendMessage(ArduinoController.HEART_ARDUINO, "OFF");
             ArduinoController.GetInstance().CloseConnection(ArduinoController.HEART_ARDUINO);
         }
 
@@ -125,12 +140,12 @@ namespace Aula_Multisensorial.CardiacSensor
             int[] values = new int[50];
             int counter = 0;
             string message;
-            /*CardiacSensorActivityRegister cardiacActivity;
+            CardiacSensorActivityRegister cardiacActivity;
             cardiacActivity = new CardiacSensorActivityRegister();
             cardiacActivity.StudentId = (string)Invoke(new GetSelectedComboBoxText(GetComboBoxStudentsText)); // para acceder a elementos de la GUI desde el hilo
             cardiacActivity.Datetime = DateTime.Now.Date; //solo fecha para poder agrupar
             cardiacActivity.Level = new LevelAccess().GetLevelById(new TeacherAccess().GetTeacherById(teacherId).LevelId).Name;
-            cardiacActivity.Period = new PeriodAccess().GetActivePeriod().Name;*/
+            cardiacActivity.Period = new PeriodAccess().GetActivePeriod().Name;
 
             do
             {
@@ -150,6 +165,7 @@ namespace Aula_Multisensorial.CardiacSensor
                     int value;
                     try
                     {
+                        message = message.Split('\r')[0];
                         value = Convert.ToInt32(message);
                         values[counter] = value;
                         counter++;
@@ -157,23 +173,71 @@ namespace Aula_Multisensorial.CardiacSensor
                         {
                             if (ValuesStandarized(values))
                             {
-                                labelPPM.Text = "Pulsaciones por minuto: " + values[0];
+                                Invoke(new SetText(SetInitialLabelText), "Pulsaciones por minuto iniciales: " + values[0]);
+                                firstValueTaked = true;
+                                cardiacActivity.InitialValue = values[0];
                             }
                             else
                             {
-                                labelPPM.Text = "Pulsaciones por minuto: -";
+                                Invoke(new SetText(SetInitialLabelText), "Pulsaciones por minuto iniciales: -");
+                                firstValueTaked = false;
                             }
                             counter = 0;
                         }
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Ha ocurrido un problema de comunicacion con el sensor cardiaco");
+
                     }
-                    //matrixActivity.Value = "Bien";
                 }
-                //new MatrixActivityRegisterAccess().InsertActivity(matrixActivity);
+            } while (buttonStart.Text.Equals("Tomar Medida"));
+
+            do
+            {
+                message = ArduinoController.GetInstance().GetMessage(ArduinoController.HEART_ARDUINO);
+                if (message == null && !ArduinoController.GetInstance().IsPortOpen(ArduinoController.HEART_ARDUINO)) // errror de conexion
+                {
+                    MessageBox.Show("Ha ocurrido un problema de conexion con el sensor cardiaco, revise que el sensor esté bien conectado");
+                    Invoke(new ChangeActivityState(SetEndActivity));
+                    break;
+                }
+                else if (message == null) // terminado por el usuario
+                {
+                    break;
+                }
+                else
+                {
+                    int value;
+                    try
+                    {
+                        message = message.Split('\r')[0];
+                        value = Convert.ToInt32(message);
+                        values[counter] = value;
+                        counter++;
+                        if (counter == 50)
+                        {
+                            if (ValuesStandarized(values))
+                            {
+                                Invoke(new SetText(SetFinalLabelText), "Pulsaciones por minuto finales: " + values[0]);
+                                cardiacActivity.FinalValue = values[0];
+                                secondValueTaked = true;
+                            }
+                            else
+                            {
+                                Invoke(new SetText(SetFinalLabelText), "Pulsaciones por minuto finales: -");
+                                secondValueTaked = false;
+                            }
+                            counter = 0;
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
             } while (buttonStart.Text.Equals("Terminar"));
+            StopReading();
+            new CardiacSensorActivityRegisterAccess().InsertActivity(cardiacActivity);
         }
 
         private string GetComboBoxStudentsText()
@@ -195,6 +259,22 @@ namespace Aula_Multisensorial.CardiacSensor
                 }
             }
             return isStandarized;
+        }
+
+        private void SetInitialLabelText(string text)
+        {
+            labelInitialBPM.Text = text;
+        }
+
+        private void SetFinalLabelText(string text)
+        {
+            labelFinalBPM.Text = text;
+        }
+
+        private void ClearLabels()
+        {
+            labelFinalBPM.Text = "";
+            labelInitialBPM.Text = "";
         }
     }
 }
