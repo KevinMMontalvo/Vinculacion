@@ -12,6 +12,7 @@ namespace Aula_Multisensorial.Gloves
     {
         private readonly string teacherId;
         private delegate void ControlEvent(object sender, EventArgs e);
+        private bool isFunctionalLevel;
 
         public Main(string teacherId)
         {
@@ -22,7 +23,11 @@ namespace Aula_Multisensorial.Gloves
 
         private void Main_Load(object sender, EventArgs e)
         {
-            LoadStudentsList();
+            ChecklLevelType();
+            if (!isFunctionalLevel)
+            {
+                LoadStudentsList();
+            }
         }
 
         private void OnClickLabelEvent(object sender, EventArgs e)
@@ -94,7 +99,7 @@ namespace Aula_Multisensorial.Gloves
         {
             bool correctOperation = true;
 
-            if (comboBoxStudents.SelectedIndex == -1)
+            if (comboBoxStudents.SelectedIndex == -1 && !isFunctionalLevel)
             {
                 return;
             }
@@ -112,19 +117,34 @@ namespace Aula_Multisensorial.Gloves
 
                 if (correctOperation)
                 {
-                    buttonStart.Text = "Terminar";
-                    buttonExit.Enabled = false;
-                    comboBoxStudents.Enabled = false;
-                    buttonStart.BackColor = Color.DarkRed;
+                    SetStartActivity();
+                }
+                else
+                {
+                    return;
+                }
+
+                if (isFunctionalLevel)
+                {
+                    correctOperation = ArduinoController.GetInstance().SendMessage(ArduinoController.LEFT_HAND_ARDUINO,"ON");
+                    correctOperation &= ArduinoController.GetInstance().SendMessage(ArduinoController.RIGHT_HAND_ARDUINO, "ON");
+                }
+                else
+                {
                     AddClickEvents();
+                }
+
+                if (isFunctionalLevel && !correctOperation)
+                {
+                    MessageBox.Show("Hubo un problema de comunicacion con algun guante");
+                    ArduinoController.GetInstance().CloseConnection(ArduinoController.RIGHT_HAND_ARDUINO);
+                    ArduinoController.GetInstance().CloseConnection(ArduinoController.LEFT_HAND_ARDUINO);
+                    SetEndActivity();
                 }
             }
             else if (buttonStart.Text.Equals("Terminar"))
             {
-                buttonStart.Text = "Iniciar";
-                buttonExit.Enabled = true;
-                comboBoxStudents.Enabled = true;
-                buttonStart.BackColor = Color.Green;
+                SetEndActivity();
                 RemoveClickEvents();
                 ArduinoController.GetInstance().CloseConnection(ArduinoController.RIGHT_HAND_ARDUINO);
                 ArduinoController.GetInstance().CloseConnection(ArduinoController.LEFT_HAND_ARDUINO);
@@ -222,6 +242,28 @@ namespace Aula_Multisensorial.Gloves
 
             comboBoxStudents.ValueMember = "Id";
             comboBoxStudents.DisplayMember = "Fullname";
+        }
+
+        private void ChecklLevelType()
+        {
+            Level level = new LevelAccess().GetLevelById(new TeacherAccess().GetTeacherById(teacherId).LevelId);
+            isFunctionalLevel = level.Name.ToUpper().Contains("FUNCIONAL");
+        }
+
+        private void SetStartActivity()
+        {
+            buttonStart.Text = "Terminar";
+            buttonExit.Enabled = false;
+            comboBoxStudents.Enabled = false;
+            buttonStart.BackColor = Color.DarkRed;
+        }
+
+        private void SetEndActivity()
+        {
+            buttonStart.Text = "Iniciar";
+            buttonExit.Enabled = true;
+            comboBoxStudents.Enabled = true;
+            buttonStart.BackColor = Color.Green;
         }
     }
 }

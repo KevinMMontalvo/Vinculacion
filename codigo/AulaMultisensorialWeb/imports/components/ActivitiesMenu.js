@@ -52,7 +52,7 @@ export default class ActivitiesMenu extends React.Component
 
 		//console.log(globeActivitiesController.getGlobalMaxMinActivityDates());
 
-		//activitiesController.startActivity("Matrix","5c1bbb3f75c6cf37a489efcb");
+		activitiesController.startActivity("Matrix","5c1bbb3f75c6cf37a489efcb");
 
 		/*
 		Matriz
@@ -71,8 +71,8 @@ export default class ActivitiesMenu extends React.Component
 		 */
 		//console.log(cardiacActivitiesController.getBarChartDataIndividual(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0),"5c43ff326beb3040fcd14d3c"));
 		//console.log(cardiacActivitiesController.getPieChartDataIndividual(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0),"5c43ff326beb3040fcd14d3c"));
-		console.log(cardiacActivitiesController.getPieChartDataCollective(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0),2,18,genders,levels,periods));
-		console.log(cardiacActivitiesController.getGlobalMaxMinActivityDates());
+		//console.log(cardiacActivitiesController.getPieChartDataCollective(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0),2,18,genders,levels,periods));
+		//console.log(cardiacActivitiesController.getGlobalMaxMinActivityDates());
 	}
 
 	GlovesActivity()
