@@ -91,6 +91,42 @@ namespace Aula_Multisensorial.Access
             return StructurePieJSON(registers[0]);
         }
 
+        public string GetLineChartDataIndividual(DateTime startDate, DateTime endDate, string studentId)
+        {
+            /*Match*/
+            BsonDocument match = new BsonDocument();
+            BsonArray matchAndConditions = new BsonArray();
+
+            BsonDocument dateFilter = new BsonDocument();
+            dateFilter.Add("$gte", startDate);
+            dateFilter.Add("$lte", endDate);
+
+            matchAndConditions.Add(new BsonDocument("datetime", dateFilter));
+            matchAndConditions.Add(new BsonDocument("student_id", studentId));
+
+            match.AddRange(new BsonDocument("$and", matchAndConditions));
+
+            /*Group*/
+            BsonDocument group = new BsonDocument();
+            group.Add("_id", "$datetime");
+            group.Add("initial_value", new BsonDocument("$avg", "$initial_value"));
+            group.Add("final_value", new BsonDocument("$avg", "$final_value"));
+
+            /*Sort*/
+            BsonDocument sort = new BsonDocument("_id", 1);
+
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+
+            List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).Sort(sort).ToList(cancellationTokenSource.Token);
+
+            if (registers.Count == 0) //valida de que haya por lo menos 1 registro
+            {
+                return new JObject().ToString();
+            }
+            return StructureLineJSON(registers);
+        }
+
         public string GetBarChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods)
         {
             // crea el filtro de busqueda de los estudiantes
@@ -258,7 +294,7 @@ namespace Aula_Multisensorial.Access
 
             BsonDocument group = new BsonDocument();
             group.Add("_id", "null");
-            group.Add("values", new BsonDocument("$push",push));
+            group.Add("values", new BsonDocument("$push", push));
 
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
             cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
@@ -387,6 +423,38 @@ namespace Aula_Multisensorial.Access
             array.Add(relaxationArray);
             array.Add(nonRelaxationArray);
 
+            return array.ToString();
+        }
+
+        private string StructureLineJSON(List<BsonDocument> activitiesList)
+        {
+            JArray dataArray;
+            JArray array = new JArray();
+            int initialValue;
+            int finalValue;
+
+            JArray headersArray = new JArray();
+            headersArray.Add(new JValue("Fechas"));
+            headersArray.Add(new JValue("Porcentaje de Relajación"));
+            array.Add(headersArray);
+
+            foreach (BsonDocument activity in activitiesList)
+            {
+                dataArray = new JArray();
+                dataArray.Add(new JValue(activity.GetElement("_id").Value.ToLocalTime().ToString("dd/MM/yyyy")));
+                initialValue = activity.GetElement("initial_value").Value.ToInt32();
+                finalValue = activity.GetElement("final_value").Value.ToInt32();
+                if (initialValue > finalValue)
+                {
+                    int percentaje = (finalValue * 100) / initialValue;
+                    dataArray.Add(new JValue(percentaje));
+                }
+                else
+                {
+                    dataArray.Add(new JValue(0));
+                }
+                array.Add(dataArray);
+            }
             return array.ToString();
         }
     }
