@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf6ce076-847d-40a9-a101-46c52b689462" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Mongo Hard Querys.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Mongo Hard Querys.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imports/components/ActivitiesMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/components/ActivitiesMenu.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,8 +18,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/imports/components/ActivitiesMenu.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
+            <state relative-caret-position="283">
+              <caret line="83" column="5" lean-forward="true" selection-start-line="83" selection-start-column="5" selection-end-line="83" selection-end-column="5" />
+              <folding>
+                <element signature="e#1207#3058#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -50,6 +51,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -66,7 +68,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -130,12 +131,13 @@
       <workItem from="1551111930703" duration="1799000" />
       <workItem from="1551530779690" duration="1156000" />
       <workItem from="1551604297692" duration="6191000" />
-      <workItem from="1551660827062" duration="1248000" />
+      <workItem from="1551660827062" duration="1875000" />
+      <workItem from="1551745210443" duration="729000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36980000" />
+    <option name="totallyTimeSpent" value="38336000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -178,8 +180,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/imports/components/ActivitiesMenu.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
+        <state relative-caret-position="283">
+          <caret line="83" column="5" lean-forward="true" selection-start-line="83" selection-start-column="5" selection-end-line="83" selection-end-column="5" />
+          <folding>
+            <element signature="e#1207#3058#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

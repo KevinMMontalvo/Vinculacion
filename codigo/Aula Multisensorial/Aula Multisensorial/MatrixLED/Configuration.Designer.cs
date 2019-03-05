@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panelSideMenu = new System.Windows.Forms.Panel();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.buttonAppearances = new System.Windows.Forms.Button();
             this.buttonBrightness = new System.Windows.Forms.Button();
             this.buttonLevel = new System.Windows.Forms.Button();
@@ -54,8 +55,9 @@
             this.button41 = new System.Windows.Forms.Button();
             this.button31 = new System.Windows.Forms.Button();
             this.button44 = new System.Windows.Forms.Button();
-            this.buttonClose = new System.Windows.Forms.Button();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.panelSideMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelSideMenu
@@ -73,6 +75,22 @@
             this.panelSideMenu.Name = "panelSideMenu";
             this.panelSideMenu.Size = new System.Drawing.Size(226, 561);
             this.panelSideMenu.TabIndex = 0;
+            // 
+            // buttonClose
+            // 
+            this.buttonClose.BackColor = System.Drawing.Color.Black;
+            this.buttonClose.FlatAppearance.BorderSize = 0;
+            this.buttonClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
+            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(134)))), ((int)(((byte)(193)))));
+            this.buttonClose.Location = new System.Drawing.Point(-3, 490);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(226, 40);
+            this.buttonClose.TabIndex = 6;
+            this.buttonClose.Text = "Cerrar";
+            this.buttonClose.UseVisualStyleBackColor = false;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // buttonAppearances
             // 
@@ -358,21 +376,14 @@
             this.button44.UseVisualStyleBackColor = false;
             this.button44.Click += new System.EventHandler(this.MatrixButtonsClickEvent);
             // 
-            // buttonClose
+            // trackBar1
             // 
-            this.buttonClose.BackColor = System.Drawing.Color.Black;
-            this.buttonClose.FlatAppearance.BorderSize = 0;
-            this.buttonClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
-            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(134)))), ((int)(((byte)(193)))));
-            this.buttonClose.Location = new System.Drawing.Point(-3, 490);
-            this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(226, 40);
-            this.buttonClose.TabIndex = 6;
-            this.buttonClose.Text = "Cerrar";
-            this.buttonClose.UseVisualStyleBackColor = false;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            this.trackBar1.Location = new System.Drawing.Point(509, 294);
+            this.trackBar1.Maximum = 100;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(104, 45);
+            this.trackBar1.TabIndex = 19;
+            this.trackBar1.TickFrequency = 10;
             // 
             // Configuration
             // 
@@ -380,6 +391,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
             this.ClientSize = new System.Drawing.Size(884, 561);
+            this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.button44);
             this.Controls.Add(this.button31);
             this.Controls.Add(this.button41);
@@ -403,7 +415,9 @@
             this.Text = "Configuration";
             this.Load += new System.EventHandler(this.Configuration_Load);
             this.panelSideMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -435,5 +449,6 @@
         private System.Windows.Forms.Button button31;
         private System.Windows.Forms.Button button44;
         private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.TrackBar trackBar1;
     }
 }
