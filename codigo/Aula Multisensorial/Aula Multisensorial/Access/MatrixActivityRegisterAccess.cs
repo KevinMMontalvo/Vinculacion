@@ -400,7 +400,7 @@ namespace Aula_Multisensorial.Access
 
             minDateResponse = activitiesCollection.Find(filter).Sort(new BsonDocument("datetime", 1)).Limit(1).ToList();
 
-            if (minDateResponse.Count == 0) //valida que por lo menos haya 1 registro
+            if (minDateResponse.Count > 0) //valida que por lo menos haya 1 registro
             {
                 MatrixActivityRegister minDateRegister = minDateResponse[0];
                 MatrixActivityRegister maxDateRegister = activitiesCollection.Find(filter).Sort(new BsonDocument("datetime", -1)).Limit(1).ToList()[0];

@@ -15,8 +15,7 @@ namespace Aula_Multisensorial.CardiacSensor
         private delegate string GetSelectedComboBoxText();
         private delegate void ChangeActivityState();
         private delegate void SetText(string text);
-        bool firstValueTaked = false;
-        bool secondValueTaked = false;
+        private CardiacSensorActivityRegister activity;
 
         public Main(string teacherId)
         {
@@ -44,19 +43,24 @@ namespace Aula_Multisensorial.CardiacSensor
                 return;
             }
 
-            if (buttonStart.Text.Equals("Iniciar"))
+            if (buttonStart.Text.Equals("Iniciar") && activity == null)
             {
                 ClearLabels();
+                activity = new CardiacSensorActivityRegister();
+            }
+
+            if (buttonStart.Text.Equals("Iniciar"))
+            {
                 if (ConnectCardiacSensor())
                 {
                     StartReading();
                 }
             }
-            else if (buttonStart.Text.Equals("Tomar Medida") && firstValueTaked)
+            else if (buttonStart.Text.Equals("Tomar Medida") && activity.InitialValue!=0)
             {
                 SetStartActivity();
             }
-            else if (buttonStart.Text.Equals("Terminar") && secondValueTaked)
+            else if (buttonStart.Text.Equals("Terminar") && activity.FinalValue != 0)
             {
                 SetEndActivity();
             }
@@ -140,57 +144,62 @@ namespace Aula_Multisensorial.CardiacSensor
             int[] values = new int[50];
             int counter = 0;
             string message;
-            CardiacSensorActivityRegister cardiacActivity;
-            cardiacActivity = new CardiacSensorActivityRegister();
-            cardiacActivity.StudentId = (string)Invoke(new GetSelectedComboBoxText(GetComboBoxStudentsText)); // para acceder a elementos de la GUI desde el hilo
-            cardiacActivity.Datetime = DateTime.Now.Date; //solo fecha para poder agrupar
-            cardiacActivity.Level = new LevelAccess().GetLevelById(new TeacherAccess().GetTeacherById(teacherId).LevelId).Name;
-            cardiacActivity.Period = new PeriodAccess().GetActivePeriod().Name;
+            
+            activity.StudentId = (string)Invoke(new GetSelectedComboBoxText(GetComboBoxStudentsText)); // para acceder a elementos de la GUI desde el hilo
+            activity.Datetime = DateTime.Now.Date; //solo fecha para poder agrupar
+            activity.Level = new LevelAccess().GetLevelById(new TeacherAccess().GetTeacherById(teacherId).LevelId).Name;
+            activity.Period = new PeriodAccess().GetActivePeriod().Name;
 
-            do
+            if (activity.InitialValue == 0)
             {
-                message = ArduinoController.GetInstance().GetMessage(ArduinoController.HEART_ARDUINO);
-                if (message == null && !ArduinoController.GetInstance().IsPortOpen(ArduinoController.HEART_ARDUINO)) // errror de conexion
+                do
                 {
-                    MessageBox.Show("Ha ocurrido un problema de conexion con el sensor cardiaco, revise que el sensor esté bien conectado");
-                    Invoke(new ChangeActivityState(SetEndActivity));
-                    break;
-                }
-                else if (message == null) // terminado por el usuario
-                {
-                    break;
-                }
-                else
-                {
-                    int value;
-                    try
+                    message = ArduinoController.GetInstance().GetMessage(ArduinoController.HEART_ARDUINO);
+                    if (message == null && !ArduinoController.GetInstance().IsPortOpen(ArduinoController.HEART_ARDUINO)) // errror de conexion
                     {
-                        message = message.Split('\r')[0];
-                        value = Convert.ToInt32(message);
-                        values[counter] = value;
-                        counter++;
-                        if (counter == 50)
+                        MessageBox.Show("Ha ocurrido un problema de conexion con el sensor cardiaco, revise que el sensor esté bien conectado");
+                        Invoke(new ChangeActivityState(SetEndActivity));
+                        break;
+                    }
+                    else if (message == null) // terminado por el usuario
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        int value;
+                        try
                         {
-                            if (ValuesStandarized(values))
+                            message = message.Split('\r')[0];
+                            value = Convert.ToInt32(message);
+                            values[counter] = value;
+                            counter++;
+                            if (counter == 50)
                             {
-                                Invoke(new SetText(SetInitialLabelText), "Pulsaciones por minuto iniciales: " + values[0]);
-                                firstValueTaked = true;
-                                cardiacActivity.InitialValue = values[0];
+                                if (ValuesStandarized(values))
+                                {
+                                    Invoke(new SetText(SetInitialLabelText), "Pulsaciones por minuto iniciales: " + values[0]);
+                                    activity.InitialValue = values[0];
+                                }
+                                else
+                                {
+                                    Invoke(new SetText(SetInitialLabelText), "Pulsaciones por minuto iniciales: -");
+                                    activity.InitialValue = 0;
+                                }
+                                counter = 0;
                             }
-                            else
-                            {
-                                Invoke(new SetText(SetInitialLabelText), "Pulsaciones por minuto iniciales: -");
-                                firstValueTaked = false;
-                            }
-                            counter = 0;
+                        }
+                        catch (Exception)
+                        {
+
                         }
                     }
-                    catch (Exception)
-                    {
-
-                    }
-                }
-            } while (buttonStart.Text.Equals("Tomar Medida"));
+                } while (buttonStart.Text.Equals("Tomar Medida"));
+            }
+            else
+            {
+                Invoke(new ChangeActivityState(SetStartActivity));
+            }
 
             do
             {
@@ -219,13 +228,12 @@ namespace Aula_Multisensorial.CardiacSensor
                             if (ValuesStandarized(values))
                             {
                                 Invoke(new SetText(SetFinalLabelText), "Pulsaciones por minuto finales: " + values[0]);
-                                cardiacActivity.FinalValue = values[0];
-                                secondValueTaked = true;
+                                activity.FinalValue = values[0];
                             }
                             else
                             {
                                 Invoke(new SetText(SetFinalLabelText), "Pulsaciones por minuto finales: -");
-                                secondValueTaked = false;
+                                activity.InitialValue = 0;
                             }
                             counter = 0;
                         }
@@ -237,7 +245,13 @@ namespace Aula_Multisensorial.CardiacSensor
                 }
             } while (buttonStart.Text.Equals("Terminar"));
             StopReading();
-            new CardiacSensorActivityRegisterAccess().InsertActivity(cardiacActivity);
+
+            if (activity.InitialValue != 0 && activity.FinalValue != 0 && buttonStart.Text.Equals("Iniciar"))
+            {
+                bool insertedProperly = new CardiacSensorActivityRegisterAccess().InsertActivity(activity);
+                activity = null;
+            }
+
         }
 
         private string GetComboBoxStudentsText()

@@ -46,7 +46,7 @@ namespace Aula_Multisensorial.Utils
                     temporarySerialPort.DiscardInBuffer();
                     temporarySerialPort.DiscardOutBuffer();
                 }
-                catch (UnauthorizedAccessException e)
+                catch (Exception e)
                 {
                     Console.WriteLine(e.StackTrace);
                     continue;
