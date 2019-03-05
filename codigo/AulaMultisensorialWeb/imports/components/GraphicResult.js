@@ -60,10 +60,10 @@ export default class GraphicResult extends React.Component {
       translatedActivity = "Guantes";
     }
     if(activity == "matrix"){
-      translatedActivity = "Guantes";
+      translatedActivity = "Matriz";
     }
     if(activity == "sensor"){
-      translatedActivity = "Guantes";
+      translatedActivity = "Sensor cardiaco";
     }
     this.setState({
       activityName: translatedActivity,
@@ -157,22 +157,44 @@ export default class GraphicResult extends React.Component {
   }
 
   GetRangeDates(){
-    let activityDates = JSON.parse(globeActivitiesController.getStudentMaxMinActivityDates(this.state.student));
-    if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
-      this.setState({
-        maxDate: new Date(activityDates.maxDate),
-        minDate: new Date(activityDates.minDate),
-      });
+    if(this.state.activity == "gloves"){
+      let activityDates = JSON.parse(globeActivitiesController.getStudentMaxMinActivityDates(this.state.student));
+      if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
+        this.setState({
+          maxDate: new Date(activityDates.maxDate),
+          minDate: new Date(activityDates.minDate),
+        });
+      }
+    }
+    if(this.state.activity == "matrix"){
+      let activityDates = JSON.parse(matrixActivitiesController.getStudentMaxMinActivityDates(this.state.student));
+      if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
+        this.setState({
+          maxDate: new Date(activityDates.maxDate),
+          minDate: new Date(activityDates.minDate),
+        });
+      }
     }
   }
 
   GetGlobalRangeDates(){
-    let activityDates = JSON.parse(globeActivitiesController.getGlobalMaxMinActivityDates());
-    if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
-      this.setState({
-        maxDate: new Date(activityDates.maxDate),
-        minDate: new Date(activityDates.minDate),
-      });
+    if(this.state.activity == "gloves"){
+      let activityDates = JSON.parse(globeActivitiesController.getGlobalMaxMinActivityDates());
+      if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
+        this.setState({
+          maxDate: new Date(activityDates.maxDate),
+          minDate: new Date(activityDates.minDate),
+        });
+      }
+    }
+    if(this.state.activity == "matrix"){
+      let activityDates = JSON.parse(matrixActivitiesController.getGlobalMaxMinActivityDates());
+      if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
+        this.setState({
+          maxDate: new Date(activityDates.maxDate),
+          minDate: new Date(activityDates.minDate),
+        });
+      }
     }
   }
 
@@ -722,7 +744,7 @@ export default class GraphicResult extends React.Component {
     this.setState({
       level: levelSelect,
     }, () => {
-      if(!this.state.graphicSettings.isCollective){
+      if(!this.props.parameters.isCollective){
         this.GetStudentsByLevel();
         this.GetTeacherLevel();
       }
@@ -1107,55 +1129,55 @@ export default class GraphicResult extends React.Component {
             <div className="graphic-settings-container">
               <div className="graphic-settings-icon"></div>
               <div className="graphic-settings-text">Opciones de la gráfica</div>
-              {
-                this.props.parameters.activity == "gloves" ?
-                  <div className="individual-gloves-chart-menu">
-                    {
-                      !this.props.parameters.isCollective ?
-                        <div className="individual-gloves-chart-menu-option">
-                          <div className="individual-gloves-chart-menu-option-selected"></div>
-                          <div className="individual-gloves-chart-menu-option-text">Estudiante</div>
-                          <div className="individual-gloves-chart-menu-option-icon"></div>
-                          <div className="individual-gloves-chart-submenu-container">
-                            <div onClick={() => this.onOpenChartModal('student')} className="individual-gloves-chart-submenu-option">
-                              <div className="individual-gloves-chart-submenu-option-text">Cambiar estudiante...</div>
-                            </div>
-                          </div>
-                        </div>
-                      :
-                      undefined
-                    }
+              <div className="individual-gloves-chart-menu">
+                {
+                  !this.props.parameters.isCollective ?
                     <div className="individual-gloves-chart-menu-option">
                       <div className="individual-gloves-chart-menu-option-selected"></div>
-                      <div className="individual-gloves-chart-menu-option-text">Tipo</div>
+                      <div className="individual-gloves-chart-menu-option-text">Estudiante</div>
                       <div className="individual-gloves-chart-menu-option-icon"></div>
                       <div className="individual-gloves-chart-submenu-container">
-                        <div className="individual-gloves-chart-submenu-option">
-                          {
-                            this.props.parameters.graphicType == "bar" ?
-                              <div onClick={() => this.ChangeChartType("pie")} className="individual-gloves-chart-submenu-option-text">Cambiar a pastel</div>
-                            :
-                            undefined
-                          }
-                          {
-                            this.props.parameters.graphicType == "pie" ?
-                              <div onClick={() => this.ChangeChartType("bar")} className="individual-gloves-chart-submenu-option-text">Cambiar a barras</div>
-                            :
-                            undefined
-                          }
+                        <div onClick={() => this.onOpenChartModal('student')} className="individual-gloves-chart-submenu-option">
+                          <div className="individual-gloves-chart-submenu-option-text">Cambiar estudiante...</div>
                         </div>
                       </div>
                     </div>
-                    <div className="individual-gloves-chart-menu-option">
-                      <div className="individual-gloves-chart-menu-option-selected"></div>
-                      <div className="individual-gloves-chart-menu-option-text">Fecha</div>
-                      <div className="individual-gloves-chart-menu-option-icon"></div>
-                      <div className="individual-gloves-chart-submenu-container">
-                        <div onClick={() => this.onOpenChartModal('date')} className="individual-gloves-chart-submenu-option">
-                          <div className="individual-gloves-chart-submenu-option-text">Cambiar rango...</div>
-                        </div>
-                      </div>
+                  :
+                  undefined
+                }
+                <div className="individual-gloves-chart-menu-option">
+                  <div className="individual-gloves-chart-menu-option-selected"></div>
+                  <div className="individual-gloves-chart-menu-option-text">Tipo</div>
+                  <div className="individual-gloves-chart-menu-option-icon"></div>
+                  <div className="individual-gloves-chart-submenu-container">
+                    <div className="individual-gloves-chart-submenu-option">
+                      {
+                        this.props.parameters.graphicType == "bar" ?
+                          <div onClick={() => this.ChangeChartType("pie")} className="individual-gloves-chart-submenu-option-text">Cambiar a pastel</div>
+                        :
+                        undefined
+                      }
+                      {
+                        this.props.parameters.graphicType == "pie" ?
+                          <div onClick={() => this.ChangeChartType("bar")} className="individual-gloves-chart-submenu-option-text">Cambiar a barras</div>
+                        :
+                        undefined
+                      }
                     </div>
+                  </div>
+                </div>
+                <div className="individual-gloves-chart-menu-option">
+                  <div className="individual-gloves-chart-menu-option-selected"></div>
+                  <div className="individual-gloves-chart-menu-option-text">Fecha</div>
+                  <div className="individual-gloves-chart-menu-option-icon"></div>
+                  <div className="individual-gloves-chart-submenu-container">
+                    <div onClick={() => this.onOpenChartModal('date')} className="individual-gloves-chart-submenu-option">
+                      <div className="individual-gloves-chart-submenu-option-text">Cambiar rango...</div>
+                    </div>
+                  </div>
+                </div>
+                {
+                  this.props.parameters.activity == "gloves" ?
                     <div className="individual-gloves-chart-menu-option">
                       <div className="individual-gloves-chart-menu-option-selected"></div>
                       <div className="individual-gloves-chart-menu-option-text">Dedos</div>
@@ -1166,47 +1188,47 @@ export default class GraphicResult extends React.Component {
                         </div>
                       </div>
                     </div>
-                    {
-                      this.props.parameters.isCollective ?
-                        <div>
-                          <div className="individual-gloves-chart-menu-option">
-                            <div className="individual-gloves-chart-menu-option-selected"></div>
-                            <div className="individual-gloves-chart-menu-option-text">Niveles</div>
-                            <div className="individual-gloves-chart-menu-option-icon"></div>
-                            <div className="individual-gloves-chart-submenu-container">
-                              <div onClick={() => this.onOpenChartModal('levels')} className="individual-gloves-chart-submenu-option">
-                                <div className="individual-gloves-chart-submenu-option-text">Cambiar niveles...</div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="individual-gloves-chart-menu-option">
-                            <div className="individual-gloves-chart-menu-option-selected"></div>
-                            <div className="individual-gloves-chart-menu-option-text">Géneros</div>
-                            <div className="individual-gloves-chart-menu-option-icon"></div>
-                            <div className="individual-gloves-chart-submenu-container">
-                              <div onClick={() => this.onOpenChartModal('genders')} className="individual-gloves-chart-submenu-option">
-                                <div className="individual-gloves-chart-submenu-option-text">Cambiar géneros...</div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="individual-gloves-chart-menu-option">
-                            <div className="individual-gloves-chart-menu-option-selected"></div>
-                            <div className="individual-gloves-chart-menu-option-text">Periodos</div>
-                            <div className="individual-gloves-chart-menu-option-icon"></div>
-                            <div className="individual-gloves-chart-submenu-container">
-                              <div onClick={() => this.onOpenChartModal('periods')} className="individual-gloves-chart-submenu-option">
-                                <div className="individual-gloves-chart-submenu-option-text">Cambiar periodos...</div>
-                              </div>
-                            </div>
+                  :
+                  undefined
+                }
+                {
+                  this.props.parameters.isCollective ?
+                    <div>
+                      <div className="individual-gloves-chart-menu-option">
+                        <div className="individual-gloves-chart-menu-option-selected"></div>
+                        <div className="individual-gloves-chart-menu-option-text">Niveles</div>
+                        <div className="individual-gloves-chart-menu-option-icon"></div>
+                        <div className="individual-gloves-chart-submenu-container">
+                          <div onClick={() => this.onOpenChartModal('levels')} className="individual-gloves-chart-submenu-option">
+                            <div className="individual-gloves-chart-submenu-option-text">Cambiar niveles...</div>
                           </div>
                         </div>
-                      :
-                      undefined
-                    }
-                  </div>
-                :
-                undefined
-              }
+                      </div>
+                      <div className="individual-gloves-chart-menu-option">
+                        <div className="individual-gloves-chart-menu-option-selected"></div>
+                        <div className="individual-gloves-chart-menu-option-text">Géneros</div>
+                        <div className="individual-gloves-chart-menu-option-icon"></div>
+                        <div className="individual-gloves-chart-submenu-container">
+                          <div onClick={() => this.onOpenChartModal('genders')} className="individual-gloves-chart-submenu-option">
+                            <div className="individual-gloves-chart-submenu-option-text">Cambiar géneros...</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="individual-gloves-chart-menu-option">
+                        <div className="individual-gloves-chart-menu-option-selected"></div>
+                        <div className="individual-gloves-chart-menu-option-text">Periodos</div>
+                        <div className="individual-gloves-chart-menu-option-icon"></div>
+                        <div className="individual-gloves-chart-submenu-container">
+                          <div onClick={() => this.onOpenChartModal('periods')} className="individual-gloves-chart-submenu-option">
+                            <div className="individual-gloves-chart-submenu-option-text">Cambiar periodos...</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  :
+                  undefined
+                }
+              </div>
             </div>
             <div className="chart-subtitle">
               Actividad: {this.state.activityName}
