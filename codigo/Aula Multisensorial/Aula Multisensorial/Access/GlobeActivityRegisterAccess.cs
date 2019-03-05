@@ -580,6 +580,7 @@ namespace Aula_Multisensorial.Access
             JArray headersArray = new JArray();
             headersArray.Add(new JValue("Fechas"));
             headersArray.Add(new JValue("Porcentaje de Aciertos"));
+            headersArray.Add(new JValue("Porcentaje de Errores"));
             array.Add(headersArray);
 
             foreach (BsonDocument activity in activitiesList)
@@ -602,6 +603,7 @@ namespace Aula_Multisensorial.Access
                 float percentaje = (successCount * 100) / (successCount + errorsCount);
                 dataArray.Add(new JValue(activity.GetElement("_id").Value.ToLocalTime().ToString("dd/MM/yyyy")));
                 dataArray.Add(new JValue(percentaje));
+                dataArray.Add(new JValue(100 - percentaje));
                 array.Add(dataArray);
             }
             return array.ToString();
