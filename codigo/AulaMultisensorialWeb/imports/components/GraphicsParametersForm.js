@@ -382,12 +382,23 @@ export default class GraphicsParametersForm extends React.Component {
   }
 
   GetGlobalRangeDates(){
-    let activityDates = JSON.parse(globeActivitiesController.getGlobalMaxMinActivityDates());
-    if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
-      this.setState({
-        maxDate: new Date(activityDates.maxDate),
-        minDate: new Date(activityDates.minDate),
-      });
+    if(this.state.activity == "gloves"){
+      let activityDates = JSON.parse(globeActivitiesController.getGlobalMaxMinActivityDates());
+      if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
+        this.setState({
+          maxDate: new Date(activityDates.maxDate),
+          minDate: new Date(activityDates.minDate),
+        });
+      }
+    }
+    if(this.state.activity == "matrix"){
+      let activityDates = JSON.parse(matrixActivitiesController.getGlobalMaxMinActivityDates());
+      if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
+        this.setState({
+          maxDate: new Date(activityDates.maxDate),
+          minDate: new Date(activityDates.minDate),
+        });
+      }
     }
   }
 
@@ -437,6 +448,9 @@ export default class GraphicsParametersForm extends React.Component {
     }, () => {
       if(this.state.activity){
         this.GetRangeDates();
+        if(this.state.graphicSettings.isCollective){
+          this.GetGlobalRangeDates();
+        }
       }
     });
   }
