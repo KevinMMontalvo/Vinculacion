@@ -30,17 +30,17 @@ namespace Aula_Multisensorial.Model
 
         [BsonElement("initial_value")]
         [JsonProperty(PropertyName = "initial_value")]
-        public string InitialValue { get; set; }
+        public int InitialValue { get; set; }
 
         [BsonElement("final_value")]
         [JsonProperty(PropertyName = "final_value")]
-        public string FinalValue { get; set; }
+        public int FinalValue { get; set; }
 
         public CardiacSensorActivityRegister()
         {
         }
 
-        public CardiacSensorActivityRegister(string id, string studentId, DateTime datetime, string level, string period, string initialValue, string finalValue)
+        public CardiacSensorActivityRegister(string id, string studentId, DateTime datetime, string level, string period, int initialValue, int finalValue)
         {
             Id = id;
             StudentId = studentId;

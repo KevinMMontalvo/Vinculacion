@@ -69,4 +69,63 @@ db.glove_activity_registers.aggregate([
 ]);
 
 
+db.cardiac_activity_registers.aggregate([
+    {
+        $match: 
+        {
+            $and: [
+                { "datetime": { $gte: ISODate("2017-01-01T00:00:00.000Z"), $lt: ISODate("2020-01-31T23:59:59.000Z") } },
+                { "student_id": "5c43ff326beb3040fcd14d3c" }
+            ]
+        }
+    },
+    {
+        $group: 
+        {
+            _id: "$datetime",
+            values: { $push:{ initial_value:"$initial_value",final_value:"$final_value"} }
+        }
+    },
+    { $sort: { "_id": 1 } }
+]);
 
+db.cardiac_activity_registers.aggregate([
+    {
+        $match: 
+        {
+            $and: [
+                { "datetime": { $gte: ISODate("2017-01-01T00:00:00.000Z"), $lt: ISODate("2020-01-31T23:59:59.000Z") } },
+                { "student_id": "5c43ff326beb3040fcd14d3c" }
+            ]
+        }
+    },
+    {
+        $group: 
+        {
+            _id: "$datetime",
+            initial_value: {$avg:"$initial_value"},
+            final_value: {$avg:"$final_value"},
+        }
+    },
+    { $sort: { "_id": 1 } }
+]);
+
+
+db.cardiac_activity_registers.aggregate([
+    {
+        $match: 
+        {
+            $and: [
+                { "datetime": { $gte: ISODate("2017-01-01T00:00:00.000Z"), $lt: ISODate("2020-01-31T23:59:59.000Z") } },
+                { "student_id": "5c43ff326beb3040fcd14d3c" }
+            ]
+        }
+    },
+    {
+        $group: 
+        {
+            _id: "null",
+            values: {$push: {initial_value:"$initial_value",final_value:"$final_value"}}
+        }
+    }
+]);

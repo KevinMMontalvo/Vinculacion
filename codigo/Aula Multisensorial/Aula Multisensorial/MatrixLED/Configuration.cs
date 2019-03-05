@@ -393,28 +393,40 @@ namespace Aula_Multisensorial.MatrixLED
         {
             panelTools.Controls.Clear();
 
-            NumericUpDown numericUpDown = new NumericUpDown();
-            numericUpDown.Name = "numericUpDown";
-            numericUpDown.Value = levelConfiguration;
-            numericUpDown.Minimum = 1;
-            numericUpDown.Maximum = 16;
-            numericUpDown.Location = new Point(300, 60);
-            numericUpDown.Size = new Size(40, 26);
-            numericUpDown.ForeColor = Color.White;
-            numericUpDown.BackColor = Color.FromArgb(30, 29, 33);
-            numericUpDown.BorderStyle = BorderStyle.None;
-            numericUpDown.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            numericUpDown.TextAlign = HorizontalAlignment.Center;
-            //numericUpDown.ValueChanged += new EventHandler(new ControlEvent());
-            panelTools.Controls.Add(numericUpDown);
+            TrackBar trackBar = new TrackBar();
+            trackBar.Name = "trackBar";
+            trackBar.Value = levelConfiguration;
+            trackBar.Minimum = 1;
+            trackBar.Maximum = 16;
+            trackBar.BackColor = Color.FromArgb(30, 29, 33);
+            trackBar.Location = new Point(200, 50);
+            trackBar.Size = new Size(255, 45);
+            trackBar.ValueChanged += new EventHandler(new ControlEvent(LevelNumberChangedEvent));
+            panelTools.Controls.Add(trackBar);
 
+            Label label = new Label();
+            label.Name = "label";
+            label.Text = levelConfiguration.ToString();
+            label.Location = new Point(460, 50);
+            label.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label.ForeColor = Color.White;
+            panelTools.Controls.Add(label);
+        }
+
+        private void LevelNumberChangedEvent(object sender, EventArgs e)
+        {
+            TrackBar trackBar = (TrackBar)sender;
+            Label label = (Label)panelTools.Controls["label"];
+            int level = trackBar.Value;
+            timer.Interval = 4200 - (200 * level);
+            label.Text = level.ToString();
         }
 
         private void SendLevelConfiguration(object sender, EventArgs e)
         {
             bool sendedProperly;
-            NumericUpDown numericUpDown = (NumericUpDown)panelTools.Controls["numericUpDown"];
-            levelConfiguration = (int)numericUpDown.Value;
+            TrackBar trackbar = (TrackBar)panelTools.Controls["trackBar"];
+            levelConfiguration = trackbar.Value;
             timer.Interval = 4200 - (200 * levelConfiguration);
 
             if (levelConfiguration < 11)
@@ -437,34 +449,39 @@ namespace Aula_Multisensorial.MatrixLED
 
         private void AddBrightnessControls()
         {
-            NumericUpDown numericUpDown = new NumericUpDown();
-            numericUpDown.Name = "numericUpDown";
-            numericUpDown.Value = brightnessConfiguration;
-            numericUpDown.Minimum = 1;
-            numericUpDown.Maximum = 8;
-            numericUpDown.Location = new Point(300, 60);
-            numericUpDown.Size = new Size(40, 26);
-            numericUpDown.ForeColor = Color.White;
-            numericUpDown.BackColor = Color.FromArgb(30, 29, 33);
-            numericUpDown.BorderStyle = BorderStyle.None;
-            numericUpDown.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            numericUpDown.TextAlign = HorizontalAlignment.Center;
-            numericUpDown.ValueChanged += new EventHandler(new ControlEvent(NumberBrightnessChangedUpDownEvent));
-            panelTools.Controls.Add(numericUpDown);
+            TrackBar trackBar = new TrackBar();
+            trackBar.Name = "trackBar";
+            trackBar.Value = brightnessConfiguration;
+            trackBar.Minimum = 1;
+            trackBar.Maximum = 8;
+            trackBar.BackColor = Color.FromArgb(30, 29, 33);
+            trackBar.Location = new Point(200, 50);
+            trackBar.Size = new Size(255, 45);
+            trackBar.ValueChanged += new EventHandler(new ControlEvent(BrightnessLevelChangedEvent));
+            panelTools.Controls.Add(trackBar);
+
+            Label label = new Label();
+            label.Name = "label";
+            label.Text = levelConfiguration.ToString();
+            label.Location = new Point(460, 50);
+            label.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label.ForeColor = Color.White;
+            panelTools.Controls.Add(label);
         }
 
-        private void NumberBrightnessChangedUpDownEvent(object sender, EventArgs e)
+        private void BrightnessLevelChangedEvent(object sender, EventArgs e)
         {
-            NumericUpDown numericUpDown = (NumericUpDown)sender;
-            int level = (int)numericUpDown.Value;
+            TrackBar trackbar = (TrackBar)sender;
+            Label label = (Label)panelTools.Controls["label"];
+            int level = trackbar.Value;
+            label.Text = level.ToString();
             SetMatrixBrightness(level);
-
         }
 
         private void SendBrightnessConfiguration(object sender, EventArgs e)
         {
-            NumericUpDown numericUpDown = (NumericUpDown)panelTools.Controls["numericUpDown"];
-            brightnessConfiguration = (int)numericUpDown.Value;
+            TrackBar trackbar = (TrackBar)panelTools.Controls["numericUpDown"];
+            brightnessConfiguration = trackbar.Value;
             if (!ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "L-000" + brightnessConfiguration))
             {
                 MessageBox.Show("No se pudo conectar con el dispositivo (Matriz de LED)");
@@ -492,36 +509,41 @@ namespace Aula_Multisensorial.MatrixLED
 
         private void AddAppearancesControls()
         {
-            NumericUpDown numericUpDown = new NumericUpDown();
-            numericUpDown.Name = "numericUpDown";
-            numericUpDown.Value = appearancesConfiguration;
-            numericUpDown.Minimum = 10;
-            numericUpDown.Increment = 10;
-            numericUpDown.Maximum = 100;
-            numericUpDown.Location = new Point(300, 60);
-            numericUpDown.Size = new Size(50, 26);
-            numericUpDown.ForeColor = Color.White;
-            numericUpDown.BackColor = Color.FromArgb(30, 29, 33);
-            numericUpDown.BorderStyle = BorderStyle.None;
-            numericUpDown.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            numericUpDown.TextAlign = HorizontalAlignment.Center;
-            panelTools.Controls.Add(numericUpDown);
+            TrackBar trackBar = new TrackBar();
+            trackBar.Name = "trackBar";
+            trackBar.Value = appearancesConfiguration;
+            trackBar.Minimum = 1;
+            trackBar.Maximum = 10;
+            trackBar.SmallChange = 1;
+            trackBar.LargeChange = 1;
+            trackBar.TickFrequency = 1;
+            trackBar.BackColor = Color.FromArgb(30, 29, 33);
+            trackBar.Location = new Point(200, 50);
+            trackBar.Size = new Size(255, 45);
+            trackBar.ValueChanged += new EventHandler(new ControlEvent(AppearancesLevelChangedEvent));
+            panelTools.Controls.Add(trackBar);
 
             Label label = new Label();
-            label.AutoSize = true;
+            label.Name = "label";
+            label.Text = appearancesConfiguration*10 + "%";
+            label.Location = new Point(460, 50);
             label.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label.ForeColor = Color.White;
-            label.Location = new Point(355, 60);
-            label.Name = "label1";
-            label.Size = new Size(24, 20);
-            label.Text = "%";
             panelTools.Controls.Add(label);
+        }
+
+        private void AppearancesLevelChangedEvent(object sender, EventArgs e)
+        {
+            TrackBar trackbar = (TrackBar)sender;
+            Label label = (Label)panelTools.Controls["label"];
+            int level = trackbar.Value *10;
+            label.Text = level+"%";
         }
 
         private void SendAppearancesConfiguration(object sender, EventArgs e)
         {
-            NumericUpDown numericUpDown = (NumericUpDown)panelTools.Controls["numericUpDown"];
-            appearancesConfiguration = (int)numericUpDown.Value;
+            TrackBar trackbar = (TrackBar)panelTools.Controls["trackBar"];
+            appearancesConfiguration = trackbar.Value;
             if (!ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "A-000" + (appearancesConfiguration / 10 - 1)))
             {
                 MessageBox.Show("No se pudo conectar con el dispositivo (Matriz de LED)");
@@ -886,6 +908,5 @@ namespace Aula_Multisensorial.MatrixLED
             parentForm.Close();
             Close();
         }
-
     }
 }

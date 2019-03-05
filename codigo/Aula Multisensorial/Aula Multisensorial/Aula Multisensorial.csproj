@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Access\AdministratorAccess.cs" />
+    <Compile Include="Access\CardiacSensorActivityRegisterAccess.cs" />
     <Compile Include="Access\GlobeActivityRegisterAccess.cs" />
     <Compile Include="Access\LevelAccess.cs" />
     <Compile Include="Access\LogAccess.cs" />
@@ -131,7 +132,6 @@
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Activity.cs" />
-    <Compile Include="Model\ActivityType.cs" />
     <Compile Include="Model\Administrator.cs" />
     <Compile Include="Model\CardiacSensorActivityRegister.cs" />
     <Compile Include="Model\GlobeActivityRegister.cs" />

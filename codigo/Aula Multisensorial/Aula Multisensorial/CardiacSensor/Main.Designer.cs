@@ -31,9 +31,10 @@
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
             this.labelTittle = new System.Windows.Forms.Label();
-            this.labelPPM = new System.Windows.Forms.Label();
+            this.labelInitialBPM = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.comboBoxStudents = new System.Windows.Forms.ComboBox();
+            this.labelFinalBPM = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonExit
@@ -79,16 +80,16 @@
             this.labelTittle.TabIndex = 4;
             this.labelTittle.Text = "Actividad de Sensor Cardiaco";
             // 
-            // labelPPM
+            // labelInitialBPM
             // 
-            this.labelPPM.AutoSize = true;
-            this.labelPPM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPPM.ForeColor = System.Drawing.Color.White;
-            this.labelPPM.Location = new System.Drawing.Point(192, 374);
-            this.labelPPM.Name = "labelPPM";
-            this.labelPPM.Size = new System.Drawing.Size(181, 20);
-            this.labelPPM.TabIndex = 22;
-            this.labelPPM.Text = "Pulsaciones por minuto: ";
+            this.labelInitialBPM.AutoSize = true;
+            this.labelInitialBPM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelInitialBPM.ForeColor = System.Drawing.Color.White;
+            this.labelInitialBPM.Location = new System.Drawing.Point(192, 374);
+            this.labelInitialBPM.Name = "labelInitialBPM";
+            this.labelInitialBPM.Size = new System.Drawing.Size(181, 20);
+            this.labelInitialBPM.TabIndex = 22;
+            this.labelInitialBPM.Text = "Pulsaciones por minuto: ";
             // 
             // labelName
             // 
@@ -110,6 +111,17 @@
             this.comboBoxStudents.Size = new System.Drawing.Size(392, 24);
             this.comboBoxStudents.TabIndex = 23;
             // 
+            // labelFinalBPM
+            // 
+            this.labelFinalBPM.AutoSize = true;
+            this.labelFinalBPM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFinalBPM.ForeColor = System.Drawing.Color.White;
+            this.labelFinalBPM.Location = new System.Drawing.Point(192, 409);
+            this.labelFinalBPM.Name = "labelFinalBPM";
+            this.labelFinalBPM.Size = new System.Drawing.Size(181, 20);
+            this.labelFinalBPM.TabIndex = 25;
+            this.labelFinalBPM.Text = "Pulsaciones por minuto: ";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -117,9 +129,10 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.labelFinalBPM);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.comboBoxStudents);
-            this.Controls.Add(this.labelPPM);
+            this.Controls.Add(this.labelInitialBPM);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.labelTittle);
@@ -138,8 +151,9 @@
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Label labelTittle;
-        private System.Windows.Forms.Label labelPPM;
+        private System.Windows.Forms.Label labelInitialBPM;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.ComboBox comboBoxStudents;
+        private System.Windows.Forms.Label labelFinalBPM;
     }
 }

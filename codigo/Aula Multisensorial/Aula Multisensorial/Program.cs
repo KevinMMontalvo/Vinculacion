@@ -15,7 +15,7 @@ namespace Aula_Multisensorial
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new CEFForm());
-            //Application.Run(new Aula_Multisensorial.MatrixLED.Main("5c1bbb3f75c6cf37a489efcb"));
+            //Application.Run(new Aula_Multisensorial.CardiacSensor.Main("5c1bbb3f75c6cf37a489efcb"));
         }
     }
 }

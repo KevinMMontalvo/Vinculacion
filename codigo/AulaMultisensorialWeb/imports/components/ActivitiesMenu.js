@@ -39,20 +39,20 @@ export default class ActivitiesMenu extends React.Component
 
 	MatrixActivity()
 	{
-		var fingers = ["D1", "D2", "I5"];
+		var fingers = ["D1", "D2", "D3", "D4", "D5", "I1", "I2", "I3", "I4", "I5"];
 
 		//ejemplo individuales
 		//console.log(globeActivitiesController.getPieChartDataIndividual(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0), "5c43ff326beb3040fcd14d3c", fingers));
-
-		var levels = ["Primero De Básica","Segundo De Básica","Septimo De Básica"];
-		var periods =["Periodo 2019 - 2020","periodo asdas"];
+		//console.log(globeActivitiesController.getLineChartDataIndividual(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0), "5c43ff326beb3040fcd14d3c", fingers));
+		var levels = ["Primero De Básica", "Segundo De Básica", "Septimo De Básica"];
+		var periods = ["Periodo 2019 - 2020", "periodo asdas"];
 		var genders = ["Masculino", "Femenino"];
 		//ejemplo colectivo
 		//console.log(globeActivitiesController.getPieChartDataCollective(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0),2,18,genders,levels,periods,fingers));
-
+		//console.log(globeActivitiesController.getLineChartDataCollective(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0),2,18,genders,levels,periods,fingers));
 		//console.log(globeActivitiesController.getGlobalMaxMinActivityDates());
 
-		//activitiesController.startActivity("Matrix","5c1bbb3f75c6cf37a489efcb");
+		//activitiesController.startActivity("Matrix", "5c1bbb3f75c6cf37a489efcb");
 
 		/*
 		Matriz
@@ -61,20 +61,31 @@ export default class ActivitiesMenu extends React.Component
 		//ejemplo individual
 		//console.log(matrixActivitiesController.getBarChartDataIndividual(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0), "5c43ff326beb3040fcd14d3c"));
 		//console.log(matrixActivitiesController.getPieChartDataIndividual(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0), "5c43ff326beb3040fcd14d3c"));
+		console.log(matrixActivitiesController.getStudentMaxMinActivityDates("5c43fc5b3705124f9435618c"));
 
 
 		//ejemplo colectivo
-		console.log(matrixActivitiesController.getPieChartDataCollective(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0),2,18,genders,levels,periods));
+		//console.log(matrixActivitiesController.getPieChartDataCollective();
+
+		/*
+		Sensor cardiaco
+		 */
+		//console.log(cardiacActivitiesController.getBarChartDataIndividual(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0),"5c43ff326beb3040fcd14d3c"));
+		//console.log(cardiacActivitiesController.getPieChartDataIndividual(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0),"5c43ff326beb3040fcd14d3c"));
+		//console.log(cardiacActivitiesController.getPieChartDataCollective(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0),2,18,genders,levels,periods));
+		//console.log(cardiacActivitiesController.getGlobalMaxMinActivityDates());
+
+
 	}
 
 	GlovesActivity()
 	{
-		activitiesController.startActivity("Globe","5c1bbb3f75c6cf37a489efcb");
+		activitiesController.startActivity("Globe", "5c1bbb3f75c6cf37a489efcb");
 	}
 
 	CardiacSensorActivity()
 	{
-		activitiesController.startActivity("CardiacSensor","5c1bbb3f75c6cf37a489efcb");
+		activitiesController.startActivity("CardiacSensor", "5c1bbb3f75c6cf37a489efcb");
 	}
 
 	ActivitiesReport()
