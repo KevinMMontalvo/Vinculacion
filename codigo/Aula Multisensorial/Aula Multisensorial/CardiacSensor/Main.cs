@@ -62,9 +62,10 @@ namespace Aula_Multisensorial.CardiacSensor
             {
                 SetStartActivity();
             }
-            else if (buttonStart.Text.Equals("Terminar") && activity.FinalValue != 0 && secondValueTaked)
+            else if (buttonStart.Text.Equals("Terminar") && secondValueTaked)
             {
                 SetEndActivity();
+                comboBoxStudents.Enabled = true;
             }
         }
 
@@ -106,7 +107,6 @@ namespace Aula_Multisensorial.CardiacSensor
         {
             buttonStart.Text = "Iniciar";
             buttonExit.Enabled = true;
-            comboBoxStudents.Enabled = true;
             buttonStart.BackColor = Color.Green;
         }
 
@@ -161,7 +161,8 @@ namespace Aula_Multisensorial.CardiacSensor
                     {
                         MessageBox.Show("Ha ocurrido un problema de conexion con el sensor cardiaco, revise que el sensor esté bien conectado");
                         Invoke(new ChangeActivityState(SetEndActivity));
-                        break;
+                        Invoke(new SetText(SetInitialLabelText), "Pulsaciones por minuto iniciales: -");
+                        return;
                     }
                     else if (message == null) // terminado por el usuario
                     {
@@ -211,7 +212,8 @@ namespace Aula_Multisensorial.CardiacSensor
                 {
                     MessageBox.Show("Ha ocurrido un problema de conexion con el sensor cardiaco, revise que el sensor esté bien conectado");
                     Invoke(new ChangeActivityState(SetEndActivity));
-                    break;
+                    Invoke(new SetText(SetFinalLabelText), "Pulsaciones por minuto finales: -");
+                    return;
                 }
                 else if (message == null) // terminado por el usuario
                 {
