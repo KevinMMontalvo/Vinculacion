@@ -293,7 +293,7 @@ namespace Aula_Multisensorial.Access
 
             List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).ToList(cancellationTokenSource.Token);
 
-            if (registers.Count > 0) //valida de que haya por lo menos 1 registro
+            if (registers.Count == 0) //valida de que haya por lo menos 1 registro
             {
                 return new JObject().ToString();
             }

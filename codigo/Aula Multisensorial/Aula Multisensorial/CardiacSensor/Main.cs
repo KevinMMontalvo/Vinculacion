@@ -16,6 +16,8 @@ namespace Aula_Multisensorial.CardiacSensor
         private delegate void ChangeActivityState();
         private delegate void SetText(string text);
         private CardiacSensorActivityRegister activity;
+        private bool firstValueTaked = false;
+        private bool secondValueTaked = false;
 
         public Main(string teacherId)
         {
@@ -56,11 +58,11 @@ namespace Aula_Multisensorial.CardiacSensor
                     StartReading();
                 }
             }
-            else if (buttonStart.Text.Equals("Tomar Medida") && activity.InitialValue!=0)
+            else if (buttonStart.Text.Equals("Tomar Medida") && firstValueTaked)
             {
                 SetStartActivity();
             }
-            else if (buttonStart.Text.Equals("Terminar") && activity.FinalValue != 0)
+            else if (buttonStart.Text.Equals("Terminar") && activity.FinalValue != 0 && secondValueTaked)
             {
                 SetEndActivity();
             }
@@ -179,12 +181,12 @@ namespace Aula_Multisensorial.CardiacSensor
                                 if (ValuesStandarized(values))
                                 {
                                     Invoke(new SetText(SetInitialLabelText), "Pulsaciones por minuto iniciales: " + values[0]);
-                                    activity.InitialValue = values[0];
+                                    firstValueTaked = true;
                                 }
                                 else
                                 {
                                     Invoke(new SetText(SetInitialLabelText), "Pulsaciones por minuto iniciales: -");
-                                    activity.InitialValue = 0;
+                                    firstValueTaked = false;
                                 }
                                 counter = 0;
                             }
@@ -195,6 +197,7 @@ namespace Aula_Multisensorial.CardiacSensor
                         }
                     }
                 } while (buttonStart.Text.Equals("Tomar Medida"));
+                activity.InitialValue = values[0];
             }
             else
             {
@@ -228,12 +231,12 @@ namespace Aula_Multisensorial.CardiacSensor
                             if (ValuesStandarized(values))
                             {
                                 Invoke(new SetText(SetFinalLabelText), "Pulsaciones por minuto finales: " + values[0]);
-                                activity.FinalValue = values[0];
+                                secondValueTaked = true;
                             }
                             else
                             {
                                 Invoke(new SetText(SetFinalLabelText), "Pulsaciones por minuto finales: -");
-                                activity.InitialValue = 0;
+                                secondValueTaked = false;
                             }
                             counter = 0;
                         }
@@ -244,6 +247,7 @@ namespace Aula_Multisensorial.CardiacSensor
                     }
                 }
             } while (buttonStart.Text.Equals("Terminar"));
+            activity.FinalValue = values[0];
             StopReading();
 
             if (activity.InitialValue != 0 && activity.FinalValue != 0 && buttonStart.Text.Equals("Iniciar"))
