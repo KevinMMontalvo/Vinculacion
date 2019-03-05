@@ -176,30 +176,30 @@ export default class UserMenu extends React.Component {
                     <div onClick={() => this.Logout()} id="logout" className="advanced-menu-option-container-b">Cerrar sesión</div>
                   </div>
                 :
-                undefined
+                  undefined
               }
               {
                 this.state.changePasswordForm ?
                   <div className="change-password-container">
                     <div className="advanced-menu-title">Cambiar contraseña</div>
                     <div className="input-container">
-    									<input onBlur={() => this.VerifySamePassword()} id="password-input"
+                      <input onBlur={() => this.VerifySamePassword()} id="password-input"
                         placeholder="Nueva contraseña"
                         className="horizontal-input-user-options"
-             type="password"/>
-    								</div>
-    								<div className="input-container">
-    									<input onKeyDown={() => this.VerifySamePassword()} onKeyUp={() => this.VerifySamePassword()} onKeyPress={() => this.VerifySamePassword()} id="password-confirmation-input"
+                      type="password"/>
+                    </div>
+                    <div className="input-container">
+                      <input onKeyDown={() => this.VerifySamePassword()} onKeyUp={() => this.VerifySamePassword()} onKeyPress={() => this.VerifySamePassword()} id="password-confirmation-input"
                         placeholder="Confirmar contraseña"
                         className="horizontal-input-user-options"
-             type="password"/>
-    								</div>
+                      type="password"/>
+                    </div>
                     <div className="button-container">
                       <div onClick={() => this.ChangePassword()} className="change-password-button">Aceptar</div>
                     </div>
                   </div>
                 :
-                undefined
+                  undefined
               }
             </Modal>
             <ButterToast

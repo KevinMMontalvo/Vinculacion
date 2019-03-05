@@ -67,7 +67,7 @@ export default class LoginForm extends React.Component {
         this.SendUser(user);
         return;
       }
-      if(teachersController.validateTeacherLogin(username,  password)){
+      if(teachersController.validateTeacherLogin(username, password)){
         this.props.SuccessfullLogin();
         for (var i = 0; i < teachers.length; i++) {
           if(username == teachers[i].name){
@@ -147,6 +147,10 @@ export default class LoginForm extends React.Component {
       date: new Date(),
     };
     return log;
+  }
+
+  componentDidMount(){
+
   }
 
   render() {

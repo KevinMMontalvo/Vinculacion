@@ -232,7 +232,6 @@ textarea:focus {
   width: 88%;
   transition: 0.5s;
   border-left: solid 4px;
-  background-color: #1E1D21;
   height: 5vh;
   transition: 0.5s;
 }
@@ -358,4 +357,8 @@ select:focus {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#small-separator{
+  height: 10vh;
 }

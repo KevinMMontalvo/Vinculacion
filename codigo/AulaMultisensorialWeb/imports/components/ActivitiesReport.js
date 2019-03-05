@@ -24,12 +24,43 @@ export default class ActivitiesReport extends React.Component {
   ShowGraphicResult(parameters){
     let data;
     let maxValue = 0;
-    if(parameters.graphicType == "bar"){
-      data = JSON.parse(globeActivitiesController.getBarChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.fingers));
-      maxValue = this.GetMaxValue(data);
+    if(parameters.activity == "gloves"){
+      if(parameters.graphicType == "bar"){
+        if(parameters.isCollective){
+          data = JSON.parse(globeActivitiesController.getBarChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods, parameters.fingers));
+        }
+        else{
+          data = JSON.parse(globeActivitiesController.getBarChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.fingers));
+        }
+        maxValue = this.GetMaxValue(data);
+      }
+      if(parameters.graphicType == "pie"){
+        if(parameters.isCollective){
+          data = JSON.parse(globeActivitiesController.getPieChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods, parameters.fingers));
+        }
+        else{
+          data = JSON.parse(globeActivitiesController.getPieChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.fingers));
+        }
+      }
     }
-    if(parameters.graphicType == "pie"){
-      data = JSON.parse(globeActivitiesController.getPieChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.fingers));
+    if(parameters.activity == "matrix"){
+      if(parameters.graphicType == "bar"){
+        if(parameters.isCollective){
+          data = JSON.parse(matrixActivitiesController.getBarChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods));
+        }
+        else{
+          data = JSON.parse(matrixActivitiesController.getBarChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student));
+        }
+        maxValue = this.GetMaxValue(data);
+      }
+      if(parameters.graphicType == "pie"){
+        if(parameters.isCollective){
+          data = JSON.parse(matrixActivitiesController.getPieChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods));
+        }
+        else{
+          data = JSON.parse(matrixActivitiesController.getPieChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student));
+        }
+      }
     }
     this.setState({
       showReportForm: false,
@@ -55,17 +86,135 @@ export default class ActivitiesReport extends React.Component {
     return maxValue;
   }
 
-  ChangeGlovesChartType(type){
+  ChangeChartType(type){
     let parameters = this.state.parameters;
     let data;
     let maxValue = 0;
     parameters.graphicType = type;
+    if(parameters.graphicType == "bar"){
+      if(parameters.isCollective){
+        data = JSON.parse(globeActivitiesController.getBarChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods, parameters.fingers));
+      }
+      else{
+        data = JSON.parse(globeActivitiesController.getBarChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.fingers));
+      }
+      maxValue = this.GetMaxValue(data);
+    }
+    if(parameters.graphicType == "pie"){
+      if(parameters.isCollective){
+        data = JSON.parse(globeActivitiesController.getPieChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods, parameters.fingers));
+      }
+      else{
+        data = JSON.parse(globeActivitiesController.getPieChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.fingers));
+      }
+    }
+    this.setState({
+      parameters: parameters,
+      data: data,
+      maxValue: maxValue,
+    });
+  }
+
+  ChangeStudent(student, name, level){
+    let parameters = this.state.parameters;
+    let data;
+    let maxValue = 0;
+    parameters.student = student;
+    parameters.name = name;
+    parameters.level = level;
     if(parameters.graphicType == "bar"){
       data = JSON.parse(globeActivitiesController.getBarChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.fingers));
       maxValue = this.GetMaxValue(data);
     }
     if(parameters.graphicType == "pie"){
       data = JSON.parse(globeActivitiesController.getPieChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.fingers));
+    }
+    this.setState({
+      parameters: parameters,
+      data: data,
+      maxValue: maxValue,
+    });
+  }
+
+  ChangeDate(minDate, maxDate){
+    let parameters = this.state.parameters;
+    let data;
+    let maxValue = 0;
+    parameters.startDate = minDate;
+    parameters.endDate = maxDate;
+    if(parameters.graphicType == "bar"){
+      if(parameters.isCollective){
+        data = JSON.parse(globeActivitiesController.getBarChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods, parameters.fingers));
+      }
+      else{
+        data = JSON.parse(globeActivitiesController.getBarChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.fingers));
+      }
+      maxValue = this.GetMaxValue(data);
+    }
+    if(parameters.graphicType == "pie"){
+      if(parameters.isCollective){
+        data = JSON.parse(globeActivitiesController.getPieChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods, parameters.fingers));
+      }
+      else{
+        data = JSON.parse(globeActivitiesController.getPieChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.fingers));
+      }
+    }
+    this.setState({
+      parameters: parameters,
+      data: data,
+      maxValue: maxValue,
+    });
+  }
+
+  ChangeFingers(fingers){
+    let parameters = this.state.parameters;
+    let data;
+    let maxValue = 0;
+    parameters.fingers = fingers;
+    if(parameters.graphicType == "bar"){
+      if(parameters.isCollective){
+        data = JSON.parse(globeActivitiesController.getBarChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods, parameters.fingers));
+      }
+      else{
+        data = JSON.parse(globeActivitiesController.getBarChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.fingers));
+      }
+      maxValue = this.GetMaxValue(data);
+    }
+    if(parameters.graphicType == "pie"){
+      if(parameters.isCollective){
+        data = JSON.parse(globeActivitiesController.getPieChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods, parameters.fingers));
+      }
+      else{
+        data = JSON.parse(globeActivitiesController.getPieChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.fingers));
+      }
+    }
+    this.setState({
+      parameters: parameters,
+      data: data,
+      maxValue: maxValue,
+    });
+  }
+
+  ChangeFilters(newParameters){
+    let parameters = newParameters;
+    let data;
+    let maxValue = 0;
+    if(parameters.graphicType == "bar"){
+      if(parameters.isCollective){
+        data = JSON.parse(globeActivitiesController.getBarChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods, parameters.fingers));
+      }
+      else{
+        data = JSON.parse(globeActivitiesController.getBarChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.fingers));
+      }
+      maxValue = this.GetMaxValue(data);
+    }
+    if(parameters.graphicType == "pie"){
+      if(parameters.isCollective){
+        data = JSON.parse(globeActivitiesController.getPieChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods, parameters.fingers));
+      }
+      else{
+        data = JSON.parse(globeActivitiesController.getPieChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.fingers));
+      }
     }
     this.setState({
       parameters: parameters,
@@ -101,8 +250,12 @@ export default class ActivitiesReport extends React.Component {
                   parameters={this.state.parameters}
                   data={this.state.data}
                   maxValue={this.state.maxValue}
-                  ChangeGlovesChartType={this.ChangeGlovesChartType.bind(this)}
-                  NewGraphic={this.NewGraphic.bind(this)}/>
+                  ChangeChartType={this.ChangeChartType.bind(this)}
+                  NewGraphic={this.NewGraphic.bind(this)}
+                  ChangeStudent={this.ChangeStudent.bind(this)}
+                  ChangeDate={this.ChangeDate.bind(this)}
+                  ChangeFingers={this.ChangeFingers.bind(this)}
+                  ChangeFilters={this.ChangeFilters.bind(this)}/>
               :
               undefined
           }

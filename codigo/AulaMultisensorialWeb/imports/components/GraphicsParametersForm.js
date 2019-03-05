@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-date-picker';
+import Filters from '../map/Filters';
 
 export default class GraphicsParametersForm extends React.Component {
   constructor(props) {
@@ -8,15 +9,23 @@ export default class GraphicsParametersForm extends React.Component {
       maxDate: new Date(),
       minDate: new Date(),
       student: undefined,
+      level: undefined,
       graphicType: undefined,
       activity: "",
-      fingers: ['D1','D2','D3','D4','D5','L1','L2','L3','L4','L5'],
+      filters: {
+        levels: [],
+        periods: [],
+        genders: ["Masculino", "Femenino"],
+      },
+      selectedMale: true,
+      selectedFemale: true,
+      fingers: ['D1','D2','D3','D4','D5','I1','I2','I3','I4','I5'],
       selectedFingers: {
-        L1: true,
-        L2: true,
-        L3: true,
-        L4: true,
-        L5: true,
+        I1: true,
+        I2: true,
+        I3: true,
+        I4: true,
+        I5: true,
         D1: true,
         D2: true,
         D3: true,
@@ -29,13 +38,18 @@ export default class GraphicsParametersForm extends React.Component {
         isDateRangeSelected: false,
         isGraphicTypeSelected: false,
         isCollective: false,
-      }
+      },
     }
   }
 
   componentDidMount(){
-    this.GetStudentsByLevel();
-    this.GetTeacherLevel();
+    this.setState({
+      level: this.props.user.level,
+    }, () => {
+      this.LoadLevelsInSelect();
+      this.GetStudentsByLevel();
+      this.GetTeacherLevel();
+    });
   }
 
   LoadStudents() {
@@ -47,9 +61,10 @@ export default class GraphicsParametersForm extends React.Component {
   GetStudentsByLevel(){
     let students = this.LoadStudents();
     let studentsByLevel = [];
+    let level = this.state.level;
     if(students != null){
       for (var i = 0; i < students.length; i++) {
-        if(students[i].level_id == this.props.user.level){
+        if(students[i].level_id == level){
           studentsByLevel.push(students[i]);
         }
       }
@@ -80,11 +95,11 @@ export default class GraphicsParametersForm extends React.Component {
   CheckSelectedFingers(){
     let fingers = this.state.fingers;
 
-    let L1 = document.getElementById('L1');
-    let L2 = document.getElementById('L2');
-    let L3 = document.getElementById('L3');
-    let L4 = document.getElementById('L4');
-    let L5 = document.getElementById('L5');
+    let I1 = document.getElementById('I1');
+    let I2 = document.getElementById('I2');
+    let I3 = document.getElementById('I3');
+    let I4 = document.getElementById('I4');
+    let I5 = document.getElementById('I5');
 
     let D1 = document.getElementById('D1');
     let D2 = document.getElementById('D2');
@@ -94,34 +109,34 @@ export default class GraphicsParametersForm extends React.Component {
 
     let removeIndex = -1;
 
-    if(!this.state.selectedFingers.L1){
-      L1.style.width = "0vw";
-      L1.style.height = "0vw";
-      removeIndex = fingers.indexOf('L1');
+    if(!this.state.selectedFingers.I1){
+      I1.style.width = "0vw";
+      I1.style.height = "0vw";
+      removeIndex = fingers.indexOf('I1');
       fingers.splice(removeIndex, 1);
     }
-    if(!this.state.selectedFingers.L2){
-      L2.style.width = "0vw";
-      L2.style.height = "0vw";
-      removeIndex = fingers.indexOf('L2');
+    if(!this.state.selectedFingers.I2){
+      I2.style.width = "0vw";
+      I2.style.height = "0vw";
+      removeIndex = fingers.indexOf('I2');
       fingers.splice(removeIndex, 1);
     }
-    if(!this.state.selectedFingers.L3){
-      L3.style.width = "0vw";
-      L3.style.height = "0vw";
-      removeIndex = fingers.indexOf('L3');
+    if(!this.state.selectedFingers.I3){
+      I3.style.width = "0vw";
+      I3.style.height = "0vw";
+      removeIndex = fingers.indexOf('I3');
       fingers.splice(removeIndex, 1);
     }
-    if(!this.state.selectedFingers.L4){
-      L4.style.width = "0vw";
-      L4.style.height = "0vw";
-      removeIndex = fingers.indexOf('L4');
+    if(!this.state.selectedFingers.I4){
+      I4.style.width = "0vw";
+      I4.style.height = "0vw";
+      removeIndex = fingers.indexOf('I4');
       fingers.splice(removeIndex, 1);
     }
-    if(!this.state.selectedFingers.L5){
-      L5.style.width = "0vw";
-      L5.style.height = "0vw";
-      removeIndex = fingers.indexOf('L5');
+    if(!this.state.selectedFingers.I5){
+      I5.style.width = "0vw";
+      I5.style.height = "0vw";
+      removeIndex = fingers.indexOf('I5');
       fingers.splice(removeIndex, 1);
     }
     if(!this.state.selectedFingers.D1){
@@ -155,39 +170,39 @@ export default class GraphicsParametersForm extends React.Component {
       fingers.splice(removeIndex, 1);
     }
 
-    if(this.state.selectedFingers.L1){
-      L1.style.width = "1vw";
-      L1.style.height = "1vw";
-      if(!fingers.includes('L1')){
-        fingers.push('L1');
+    if(this.state.selectedFingers.I1){
+      I1.style.width = "1vw";
+      I1.style.height = "1vw";
+      if(!fingers.includes('I1')){
+        fingers.push('I1');
       }
     }
-    if(this.state.selectedFingers.L2){
-      L2.style.width = "1vw";
-      L2.style.height = "1vw";
-      if(!fingers.includes('L2')){
-        fingers.push('L2');
+    if(this.state.selectedFingers.I2){
+      I2.style.width = "1vw";
+      I2.style.height = "1vw";
+      if(!fingers.includes('I2')){
+        fingers.push('I2');
       }
     }
-    if(this.state.selectedFingers.L3){
-      L3.style.width = "1vw";
-      L3.style.height = "1vw";
-      if(!fingers.includes('L3')){
-        fingers.push('L3');
+    if(this.state.selectedFingers.I3){
+      I3.style.width = "1vw";
+      I3.style.height = "1vw";
+      if(!fingers.includes('I3')){
+        fingers.push('I3');
       }
     }
-    if(this.state.selectedFingers.L4){
-      L4.style.width = "1vw";
-      L4.style.height = "1vw";
-      if(!fingers.includes('L4')){
-        fingers.push('L4');
+    if(this.state.selectedFingers.I4){
+      I4.style.width = "1vw";
+      I4.style.height = "1vw";
+      if(!fingers.includes('I4')){
+        fingers.push('I4');
       }
     }
-    if(this.state.selectedFingers.L5){
-      L5.style.width = "1vw";
-      L5.style.height = "1vw";
-      if(!fingers.includes('L5')){
-        fingers.push('L5');
+    if(this.state.selectedFingers.I5){
+      I5.style.width = "1vw";
+      I5.style.height = "1vw";
+      if(!fingers.includes('I5')){
+        fingers.push('I5');
       }
     }
     if(this.state.selectedFingers.D1){
@@ -232,32 +247,32 @@ export default class GraphicsParametersForm extends React.Component {
 
   SelectFinger(finger){
     let selectedFingers = this.state.selectedFingers;
-    if(finger == "L1"){
-      selectedFingers.L1 = !selectedFingers.L1;
+    if(finger == "I1"){
+      selectedFingers.I1 = !selectedFingers.I1;
       this.setState({
         selectedFingers: selectedFingers,
       });
     }
-    if(finger == "L2"){
-      selectedFingers.L2 = !selectedFingers.L2;
+    if(finger == "I2"){
+      selectedFingers.I2 = !selectedFingers.I2;
       this.setState({
         selectedFingers: selectedFingers,
       });
     }
-    if(finger == "L3"){
-      selectedFingers.L3 = !selectedFingers.L3;
+    if(finger == "I3"){
+      selectedFingers.I3 = !selectedFingers.I3;
       this.setState({
         selectedFingers: selectedFingers,
       });
     }
-    if(finger == "L4"){
-      selectedFingers.L4 = !selectedFingers.L4;
+    if(finger == "I4"){
+      selectedFingers.I4 = !selectedFingers.I4;
       this.setState({
         selectedFingers: selectedFingers,
       });
     }
-    if(finger == "L5"){
-      selectedFingers.L5 = !selectedFingers.L5;
+    if(finger == "I5"){
+      selectedFingers.I5 = !selectedFingers.I5;
       this.setState({
         selectedFingers: selectedFingers,
       });
@@ -303,6 +318,12 @@ export default class GraphicsParametersForm extends React.Component {
 		return levels;
 	}
 
+  LoadPeriods() {
+    var periodsString = periodsController.getPeriods();
+    var periods = JSON.parse(periodsString);
+    return periods;
+  }
+
   GetTeacherLevel() {
     let levels = this.LoadLevels();
     let levelName;
@@ -316,7 +337,10 @@ export default class GraphicsParametersForm extends React.Component {
     });
   }
 
-  onChange = date => this.setState({ date });
+  onChangeMax = maxDate => this.setState({ maxDate });
+
+  onChangeMin = minDate => this.setState({ minDate });
+
 	lang = "es-MX";
 
   SetStudentParameter() {
@@ -330,12 +354,35 @@ export default class GraphicsParametersForm extends React.Component {
       student: student,
       name: name,
     }, () => {
-      this.GetRangeDates();
+      if(this.state.activity){
+        this.GetRangeDates();
+      }
     });
   }
 
   GetRangeDates(){
-    let activityDates = JSON.parse(globeActivitiesController.getStudentMaxMinActivityDates(this.state.student));
+    if(this.state.activity == "gloves"){
+      let activityDates = JSON.parse(globeActivitiesController.getStudentMaxMinActivityDates(this.state.student));
+      if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
+        this.setState({
+          maxDate: new Date(activityDates.maxDate),
+          minDate: new Date(activityDates.minDate),
+        });
+      }
+    }
+    if(this.state.activity == "matrix"){
+      let activityDates = JSON.parse(matrixActivitiesController.getStudentMaxMinActivityDates(this.state.student));
+      if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
+        this.setState({
+          maxDate: new Date(activityDates.maxDate),
+          minDate: new Date(activityDates.minDate),
+        });
+      }
+    }
+  }
+
+  GetGlobalRangeDates(){
+    let activityDates = JSON.parse(globeActivitiesController.getGlobalMaxMinActivityDates());
     if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
       this.setState({
         maxDate: new Date(activityDates.maxDate),
@@ -348,17 +395,19 @@ export default class GraphicsParametersForm extends React.Component {
     let graphicSettings = this.state.graphicSettings;
     let studentSwitchButton = document.getElementById('collective-individual-switch-button');
     if(!graphicSettings.isCollective) {
-      studentSwitchButton.innerHTML = "Individual " + this.state.levelName;
+      studentSwitchButton.innerHTML = "Individual";
       graphicSettings.isCollective = true;
     }
     else {
-      studentSwitchButton.innerHTML = "Colectivo " + this.state.levelName;
+      studentSwitchButton.innerHTML = "Colectivo";
       graphicSettings.isCollective = false;
       this.GetStudentsByLevel();
     }
     graphicSettings.isStudentSelected = true;
     this.setState({
       graphicSettings: graphicSettings,
+    }, () => {
+      this.GetGlobalRangeDates();
     });
   }
 
@@ -375,9 +424,20 @@ export default class GraphicsParametersForm extends React.Component {
       matrixOption.className = 'activity-picker-option';
       sensorOption.className = 'activity-picker-option';
     }
+    if(activity == "matrix"){
+      graphicSettings.isActivitySelected = true;
+      graphicSettings.isDateRangeSelected = true;
+      glovesOption.className = 'activity-picker-option';
+      matrixOption.className = 'activity-picker-option-selected';
+      sensorOption.className = 'activity-picker-option';
+    }
     this.setState({
       graphicSettings: graphicSettings,
       activity: activity,
+    }, () => {
+      if(this.state.activity){
+        this.GetRangeDates();
+      }
     });
   }
 
@@ -385,7 +445,7 @@ export default class GraphicsParametersForm extends React.Component {
     let fingers = this.state.fingers;
     let bothHandsSelect = document.getElementById('bothHands-button');
     let leftCheckbox = document.getElementById('leftHand-button');
-    if(fingers.includes('L1') && fingers.includes('L2') && fingers.includes('L3') && fingers.includes('L4') && fingers.includes('L5')){
+    if(fingers.includes('I1') && fingers.includes('I2') && fingers.includes('I3') && fingers.includes('I4') && fingers.includes('I5')){
       leftCheckbox.style.backgroundImage = "url(check-w.svg)";
     }
     else {
@@ -398,7 +458,7 @@ export default class GraphicsParametersForm extends React.Component {
     else {
       rightCheckbox.style.backgroundImage = "none";
     }
-    if(fingers.includes('L1') && fingers.includes('L2') && fingers.includes('L3') && fingers.includes('L4') && fingers.includes('L5') && fingers.includes('D1') && fingers.includes('D2') && fingers.includes('D3') && fingers.includes('D4') && fingers.includes('D5')){
+    if(fingers.includes('I1') && fingers.includes('I2') && fingers.includes('I3') && fingers.includes('I4') && fingers.includes('I5') && fingers.includes('D1') && fingers.includes('D2') && fingers.includes('D3') && fingers.includes('D4') && fingers.includes('D5')){
       bothHandsSelect.style.backgroundImage = "url(check-w.svg)";
     }
     else {
@@ -410,7 +470,7 @@ export default class GraphicsParametersForm extends React.Component {
     let isSelected;
     let fingers = this.state.fingers;
     let selectedFingers = this.state.selectedFingers;
-    if(fingers.includes('L1') && fingers.includes('L2') && fingers.includes('L3') && fingers.includes('L4') && fingers.includes('L5')){
+    if(fingers.includes('I1') && fingers.includes('I2') && fingers.includes('I3') && fingers.includes('I4') && fingers.includes('I5')){
       isSelected = true;
     }
     else {
@@ -418,42 +478,42 @@ export default class GraphicsParametersForm extends React.Component {
     }
     if(isSelected){
       let removeIndex = -1;
-      removeIndex = fingers.indexOf('L1');
+      removeIndex = fingers.indexOf('I1');
       fingers.splice(removeIndex, 1);
-      removeIndex = fingers.indexOf('L2');
+      removeIndex = fingers.indexOf('I2');
       fingers.splice(removeIndex, 1);
-      removeIndex = fingers.indexOf('L3');
+      removeIndex = fingers.indexOf('I3');
       fingers.splice(removeIndex, 1);
-      removeIndex = fingers.indexOf('L4');
+      removeIndex = fingers.indexOf('I4');
       fingers.splice(removeIndex, 1);
-      removeIndex = fingers.indexOf('L5');
+      removeIndex = fingers.indexOf('I5');
       fingers.splice(removeIndex, 1);
-      selectedFingers.L1 = false;
-      selectedFingers.L2 = false;
-      selectedFingers.L3 = false;
-      selectedFingers.L4 = false;
-      selectedFingers.L5 = false;
+      selectedFingers.I1 = false;
+      selectedFingers.I2 = false;
+      selectedFingers.I3 = false;
+      selectedFingers.I4 = false;
+      selectedFingers.I5 = false;
     }
     else {
-      if(!fingers.includes('L1')){
-        fingers.push('L1');
-        selectedFingers.L1 = true;
+      if(!fingers.includes('I1')){
+        fingers.push('I1');
+        selectedFingers.I1 = true;
       }
-      if(!fingers.includes('L2')){
-        fingers.push('L2');
-        selectedFingers.L2 = true;
+      if(!fingers.includes('I2')){
+        fingers.push('I2');
+        selectedFingers.I2 = true;
       }
-      if(!fingers.includes('L3')){
-        fingers.push('L3');
-        selectedFingers.L3 = true;
+      if(!fingers.includes('I3')){
+        fingers.push('I3');
+        selectedFingers.I3 = true;
       }
-      if(!fingers.includes('L4')){
-        fingers.push('L4');
-        selectedFingers.L4 = true;
+      if(!fingers.includes('I4')){
+        fingers.push('I4');
+        selectedFingers.I4 = true;
       }
-      if(!fingers.includes('L5')){
-        fingers.push('L5');
-        selectedFingers.L5 = true;
+      if(!fingers.includes('I5')){
+        fingers.push('I5');
+        selectedFingers.I5 = true;
       }
     }
     this.setState({
@@ -524,7 +584,7 @@ export default class GraphicsParametersForm extends React.Component {
     let isSelected;
     let fingers = this.state.fingers;
     let selectedFingers = this.state.selectedFingers;
-    if(fingers.includes('L1') && fingers.includes('L2') && fingers.includes('L3') && fingers.includes('L4') && fingers.includes('L5') && fingers.includes('D1') && fingers.includes('D2') && fingers.includes('D3') && fingers.includes('D4') && fingers.includes('D5')){
+    if(fingers.includes('I1') && fingers.includes('I2') && fingers.includes('I3') && fingers.includes('I4') && fingers.includes('I5') && fingers.includes('D1') && fingers.includes('D2') && fingers.includes('D3') && fingers.includes('D4') && fingers.includes('D5')){
       isSelected = true;
     }
     else {
@@ -542,26 +602,26 @@ export default class GraphicsParametersForm extends React.Component {
       fingers.splice(removeIndex, 1);
       removeIndex = fingers.indexOf('D5');
       fingers.splice(removeIndex, 1);
-      removeIndex = fingers.indexOf('L1');
+      removeIndex = fingers.indexOf('I1');
       fingers.splice(removeIndex, 1);
-      removeIndex = fingers.indexOf('L2');
+      removeIndex = fingers.indexOf('I2');
       fingers.splice(removeIndex, 1);
-      removeIndex = fingers.indexOf('L3');
+      removeIndex = fingers.indexOf('I3');
       fingers.splice(removeIndex, 1);
-      removeIndex = fingers.indexOf('L4');
+      removeIndex = fingers.indexOf('I4');
       fingers.splice(removeIndex, 1);
-      removeIndex = fingers.indexOf('L5');
+      removeIndex = fingers.indexOf('I5');
       fingers.splice(removeIndex, 1);
       selectedFingers.D1 = false;
       selectedFingers.D2 = false;
       selectedFingers.D3 = false;
       selectedFingers.D4 = false;
       selectedFingers.D5 = false;
-      selectedFingers.L1 = false;
-      selectedFingers.L2 = false;
-      selectedFingers.L3 = false;
-      selectedFingers.L4 = false;
-      selectedFingers.L5 = false;
+      selectedFingers.I1 = false;
+      selectedFingers.I2 = false;
+      selectedFingers.I3 = false;
+      selectedFingers.I4 = false;
+      selectedFingers.I5 = false;
     }
     else {
       if(!fingers.includes('D1')){
@@ -584,25 +644,25 @@ export default class GraphicsParametersForm extends React.Component {
         fingers.push('D5');
         selectedFingers.D5 = true;
       }
-      if(!fingers.includes('L1')){
-        fingers.push('L1');
-        selectedFingers.L1 = true;
+      if(!fingers.includes('I1')){
+        fingers.push('I1');
+        selectedFingers.I1 = true;
       }
-      if(!fingers.includes('L2')){
-        fingers.push('L2');
-        selectedFingers.L2 = true;
+      if(!fingers.includes('I2')){
+        fingers.push('I2');
+        selectedFingers.I2 = true;
       }
-      if(!fingers.includes('L3')){
-        fingers.push('L3');
-        selectedFingers.L3 = true;
+      if(!fingers.includes('I3')){
+        fingers.push('I3');
+        selectedFingers.I3 = true;
       }
-      if(!fingers.includes('L4')){
-        fingers.push('L4');
-        selectedFingers.L4 = true;
+      if(!fingers.includes('I4')){
+        fingers.push('I4');
+        selectedFingers.I4 = true;
       }
-      if(!fingers.includes('L5')){
-        fingers.push('L5');
-        selectedFingers.L5 = true;
+      if(!fingers.includes('I5')){
+        fingers.push('I5');
+        selectedFingers.I5 = true;
       }
     }
     this.setState({
@@ -626,10 +686,88 @@ export default class GraphicsParametersForm extends React.Component {
       pieOption.className = 'graphic-picker-option-selected';
       barOption.className = 'graphic-picker-option';
     }
+    document.getElementById('activity-separator').style.display = "none";
     graphicType = type;
     this.setState({
       graphicSettings: graphicSettings,
       graphicType: graphicType,
+    },() => {
+      if(this.state.graphicSettings.isCollective){
+        this.LoadFilterLevels();
+        this.LoadFilterPeriods();
+        this.GetGlobalRangeDates();
+      }
+      else {
+        this.GetRangeDates();
+      }
+    });
+  }
+
+  AddLevelAsFilter(){
+    let levelId = document.getElementById('filter-level-select').value;
+    let levelName;
+    if(levelId){
+      for (var i = 0; i < this.state.levels.length; i++) {
+        if(this.state.levels[i]._id == levelId){
+          levelName = this.state.levels[i].name;
+        }
+      }
+      let filters = this.state.filters;
+      let level = {};
+      level.name = levelName;
+      level._id = levelId;
+      filters.levels.push(level);
+      this.setState({
+        filters: filters,
+      },() => {
+        document.getElementById('filter-level-select').remove(document.getElementById('filter-level-select').selectedIndex);
+      });
+    }
+  }
+
+  AddPeriodAsFilter(){
+    let periodId = document.getElementById('filter-period-select').value;
+    let periodName;
+    if(periodId){
+      for (var i = 0; i < this.state.periods.length; i++) {
+        if(this.state.periods[i]._id == periodId){
+          periodName = this.state.periods[i].name;
+        }
+      }
+      let filters = this.state.filters;
+      let period = {};
+      period.name = periodName;
+      period._id = periodId;
+      filters.periods.push(period);
+      this.setState({
+        filters: filters,
+      },() => {
+        document.getElementById('filter-period-select').remove(document.getElementById('filter-period-select').selectedIndex);
+      });
+    }
+  }
+
+  LoadFilterLevels(){
+    var levelSelect = document.getElementById('filter-level-select');
+    for (var i = 0; i < this.state.levels.length; i++){
+      var option = document.createElement("option");
+      option.text = this.state.levels[i].name;
+      option.value = this.state.levels[i]._id;
+      levelSelect.add(option);
+    }
+  }
+
+  LoadFilterPeriods(){
+    this.setState({
+      periods: this.LoadPeriods(),
+    }, () => {
+      var periodSelect = document.getElementById('filter-period-select');
+      for (var i = 0; i < this.state.periods.length; i++){
+        var option = document.createElement("option");
+        option.text = this.state.periods[i].name;
+        option.value = this.state.periods[i]._id;
+        periodSelect.add(option);
+      }
     });
   }
 
@@ -642,7 +780,203 @@ export default class GraphicsParametersForm extends React.Component {
     parameters.startDate = this.state.minDate;
     parameters.fingers = this.state.fingers;
     parameters.graphicType = this.state.graphicType;
+    parameters.level = this.state.level;
+    if(this.state.graphicSettings.isCollective){
+      parameters.levels = [];
+      for (var i = 0; i < this.state.filters.levels.length; i++) {
+        parameters.levels.push(this.state.filters.levels[i].name);
+      }
+      let maxAge = parseInt(document.getElementById('max-age-input').value);
+      let minAge = parseInt(document.getElementById('min-age-input').value);
+      if(maxAge == ""){
+        maxAge = 0;
+      }
+      if(minAge == ""){
+        minAge = 0;
+      }
+      parameters.maxAge = maxAge;
+      parameters.minAge = minAge;
+      parameters.genders = this.state.filters.genders;
+      parameters.periods = [];
+      for (var i = 0; i < this.state.filters.periods.length; i++) {
+        parameters.periods.push(this.state.filters.periods[i].name);
+      }
+      parameters.isCollective = this.state.graphicSettings.isCollective;
+    }
     this.props.ShowGraphicResult(parameters);
+  }
+
+  LoadLevelsInSelect(){
+		this.setState({
+			levels: this.LoadLevels(),
+		}, () =>
+		{
+			var levelSelect = document.getElementById('level-select');
+			for (var i = 0; i < this.state.levels.length; i++)
+			{
+				var option = document.createElement("option");
+				option.text = this.state.levels[i].name;
+				option.value = this.state.levels[i]._id;
+				levelSelect.add(option);
+			}
+		});
+	}
+
+  SetLevelParameter(){
+    let studentSelect = document.getElementById('student-select');
+    for (var i = 0; i < this.state.studentsByLevel.length; i++) {
+      studentSelect.remove(1);
+    }
+    let levelSelect = document.getElementById('level-select').value;
+    this.setState({
+      level: levelSelect,
+    }, () => {
+      if(!this.state.graphicSettings.isCollective){
+        this.GetStudentsByLevel();
+        this.GetTeacherLevel();
+      }
+    });
+  }
+
+  RemoveFilter(index, name, type){
+    let filters = this.state.filters;
+    if(type == "level"){
+      var levelSelect = document.getElementById('filter-level-select');
+      var option = document.createElement("option");
+      option.text = name;
+      option.value = index;
+      levelSelect.add(option);
+      for (var i = 0; i < filters.levels.length; i++)
+  		{
+  			if(filters.levels[i]._id == index){
+          filters.levels.splice(i, 1);
+        }
+  		}
+    }
+    if(type == "period"){
+      var periodSelect = document.getElementById('filter-period-select');
+      var option = document.createElement("option");
+      option.text = name;
+      option.value = index;
+      periodSelect.add(option);
+      for (var i = 0; i < filters.periods.length; i++)
+  		{
+  			if(filters.periods[i]._id == index){
+          filters.periods.splice(i, 1);
+        }
+  		}
+    }
+		this.setState({
+			filters: filters,
+		});
+	}
+
+  AddAllLevelsAsFilters(){
+    let filters = this.state.filters;
+    let levelSelect = document.getElementById('filter-level-select');
+    for (var i = 0; i < levelSelect.options.length; i++) {
+      let level = {};
+      level.name = levelSelect.options[i].text;
+      level._id = levelSelect.options[i].value;
+      filters.levels.push(level);
+    }
+    let selectLength = levelSelect.options.length;
+    for (var i = 0; i < selectLength; i++) {
+      levelSelect.remove(0);
+    }
+    this.setState({
+      filters: filters,
+    });
+  }
+
+  AddAllPeriodsAsFilters(){
+    let filters = this.state.filters;
+    let periodSelect = document.getElementById('filter-period-select');
+    for (var i = 0; i < periodSelect.options.length; i++) {
+      let period = {};
+      period.name = periodSelect.options[i].text;
+      period._id = periodSelect.options[i].value;
+      filters.periods.push(period);
+    }
+    let selectLength = periodSelect.options.length;
+    for (var i = 0; i < selectLength; i++) {
+      periodSelect.remove(0);
+    }
+    this.setState({
+      filters: filters,
+    });
+  }
+
+  ValidateOnlyNumbers(evt){
+		var theEvent = evt || window.event;
+		if (theEvent.type === 'paste')
+		{
+			key = event.clipboardData.getData('text/plain');
+		}
+		else
+		{
+			var key = theEvent.keyCode || theEvent.which;
+			key = String.fromCharCode(key);
+		}
+		var regex = /[0-9]|\1/;
+		if (!regex.test(key))
+		{
+			theEvent.returnValue = false;
+			if (theEvent.preventDefault)
+			{
+				theEvent.preventDefault();
+			}
+		}
+	}
+
+  SelectGender(gender){
+    if(gender == "male"){
+      this.setState({
+        selectedMale: !this.state.selectedMale,
+      }, () => {
+        let maleCheckbox = document.getElementById('male-button');
+        let filters = this.state.filters;
+        let genders = filters.genders;
+        if(this.state.selectedMale){
+          maleCheckbox.style.backgroundImage = "url(check-w.svg)";
+          genders.push('Masculino');
+        }
+        else {
+          maleCheckbox.style.backgroundImage = "none";
+          let removeIndex = -1;
+          removeIndex = genders.indexOf('Masculino');
+          genders.splice(removeIndex, 1);
+        }
+        filters.genders = genders;
+        this.setState({
+          filters: filters,
+        });
+      });
+    }
+    if(gender == "female"){
+      this.setState({
+        selectedFemale: !this.state.selectedFemale,
+      }, () => {
+        let femaleCheckbox = document.getElementById('female-button');
+        let filters = this.state.filters;
+        let genders = filters.genders;
+        if(this.state.selectedFemale){
+          femaleCheckbox.style.backgroundImage = "url(check-w.svg)";
+          genders.push('Femenino');
+        }
+        else {
+          femaleCheckbox.style.backgroundImage = "none";
+          let removeIndex = -1;
+          removeIndex = genders.indexOf('Femenino');
+          genders.splice(removeIndex, 1);
+        }
+        filters.genders = genders;
+        this.setState({
+          filters: filters,
+        });
+      });
+    }
+
   }
 
   render() {
@@ -650,12 +984,27 @@ export default class GraphicsParametersForm extends React.Component {
       <div>
         <div className="graphics-form">
           <div className="form-container">
-  					<p className="input-label">Estudiante</p>
+            {
+              this.state.graphicSettings.isCollective ?
+                undefined
+              :
+              <div>
+                <p className="input-label">Nivel</p>
+                <div className="input-container">
+                  <select onChange={() => this.SetLevelParameter()} id="level-select">
+                    <option id="student-default-option" value="" selected disabled hidden>{this.state.levelName}</option>
+                  </select>
+                </div>
+              </div>
+            }
+  				</div>
+          <div className="form-container">
+            <p className="input-label">Estudiante</p>
             {
               this.state.graphicSettings.isCollective
                 ?
                   <div className="input-container">
-                    Todos los estudiantes
+                    Se considerarán todos los estudiantes de los cursos que se vaya a seleccionar
         					</div>
                 :
                 <div className="input-container">
@@ -668,7 +1017,7 @@ export default class GraphicsParametersForm extends React.Component {
               this.state.levelName ?
                 <div className="option-input-container">
                   <div className="option-input-text">Cambiar a: </div>
-                  <div id="collective-individual-switch-button" onClick={() => this.SwitchStudentParameter()} className="option-button">Colectivo {this.state.levelName}</div>
+                  <div id="collective-individual-switch-button" onClick={() => this.SwitchStudentParameter()} className="option-button">Colectivo</div>
                 </div>
               :
               undefined
@@ -710,6 +1059,95 @@ export default class GraphicsParametersForm extends React.Component {
                     <p className="graphic-picker-text">Pastel</p>
                   </div>
                 </div>
+                <div id="activity-separator" className="separator"></div>
+              </div>
+            :
+            undefined
+          }
+          {
+            this.state.graphicSettings.isCollective && this.state.graphicSettings.isGraphicTypeSelected ?
+              <div>
+                <div className="animated-form-container">
+                  <p className="input-label">Niveles</p>
+                  <div className="input-container">
+                    <div className="filter-input-container">
+                      <div className="filter-input">
+                        <select onChange={() => this.SetLevelParameter()} id="filter-level-select"></select>
+                      </div>
+                      <div className="add-filter-button-container">
+                        <div className="add-filter-button-type-container">
+                          <div onClick={() => this.AddLevelAsFilter()} className="add-filter-button"></div>
+                        </div>
+                        <div className="add-filter-button-type-container">
+                          <div onClick={() => this.AddAllLevelsAsFilters()} className="add-all-filter-button">Agregar todos</div>
+                        </div>
+                      </div>
+                      <div className="added-filters-contaier">
+                        <div className="added-filter-text">Niveles</div>
+                        <div className="added-filter-area">
+                          {this.state.filters.levels.map((levels) =>
+            								{
+            									return <Filters levels={true}
+            										RemoveFilter={this.RemoveFilter.bind(this)}
+            										levels={levels} key={levels._id}></Filters>;
+            								})}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="animated-form-container">
+                  <p className="input-label">Periodos</p>
+                  <div className="input-container">
+                    <div className="filter-input-container">
+                      <div className="filter-input">
+                        <select onChange={() => this.SetPeriodParameter()} id="filter-period-select"></select>
+                      </div>
+                      <div className="add-filter-button-container">
+                        <div className="add-filter-button-type-container">
+                          <div onClick={() => this.AddPeriodAsFilter()} className="add-filter-button"></div>
+                        </div>
+                        <div className="add-filter-button-type-container">
+                          <div onClick={() => this.AddAllPeriodsAsFilters()} className="add-all-filter-button">Agregar todos</div>
+                        </div>
+                      </div>
+                      <div className="added-filters-contaier">
+                        <div className="added-filter-text">Periodos</div>
+                        <div className="added-filter-area">
+                          {this.state.filters.periods.map((periods) =>
+            								{
+            									return <Filters periods={true}
+            										RemoveFilter={this.RemoveFilter.bind(this)}
+            										periods={periods} key={periods._id}></Filters>;
+            								})}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="animated-form-container">
+                  <p className="input-label">Género</p>
+                  <div id="gender-checkbox" className="checkbox-panel">
+                    <div onClick={() => this.SelectGender("male")} id="male-checkbox" className="checkbox-container">
+                      <div id="male-button" className="checkbox-button"></div>
+                      <div className="checkbox-text">Masculino</div>
+                    </div>
+                    <div onClick={() => this.SelectGender("female")} id="female-checkbox" className="checkbox-container">
+                      <div id="female-button" className="checkbox-button"></div>
+                      <div className="checkbox-text">Femenino</div>
+                    </div>
+                  </div>
+                  <div id="small-separator" className="separator"></div>
+                </div>
+                <div className="animated-form-container">
+                  <p className="input-label">Rango de edades</p>
+                  <div className="student-input">
+        						<input id="min-age-input" onKeyPress={() => this.ValidateOnlyNumbers(event)}
+              placeholder="Edad mínima" className="vertical-input" maxLength="2" value="0"></input>
+        						<input id="max-age-input" onKeyPress={() => this.ValidateOnlyNumbers(event)}
+              placeholder="Edad máxima" className="vertical-input" maxLength="2" value="99"></input>
+        					</div>
+                </div>
               </div>
             :
             undefined
@@ -721,7 +1159,7 @@ export default class GraphicsParametersForm extends React.Component {
                   <p className="input-label">Fecha inicial</p>
                   <div className="date-input-container">
                     <DatePicker
-                      onChange={this.onChange}
+                      onChange={this.onChangeMin}
                       value={this.state.minDate}
                       locate={this.lang}/>
                   </div>
@@ -730,72 +1168,77 @@ export default class GraphicsParametersForm extends React.Component {
                   <p className="input-label">Fecha final</p>
                   <div className="date-input-container">
                     <DatePicker
-                      onChange={this.onChange}
+                      onChange={this.onChangeMax}
                       value={this.state.maxDate}
                       locate={this.lang}/>
                   </div>
                 </div>
-                <div className="animated-form-container">
-                  <p className="input-label">Dedos</p>
-                  <div className="hands-picker-container">
-                    <div id="left-hand-picker" className="hand-picker">
-                      <div onClick={() => this.SelectFinger("L1")} className="finger-1">
-                        <div id="L1" className="l-selected-finger-1"></div>
-                      </div>
-                      <div onClick={() => this.SelectFinger("L2")} className="finger-2">
-                        <div id="L2" className="l-selected-finger-2"></div>
-                      </div>
-                      <div onClick={() => this.SelectFinger("L3")} className="finger-3">
-                        <div id="L3" className="l-selected-finger-3"></div>
-                      </div>
-                      <div onClick={() => this.SelectFinger("L4")} className="finger-4">
-                        <div id="L4" className="l-selected-finger-4"></div>
-                      </div>
-                      <div onClick={() => this.SelectFinger("L5")} className="finger-5">
-                        <div id="L5" className="l-selected-finger-5"></div>
+                {
+                  this.state.activity == "gloves" ?
+                    <div className="animated-form-container">
+                      <p className="input-label">Dedos</p>
+                      <div className="hands-picker-container">
+                        <div id="left-hand-picker" className="hand-picker">
+                          <div onClick={() => this.SelectFinger("I1")} className="finger-1">
+                            <div id="I1" className="l-selected-finger-1"></div>
+                          </div>
+                          <div onClick={() => this.SelectFinger("I2")} className="finger-2">
+                            <div id="I2" className="l-selected-finger-2"></div>
+                          </div>
+                          <div onClick={() => this.SelectFinger("I3")} className="finger-3">
+                            <div id="I3" className="l-selected-finger-3"></div>
+                          </div>
+                          <div onClick={() => this.SelectFinger("I4")} className="finger-4">
+                            <div id="I4" className="l-selected-finger-4"></div>
+                          </div>
+                          <div onClick={() => this.SelectFinger("I5")} className="finger-5">
+                            <div id="I5" className="l-selected-finger-5"></div>
+                          </div>
+                        </div>
+                        <div id="right-hand-picker" className="hand-picker">
+                          <div onClick={() => this.SelectFinger("D5")} className="finger-5">
+                            <div id="D5" className="r-selected-finger-5"></div>
+                          </div>
+                          <div onClick={() => this.SelectFinger("D4")} className="finger-4">
+                            <div id="D4" className="r-selected-finger-4"></div>
+                          </div>
+                          <div onClick={() => this.SelectFinger("D3")} className="finger-3">
+                            <div id="D3" className="r-selected-finger-3"></div>
+                          </div>
+                          <div onClick={() => this.SelectFinger("D2")} className="finger-2">
+                            <div id="D2" className="r-selected-finger-2"></div>
+                          </div>
+                          <div onClick={() => this.SelectFinger("D1")} className="finger-1">
+                            <div id="D1" className="r-selected-finger-1"></div>
+                          </div>
+                        </div>
+                        <div className="checkbox-panel">
+                          <div onClick={() => this.SelectUnselectLeftHand()} id="left-hand-checkbox" className="checkbox-container">
+                            <div id="leftHand-button" className="checkbox-button"></div>
+                            <div className="checkbox-text">Mano izquierda</div>
+                          </div>
+                          <div onClick={() => this.SelectUnselectRightHand()} id="right-hand-checkbox" className="checkbox-container">
+                            <div id="rightHand-button" className="checkbox-button"></div>
+                            <div className="checkbox-text">Mano derecha</div>
+                          </div>
+                          <div onClick={() => this.SelectUnselectBothHands()} id="both-hands-checkbox" className="checkbox-container">
+                            <div id="bothHands-button" className="checkbox-button"></div>
+                            <div className="checkbox-text">Manos izquierda & derecha</div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div id="right-hand-picker" className="hand-picker">
-                      <div onClick={() => this.SelectFinger("D5")} className="finger-5">
-                        <div id="D5" className="r-selected-finger-5"></div>
-                      </div>
-                      <div onClick={() => this.SelectFinger("D4")} className="finger-4">
-                        <div id="D4" className="r-selected-finger-4"></div>
-                      </div>
-                      <div onClick={() => this.SelectFinger("D3")} className="finger-3">
-                        <div id="D3" className="r-selected-finger-3"></div>
-                      </div>
-                      <div onClick={() => this.SelectFinger("D2")} className="finger-2">
-                        <div id="D2" className="r-selected-finger-2"></div>
-                      </div>
-                      <div onClick={() => this.SelectFinger("D1")} className="finger-1">
-                        <div id="D1" className="r-selected-finger-1"></div>
-                      </div>
-                    </div>
-                    <div className="checkbox-panel">
-                      <div onClick={() => this.SelectUnselectLeftHand()} id="left-hand-checkbox" className="checkbox-container">
-                        <div id="leftHand-button" className="checkbox-button"></div>
-                        <div className="checkbox-text">Mano izquierda</div>
-                      </div>
-                      <div onClick={() => this.SelectUnselectRightHand()} id="right-hand-checkbox" className="checkbox-container">
-                        <div id="rightHand-button" className="checkbox-button"></div>
-                        <div className="checkbox-text">Mano derecha</div>
-                      </div>
-                      <div onClick={() => this.SelectUnselectBothHands()} id="both-hands-checkbox" className="checkbox-container">
-                        <div id="bothHands-button" className="checkbox-button"></div>
-                        <div className="checkbox-text">Manos izquierda & derecha</div>
-                      </div>
+                  :
+                  undefined
+                }
+                <div>
+                  <div className="button-container">
+                    <div onClick={() => this.GenerateGraphic()} className="secondary-button">
+                      Generar gráfica
                     </div>
                   </div>
-                  <div>
-                    <div className="button-container">
-                      <div onClick={() => this.GenerateGraphic()} className="secondary-button">
-                        Generar gráfica
-                      </div>
-                    </div>
-                  </div>
-                  <div className="separator"></div>
                 </div>
+                <div className="separator"></div>
               </div>
             :
             undefined

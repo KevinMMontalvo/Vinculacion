@@ -1,0 +1,161 @@
+.chart-modal-container {
+  width: 40vw;
+  height: auto;
+  background-color: #FFF;
+}
+
+.big-chart-modal-container {
+  width: 50vw;
+  height: auto;
+  background-color: #FFF;
+}
+
+.modal-select {
+  width: 84%;
+  height: 5vh;
+  border: none;
+  background-color: #F2F3F4;
+  border-left: solid 2px;
+  border-color: #333;
+  font-size: 1em;
+  transition: 0.5s;
+  text-align-last: center;
+  color: #333;
+}
+
+.modal-select:focus {
+  box-shadow: none;
+  outline: none;
+  border-left: solid 4px;
+  border-color: #2980B9;
+}
+
+.white-date-picker {
+  background-color: #F2F3F4;
+  color: #000;
+}
+
+.white-date-picker g {
+  stroke: black;
+}
+
+.white-date-picker .react-date-picker__inputGroup {
+  display: block !important;
+  background-color: #F2F3F4 !important;
+  text-align: center !important;
+  color: #000;
+}
+
+.white-date-picker .react-date-picker--closed.react-date-picker--enabled {
+  width: 85%;
+  display: flex;
+  justify-content: center;
+  transition: 0.5s;
+  position: relative;
+  left: 0.5vw;
+  height: 5vh;
+  border-left: solid 2px;
+  border-color: #333;
+  color: #FFF;
+}
+
+.white-date-picker .react-date-picker__inputGroup__input {
+  color: #000 !important;
+}
+
+#left-hand-picker-modal{
+  background-image: url(left-hand-picker-modal.svg);
+}
+
+#right-hand-picker-modal{
+  background-image: url(right-hand-picker-modal.svg);
+}
+
+.hands-picker-container-modal {
+  width: 100%;
+  height: 15vw;
+  display: flex;
+  align-items: center;
+  position: relative;
+  left: 1vw;
+}
+
+.checkbox-panel-modal{
+  width: 14.5vw;
+  height: 7.5vw;
+  position: absolute;
+  right: 1vw;
+}
+
+.modal-add-all-filter-button {
+  width: 90%;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  background-color: #2980B9;
+  transition: 0.5s;
+  color: #FFF;
+}
+
+.modal-add-all-filter-button:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+
+.modal-added-filters-contaier {
+  width: 17.5vw;
+  height: 100%;
+}
+
+.modal-added-filter-text {
+  width: 100%;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.05em;
+  background-color: #F2F3F4;
+  color: #333;
+  border-bottom: solid 1px #000;
+}
+
+.modal-added-filter-area {
+  width: 100%;
+  height: 15vh;
+  max-height: 15vh;
+  overflow-y: scroll;
+  background-color: #F2F3F4;
+  color: #333;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+}
+
+.modal-filter-input {
+  width: 17.5vw;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-filter-delete-button {
+  width: 3.5vh;
+  height: 3.5vh;
+  background-image: url(delete.svg);
+  background-position: center;
+  background-size: 1.5vh;
+  background-repeat: no-repeat;
+  transition: 0.5s;
+}
+
+.modal-filter-delete-button:hover {
+  border-radius: 100%;
+  cursor: pointer;
+  transform: scale(1.25);
+  -webkit-box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.75);
+}

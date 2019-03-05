@@ -197,3 +197,20 @@
 .individual-gloves-chart-submenu-option-text:hover {
   color: #2980B9;
 }
+
+.change-chart-settings-button {
+  width: 15vw;
+  height: 5vh;
+  background-color: #333;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFF;
+  transition: 0.25s;
+}
+
+.change-chart-settings-button:hover {
+  cursor: pointer;
+  background-color: #2980B9;
+}
