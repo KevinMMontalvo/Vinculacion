@@ -11,6 +11,7 @@ export default class GraphicsParametersForm extends React.Component {
       student: undefined,
       level: undefined,
       graphicType: undefined,
+      filtersLoaded: false,
       activity: "",
       filters: {
         levels: [],
@@ -692,12 +693,20 @@ export default class GraphicsParametersForm extends React.Component {
     graphicSettings.isGraphicTypeSelected = true;
     let barOption = document.getElementById('bar-option');
     let pieOption = document.getElementById('pie-option');
+    let lineOption = document.getElementById('line-option');
     if(type == "bar"){
       barOption.className = 'graphic-picker-option-selected';
       pieOption.className = 'graphic-picker-option';
+      lineOption.className = 'graphic-picker-option';
     }
     if(type == "pie"){
       pieOption.className = 'graphic-picker-option-selected';
+      barOption.className = 'graphic-picker-option';
+      lineOption.className = 'graphic-picker-option';
+    }
+    if(type == "line"){
+      lineOption.className = 'graphic-picker-option-selected';
+      pieOption.className = 'graphic-picker-option';
       barOption.className = 'graphic-picker-option';
     }
     document.getElementById('activity-separator').style.display = "none";
@@ -762,27 +771,37 @@ export default class GraphicsParametersForm extends React.Component {
   }
 
   LoadFilterLevels(){
-    var levelSelect = document.getElementById('filter-level-select');
-    for (var i = 0; i < this.state.levels.length; i++){
-      var option = document.createElement("option");
-      option.text = this.state.levels[i].name;
-      option.value = this.state.levels[i]._id;
-      levelSelect.add(option);
+    if(!this.state.filtersLoaded){
+      var levelSelect = document.getElementById('filter-level-select');
+      for (var i = 0; i < this.state.levels.length; i++){
+        var option = document.createElement("option");
+        option.text = this.state.levels[i].name;
+        option.value = this.state.levels[i]._id;
+        levelSelect.add(option);
+      }
     }
+    this.setState({
+      filtersLoaded: true,
+    });
   }
 
   LoadFilterPeriods(){
-    this.setState({
-      periods: this.LoadPeriods(),
-    }, () => {
-      var periodSelect = document.getElementById('filter-period-select');
-      for (var i = 0; i < this.state.periods.length; i++){
-        var option = document.createElement("option");
-        option.text = this.state.periods[i].name;
-        option.value = this.state.periods[i]._id;
-        periodSelect.add(option);
-      }
-    });
+    if(!this.state.filtersLoaded){
+      this.setState({
+        periods: this.LoadPeriods(),
+      }, () => {
+        var periodSelect = document.getElementById('filter-period-select');
+        for (var i = 0; i < this.state.periods.length; i++){
+          var option = document.createElement("option");
+          option.text = this.state.periods[i].name;
+          option.value = this.state.periods[i]._id;
+          periodSelect.add(option);
+        }
+      });
+      this.setState({
+        filtersLoaded: true,
+      });
+    }
   }
 
   GenerateGraphic(){
@@ -1071,6 +1090,10 @@ export default class GraphicsParametersForm extends React.Component {
                   <div id="pie-option" onClick={() => this.SetGraphicType("pie")} className="graphic-picker-option">
                     <div id="pie-picker" className="graphic-picker-icon"></div>
                     <p className="graphic-picker-text">Pastel</p>
+                  </div>
+                  <div id="line-option" onClick={() => this.SetGraphicType("line")} className="graphic-picker-option">
+                    <div id="line-picker" className="graphic-picker-icon"></div>
+                    <p className="graphic-picker-text">Línea</p>
                   </div>
                 </div>
                 <div id="activity-separator" className="separator"></div>

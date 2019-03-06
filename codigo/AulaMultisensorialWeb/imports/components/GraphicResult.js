@@ -157,8 +157,8 @@ export default class GraphicResult extends React.Component {
   }
 
   GetRangeDates(){
-    if(this.state.activity == "gloves"){
-      let activityDates = JSON.parse(globeActivitiesController.getStudentMaxMinActivityDates(this.state.student));
+    if(this.props.parameters.activity == "gloves"){
+      let activityDates = JSON.parse(globeActivitiesController.getStudentMaxMinActivityDates(this.props.parameters.student));
       if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
         this.setState({
           maxDate: new Date(activityDates.maxDate),
@@ -166,8 +166,8 @@ export default class GraphicResult extends React.Component {
         });
       }
     }
-    if(this.state.activity == "matrix"){
-      let activityDates = JSON.parse(matrixActivitiesController.getStudentMaxMinActivityDates(this.state.student));
+    if(this.props.parameters.activity == "matrix"){
+      let activityDates = JSON.parse(matrixActivitiesController.getStudentMaxMinActivityDates(this.props.parameters.student));
       if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
         this.setState({
           maxDate: new Date(activityDates.maxDate),
@@ -178,7 +178,7 @@ export default class GraphicResult extends React.Component {
   }
 
   GetGlobalRangeDates(){
-    if(this.state.activity == "gloves"){
+    if(this.props.parameters.activity == "gloves"){
       let activityDates = JSON.parse(globeActivitiesController.getGlobalMaxMinActivityDates());
       if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
         this.setState({
@@ -187,7 +187,7 @@ export default class GraphicResult extends React.Component {
         });
       }
     }
-    if(this.state.activity == "matrix"){
+    if(this.props.parameters.activity == "matrix"){
       let activityDates = JSON.parse(matrixActivitiesController.getGlobalMaxMinActivityDates());
       if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
         this.setState({
@@ -1153,13 +1153,28 @@ export default class GraphicResult extends React.Component {
                     <div className="individual-gloves-chart-submenu-option">
                       {
                         this.props.parameters.graphicType == "bar" ?
-                          <div onClick={() => this.ChangeChartType("pie")} className="individual-gloves-chart-submenu-option-text">Cambiar a pastel</div>
+                          <div>
+                            <div onClick={() => this.ChangeChartType("pie")} className="individual-gloves-chart-submenu-option-text">Cambiar a pastel</div>
+                            <div onClick={() => this.ChangeChartType("line")} className="individual-gloves-chart-submenu-option-text">Cambiar a línea</div>
+                          </div>
                         :
                         undefined
                       }
                       {
                         this.props.parameters.graphicType == "pie" ?
-                          <div onClick={() => this.ChangeChartType("bar")} className="individual-gloves-chart-submenu-option-text">Cambiar a barras</div>
+                          <div>
+                            <div onClick={() => this.ChangeChartType("bar")} className="individual-gloves-chart-submenu-option-text">Cambiar a barras</div>
+                            <div onClick={() => this.ChangeChartType("line")} className="individual-gloves-chart-submenu-option-text">Cambiar a línea</div>
+                          </div>
+                        :
+                        undefined
+                      }
+                      {
+                        this.props.parameters.graphicType == "line" ?
+                          <div>
+                            <div onClick={() => this.ChangeChartType("bar")} className="individual-gloves-chart-submenu-option-text">Cambiar a barras</div>
+                            <div onClick={() => this.ChangeChartType("pie")} className="individual-gloves-chart-submenu-option-text">Cambiar a pastel</div>
+                          </div>
                         :
                         undefined
                       }
@@ -1302,6 +1317,37 @@ export default class GraphicResult extends React.Component {
                   },
                 }}
                 rootProps={{ 'data-testid': '1' }}
+              />
+            :
+            undefined
+          }
+          {
+            this.props.parameters.graphicType == "line" && this.props.data[0] ?
+              <Chart
+                width={'70vw'}
+                height={'65vh'}
+                chartType="LineChart"
+                loader={<div>
+                  <div className="loading-container">
+                    <DotLoader
+                      sizeUnit={"vw"}
+                      size={8}
+                      color={'#2BBEA2'}
+                      loading={true}
+                    />
+                    <p className="loading-text">Cargando...</p>
+                  </div>
+                </div>}
+                data={this.props.data}
+                options={{
+                  hAxis: {
+                    title: 'Tiempo',
+                  },
+                  vAxis: {
+                    title: 'Aciertos - errores',
+                  },
+                }}
+                rootProps={{ 'data-testid': '2' }}
               />
             :
             undefined
