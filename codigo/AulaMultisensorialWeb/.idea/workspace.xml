@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf6ce076-847d-40a9-a101-46c52b689462" name="Default Changelist" comment="" />
+    <list default="true" id="bf6ce076-847d-40a9-a101-46c52b689462" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Access/MatrixActivityRegisterAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Access/MatrixActivityRegisterAccess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imports/components/ActivitiesMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/components/ActivitiesMenu.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -16,8 +21,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/imports/components/ActivitiesMenu.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
-              <caret line="75" column="10" selection-start-line="75" selection-start-column="10" selection-end-line="75" selection-end-column="10" />
+            <state relative-caret-position="304">
+              <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -130,11 +135,15 @@
       <workItem from="1551745210443" duration="4915000" />
       <workItem from="1551816344948" duration="683000" />
       <workItem from="1551819992756" duration="618000" />
+      <workItem from="1552016405791" duration="625000" />
+      <workItem from="1552018287447" duration="1599000" />
+      <workItem from="1552070726780" duration="599000" />
+      <workItem from="1552138572196" duration="599000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43823000" />
+    <option name="totallyTimeSpent" value="47245000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -176,8 +185,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/imports/components/ActivitiesMenu.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="75" column="10" selection-start-line="75" selection-start-column="10" selection-end-line="75" selection-end-column="10" />
+        <state relative-caret-position="304">
+          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
         </state>
       </provider>
     </entry>

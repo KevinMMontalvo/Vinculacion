@@ -52,7 +52,7 @@ export default class ActivitiesMenu extends React.Component
 		//console.log(globeActivitiesController.getLineChartDataCollective(new Date(2017, 1, 1, 0, 0, 0, 0), new Date(2020, 1, 4, 0, 0, 0, 0),2,18,genders,levels,periods,fingers));
 		//console.log(globeActivitiesController.getGlobalMaxMinActivityDates());
 
-		//activitiesController.startActivity("Matrix", "5c1bbb3f75c6cf37a489efcb");
+		activitiesController.startActivity("Matrix", "5c1bbb3f75c6cf37a489efcb");
 
 		/*
 		Matriz

@@ -19,7 +19,7 @@ namespace Aula_Multisensorial.Access
             activitiesCollection = DatabaseConnection.GetInstance().Database.GetCollection<MatrixActivityRegister>("led_matrix_activity_registers");
         }
 
-        public string GetBarChartDataIndividual(DateTime startDate, DateTime endDate, string studentId)
+        public string GetBarChartDataIndividual(DateTime startDate, DateTime endDate, string studentId, int[] colorConfigurations, int[] sequenceConfigurations, int[] levelsConfigurations, int[] appearancesConfigurations)
         {
             /*Match*/
             BsonDocument match = new BsonDocument();
@@ -29,9 +29,40 @@ namespace Aula_Multisensorial.Access
             dateFilter.Add("$gte", startDate);
             dateFilter.Add("$lte", endDate);
 
+            //filtro de configuracion de colores
+            BsonArray colorsFilter = new BsonArray();
+            foreach (int color in colorConfigurations)
+            {
+                colorsFilter.Add(new BsonDocument("color_configuration", color));
+            }
+
+            //filtro de configuracion de secuencias
+            BsonArray sequencesFilter = new BsonArray();
+            foreach (int sequence in sequenceConfigurations)
+            {
+                sequencesFilter.Add(new BsonDocument("sequence_configuration", sequence));
+            }
+
+            //filtro de configuracion de niveles
+            BsonArray levelsConfigurationFilter = new BsonArray();
+            foreach (int level in levelsConfigurations)
+            {
+                levelsConfigurationFilter.Add(new BsonDocument("level_configuration", level));
+            }
+
+            //filtro de configuracion de apariciones
+            BsonArray appearancesFilter = new BsonArray();
+            foreach (int appearances in appearancesConfigurations)
+            {
+                colorsFilter.Add(new BsonDocument("appearances_configuration", appearances));
+            }
 
             matchAndConditions.Add(new BsonDocument("datetime", dateFilter));
             matchAndConditions.Add(new BsonDocument("student_id", studentId));
+            matchAndConditions.Add(new BsonDocument("$or", colorsFilter));
+            matchAndConditions.Add(new BsonDocument("$or", sequencesFilter));
+            matchAndConditions.Add(new BsonDocument("$or", levelsConfigurationFilter));
+            matchAndConditions.Add(new BsonDocument("$or", appearancesFilter));
 
             match.AddRange(new BsonDocument("$and", matchAndConditions));
 
@@ -55,7 +86,7 @@ namespace Aula_Multisensorial.Access
             return StructureBarJSON(registers);
         }
 
-        public string GetPieChartDataIndividual(DateTime startDate, DateTime endDate, string studentId)
+        public string GetPieChartDataIndividual(DateTime startDate, DateTime endDate, string studentId, int[] colorConfigurations, int[] sequenceConfigurations, int[] levelsConfigurations, int[] appearancesConfigurations)
         {
             /* Match */
             BsonDocument match = new BsonDocument();
@@ -66,9 +97,41 @@ namespace Aula_Multisensorial.Access
             dateFilter.Add("$gte", startDate);
             dateFilter.Add("$lte", endDate);
 
+            //filtro de configuracion de colores
+            BsonArray colorsFilter = new BsonArray();
+            foreach (int color in colorConfigurations)
+            {
+                colorsFilter.Add(new BsonDocument("color_configuration", color));
+            }
+
+            //filtro de configuracion de secuencias
+            BsonArray sequencesFilter = new BsonArray();
+            foreach (int sequence in sequenceConfigurations)
+            {
+                sequencesFilter.Add(new BsonDocument("sequence_configuration", sequence));
+            }
+
+            //filtro de configuracion de niveles
+            BsonArray levelsConfigurationFilter = new BsonArray();
+            foreach (int level in levelsConfigurations)
+            {
+                levelsConfigurationFilter.Add(new BsonDocument("level_configuration", level));
+            }
+
+            //filtro de configuracion de apariciones
+            BsonArray appearancesFilter = new BsonArray();
+            foreach (int appearances in appearancesConfigurations)
+            {
+                colorsFilter.Add(new BsonDocument("appearances_configuration", appearances));
+            }
+
             //agrega los filtros al JSON
             matchAndConditions.Add(new BsonDocument("datetime", dateFilter));
             matchAndConditions.Add(new BsonDocument("student_id", studentId));
+            matchAndConditions.Add(new BsonDocument("$or", colorsFilter));
+            matchAndConditions.Add(new BsonDocument("$or", sequencesFilter));
+            matchAndConditions.Add(new BsonDocument("$or", levelsConfigurationFilter));
+            matchAndConditions.Add(new BsonDocument("$or", appearancesFilter));
             match.AddRange(new BsonDocument("$and", matchAndConditions));
 
             /*Group*/
@@ -88,7 +151,7 @@ namespace Aula_Multisensorial.Access
             return StructurePieJSON(registers[0]);
         }
 
-        public string GetLineChartDataIndividual(DateTime startDate, DateTime endDate, string studentId)
+        public string GetLineChartDataIndividual(DateTime startDate, DateTime endDate, string studentId, int[] colorConfigurations, int[] sequenceConfigurations, int[] levelsConfigurations, int[] appearancesConfigurations)
         {
             /*Match*/
             BsonDocument match = new BsonDocument();
@@ -98,9 +161,40 @@ namespace Aula_Multisensorial.Access
             dateFilter.Add("$gte", startDate);
             dateFilter.Add("$lte", endDate);
 
+            //filtro de configuracion de colores
+            BsonArray colorsFilter = new BsonArray();
+            foreach (int color in colorConfigurations)
+            {
+                colorsFilter.Add(new BsonDocument("color_configuration", color));
+            }
+
+            //filtro de configuracion de secuencias
+            BsonArray sequencesFilter = new BsonArray();
+            foreach (int sequence in sequenceConfigurations)
+            {
+                sequencesFilter.Add(new BsonDocument("sequence_configuration", sequence));
+            }
+
+            //filtro de configuracion de niveles
+            BsonArray levelsConfigurationFilter = new BsonArray();
+            foreach (int level in levelsConfigurations)
+            {
+                levelsConfigurationFilter.Add(new BsonDocument("level_configuration", level));
+            }
+
+            //filtro de configuracion de apariciones
+            BsonArray appearancesFilter = new BsonArray();
+            foreach (int appearances in appearancesConfigurations)
+            {
+                colorsFilter.Add(new BsonDocument("appearances_configuration", appearances));
+            }
 
             matchAndConditions.Add(new BsonDocument("datetime", dateFilter));
             matchAndConditions.Add(new BsonDocument("student_id", studentId));
+            matchAndConditions.Add(new BsonDocument("$or", colorsFilter));
+            matchAndConditions.Add(new BsonDocument("$or", sequencesFilter));
+            matchAndConditions.Add(new BsonDocument("$or", levelsConfigurationFilter));
+            matchAndConditions.Add(new BsonDocument("$or", appearancesFilter));
 
             match.AddRange(new BsonDocument("$and", matchAndConditions));
 
@@ -124,7 +218,7 @@ namespace Aula_Multisensorial.Access
             return StructureLineJSON(registers);
         }
 
-        public string GetBarChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods)
+        public string GetBarChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods, int[] colorConfigurations, int[] sequenceConfigurations, int[] levelsConfigurations, int[] appearancesConfigurations)
         {
             // crea el filtro de busqueda de los estudiantes
             BsonDocument query = new BsonDocument();
@@ -187,11 +281,43 @@ namespace Aula_Multisensorial.Access
                 periodsFilter.Add(new BsonDocument("period", period));
             }
 
+            //filtro de configuracion de colores
+            BsonArray colorsFilter = new BsonArray();
+            foreach (int color in colorConfigurations)
+            {
+                colorsFilter.Add(new BsonDocument("color_configuration", color));
+            }
+
+            //filtro de configuracion de secuencias
+            BsonArray sequencesFilter = new BsonArray();
+            foreach (int sequence in sequenceConfigurations)
+            {
+                sequencesFilter.Add(new BsonDocument("sequence_configuration", sequence));
+            }
+
+            //filtro de configuracion de niveles
+            BsonArray levelsConfigurationFilter = new BsonArray();
+            foreach (int level in levelsConfigurations)
+            {
+                levelsConfigurationFilter.Add(new BsonDocument("level_configuration", level));
+            }
+
+            //filtro de configuracion de apariciones
+            BsonArray appearancesFilter = new BsonArray();
+            foreach (int appearances in appearancesConfigurations)
+            {
+                colorsFilter.Add(new BsonDocument("appearances_configuration", appearances));
+            }
+
             //agrega los filtros al JSON
             matchAndConditions.Add(new BsonDocument("datetime", dateFilter));
             matchAndConditions.Add(new BsonDocument("$or", studentsFilter));
             matchAndConditions.Add(new BsonDocument("$or", levelsFilter));
             matchAndConditions.Add(new BsonDocument("$or", periodsFilter));
+            matchAndConditions.Add(new BsonDocument("$or", colorsFilter));
+            matchAndConditions.Add(new BsonDocument("$or", sequencesFilter));
+            matchAndConditions.Add(new BsonDocument("$or", levelsConfigurationFilter));
+            matchAndConditions.Add(new BsonDocument("$or", appearancesFilter));
             match.AddRange(new BsonDocument("$and", matchAndConditions));
 
             /*Group*/
@@ -214,7 +340,7 @@ namespace Aula_Multisensorial.Access
             return StructureBarJSON(registers);
         }
 
-        public string GetPieChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods)
+        public string GetPieChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods, int[] colorConfigurations, int[] sequenceConfigurations, int[] levelsConfigurations, int[] appearancesConfigurations)
         {
             // crea el filtro de busqueda de los estudiantes
             BsonDocument query = new BsonDocument();
@@ -276,11 +402,43 @@ namespace Aula_Multisensorial.Access
                 periodsFilter.Add(new BsonDocument("period", period));
             }
 
+            //filtro de configuracion de colores
+            BsonArray colorsFilter = new BsonArray();
+            foreach (int color in colorConfigurations)
+            {
+                colorsFilter.Add(new BsonDocument("color_configuration", color));
+            }
+
+            //filtro de configuracion de secuencias
+            BsonArray sequencesFilter = new BsonArray();
+            foreach (int sequence in sequenceConfigurations)
+            {
+                sequencesFilter.Add(new BsonDocument("sequence_configuration", sequence));
+            }
+
+            //filtro de configuracion de niveles
+            BsonArray levelsConfigurationFilter = new BsonArray();
+            foreach (int level in levelsConfigurations)
+            {
+                levelsConfigurationFilter.Add(new BsonDocument("level_configuration", level));
+            }
+
+            //filtro de configuracion de apariciones
+            BsonArray appearancesFilter = new BsonArray();
+            foreach (int appearances in appearancesConfigurations)
+            {
+                colorsFilter.Add(new BsonDocument("appearances_configuration", appearances));
+            }
+
             //agrega los filtros al JSON
             matchAndConditions.Add(new BsonDocument("datetime", dateFilter));
             matchAndConditions.Add(new BsonDocument("$or", studentsFilter));
             matchAndConditions.Add(new BsonDocument("$or", levelsFilter));
             matchAndConditions.Add(new BsonDocument("$or", periodsFilter));
+            matchAndConditions.Add(new BsonDocument("$or", colorsFilter));
+            matchAndConditions.Add(new BsonDocument("$or", sequencesFilter));
+            matchAndConditions.Add(new BsonDocument("$or", levelsConfigurationFilter));
+            matchAndConditions.Add(new BsonDocument("$or", appearancesFilter));
             match.AddRange(new BsonDocument("$and", matchAndConditions));
 
             /*Group*/
@@ -300,7 +458,7 @@ namespace Aula_Multisensorial.Access
             return StructurePieJSON(registers[0]);
         }
 
-        public string GetLineChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods)
+        public string GetLineChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods, int[] colorConfigurations, int[] sequenceConfigurations, int[] levelsConfigurations, int[] appearancesConfigurations)
         {
             // crea el filtro de busqueda de los estudiantes
             BsonDocument query = new BsonDocument();
@@ -325,6 +483,34 @@ namespace Aula_Multisensorial.Access
             foreach (string gender in genders)
             {
                 gendersFilter.Add(new BsonDocument("gender", gender));
+            }
+
+            //filtro de configuracion de colores
+            BsonArray colorsFilter = new BsonArray();
+            foreach (int color in colorConfigurations)
+            {
+                colorsFilter.Add(new BsonDocument("color_configuration", color));
+            }
+
+            //filtro de configuracion de secuencias
+            BsonArray sequencesFilter = new BsonArray();
+            foreach (int sequence in sequenceConfigurations)
+            {
+                sequencesFilter.Add(new BsonDocument("sequence_configuration", sequence));
+            }
+
+            //filtro de configuracion de niveles
+            BsonArray levelsConfigurationFilter = new BsonArray();
+            foreach (int level in levelsConfigurations)
+            {
+                levelsConfigurationFilter.Add(new BsonDocument("level_configuration", level));
+            }
+
+            //filtro de configuracion de apariciones
+            BsonArray appearancesFilter = new BsonArray();
+            foreach (int appearances in appearancesConfigurations)
+            {
+                colorsFilter.Add(new BsonDocument("appearances_configuration", appearances));
             }
 
             //agrega los filtros al JSON
@@ -368,6 +554,10 @@ namespace Aula_Multisensorial.Access
             matchAndConditions.Add(new BsonDocument("$or", studentsFilter));
             matchAndConditions.Add(new BsonDocument("$or", levelsFilter));
             matchAndConditions.Add(new BsonDocument("$or", periodsFilter));
+            matchAndConditions.Add(new BsonDocument("$or", colorsFilter));
+            matchAndConditions.Add(new BsonDocument("$or", sequencesFilter));
+            matchAndConditions.Add(new BsonDocument("$or", levelsConfigurationFilter));
+            matchAndConditions.Add(new BsonDocument("$or", appearancesFilter));
             match.AddRange(new BsonDocument("$and", matchAndConditions));
 
             /*Group*/
@@ -561,7 +751,7 @@ namespace Aula_Multisensorial.Access
                 float percentaje = (successCount * 100) / (successCount + errorsCount);
                 dataArray.Add(new JValue(activity.GetElement("_id").Value.ToLocalTime().ToString("dd/MM/yyyy")));
                 dataArray.Add(new JValue(percentaje));
-                dataArray.Add(new JValue(100-percentaje));
+                dataArray.Add(new JValue(100 - percentaje));
                 array.Add(dataArray);
             }
             return array.ToString();

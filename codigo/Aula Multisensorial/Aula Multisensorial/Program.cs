@@ -1,5 +1,4 @@
-﻿using Aula_Multisensorial.Gloves;
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace Aula_Multisensorial
@@ -14,8 +13,8 @@ namespace Aula_Multisensorial
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CEFForm());
-            //Application.Run(new Aula_Multisensorial.CardiacSensor.Main("5c1bbb3f75c6cf37a489efcb"));
+            //Application.Run(new CEFForm());
+            Application.Run(new Aula_Multisensorial.Gloves.Main("5c1bbb3f75c6cf37a489efcb"));
         }
     }
 }
