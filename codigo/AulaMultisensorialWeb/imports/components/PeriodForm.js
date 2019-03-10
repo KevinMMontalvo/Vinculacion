@@ -189,6 +189,9 @@ export default class PeriodForm extends React.Component
 	componentDidMount(){
 		if(this.props.periodToModify != undefined){
 			document.getElementById('name-input').value = this.props.periodToModify.name;
+			this.setState({
+				startDate: new Date(this.props.periodToModify.start_date),
+			})
 		}
 	}
 

@@ -171,7 +171,6 @@ export default class UserMenu extends React.Component {
                 this.state.showOptions ?
                   <div className="advanced-menu-options-container">
                     <div className="advanced-menu-title">Opciones de usuario</div>
-                    <div id="import-excel" className="advanced-menu-option-container-g">Importar excel (.xlsx)</div>
                     <div onClick={() => this.ShowChangePasswordForm()} id="change-password" className="advanced-menu-option-container-b">Cambiar contraseña</div>
                     <div onClick={() => this.Logout()} id="logout" className="advanced-menu-option-container-b">Cerrar sesión</div>
                   </div>
