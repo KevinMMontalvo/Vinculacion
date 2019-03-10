@@ -1047,8 +1047,6 @@ export default class GraphicsParametersForm extends React.Component {
         }
         let maxAge = document.getElementById('max-age-input').value;
         let minAge = document.getElementById('min-age-input').value;
-        console.log(maxAge);
-        console.log(minAge);
         if(maxAge == ""){
           maxAge = 99;
         }

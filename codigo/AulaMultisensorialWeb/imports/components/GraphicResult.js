@@ -5,6 +5,7 @@ import Modal from 'react-responsive-modal';
 import DatePicker from 'react-date-picker';
 import GraphicsParametersForm from '../components/GraphicsParametersForm';
 import Filters from '../map/Filters';
+import ButterToast, { Cinnamon, POS_BOTTOM, POS_RIGHT, POS_TOP } from 'butter-toast';
 
 export default class GraphicResult extends React.Component {
   constructor(props) {
@@ -1068,7 +1069,9 @@ export default class GraphicResult extends React.Component {
     }
   }
 
-  ChangeChartSettings() {
+  ChangeChartSettings(){
+    var nonValidInputs = false;
+    var nonValidFilters = false;
     if(this.state.studentOption){
       this.props.ChangeStudent(this.state.student, this.state.name, this.state.level);
     }
@@ -1076,7 +1079,13 @@ export default class GraphicResult extends React.Component {
       this.props.ChangeDate(this.state.minDate, this.state.maxDate);
     }
     if(this.state.fingersOption){
-      this.props.ChangeFingers(this.state.fingers);
+      if(this.state.fingers.length == 0){
+        this.ShowWarningMenssage("Tiene que selecionar por lo menos un dedo", "Existen campos vacios");
+        nonValidInputs = true;
+      }
+      else{
+        this.props.ChangeFingers(this.state.fingers);
+      }
     }
     if(this.state.levelsOption){
       let parameters = this.props.parameters;
@@ -1084,7 +1093,13 @@ export default class GraphicResult extends React.Component {
       for (var i = 0; i < this.state.filters.levels.length; i++) {
         parameters.levels.push(this.state.filters.levels[i].name);
       }
-      this.props.ChangeFilters(parameters);
+      if(parameters.levels.length == 0){
+        this.ShowWarningMenssage("Tiene que selecionar por lo menos un nivel", "Existen campos vacios");
+        nonValidFilters = true;
+      }
+      else{
+        this.props.ChangeFilters(parameters);
+      }
     }
     if(this.state.periodsOption){
       let parameters = this.props.parameters;
@@ -1092,19 +1107,79 @@ export default class GraphicResult extends React.Component {
       for (var i = 0; i < this.state.filters.periods.length; i++) {
         parameters.periods.push(this.state.filters.periods[i].name);
       }
-      this.props.ChangeFilters(parameters);
+      if(parameters.periods.length == 0){
+        this.ShowWarningMenssage("Tiene que selecionar por lo menos un periodo", "Existen campos vacios");
+        nonValidFilters = true;
+      }
+      else{
+        this.props.ChangeFilters(parameters);
+      }
     }
     if(this.state.gendersOption){
       let parameters = this.props.parameters;
       parameters.genders = this.state.filters.genders;
-      this.props.ChangeFilters(parameters);
+      if(parameters.genders.length == 0){
+        this.ShowWarningMenssage("Tiene que selecionar por lo menos un género", "Existen campos vacios");
+        nonValidFilters = true;
+      }
+      else{
+        this.props.ChangeFilters(parameters);
+      }
     }
-    this.setState({
-      studentOption: false,
-      dateOption: false,
-      openChartModal: false,
-    });
-    document.getElementById('chart-container').className = "chart-modal-container";
+    if(!nonValidFilters && !nonValidInputs){
+      this.setState({
+        studentOption: false,
+        dateOption: false,
+        openChartModal: false,
+      });
+      document.getElementById('chart-container').className = "chart-modal-container";
+    }
+  }
+
+  dismissAll = () => {
+    this.tray.dismissAll();
+  }
+
+  ShowWarningMenssage(content, title){
+		this.tray.raise({
+			content: <Cinnamon.Crisp
+				className="butter-alert"
+				scheme={Cinnamon.Slim.SCHEME_DARK}
+				content={() => <div>{content}</div>}
+				title={title}
+				icon={<div className="alert-warning-icon"></div>}
+            />
+		});
+    this.dismissAll();
+	}
+
+  CheckNonValidInputs(){
+    var nonValidInputs = false;
+    var nonValidFilters = false;
+    if(this.props.parameters.activity == "gloves"){
+      if(this.props.parameters.fingers.length == 0){
+        this.ShowWarningMenssage("Tiene que selecionar por lo menos un dedo", "Existen campos vacios");
+        nonValidInputs = true;
+      }
+    }
+    if(this.props.parameters.isCollective){
+      if(this.props.parameters.levels.length == 0){
+        this.ShowWarningMenssage("Tiene que selecionar por lo menos un nivel", "Existen campos vacios");
+        nonValidFilters = true;
+      }
+      if(this.props.parameters.periods.length == 0){
+        this.ShowWarningMenssage("Tiene que selecionar por lo menos un periodo", "Existen campos vacios");
+        nonValidFilters = true;
+      }
+      if(this.props.parameters.genders.length == 0){
+        this.ShowWarningMenssage("Tiene que selecionar por lo menos un género", "Existen campos vacios");
+        nonValidFilters = true;
+      }
+    }
+    if(nonValidFilters || nonValidInputs){
+      return false;
+    }
+    return true;
   }
 
   render() {
@@ -1576,6 +1651,14 @@ export default class GraphicResult extends React.Component {
             </div>
           </div>
         </Modal>
+        <ButterToast
+  				position={{
+  						vertical: POS_TOP,
+  						horizontal: POS_RIGHT
+  				}}
+  				timeout={7500}
+          ref={tray => this.tray = tray}
+  			/>
       </div>
     );
   }
