@@ -42,6 +42,14 @@ export default class ActivitiesReport extends React.Component {
           data = JSON.parse(globeActivitiesController.getPieChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.fingers));
         }
       }
+      if(parameters.graphicType == "line"){
+        if(parameters.isCollective){
+          data = JSON.parse(globeActivitiesController.getLineChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods, parameters.fingers));
+        }
+        else{
+          data = JSON.parse(globeActivitiesController.getLineChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.fingers));
+        }
+      }
     }
     if(parameters.activity == "matrix"){
       if(parameters.graphicType == "bar"){
@@ -59,6 +67,14 @@ export default class ActivitiesReport extends React.Component {
         }
         else{
           data = JSON.parse(matrixActivitiesController.getPieChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student));
+        }
+      }
+      if(parameters.graphicType == "line"){
+        if(parameters.isCollective){
+          data = JSON.parse(matrixActivitiesController.getLineChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods));
+        }
+        else{
+          data = JSON.parse(matrixActivitiesController.getLineChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student));
         }
       }
     }
