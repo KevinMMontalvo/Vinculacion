@@ -373,6 +373,7 @@ export default class StudentForm extends React.Component
 			document.getElementById('percentage-of-disability-input').value = this.props.studentToModify.percentage_of_disability;
 			this.setState({
 				techHelps: this.props.studentToModify.technical_helps,
+				date: new Date(this.props.studentToModify.birthdate),
 			});
 		}
 		this.LoadLevelsInSelect();

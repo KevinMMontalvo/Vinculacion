@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-date-picker';
 import Filters from '../map/Filters';
+import ButterToast, { Cinnamon, POS_BOTTOM, POS_RIGHT, POS_TOP } from 'butter-toast';
 
 export default class GraphicsParametersForm extends React.Component {
   constructor(props) {
@@ -413,13 +414,18 @@ export default class GraphicsParametersForm extends React.Component {
     else {
       studentSwitchButton.innerHTML = "Colectivo";
       graphicSettings.isCollective = false;
-      this.GetStudentsByLevel();
     }
     graphicSettings.isStudentSelected = true;
     this.setState({
       graphicSettings: graphicSettings,
     }, () => {
-      this.GetGlobalRangeDates();
+      if(this.state.graphicSettings.isCollective){
+        this.GetGlobalRangeDates();
+      }
+      else {
+        this.LoadLevelsInSelect();
+        this.GetStudentsByLevel();
+      }
     });
   }
 
@@ -804,41 +810,6 @@ export default class GraphicsParametersForm extends React.Component {
     }
   }
 
-  GenerateGraphic(){
-    let parameters = {};
-    parameters.student = this.state.student;
-    parameters.name = this.state.name;
-    parameters.activity = this.state.activity;
-    parameters.endDate = this.state.maxDate;
-    parameters.startDate = this.state.minDate;
-    parameters.fingers = this.state.fingers;
-    parameters.graphicType = this.state.graphicType;
-    parameters.level = this.state.level;
-    if(this.state.graphicSettings.isCollective){
-      parameters.levels = [];
-      for (var i = 0; i < this.state.filters.levels.length; i++) {
-        parameters.levels.push(this.state.filters.levels[i].name);
-      }
-      let maxAge = parseInt(document.getElementById('max-age-input').value);
-      let minAge = parseInt(document.getElementById('min-age-input').value);
-      if(maxAge == ""){
-        maxAge = 0;
-      }
-      if(minAge == ""){
-        minAge = 0;
-      }
-      parameters.maxAge = maxAge;
-      parameters.minAge = minAge;
-      parameters.genders = this.state.filters.genders;
-      parameters.periods = [];
-      for (var i = 0; i < this.state.filters.periods.length; i++) {
-        parameters.periods.push(this.state.filters.periods[i].name);
-      }
-      parameters.isCollective = this.state.graphicSettings.isCollective;
-    }
-    this.props.ShowGraphicResult(parameters);
-  }
-
   LoadLevelsInSelect(){
 		this.setState({
 			levels: this.LoadLevels(),
@@ -1012,6 +983,91 @@ export default class GraphicsParametersForm extends React.Component {
 
   }
 
+  dismissAll = () => {
+    this.tray.dismissAll();
+  }
+
+  ShowWarningMenssage(content, title){
+		this.tray.raise({
+			content: <Cinnamon.Crisp
+				className="butter-alert"
+				scheme={Cinnamon.Slim.SCHEME_DARK}
+				content={() => <div>{content}</div>}
+				title={title}
+				icon={<div className="alert-warning-icon"></div>}
+			/>
+		});
+    this.dismissAll();
+	}
+
+  CheckNonValidInputs(){
+    var nonValidInputs = false;
+    var nonValidFilters = false;
+    if(this.state.activity == "gloves"){
+      if(this.state.fingers.length == 0){
+        this.ShowWarningMenssage("Tiene que selecionar por lo menos un dedo", "Existen campos vacios");
+        nonValidInputs = true;
+      }
+    }
+    if(this.state.graphicSettings.isCollective){
+      if(this.state.filters.levels.length == 0){
+        this.ShowWarningMenssage("Tiene que selecionar por lo menos un nivel", "Existen campos vacios");
+        nonValidFilters = true;
+      }
+      if(this.state.filters.periods.length == 0){
+        this.ShowWarningMenssage("Tiene que selecionar por lo menos un periodo", "Existen campos vacios");
+        nonValidFilters = true;
+      }
+      if(this.state.filters.genders.length == 0){
+        this.ShowWarningMenssage("Tiene que selecionar por lo menos un género", "Existen campos vacios");
+        nonValidFilters = true;
+      }
+    }
+    if(nonValidFilters || nonValidInputs){
+      return false;
+    }
+    return true;
+  }
+
+  GenerateGraphic(){
+    if(this.CheckNonValidInputs()){
+      let parameters = {};
+      parameters.student = this.state.student;
+      parameters.name = this.state.name;
+      parameters.activity = this.state.activity;
+      parameters.endDate = this.state.maxDate;
+      parameters.startDate = this.state.minDate;
+      parameters.fingers = this.state.fingers;
+      parameters.graphicType = this.state.graphicType;
+      parameters.level = this.state.level;
+      if(this.state.graphicSettings.isCollective){
+        parameters.levels = [];
+        for (var i = 0; i < this.state.filters.levels.length; i++) {
+          parameters.levels.push(this.state.filters.levels[i].name);
+        }
+        let maxAge = document.getElementById('max-age-input').value;
+        let minAge = document.getElementById('min-age-input').value;
+        console.log(maxAge);
+        console.log(minAge);
+        if(maxAge == ""){
+          maxAge = 99;
+        }
+        if(minAge == ""){
+          minAge = 0;
+        }
+        parameters.maxAge = parseInt(maxAge);
+        parameters.minAge = parseInt(minAge);
+        parameters.genders = this.state.filters.genders;
+        parameters.periods = [];
+        for (var i = 0; i < this.state.filters.periods.length; i++) {
+          parameters.periods.push(this.state.filters.periods[i].name);
+        }
+        parameters.isCollective = this.state.graphicSettings.isCollective;
+      }
+      this.props.ShowGraphicResult(parameters);
+    }
+  }
+
   render() {
     return(
       <div>
@@ -1180,9 +1236,9 @@ export default class GraphicsParametersForm extends React.Component {
                   <p className="input-label">Rango de edades</p>
                   <div className="student-input">
         						<input id="min-age-input" onKeyPress={() => this.ValidateOnlyNumbers(event)}
-              placeholder="Edad mínima" className="vertical-input" maxLength="2" value="0"></input>
+              placeholder="Edad mínima" className="vertical-input" maxLength="2" placeholder="0"></input>
         						<input id="max-age-input" onKeyPress={() => this.ValidateOnlyNumbers(event)}
-              placeholder="Edad máxima" className="vertical-input" maxLength="2" value="99"></input>
+              placeholder="Edad máxima" className="vertical-input" maxLength="2" placeholder="99"></input>
         					</div>
                 </div>
               </div>
@@ -1281,7 +1337,14 @@ export default class GraphicsParametersForm extends React.Component {
             undefined
           }
         </div>
-
+        <ButterToast
+  				position={{
+  						vertical: POS_TOP,
+  						horizontal: POS_RIGHT
+  				}}
+  				timeout={7500}
+          ref={tray => this.tray = tray}
+  			/>
       </div>
     );
   }
