@@ -10,11 +10,12 @@ namespace Aula_Multisensorial.Gloves
 {
     public partial class Main : Form
     {
+        private static Main instance = null;
         private readonly string teacherId;
         private delegate void ControlEvent(object sender, EventArgs e);
         private bool isFunctionalLevel;
 
-        public Main(string teacherId)
+        private Main(string teacherId)
         {
             InitializeComponent();
             this.teacherId = teacherId;
@@ -156,9 +157,25 @@ namespace Aula_Multisensorial.Gloves
             Close();
         }
 
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ArduinoController.GetInstance().CloseConnection(ArduinoController.LEFT_HAND_ARDUINO);
+            ArduinoController.GetInstance().CloseConnection(ArduinoController.RIGHT_HAND_ARDUINO);
+            instance = null;
+        }
+
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
             Dispose();
+        }
+
+        public static Main GetInstance(string teacherId)
+        {
+            if (instance == null)
+            {
+                instance = new Main(teacherId);
+            }
+            return instance;
         }
 
         private void AddClickEvents()
@@ -265,5 +282,7 @@ namespace Aula_Multisensorial.Gloves
             comboBoxStudents.Enabled = true;
             buttonStart.BackColor = Color.Green;
         }
+
+        
     }
 }
