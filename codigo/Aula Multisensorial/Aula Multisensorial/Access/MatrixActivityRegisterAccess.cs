@@ -54,7 +54,7 @@ namespace Aula_Multisensorial.Access
             BsonArray appearancesFilter = new BsonArray();
             foreach (int appearances in appearancesConfigurations)
             {
-                colorsFilter.Add(new BsonDocument("appearances_configuration", appearances));
+                appearancesFilter.Add(new BsonDocument("appearances_configuration", appearances));
             }
 
             matchAndConditions.Add(new BsonDocument("datetime", dateFilter));
@@ -122,7 +122,7 @@ namespace Aula_Multisensorial.Access
             BsonArray appearancesFilter = new BsonArray();
             foreach (int appearances in appearancesConfigurations)
             {
-                colorsFilter.Add(new BsonDocument("appearances_configuration", appearances));
+                appearancesFilter.Add(new BsonDocument("appearances_configuration", appearances));
             }
 
             //agrega los filtros al JSON
@@ -186,7 +186,7 @@ namespace Aula_Multisensorial.Access
             BsonArray appearancesFilter = new BsonArray();
             foreach (int appearances in appearancesConfigurations)
             {
-                colorsFilter.Add(new BsonDocument("appearances_configuration", appearances));
+                appearancesFilter.Add(new BsonDocument("appearances_configuration", appearances));
             }
 
             matchAndConditions.Add(new BsonDocument("datetime", dateFilter));
@@ -306,7 +306,7 @@ namespace Aula_Multisensorial.Access
             BsonArray appearancesFilter = new BsonArray();
             foreach (int appearances in appearancesConfigurations)
             {
-                colorsFilter.Add(new BsonDocument("appearances_configuration", appearances));
+                appearancesFilter.Add(new BsonDocument("appearances_configuration", appearances));
             }
 
             //agrega los filtros al JSON
@@ -427,7 +427,7 @@ namespace Aula_Multisensorial.Access
             BsonArray appearancesFilter = new BsonArray();
             foreach (int appearances in appearancesConfigurations)
             {
-                colorsFilter.Add(new BsonDocument("appearances_configuration", appearances));
+                appearancesFilter.Add(new BsonDocument("appearances_configuration", appearances));
             }
 
             //agrega los filtros al JSON
@@ -510,7 +510,7 @@ namespace Aula_Multisensorial.Access
             BsonArray appearancesFilter = new BsonArray();
             foreach (int appearances in appearancesConfigurations)
             {
-                colorsFilter.Add(new BsonDocument("appearances_configuration", appearances));
+                appearancesFilter.Add(new BsonDocument("appearances_configuration", appearances));
             }
 
             //agrega los filtros al JSON
