@@ -185,14 +185,14 @@ namespace Aula_Multisensorial.Gloves
         {
 
             GlobeActivityRegister globeActivity = new GlobeActivityRegister();
-            globeActivity.StudentId = comboBoxStudents.SelectedValue.ToString();
+            globeActivity.StudentId = ((Student)comboBoxStudents.SelectedItem).Id;
             globeActivity.Finger = fingerMessage;
             globeActivity.Datetime = DateTime.Now.Date; //solo fecha para poder agrupar
             globeActivity.Level = new LevelAccess().GetLevelById(new TeacherAccess().GetTeacherById(teacherId).LevelId).Name;
             globeActivity.Period = new PeriodAccess().GetActivePeriod().Name;
 
             ArduinoController.GetInstance().SendMessage(arduinoIndex, fingerMessage);
-            string recivedMessage = ArduinoController.GetInstance().GetMessage(ArduinoController.RIGHT_HAND_ARDUINO);
+            string recivedMessage = ArduinoController.GetInstance().GetMessage(arduinoIndex);
             if (recivedMessage == null)
             {
                 MessageBox.Show("Ha ocurrido un problema de conexion con el guante, revise que los guantes esten bien conectados");
@@ -219,7 +219,7 @@ namespace Aula_Multisensorial.Gloves
 
         private bool ConnectGlobe(int arduinoIndex)
         {
-            bool connectionSuccessful = ArduinoController.GetInstance().StartConnection(ArduinoController.RIGHT_HAND_ARDUINO);
+            bool connectionSuccessful = ArduinoController.GetInstance().StartConnection(arduinoIndex);
             if (!connectionSuccessful && arduinoIndex == ArduinoController.RIGHT_HAND_ARDUINO)
             {
                 MessageBox.Show("No se pudo conectar con el guante derecho");

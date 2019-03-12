@@ -38,7 +38,7 @@ namespace Aula_Multisensorial.MatrixLED
 
         private void Main_Load(object sender, EventArgs e)
         {
-            /*if (!ConnectMatrix())
+            if (!ConnectMatrix())
             {
                 Shown += new EventHandler(new ControlEvent(ShownFormEvent)); // Cierra el formulario automaticamente
                 return;
@@ -53,7 +53,7 @@ namespace Aula_Multisensorial.MatrixLED
             {
                 MessageBox.Show(ex.Message);
                 Shown += new EventHandler(new ControlEvent(ShownFormEvent)); // Cierra el formulario automaticamente
-            }*/
+            }
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -89,13 +89,13 @@ namespace Aula_Multisensorial.MatrixLED
 
         private void buttonSetup_Click(object sender, EventArgs e)
         {
-            /*if (ConnectMatrix())
-            {*/
-                //Configuration configuration = new Configuration(this, shapeConfiguration, colorConfiguration, sequenceConfiguration, levelConfiguration, brightnessConfiguration, appearancesConfiguration);
-                Configuration configuration = new Configuration(this, "1111111100000000", 5, 3, 3, 4, 5);
+            if (ConnectMatrix())
+            {
+                Configuration configuration = new Configuration(this, shapeConfiguration, colorConfiguration, sequenceConfiguration, levelConfiguration, brightnessConfiguration, appearancesConfiguration);
+                //Configuration configuration = new Configuration(this, "1111111100000000", 5, 3, 3, 4, 5);
                 configuration.Show();
                 Hide();
-            //}
+            }
         }
 
         private void buttonExit_Click(object sender, EventArgs e)

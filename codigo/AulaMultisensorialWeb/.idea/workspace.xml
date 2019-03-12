@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf6ce076-847d-40a9-a101-46c52b689462" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Access/MatrixActivityRegisterAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Access/MatrixActivityRegisterAccess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imports/components/ActivitiesMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/components/ActivitiesMenu.js" afterDir="false" />
-    </list>
+    <list default="true" id="bf6ce076-847d-40a9-a101-46c52b689462" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -21,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/imports/components/ActivitiesMenu.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
+            <state relative-caret-position="389">
+              <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
             </state>
           </provider>
         </entry>
@@ -51,6 +46,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -67,7 +63,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -139,14 +134,16 @@
       <workItem from="1552018287447" duration="1599000" />
       <workItem from="1552070726780" duration="599000" />
       <workItem from="1552138572196" duration="599000" />
+      <workItem from="1552314249593" duration="2629000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47245000" />
+    <option name="totallyTimeSpent" value="49874000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17913593" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -185,8 +182,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/imports/components/ActivitiesMenu.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
+        <state relative-caret-position="389">
+          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
         </state>
       </provider>
     </entry>

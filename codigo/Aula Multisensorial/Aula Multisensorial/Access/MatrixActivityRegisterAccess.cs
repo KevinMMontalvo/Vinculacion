@@ -19,7 +19,7 @@ namespace Aula_Multisensorial.Access
             activitiesCollection = DatabaseConnection.GetInstance().Database.GetCollection<MatrixActivityRegister>("led_matrix_activity_registers");
         }
 
-        public string GetBarChartDataIndividual(DateTime startDate, DateTime endDate, string studentId, int[] colorConfigurations, int[] sequenceConfigurations, int[] levelsConfigurations, int[] appearancesConfigurations)
+        public string GetBarChartDataIndividual(DateTime startDate, DateTime endDate, string studentId, object[] colorConfigurations, object[] sequenceConfigurations, object[] levelsConfigurations, object[] appearancesConfigurations)
         {
             /*Match*/
             BsonDocument match = new BsonDocument();
@@ -86,7 +86,7 @@ namespace Aula_Multisensorial.Access
             return StructureBarJSON(registers);
         }
 
-        public string GetPieChartDataIndividual(DateTime startDate, DateTime endDate, string studentId, int[] colorConfigurations, int[] sequenceConfigurations, int[] levelsConfigurations, int[] appearancesConfigurations)
+        public string GetPieChartDataIndividual(DateTime startDate, DateTime endDate, string studentId, object[] colorConfigurations, object[] sequenceConfigurations, object[] levelsConfigurations, object[] appearancesConfigurations)
         {
             /* Match */
             BsonDocument match = new BsonDocument();
@@ -151,7 +151,7 @@ namespace Aula_Multisensorial.Access
             return StructurePieJSON(registers[0]);
         }
 
-        public string GetLineChartDataIndividual(DateTime startDate, DateTime endDate, string studentId, int[] colorConfigurations, int[] sequenceConfigurations, int[] levelsConfigurations, int[] appearancesConfigurations)
+        public string GetLineChartDataIndividual(DateTime startDate, DateTime endDate, string studentId, object[] colorConfigurations, object[] sequenceConfigurations, object[] levelsConfigurations, object[] appearancesConfigurations)
         {
             /*Match*/
             BsonDocument match = new BsonDocument();
@@ -218,7 +218,7 @@ namespace Aula_Multisensorial.Access
             return StructureLineJSON(registers);
         }
 
-        public string GetBarChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods, int[] colorConfigurations, int[] sequenceConfigurations, int[] levelsConfigurations, int[] appearancesConfigurations)
+        public string GetBarChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods, object[] colorConfigurations, object[] sequenceConfigurations, object[] levelsConfigurations, object[] appearancesConfigurations)
         {
             // crea el filtro de busqueda de los estudiantes
             BsonDocument query = new BsonDocument();
@@ -340,7 +340,7 @@ namespace Aula_Multisensorial.Access
             return StructureBarJSON(registers);
         }
 
-        public string GetPieChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods, int[] colorConfigurations, int[] sequenceConfigurations, int[] levelsConfigurations, int[] appearancesConfigurations)
+        public string GetPieChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods, object[] colorConfigurations, object[] sequenceConfigurations, object[] levelsConfigurations, object[] appearancesConfigurations)
         {
             // crea el filtro de busqueda de los estudiantes
             BsonDocument query = new BsonDocument();
@@ -458,7 +458,7 @@ namespace Aula_Multisensorial.Access
             return StructurePieJSON(registers[0]);
         }
 
-        public string GetLineChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods, int[] colorConfigurations, int[] sequenceConfigurations, int[] levelsConfigurations, int[] appearancesConfigurations)
+        public string GetLineChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods, object[] colorConfigurations, object[] sequenceConfigurations, object[] levelsConfigurations, object[] appearancesConfigurations)
         {
             // crea el filtro de busqueda de los estudiantes
             BsonDocument query = new BsonDocument();

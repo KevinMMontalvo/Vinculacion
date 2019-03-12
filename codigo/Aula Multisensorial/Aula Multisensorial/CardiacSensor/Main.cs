@@ -11,6 +11,7 @@ namespace Aula_Multisensorial.CardiacSensor
 {
     public partial class Main : Form
     {
+        private static Main instance = null;
         private readonly string teacherId;
         private delegate string GetSelectedComboBoxText();
         private delegate void ChangeActivityState();
@@ -19,7 +20,7 @@ namespace Aula_Multisensorial.CardiacSensor
         private bool firstValueTaked = false;
         private bool secondValueTaked = false;
 
-        public Main(string teacherId)
+        private Main(string teacherId)
         {
             InitializeComponent();
             this.teacherId = teacherId;
@@ -35,6 +36,7 @@ namespace Aula_Multisensorial.CardiacSensor
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             ArduinoController.GetInstance().CloseConnection(ArduinoController.HEART_ARDUINO);
+            instance = null;
             Dispose();
         }
 
@@ -72,6 +74,15 @@ namespace Aula_Multisensorial.CardiacSensor
         private void buttonExit_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        public static Main GetInstance(string teacherId)
+        {
+            if (instance == null)
+            {
+                instance = new Main(teacherId);
+            }
+            return instance;
         }
 
         private void LoadStudentsList()
