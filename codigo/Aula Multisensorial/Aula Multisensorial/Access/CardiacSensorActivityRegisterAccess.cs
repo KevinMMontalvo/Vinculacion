@@ -11,14 +11,22 @@ namespace Aula_Multisensorial.Access
 {
     class CardiacSensorActivityRegisterAccess
     {
-        private static readonly int TIMEOUT = 2000; //Tiempo de respuesta maximo
         private readonly IMongoCollection<CardiacSensorActivityRegister> activitiesCollection;
+        private CancellationTokenSource cancellationTokenSource;
 
         public CardiacSensorActivityRegisterAccess()
         {
             activitiesCollection = DatabaseConnection.GetInstance().Database.GetCollection<CardiacSensorActivityRegister>("cardiac_activity_registers");
         }
 
+        /// <summary>
+        /// Obtiene los datos para la grafica de pulso inicial vs pulso final de un estudiante
+        /// en forma de barras
+        /// </summary>
+        /// <param name="startDate">Fecha de inicio de los registros</param>
+        /// <param name="endDate">Fecha de fin de los registros</param>
+        /// <param name="studentId">String con el ID del estudiante</param>
+        /// <returns>String del JSON con la informacion para el grafico</returns>
         public string GetBarChartDataIndividual(DateTime startDate, DateTime endDate, string studentId)
         {
             /*Match*/
@@ -43,8 +51,8 @@ namespace Aula_Multisensorial.Access
             /*Sort*/
             BsonDocument sort = new BsonDocument("_id", 1);
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).Sort(sort).ToList(cancellationTokenSource.Token);
 
@@ -55,6 +63,14 @@ namespace Aula_Multisensorial.Access
             return StructureBarJSON(registers);
         }
 
+        /// <summary>
+        /// Obtiene los datos para la grafica de relajacion de pulso inicial vs pulso final global de un estudiante
+        /// en forma de pastel
+        /// </summary>
+        /// <param name="startDate">Fecha de inicio de los registros</param>
+        /// <param name="endDate">Fecha de fin de los registros</param>
+        /// <param name="studentId">String con el ID del estudiante</param>
+        /// <returns>String del JSON con la informacion para el grafico</returns>
         public string GetPieChartDataIndividual(DateTime startDate, DateTime endDate, string studentId)
         {
             /*Match*/
@@ -79,8 +95,8 @@ namespace Aula_Multisensorial.Access
             group.Add("_id", "null");
             group.Add("values", new BsonDocument("$push", push));
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).ToList(cancellationTokenSource.Token);
 
@@ -91,6 +107,14 @@ namespace Aula_Multisensorial.Access
             return StructurePieJSON(registers[0]);
         }
 
+        /// <summary>
+        /// Obtiene los datos para la grafica de relajacion porcentual de un estudiante
+        /// en forma de linea
+        /// </summary>
+        /// <param name="startDate">Fecha de inicio de los registros</param>
+        /// <param name="endDate">Fecha de fin de los registros</param>
+        /// <param name="studentId">String con el ID del estudiante</param>
+        /// <returns>String del JSON con la informacion para el grafico</returns>
         public string GetLineChartDataIndividual(DateTime startDate, DateTime endDate, string studentId)
         {
             /*Match*/
@@ -115,8 +139,8 @@ namespace Aula_Multisensorial.Access
             /*Sort*/
             BsonDocument sort = new BsonDocument("_id", 1);
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).Sort(sort).ToList(cancellationTokenSource.Token);
 
@@ -127,6 +151,18 @@ namespace Aula_Multisensorial.Access
             return StructureLineJSON(registers);
         }
 
+        /// <summary>
+        /// Obtiene los datos para la grafica de pulso inicial vs pulso final de varios estudiantes
+        /// segun los parametros
+        /// </summary>
+        /// <param name="startDate">Fecha de inicio de los registros</param>
+        /// <param name="endDate">Fecha de fin de los registros</param>
+        /// <param name="minAge">Edad minima de los estudiantes</param>
+        /// <param name="maxAge">Edad maxima de los estudiantes</param>
+        /// <param name="genders">Generos de los estudiantes</param>
+        /// <param name="levels">Niveles de los registros</param>
+        /// <param name="periods">Periodos de los registros</param>
+        /// <returns>String del JSON con la informacion para el grafico</returns>
         public string GetBarChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods)
         {
             // crea el filtro de busqueda de los estudiantes
@@ -206,8 +242,8 @@ namespace Aula_Multisensorial.Access
             /*Sort*/
             BsonDocument sort = new BsonDocument("_id", 1);
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).Sort(sort).ToList(cancellationTokenSource.Token);
 
@@ -218,6 +254,18 @@ namespace Aula_Multisensorial.Access
             return StructureBarJSON(registers);
         }
 
+        /// <summary>
+        /// Obtiene los datos para la grafica relajacion de pulso inicial vs pulso final global de varios estudiantes
+        /// segun los parametros
+        /// </summary>
+        /// <param name="startDate">Fecha de inicio de los registros</param>
+        /// <param name="endDate">Fecha de fin de los registros</param>
+        /// <param name="minAge">Edad minima de los estudiantes</param>
+        /// <param name="maxAge">Edad maxima de los estudiantes</param>
+        /// <param name="genders">Generos de los estudiantes</param>
+        /// <param name="levels">Niveles de los registros</param>
+        /// <param name="periods">Periodos de los registros</param>
+        /// <returns>String del JSON con la informacion para el grafico</returns>
         public string GetPieChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods)
         {
             // crea el filtro de busqueda de los estudiantes
@@ -296,8 +344,8 @@ namespace Aula_Multisensorial.Access
             group.Add("_id", "null");
             group.Add("values", new BsonDocument("$push", push));
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).ToList(cancellationTokenSource.Token);
 
@@ -308,6 +356,18 @@ namespace Aula_Multisensorial.Access
             return StructurePieJSON(registers[0]);
         }
 
+        /// <summary>
+        /// Obtiene los datos para la grafica de relajacion porcentual de varios estudiantes
+        /// segun los parametros
+        /// </summary>
+        /// <param name="startDate">Fecha de inicio de los registros</param>
+        /// <param name="endDate">Fecha de fin de los registros</param>
+        /// <param name="minAge">Edad minima de los estudiantes</param>
+        /// <param name="maxAge">Edad maxima de los estudiantes</param>
+        /// <param name="genders">Generos de los estudiantes</param>
+        /// <param name="levels">Niveles de los registros</param>
+        /// <param name="periods">Periodos de los registros</param>
+        /// <returns>String del JSON con la informacion para el grafico</returns>
         public string GetLineChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods)
         {
             // crea el filtro de busqueda de los estudiantes
@@ -387,8 +447,8 @@ namespace Aula_Multisensorial.Access
             /*Sort*/
             BsonDocument sort = new BsonDocument("_id", 1);
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             List<BsonDocument> registers = activitiesCollection.Aggregate().Match(match).Group(group).Sort(sort).ToList(cancellationTokenSource.Token);
 
@@ -399,6 +459,11 @@ namespace Aula_Multisensorial.Access
             return StructureLineJSON(registers);
         }
 
+        /// <summary>
+        /// Obtiene las fechas maximas y minimas de los registros de actvidades de un estudiante
+        /// </summary>
+        /// <param name="studentId">String con el ID del estudiante</param>
+        /// <returns>String con el JSON de las fechas maxima y minima</returns>
         public string GetStudentMaxMinActivityDates(string studentId)
         {
             List<CardiacSensorActivityRegister> minDateResponse;
@@ -407,12 +472,15 @@ namespace Aula_Multisensorial.Access
 
             FilterDefinition<CardiacSensorActivityRegister> filter = Builders<CardiacSensorActivityRegister>.Filter.Eq("student_id", studentId);
 
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
+
             minDateResponse = activitiesCollection.Find(filter).Sort(new BsonDocument("datetime", 1)).Limit(1).ToList();
 
             if (minDateResponse.Count == 0) //valida que por lo menos haya 1 registro
             {
                 CardiacSensorActivityRegister minDateRegister = minDateResponse[0];
-                CardiacSensorActivityRegister maxDateRegister = activitiesCollection.Find(filter).Sort(new BsonDocument("datetime", -1)).Limit(1).ToList()[0];
+                CardiacSensorActivityRegister maxDateRegister = activitiesCollection.Find(filter).Sort(new BsonDocument("datetime", -1)).Limit(1).ToList(cancellationTokenSource.Token)[0];
                 response.Add("minDate", minDateRegister.Datetime.ToLocalTime().ToString("yyyy-MM-dd"));
                 response.Add("maxDate", maxDateRegister.Datetime.ToLocalTime().ToString("yyyy-MM-dd"));
             }
@@ -420,13 +488,20 @@ namespace Aula_Multisensorial.Access
             return response.ToString();
         }
 
+        /// <summary>
+        /// Obtiene las fechas maximas y minimas de los registros de actvidades de todos los estudiantes
+        /// </summary>
+        /// <returns>String con el JSON de las fechas maxima y minima</returns>
         public string GetGlobalMaxMinActivityDates()
         {
             List<CardiacSensorActivityRegister> minDateResponse;
 
             JObject response = new JObject();
 
-            minDateResponse = activitiesCollection.Find(new BsonDocument()).Sort(new BsonDocument("datetime", 1)).Limit(1).ToList();
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
+
+            minDateResponse = activitiesCollection.Find(new BsonDocument()).Sort(new BsonDocument("datetime", 1)).Limit(1).ToList(cancellationTokenSource.Token);
 
             if (minDateResponse.Count > 0) //valida que por lo menos haya 1 registro
             {
@@ -439,10 +514,15 @@ namespace Aula_Multisensorial.Access
             return response.ToString();
         }
 
+        /// <summary>
+        /// Inserta un registro de actividad
+        /// </summary>
+        /// <param name="activity">Actividad con los datos a ser insertados</param>
+        /// <returns>Retorna verdadero si la insercion fue exitosa</returns>
         public bool InsertActivity(CardiacSensorActivityRegister activity)
         {
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             try
             {
@@ -456,6 +536,11 @@ namespace Aula_Multisensorial.Access
             }
         }
 
+        /// <summary>
+        /// Genera el String con el JSON para las graficas de barras
+        /// </summary>
+        /// <param name="activitiesList">Lista de las actividades consultadas</param>
+        /// <returns>String con el JSON de la informacion del grafico</returns>
         private string StructureBarJSON(List<BsonDocument> activitiesList)
         {
             JArray dataArray;
@@ -478,6 +563,11 @@ namespace Aula_Multisensorial.Access
             return array.ToString();
         }
 
+        /// <summary>
+        /// Genera el String con el JSON para las graficas de pastel
+        /// </summary>
+        /// <param name="activitiesList">JSON con la informacion consultada</param>
+        /// <returns>String con el JSON de la informacion del grafico</returns>
         private string StructurePieJSON(BsonDocument activitiesList)
         {
             int relaxationTimes = 0;
@@ -517,6 +607,11 @@ namespace Aula_Multisensorial.Access
             return array.ToString();
         }
 
+        /// <summary>
+        /// Genera el String con el JSON para las graficas de linea
+        /// </summary>
+        /// <param name="activitiesList">Lista de las actividades consultadas</param>
+        /// <returns>String con el JSON de la informacion del grafico</returns>
         private string StructureLineJSON(List<BsonDocument> activitiesList)
         {
             JArray dataArray;

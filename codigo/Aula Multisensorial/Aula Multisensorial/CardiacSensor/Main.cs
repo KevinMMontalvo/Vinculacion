@@ -42,7 +42,6 @@ namespace Aula_Multisensorial.CardiacSensor
         {
             ArduinoController.GetInstance().CloseConnection(ArduinoController.HEART_ARDUINO);
             instance = null;
-            Dispose();
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -81,6 +80,11 @@ namespace Aula_Multisensorial.CardiacSensor
             Close();
         }
 
+        /// <summary>
+        /// Metodo para obtener la instancia de patron singleton de la clase
+        /// </summary>
+        /// <param name="teacherId">String con el ID del docente para ejecutar el contructor</param>
+        /// <returns>Retorna la instancia del mimo tipo de la clase</returns>
         public static Main GetInstance(string teacherId)
         {
             if (instance == null)
@@ -90,6 +94,9 @@ namespace Aula_Multisensorial.CardiacSensor
             return instance;
         }
 
+        /// <summary>
+        /// Llena el combobox con los nombres de los alumnos asignados al curso del docente
+        /// </summary>
         private void LoadStudentsList()
         {
             List<Student> students = new StudentAccess().GetStudentsByTeacherLevel(teacherId);
@@ -103,6 +110,9 @@ namespace Aula_Multisensorial.CardiacSensor
             comboBoxStudents.DisplayMember = "Fullname";
         }
 
+        /// <summary>
+        /// Cambia los atributos de los elementos del Form, se usa para cuando la actividad haya iniciado
+        /// </summary>
         private void SetStartActivity()
         {
             buttonStart.Text = "Terminar";
@@ -111,6 +121,10 @@ namespace Aula_Multisensorial.CardiacSensor
             buttonStart.BackColor = Color.DarkRed;
         }
 
+        /// <summary>
+        /// Cambia los atributos de los elementos del Form, se usa para cuando la actividad se haya
+        /// iniciado y se vaya a tomar la segunda medida de la actvidad
+        /// </summary>
         private void SetTakeSecondMeasure()
         {
             buttonStart.Text = "Tomar Medida";
@@ -119,6 +133,10 @@ namespace Aula_Multisensorial.CardiacSensor
             buttonStart.BackColor = Color.DarkRed;
         }
 
+        /// <summary>
+        /// Cambia los atributos de los elementos del Form, se usa para cuando la actividad se haya
+        /// terminado y se vuelve los elementos del Form a su estado inicial
+        /// </summary>
         private void SetEndActivity()
         {
             buttonStart.Text = "Iniciar";
@@ -126,6 +144,10 @@ namespace Aula_Multisensorial.CardiacSensor
             buttonStart.BackColor = Color.Green;
         }
 
+        /// <summary>
+        /// Comprueba y realiza la conexion el dispositivo
+        /// </summary>
+        /// <returns>Retorna verdadero si la insercion fue exitosa</returns>
         private bool ConnectCardiacSensor()
         {
             if (ArduinoController.GetInstance().IsPortOpen(ArduinoController.HEART_ARDUINO))
@@ -139,27 +161,41 @@ namespace Aula_Multisensorial.CardiacSensor
             }
             return connectionSuccessful;
         }
-
+        
+        /// <summary>
+        /// Metodo que inicia el hilo de recepcion de mensajes
+        /// </summary>
         private async void StartReading()
         {
             bool messageSended = ArduinoController.GetInstance().SendMessage(ArduinoController.HEART_ARDUINO, "ON");
             if (messageSended)
             {
-                Task readVaules = new Task(ReceiveMessages);
+                Task readVaules = new Task(ReceiveMessages); //tarea asincrona
                 readVaules.Start();
                 SetTakeSecondMeasure();
             }
+            else
+            {
+                MessageBox.Show("Error de conexion con el dispositivo");
+            }
         }
 
+        /// <summary>
+        /// Metodo que envia el comando de fin de actividad y cierra la conexion
+        /// </summary>
         private void StopReading()
         {
             ArduinoController.GetInstance().SendMessage(ArduinoController.HEART_ARDUINO, "OFF");
             ArduinoController.GetInstance().CloseConnection(ArduinoController.HEART_ARDUINO);
         }
 
+        /// <summary>
+        /// Metodo que se va a ejecutar asincronicamente para recibir los valores arrojados 
+        /// por el dispositivo
+        /// </summary>
         private void ReceiveMessages()
         {
-            int[] values = new int[50];
+            int[] values = new int[50]; //buffer de comparacion
             int counter = 0;
             string message;
             
@@ -168,6 +204,9 @@ namespace Aula_Multisensorial.CardiacSensor
             activity.Level = new LevelAccess().GetLevelById(new TeacherAccess().GetTeacherById(teacherId).LevelId).Name;
             activity.Period = new PeriodAccess().GetActivePeriod().Name;
 
+            /*
+             Lectura del primer valor
+             */
             if (activity.InitialValue == 0)
             {
                 do
@@ -195,7 +234,7 @@ namespace Aula_Multisensorial.CardiacSensor
                             counter++;
                             if (counter == 50)
                             {
-                                if (ValuesStandarized(values))
+                                if (ValuesStandarized(values)) //todos los valores del buffer son iguales
                                 {
                                     Invoke(new SetText(SetInitialLabelText), "Pulsaciones por minuto iniciales: " + values[0]);
                                     firstValueTaked = true;
@@ -221,6 +260,9 @@ namespace Aula_Multisensorial.CardiacSensor
                 Invoke(new ChangeActivityState(SetStartActivity));
             }
 
+            /*
+             Lectura del sugundo valor
+             */
             do
             {
                 message = ArduinoController.GetInstance().GetMessage(ArduinoController.HEART_ARDUINO);
@@ -268,6 +310,7 @@ namespace Aula_Multisensorial.CardiacSensor
             activity.FinalValue = values[0];
             StopReading();
 
+            //Aqui se inserta la actividad en la base de datos
             if (activity.InitialValue != 0 && activity.FinalValue != 0 && buttonStart.Text.Equals("Iniciar"))
             {
                 bool insertedProperly = new CardiacSensorActivityRegisterAccess().InsertActivity(activity);
@@ -276,18 +319,28 @@ namespace Aula_Multisensorial.CardiacSensor
 
         }
 
+        /// <summary>
+        /// Retorna el nombre del estudiante seleccionado en el combobox
+        /// </summary>
+        /// <returns></returns>
         private string GetComboBoxStudentsText()
         {
             Student selectedStudent = (Student)comboBoxStudents.SelectedItem;
             return selectedStudent.Id;
         }
 
+        /// <summary>
+        /// Comprueba que todos los valores sean iguales y validos
+        /// </summary>
+        /// <param name="values">Arreglo de enteros con los valores a ser comprobados</param>
+        /// <returns>Retorna verdadero si la todos los valores son iguales</returns>
         private bool ValuesStandarized(int[] values)
         {
             bool isStandarized = true;
 
             for (int i = 1; i < 50; i++)
             {
+                // aqui se valida los limites maximos y minimos de los valores de las pulsaciones
                 if (values[i] > values[0] + 1 || values[i] < values[0] - 1 || values[i] < 60 || values[i] > 160)
                 {
                     isStandarized = false;
@@ -297,22 +350,31 @@ namespace Aula_Multisensorial.CardiacSensor
             return isStandarized;
         }
 
+        /// <summary>
+        /// Cambia el texto del label en donde se muestra la primera medicion
+        /// </summary>
+        /// <param name="text"></param>
         private void SetInitialLabelText(string text)
         {
             labelInitialBPM.Text = text;
         }
 
+        /// <summary>
+        /// Cambia el texto del label en donde se muestra la segunda medicion
+        /// </summary>
+        /// <param name="text"></param>
         private void SetFinalLabelText(string text)
         {
             labelFinalBPM.Text = text;
         }
 
+        /// <summary>
+        /// Limpia el texto de los labels en donde se muestran las mediciones
+        /// </summary>
         private void ClearLabels()
         {
             labelFinalBPM.Text = "";
             labelInitialBPM.Text = "";
         }
-
-        
     }
 }

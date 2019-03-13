@@ -12,7 +12,6 @@ namespace Aula_Multisensorial.Access
     class TeacherAccess
     {
         private CancellationTokenSource cancellationTokenSource;
-        private static readonly int TIMEOUT = 2000; //Tiempo de respuesta maximo
         private readonly IMongoCollection<Teacher> teachersCollection;
 
         public TeacherAccess()
@@ -28,6 +27,9 @@ namespace Aula_Multisensorial.Access
         {
             try
             {
+                cancellationTokenSource = new CancellationTokenSource();
+                cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
+
                 List<Teacher> teachersList = teachersCollection.Find(_ => true).ToList();
                 return Newtonsoft.Json.JsonConvert.SerializeObject(teachersList);
             }
@@ -46,11 +48,11 @@ namespace Aula_Multisensorial.Access
         public bool InsertTeacher(Dictionary<string, object> teacher)
         {
             BsonDocument document = new BsonDocument(teacher);
-
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
             try
             {
+                cancellationTokenSource = new CancellationTokenSource();
+                cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
+
                 teachersCollection.InsertOne(BsonSerializer.Deserialize<Teacher>(document), null, cancellationTokenSource.Token);
                 return true;
             }
@@ -76,8 +78,8 @@ namespace Aula_Multisensorial.Access
 
             Teacher objectTeacher = BsonSerializer.Deserialize<Teacher>(document); //JSON → Objeto Teacher
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             ReplaceOneResult result = teachersCollection.ReplaceOne(filter, objectTeacher, null, cancellationTokenSource.Token);
 
@@ -101,8 +103,8 @@ namespace Aula_Multisensorial.Access
         {
             FilterDefinition<Teacher> filter = Builders<Teacher>.Filter.Eq("Id", id);
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             DeleteResult deleteResult = teachersCollection.DeleteOne(filter, cancellationTokenSource.Token);
 
@@ -127,8 +129,11 @@ namespace Aula_Multisensorial.Access
         {
             FilterDefinition<Teacher> filter = Builders<Teacher>.Filter.Eq("Name", name);
 
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
+
             //consulta de los profesores con ese nombre
-            List<Teacher> teachersList = teachersCollection.Find(filter).ToList();
+            List<Teacher> teachersList = teachersCollection.Find(filter).ToList(cancellationTokenSource.Token);
 
             // solo debe haber un docente con ese nombre
             if (teachersList.Count != 1)
@@ -157,8 +162,8 @@ namespace Aula_Multisensorial.Access
         {
             FilterDefinition<Teacher> filter = Builders<Teacher>.Filter.Eq("Id", id);
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             UpdateDefinition<Teacher> updateDefinition = Builders<Teacher>.Update.Set("Password", newPassword);
 
@@ -175,11 +180,18 @@ namespace Aula_Multisensorial.Access
 
         }
 
+        /// <summary>
+        /// Obtiene el objeto docente consultandolo por el ID
+        /// </summary>
+        /// <param name="teacherId">String con el Id del docente a consultar</param>
+        /// <returns>Retorna el objeto docente consultado</returns>
         public Teacher GetTeacherById(string teacherId)
         {
             FilterDefinition<Teacher> filter = Builders<Teacher>.Filter.Eq("Id", teacherId);
+
             cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(5000);
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT);
+
             return teachersCollection.Find(filter).ToList(cancellationTokenSource.Token)[0];
         }
     }

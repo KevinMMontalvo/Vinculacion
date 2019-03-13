@@ -98,6 +98,10 @@ namespace Aula_Multisensorial.MatrixLED
             OpenParentForm();
         }
 
+        /// <summary>
+        /// Cambia el estado de los botones que representan la matriz para que se puedan hacer click o no
+        /// </summary>
+        /// <param name="enable">boleano con el estado al que se va a cambiar el estado</param>
         private void ChangeButtonsEnableState(bool enable)
         {
             button11.Enabled = enable;
@@ -121,6 +125,10 @@ namespace Aula_Multisensorial.MatrixLED
             button44.Enabled = enable;
         }
 
+        /// <summary>
+        /// Evento que envia la configuracion de la forma y limpia los 
+        /// controles de configuracion de la misma
+        /// </summary>
         private void SendShapeConfiguration(object sender, EventArgs e)
         {
             if (!ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "F-" + GetBytes()))
@@ -136,6 +144,9 @@ namespace Aula_Multisensorial.MatrixLED
             timer.Start();
         }
 
+        /// <summary>
+        /// Evento de clic de los botones que representan la matriz
+        /// </summary>
         private void MatrixButtonsClickEvent(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -151,6 +162,10 @@ namespace Aula_Multisensorial.MatrixLED
             }
         }
 
+        /// <summary>
+        /// Obtiene los bytes correspondientes a cada fila de la matriz
+        /// </summary>
+        /// <returns></returns>
         private string GetBytes()
         {
             string byteFila1 = GetRowBinaries(1);
@@ -163,6 +178,11 @@ namespace Aula_Multisensorial.MatrixLED
             return "" + (char)Convert.ToInt32(byteFila1, 2) + (char)Convert.ToInt32(byteFila2, 2) + (char)Convert.ToInt32(byteFila3, 2) + (char)Convert.ToInt32(byteFila4, 2);
         }
 
+        /// <summary>
+        /// Retorna en una cadena el estado de los botones de una fila
+        /// </summary>
+        /// <param name="row">Numero de fila que se desea obtener</param>
+        /// <returns>String con el estado de los botones de una fila</returns>
         private string GetRowBinaries(int row)
         {
             string binaryNumber = "";
@@ -181,6 +201,12 @@ namespace Aula_Multisensorial.MatrixLED
             return binaryNumber;
         }
 
+        /// <summary>
+        /// Configura la forma y color con el que se muestra la matriz
+        /// </summary>
+        /// <param name="row">Numero de fila</param>
+        /// <param name="binaryCode">Estado de la fila</param>
+        /// <param name="color">Color con el que se va a rellenar el boton de la fila</param>
         private void SetRowBinaries(int row, string binaryCode, Color color)
         {
             for (int i = 1; i <= 4; i++)
@@ -196,6 +222,9 @@ namespace Aula_Multisensorial.MatrixLED
             }
         }
 
+        /// <summary>
+        /// Evento del boton de cancelar cuando se selecciona la opcion de Forma
+        /// </summary>
         private void ShapeCancelButtonEvent(object sender, EventArgs e)
         {
             panelTools.Controls.Clear();
@@ -204,6 +233,9 @@ namespace Aula_Multisensorial.MatrixLED
             timer.Start();
         }
 
+        /// <summary>
+        /// Agrega los controles necesarios para la configuracion del nivel de color
+        /// </summary>
         private void AddColorControls()
         {
             panelTools.Controls.Clear();
@@ -236,6 +268,9 @@ namespace Aula_Multisensorial.MatrixLED
 
         }
 
+        /// <summary>
+        /// Agrega botones de Aceptar y Cancelar, es general para la maytoria de configuraciones
+        /// </summary>
         private void AddAcceptAndCancepButtons(ControlEvent acceptEvent, ControlEvent cancelEvent)
         {
             Button buttonAccept = new Button();
@@ -272,12 +307,19 @@ namespace Aula_Multisensorial.MatrixLED
             panelTools.Controls.Add(buttonCancel);
         }
 
+        /// <summary>
+        /// Evento del boton de cancelar, funciona para la mayoria de configuraciones
+        /// </summary>
         private void GenericCancelEvent(object sender, EventArgs e)
         {
             panelTools.Controls.Clear();
             timer.Start();
         }
 
+        /// <summary>
+        /// Pinta los botones de la configuracion de colores
+        /// </summary>
+        /// <param name="level">Int que representa el nivel de configuracion</param>
         private void PaintColorControls(int level)
         {
             //limpia todos los colores
@@ -322,6 +364,9 @@ namespace Aula_Multisensorial.MatrixLED
             }
         }
 
+        /// <summary>
+        /// Evento del control de cambio de nivel de color
+        /// </summary>
         private void NumberColorChangedUpDownEvent(object sender, EventArgs e)
         {
             NumericUpDown numericUpDown = (NumericUpDown)sender;
@@ -329,6 +374,10 @@ namespace Aula_Multisensorial.MatrixLED
             PaintColorControls(level);
         }
 
+        /// <summary>
+        /// Evento que envia la configuracion de color y limpia los 
+        /// controles de configuracion de la misma
+        /// </summary>
         private void SendColorConfiguration(object sender, EventArgs e)
         {
             NumericUpDown numericUpDown = (NumericUpDown)panelTools.Controls["numericUpDownColor"];
@@ -343,6 +392,9 @@ namespace Aula_Multisensorial.MatrixLED
             panelTools.Controls.Clear();
         }
 
+        /// <summary>
+        /// Agrega los controles necesarios para la configuracion de secuencia
+        /// </summary>
         private void AddSequenceControls()
         {
             panelTools.Controls.Clear();
@@ -369,12 +421,20 @@ namespace Aula_Multisensorial.MatrixLED
             panelTools.Controls.Add(comboBox);
         }
 
+        /// <summary>
+        /// Selecciona el nivel de secuencia seleccionado
+        /// </summary>
+        /// <param name="sequence">Int que representa el nivel de sequencia</param>
         private void SetSequenceComboBox(int sequence)
         {
             ComboBox comboBox = (ComboBox)panelTools.Controls["comboBox"];
             comboBox.SelectedIndex = sequence;
         }
 
+        /// <summary>
+        /// Evento que envia la configuracion de secuencia y limpia los 
+        /// controles de configuracion de la misma
+        /// </summary>
         private void SendSequenceConfiguration(object sender, EventArgs e)
         {
             ComboBox comboBox = (ComboBox)panelTools.Controls["comboBox"];
@@ -389,6 +449,9 @@ namespace Aula_Multisensorial.MatrixLED
             panelTools.Controls.Clear();
         }
 
+        /// <summary>
+        /// Agrega los controles necesarios para la configuracion de nivel
+        /// </summary>
         private void AddLevelControls()
         {
             panelTools.Controls.Clear();
@@ -413,6 +476,9 @@ namespace Aula_Multisensorial.MatrixLED
             panelTools.Controls.Add(label);
         }
 
+        /// <summary>
+        /// Evento del control de cambio de nivel
+        /// </summary>
         private void LevelNumberChangedEvent(object sender, EventArgs e)
         {
             TrackBar trackBar = (TrackBar)sender;
@@ -422,6 +488,10 @@ namespace Aula_Multisensorial.MatrixLED
             label.Text = level.ToString();
         }
 
+        /// <summary>
+        /// Evento que envia la configuracion de secuencia y limpia los 
+        /// controles de configuracion de la misma
+        /// </summary>
         private void SendLevelConfiguration(object sender, EventArgs e)
         {
             bool sendedProperly;
@@ -447,6 +517,9 @@ namespace Aula_Multisensorial.MatrixLED
             panelTools.Controls.Clear();
         }
 
+        /// <summary>
+        /// Agrega los controles necesarios para la configuracion del brillo
+        /// </summary>
         private void AddBrightnessControls()
         {
             TrackBar trackBar = new TrackBar();
@@ -469,6 +542,9 @@ namespace Aula_Multisensorial.MatrixLED
             panelTools.Controls.Add(label);
         }
 
+        /// <summary>
+        /// Evento del control de cambio de brillo
+        /// </summary>
         private void BrightnessLevelChangedEvent(object sender, EventArgs e)
         {
             TrackBar trackbar = (TrackBar)sender;
@@ -478,6 +554,10 @@ namespace Aula_Multisensorial.MatrixLED
             SetMatrixBrightness(level);
         }
 
+        /// <summary>
+        /// Evento que envia la configuracion de brillo y limpia los 
+        /// controles de configuracion de la misma
+        /// </summary>
         private void SendBrightnessConfiguration(object sender, EventArgs e)
         {
             TrackBar trackbar = (TrackBar)panelTools.Controls["numericUpDown"];
@@ -492,12 +572,19 @@ namespace Aula_Multisensorial.MatrixLED
             timer.Start();
         }
 
+        /// <summary>
+        /// Evento del boton Cancelar de la configuracion del brillo
+        /// </summary>
         private void BrightnessCancelButtonEvent(object sender, EventArgs e)
         {
             panelTools.Controls.Clear();
             timer.Start();
         }
 
+        /// <summary>
+        /// Cambia y muestra la configuracion del brillo de la matriz
+        /// </summary>
+        /// <param name="brightnessLevel">Int que representa el nivel de brillo</param>
         private void SetMatrixBrightness(int brightnessLevel)
         {
             int colorNumber = 55 + 25 * brightnessLevel;
@@ -507,6 +594,9 @@ namespace Aula_Multisensorial.MatrixLED
             SetRowBinaries(4, "1111", Color.FromArgb(colorNumber, colorNumber, colorNumber));
         }
 
+        /// <summary>
+        /// Agrega los controles necesarios para la configuracion de apariciones
+        /// </summary>
         private void AddAppearancesControls()
         {
             TrackBar trackBar = new TrackBar();
@@ -532,6 +622,9 @@ namespace Aula_Multisensorial.MatrixLED
             panelTools.Controls.Add(label);
         }
 
+        /// <summary>
+        /// Evento del control de cambio de nivel apariciones
+        /// </summary>
         private void AppearancesLevelChangedEvent(object sender, EventArgs e)
         {
             TrackBar trackbar = (TrackBar)sender;
@@ -540,6 +633,10 @@ namespace Aula_Multisensorial.MatrixLED
             label.Text = level+"%";
         }
 
+        /// <summary>
+        /// Evento que envia la configuracion del nivel de apariciones y limpia los 
+        /// controles de configuracion de la misma
+        /// </summary>
         private void SendAppearancesConfiguration(object sender, EventArgs e)
         {
             TrackBar trackbar = (TrackBar)panelTools.Controls["trackBar"];
@@ -553,6 +650,9 @@ namespace Aula_Multisensorial.MatrixLED
             panelTools.Controls.Clear();
         }
 
+        /// <summary>
+        /// Evento del timer para realizar la animacion
+        /// </summary>
         private void timer_Tick(object sender, EventArgs e)
         {
             if (sequenceConfiguration == 0) //desplazamiento derecho
@@ -811,6 +911,9 @@ namespace Aula_Multisensorial.MatrixLED
             }
         }
 
+        /// <summary>
+        /// Guarda el buffer a partir de la configuracion 
+        /// </summary>
         private void LoadShapeBuffer()
         {
             int contador = 0;
@@ -837,6 +940,10 @@ namespace Aula_Multisensorial.MatrixLED
             }
         }
 
+        /// <summary>
+        /// Dibuja la matriz con la configuracion del buffer
+        /// </summary>
+        /// <param name="color">Color del cual se van a pintar los colores de los botones que reprentan a la matriz</param>
         private void RenderMatrix(Color color)
         {
             string binary = "";
@@ -895,7 +1002,10 @@ namespace Aula_Multisensorial.MatrixLED
             }
             SetRowBinaries(3, binary, color);
         }
-
+        
+        /// <summary>
+        /// Abre la ventana principal de la actividad
+        /// </summary>
         private void OpenParentForm()
         {
             parentForm.LoadConfigurations();
@@ -903,6 +1013,9 @@ namespace Aula_Multisensorial.MatrixLED
             Close();
         }
 
+        /// <summary>
+        /// Cierra la actividad, se usa en caso de error critico
+        /// </summary>
         private void CloseMatrixActivity()
         {
             parentForm.Close();

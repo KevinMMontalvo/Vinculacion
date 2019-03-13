@@ -132,7 +132,7 @@ namespace Aula_Multisensorial.Gloves
                 }
                 else
                 {
-                    AddClickEvents();
+                    AddLabelsEvents();
                 }
 
                 if (isFunctionalLevel && !correctOperation)
@@ -169,6 +169,11 @@ namespace Aula_Multisensorial.Gloves
             Dispose();
         }
 
+        /// <summary>
+        /// Metodo para obtener la instancia de patron singleton de la clase
+        /// </summary>
+        /// <param name="teacherId">String con el Id del docente para ejecutar el constructor</param>
+        /// <returns>Retorna la instancia del mimo tipo de la clase</returns>
         public static Main GetInstance(string teacherId)
         {
             if (instance == null)
@@ -178,7 +183,10 @@ namespace Aula_Multisensorial.Gloves
             return instance;
         }
 
-        private void AddClickEvents()
+        /// <summary>
+        /// Agrega los eventos a los labels de los dedos
+        /// </summary>
+        private void AddLabelsEvents()
         {
             for (int i = 1; i <= 10; i++)
             {
@@ -188,6 +196,9 @@ namespace Aula_Multisensorial.Gloves
             }
         }
 
+        /// <summary>
+        /// Elimina los eventos a los labels de los dedos
+        /// </summary>
         private void RemoveClickEvents()
         {
             for (int i = 1; i <= 10; i++)
@@ -198,6 +209,12 @@ namespace Aula_Multisensorial.Gloves
             }
         }
 
+        /// <summary>
+        /// Ejecuta la accion al dar clic en algun dedo, envia el mensaje al arduino y esta en espera de la respuesta
+        /// luego inserta la actividad en la base de datos
+        /// </summary>
+        /// <param name="arduinoIndex">Int constante de arduino al que se corresponde el dedo seleccionado</param>
+        /// <param name="fingerMessage">Mensaje aue se va a enviar al dispositivo</param>
         private void DoFingerActivity(int arduinoIndex, string fingerMessage)
         {
 
@@ -234,6 +251,11 @@ namespace Aula_Multisensorial.Gloves
             }
         }
 
+        /// <summary>
+        /// Comprueba y realiza la conexion con el dispositivo
+        /// </summary>
+        /// <param name="arduinoIndex">Int constante de arduino</param>
+        /// <returns>Retorna verdadero si la insercion fue exitosa</returns>
         private bool ConnectGlobe(int arduinoIndex)
         {
             bool connectionSuccessful = ArduinoController.GetInstance().StartConnection(arduinoIndex);
@@ -248,6 +270,9 @@ namespace Aula_Multisensorial.Gloves
             return connectionSuccessful;
         }
 
+        /// <summary>
+        /// Llena el combobox con los nombres de los alumnos asignados al curso del docente
+        /// </summary>
         private void LoadStudentsList()
         {
             List<Student> students = new StudentAccess().GetStudentsByTeacherLevel(teacherId);
@@ -261,12 +286,18 @@ namespace Aula_Multisensorial.Gloves
             comboBoxStudents.DisplayMember = "Fullname";
         }
 
+        /// <summary>
+        /// Comprueba si el nivel es funcional segun el nombre asignado el curso
+        /// </summary>
         private void ChecklLevelType()
         {
             Level level = new LevelAccess().GetLevelById(new TeacherAccess().GetTeacherById(teacherId).LevelId);
             isFunctionalLevel = level.Name.ToUpper().Contains("FUNCIONAL");
         }
 
+        /// <summary>
+        /// Cambia los atributos de los elementos del Form, se usa para cuando la actividad haya iniciado
+        /// </summary>
         private void SetStartActivity()
         {
             buttonStart.Text = "Terminar";
@@ -275,6 +306,10 @@ namespace Aula_Multisensorial.Gloves
             buttonStart.BackColor = Color.DarkRed;
         }
 
+        /// <summary>
+        /// Cambia los atributos de los elementos del Form, se usa para cuando la actividad se haya
+        /// terminado y se vuelve los elementos del Form a su estado inicial
+        /// </summary>
         private void SetEndActivity()
         {
             buttonStart.Text = "Iniciar";
@@ -282,7 +317,5 @@ namespace Aula_Multisensorial.Gloves
             comboBoxStudents.Enabled = true;
             buttonStart.BackColor = Color.Green;
         }
-
-        
     }
 }

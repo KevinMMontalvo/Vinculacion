@@ -22,6 +22,10 @@ namespace Aula_Multisensorial.Utils
             serialPorts = new SerialPort[5];
         }
 
+        /// <summary>
+        /// Obtiene la instancia del patron singleton de la clase
+        /// </summary>
+        /// <returns>Instancia del mismo tiepo de esta clase</returns>
         public static ArduinoController GetInstance()
         {
             if (instance == null)
@@ -31,6 +35,11 @@ namespace Aula_Multisensorial.Utils
             return instance;
         }
 
+        /// <summary>
+        /// Inicia la conexion con un dispositivo
+        /// </summary>
+        /// <param name="arduinoIndex">Int constante que representa el dispositivo</param>
+        /// <returns>Retorna true si la accion se realizo correctamente</returns>
         public bool StartConnection(int arduinoIndex)
         {
             string[] ports = SerialPort.GetPortNames();
@@ -96,6 +105,12 @@ namespace Aula_Multisensorial.Utils
             return false;
         }
 
+        /// <summary>
+        /// Envia un mensaje al dispositivo
+        /// </summary>
+        /// <param name="arduinoIndex">Int constante que representa el dispositivo</param>
+        /// <param name="message">String con el mensaje</param>
+        /// <returns>Retorna true si la accion se realizo correctamente</returns>
         public bool SendMessage(int arduinoIndex, string message)
         {
             if (serialPorts[arduinoIndex] != null && serialPorts[arduinoIndex].IsOpen)
@@ -109,6 +124,11 @@ namespace Aula_Multisensorial.Utils
             }
         }
 
+        /// <summary>
+        /// Lee un mensaje entrante de un dispositivo
+        /// </summary>
+        /// <param name="arduinoIndex">Int constante que representa el dispositivo</param>
+        /// <returns>Retorna true si la accion se realizo correctamente</returns>
         public string GetMessage(int arduinoIndex)
         {
             if (serialPorts[arduinoIndex] != null && serialPorts[arduinoIndex].IsOpen)
@@ -125,6 +145,11 @@ namespace Aula_Multisensorial.Utils
             return null;
         }
 
+        /// <summary>
+        /// Lee un mensaje obteniendo los bytes, se usa en la configuracion de la matriz
+        /// </summary>
+        /// <param name="arduinoIndex">Int constante que representa el dispositivo</param>
+        /// <returns>Retorna true si la accion se realizo correctamente</returns>
         public List<byte> GetMessageInBytes(int arduinoIndex)
         {
             List<byte> message = new List<byte>();
@@ -139,6 +164,11 @@ namespace Aula_Multisensorial.Utils
             return message;
         }
 
+        /// <summary>
+        /// Cierra la conexion de forma segura con un dispositivo
+        /// </summary>
+        /// <param name="arduinoIndex">Int constante que representa el dispositivo</param>
+        /// <returns>Retorna true si la accion se realizo correctamente</returns>
         public bool CloseConnection(int arduinoIndex)
         {
             if (serialPorts[arduinoIndex] != null && serialPorts[arduinoIndex].IsOpen)
@@ -153,6 +183,11 @@ namespace Aula_Multisensorial.Utils
             return false;
         }
 
+        /// <summary>
+        /// Comprueba si el puerto de un dispositivo ya esta abierto
+        /// </summary>
+        /// <param name="arduinoIndex">Int constante que representa el dispositivo</param>
+        /// <returns>Retorna true si el puerto ya esta abierto</returns>
         public bool IsPortOpen(int arduinoIndex)
         {
             if (serialPorts[arduinoIndex] != null && serialPorts[arduinoIndex].IsOpen)

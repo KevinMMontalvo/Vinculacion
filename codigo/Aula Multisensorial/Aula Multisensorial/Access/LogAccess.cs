@@ -12,7 +12,7 @@ namespace Aula_Multisensorial.Access
 {
     class LogAccess
     {
-        private static readonly int TIMEOUT = 2000; //Tiempo de respuesta maximo
+        private CancellationTokenSource cancellationTokenSource;
         private readonly IMongoCollection<Log> logsCollection;
 
 
@@ -29,6 +29,8 @@ namespace Aula_Multisensorial.Access
         {
             try
             {
+                cancellationTokenSource = new CancellationTokenSource();
+                cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
                 List<Log> administratorsList = logsCollection.Find(_ => true).ToList();
                 return Newtonsoft.Json.JsonConvert.SerializeObject(administratorsList);
             }
@@ -49,7 +51,7 @@ namespace Aula_Multisensorial.Access
             BsonDocument document = new BsonDocument(log);
 
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
             try
             {
                 logsCollection.InsertOne(BsonSerializer.Deserialize<Log>(document), null, cancellationTokenSource.Token);

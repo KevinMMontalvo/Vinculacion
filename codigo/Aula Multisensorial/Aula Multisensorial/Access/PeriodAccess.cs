@@ -11,7 +11,7 @@ namespace Aula_Multisensorial.Access
 {
     class PeriodAccess
     {
-        private static readonly int TIMEOUT = 2000; //Tiempo de respuesta maximo
+        private CancellationTokenSource cancellationTokenSource;
         private readonly IMongoCollection<Period> periodsCollection;
 
         public PeriodAccess()
@@ -27,7 +27,10 @@ namespace Aula_Multisensorial.Access
         {
             try
             {
-                List<Period> periodsList = periodsCollection.Find(_ => true).ToList();
+                cancellationTokenSource = new CancellationTokenSource();
+                cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
+
+                List<Period> periodsList = periodsCollection.Find(_ => true).ToList(cancellationTokenSource.Token);
                 return Newtonsoft.Json.JsonConvert.SerializeObject(periodsList);
             }
             catch (Exception e)
@@ -46,8 +49,8 @@ namespace Aula_Multisensorial.Access
         {
             BsonDocument document = new BsonDocument(period);
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             try
             {
@@ -74,8 +77,8 @@ namespace Aula_Multisensorial.Access
             string id = document.GetValue("_id").AsString;
             FilterDefinition<Period> filter = Builders<Period>.Filter.Eq("Id", id);
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             Period objectPerdiod = BsonSerializer.Deserialize<Period>(document);
             ReplaceOneResult result = periodsCollection.ReplaceOne(filter, objectPerdiod, null, cancellationTokenSource.Token);
@@ -100,8 +103,8 @@ namespace Aula_Multisensorial.Access
         {
             FilterDefinition<Period> filter = Builders<Period>.Filter.Eq("Id", id);
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             DeleteResult deleteResult = periodsCollection.DeleteOne(filter);
 
@@ -126,8 +129,8 @@ namespace Aula_Multisensorial.Access
             FilterDefinition<Period> filterNewVisible = Builders<Period>.Filter.Eq("Id", id);
             FilterDefinition<Period> filterVisiblePeriod = Builders<Period>.Filter.Eq("IsVisible", true);
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); //configuracion del tiempo maximo de respuesta
 
             UpdateDefinition<Period> updateDefinitionMakeInvisible = Builders<Period>.Update.Set("IsVisible", false);
             UpdateDefinition<Period> updateDefinitionMakeVisible = Builders<Period>.Update.Set("IsVisible", true);
@@ -152,11 +155,17 @@ namespace Aula_Multisensorial.Access
             }
         }
         
+        /// <summary>
+        /// Retorna el periodo activo
+        /// </summary>
+        /// <returns>Objeto Periodo que tiene atributo is Visible como verdadero</returns>
         public Period GetActivePeriod()
         {
             FilterDefinition<Period> filter = Builders<Period>.Filter.Eq("IsVisible", true);
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT);
+
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); //configuracion del tiempo maximo de respuesta
+
             return periodsCollection.Find(filter).ToList(cancellationTokenSource.Token)[0];
         }
     }
