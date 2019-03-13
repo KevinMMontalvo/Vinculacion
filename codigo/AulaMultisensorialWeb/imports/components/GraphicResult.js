@@ -39,6 +39,7 @@ export default class GraphicResult extends React.Component {
         changeLevels: [],
         appearances: [],
       },
+      title: undefined,
     }
   }
 
@@ -58,6 +59,20 @@ export default class GraphicResult extends React.Component {
 
   componentDidMount() {
     this.TranslateActivityName();
+    this.GetTitle();
+  }
+
+  GetTitle(){
+    let title = "";
+    if(this.props.parameters.activity == "gloves" || this.props.parameters.activity == "matrix"){
+      title = "Cantidad de aciertos vs errores";
+    }
+    if(this.props.parameters.activity == "sensor"){
+      title = "Pulso inicial vs pulso final";
+    }
+    this.setState({
+      title: title,
+    });
   }
 
   TranslateActivityName() {
@@ -164,8 +179,8 @@ export default class GraphicResult extends React.Component {
   }
 
   GetRangeDates(){
-    if(this.props.parameters.activity == "gloves"){
-      let activityDates = JSON.parse(globeActivitiesController.getStudentMaxMinActivityDates(this.props.parameters.student));
+    if(this.state.activity == "gloves"){
+      let activityDates = JSON.parse(globeActivitiesController.getStudentMaxMinActivityDates(this.state.student));
       if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
         this.setState({
           maxDate: new Date(activityDates.maxDate),
@@ -173,8 +188,17 @@ export default class GraphicResult extends React.Component {
         });
       }
     }
-    if(this.props.parameters.activity == "matrix"){
-      let activityDates = JSON.parse(matrixActivitiesController.getStudentMaxMinActivityDates(this.props.parameters.student));
+    if(this.state.activity == "matrix"){
+      let activityDates = JSON.parse(matrixActivitiesController.getStudentMaxMinActivityDates(this.state.student));
+      if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
+        this.setState({
+          maxDate: new Date(activityDates.maxDate),
+          minDate: new Date(activityDates.minDate),
+        });
+      }
+    }
+    if(this.state.activity == "sensor"){
+      let activityDates = JSON.parse(cardiacActivitiesController.getStudentMaxMinActivityDates(this.state.student));
       if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
         this.setState({
           maxDate: new Date(activityDates.maxDate),
@@ -185,7 +209,7 @@ export default class GraphicResult extends React.Component {
   }
 
   GetGlobalRangeDates(){
-    if(this.props.parameters.activity == "gloves"){
+    if(this.state.activity == "gloves"){
       let activityDates = JSON.parse(globeActivitiesController.getGlobalMaxMinActivityDates());
       if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
         this.setState({
@@ -194,8 +218,17 @@ export default class GraphicResult extends React.Component {
         });
       }
     }
-    if(this.props.parameters.activity == "matrix"){
+    if(this.state.activity == "matrix"){
       let activityDates = JSON.parse(matrixActivitiesController.getGlobalMaxMinActivityDates());
+      if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
+        this.setState({
+          maxDate: new Date(activityDates.maxDate),
+          minDate: new Date(activityDates.minDate),
+        });
+      }
+    }
+    if(this.state.activity == "sensor"){
+      let activityDates = JSON.parse(cardiacActivitiesController.getGlobalMaxMinActivityDates());
       if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
         this.setState({
           maxDate: new Date(activityDates.maxDate),
@@ -1951,7 +1984,7 @@ export default class GraphicResult extends React.Component {
                 options={{
                   chartArea: { width: '67.5%' },
                   hAxis: {
-                    title: 'Cantidad de aciertos vs errores',
+                    title: this.state.title,
                     minValue: 0,
                   },
                   vAxis: {

@@ -388,6 +388,16 @@ export default class GraphicsParametersForm extends React.Component {
         });
       }
     }
+    if(this.state.activity == "sensor"){
+      console.log('yes individual');
+      let activityDates = JSON.parse(cardiacActivitiesController.getStudentMaxMinActivityDates(this.state.student));
+      if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
+        this.setState({
+          maxDate: new Date(activityDates.maxDate),
+          minDate: new Date(activityDates.minDate),
+        });
+      }
+    }
   }
 
   GetGlobalRangeDates(){
@@ -402,6 +412,16 @@ export default class GraphicsParametersForm extends React.Component {
     }
     if(this.state.activity == "matrix"){
       let activityDates = JSON.parse(matrixActivitiesController.getGlobalMaxMinActivityDates());
+      if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
+        this.setState({
+          maxDate: new Date(activityDates.maxDate),
+          minDate: new Date(activityDates.minDate),
+        });
+      }
+    }
+    if(this.state.activity == "sensor"){
+      console.log('yes');
+      let activityDates = JSON.parse(cardiacActivitiesController.getGlobalMaxMinActivityDates());
       if(activityDates.maxDate != undefined && activityDates.minDate != undefined){
         this.setState({
           maxDate: new Date(activityDates.maxDate),
@@ -470,14 +490,23 @@ export default class GraphicsParametersForm extends React.Component {
       matrixOption.className = 'activity-picker-option-selected';
       sensorOption.className = 'activity-picker-option';
     }
+    if(activity == "sensor"){
+      graphicSettings.isActivitySelected = true;
+      graphicSettings.isDateRangeSelected = true;
+      glovesOption.className = 'activity-picker-option';
+      matrixOption.className = 'activity-picker-option';
+      sensorOption.className = 'activity-picker-option-selected';
+    }
     this.setState({
       graphicSettings: graphicSettings,
       activity: activity,
     }, () => {
       if(this.state.activity){
-        this.GetRangeDates();
         if(this.state.graphicSettings.isCollective){
           this.GetGlobalRangeDates();
+        }
+        else {
+          this.GetRangeDates();
         }
       }
       /*if(this.state.graphicType && this.state.activity == "matrix"){
