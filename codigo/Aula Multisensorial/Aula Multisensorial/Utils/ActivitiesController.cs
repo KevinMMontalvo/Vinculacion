@@ -30,12 +30,12 @@ namespace Aula_Multisensorial.Utils
 
         private void StartMatrixActivity(string teacherId)
         {
-            new MatrixLED.Main(teacherId);
+            MatrixLED.Main.GetInstance(teacherId);
         }
 
         private void StartGlovesActivity(string teacherId)
         {
-            new Gloves.Main(teacherId);
+            Gloves.Main.GetInstance(teacherId);
         }
 
         private void StartCardiacSensorActivity(string teacherId)

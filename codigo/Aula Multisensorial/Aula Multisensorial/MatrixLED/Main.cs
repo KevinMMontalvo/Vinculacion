@@ -11,6 +11,7 @@ namespace Aula_Multisensorial.MatrixLED
 {
     public partial class Main : Form
     {
+        private static Main instance = null;
         private static readonly string SHAPE_CONFIG_CODE = "CF-";
         private static readonly string COLOR_CONFIG_CODE = "CC-";
         private static readonly string SEQUENCE_CONFIG_CODE = "CS-";
@@ -28,7 +29,7 @@ namespace Aula_Multisensorial.MatrixLED
         private int brightnessConfiguration;
         private int appearancesConfiguration;
 
-        public Main(string teacherId)
+        private Main(string teacherId)
         {
             InitializeComponent();
             this.teacherId = teacherId;
@@ -106,6 +107,11 @@ namespace Aula_Multisensorial.MatrixLED
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             ArduinoController.GetInstance().CloseConnection(ArduinoController.MATRIX_ARDUINO);
+            instance = null;
+        }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
             Dispose();
         }
 
@@ -115,6 +121,15 @@ namespace Aula_Multisensorial.MatrixLED
         private void ShownFormEvent(object sender, EventArgs e)
         {
             Close();
+        }
+
+        public static Main GetInstance(string teacherId)
+        {
+            if (instance == null)
+            {
+                instance = new Main(teacherId);
+            }
+            return instance;
         }
 
         private bool ConnectMatrix()
@@ -449,6 +464,5 @@ namespace Aula_Multisensorial.MatrixLED
             comboBoxStudents.Enabled = true;
             buttonStart.BackColor = Color.Green;
         }
-
     }
 }

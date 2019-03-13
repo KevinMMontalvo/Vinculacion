@@ -33,6 +33,11 @@ namespace Aula_Multisensorial.CardiacSensor
             LoadStudentsList();
         }
 
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Dispose();
+        }
+
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             ArduinoController.GetInstance().CloseConnection(ArduinoController.HEART_ARDUINO);
@@ -307,5 +312,7 @@ namespace Aula_Multisensorial.CardiacSensor
             labelFinalBPM.Text = "";
             labelInitialBPM.Text = "";
         }
+
+        
     }
 }
