@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DatePicker from 'react-date-picker';
 import Filters from '../map/Filters';
 import ButterToast, { Cinnamon, POS_BOTTOM, POS_RIGHT, POS_TOP } from 'butter-toast';
+import Range from 'react-range-progress';
 
 export default class GraphicsParametersForm extends React.Component {
   constructor(props) {
@@ -13,11 +14,17 @@ export default class GraphicsParametersForm extends React.Component {
       level: undefined,
       graphicType: undefined,
       filtersLoaded: false,
-      activity: "",
+      activity: undefined,
       filters: {
         levels: [],
         periods: [],
         genders: ["Masculino", "Femenino"],
+      },
+      matrixSettings: {
+        colors: [],
+        sequences: [],
+        changeLevels: [],
+        appearances: [],
       },
       selectedMale: true,
       selectedFemale: true,
@@ -414,13 +421,27 @@ export default class GraphicsParametersForm extends React.Component {
     else {
       studentSwitchButton.innerHTML = "Colectivo";
       graphicSettings.isCollective = false;
+      this.setState({
+        filtersLoaded: false,
+      });
     }
     graphicSettings.isStudentSelected = true;
     this.setState({
       graphicSettings: graphicSettings,
     }, () => {
       if(this.state.graphicSettings.isCollective){
+        let filters = {};
+        filters.levels = [],
+        filters.periods = [];
+        filters.genders = ["Masculino", "Femenino"];
+        this.setState({
+          filters: filters,
+        });
         this.GetGlobalRangeDates();
+        if(this.state.graphicType){
+          this.LoadFilterLevels();
+          this.LoadFilterPeriods();
+        }
       }
       else {
         this.LoadLevelsInSelect();
@@ -459,6 +480,12 @@ export default class GraphicsParametersForm extends React.Component {
           this.GetGlobalRangeDates();
         }
       }
+      /*if(this.state.graphicType && this.state.activity == "matrix"){
+        this.AddAllColors();
+        this.AddAllAppearances();
+        this.AddAllChangeLevels();
+        this.AddAllSequences();
+      }*/
     });
   }
 
@@ -729,6 +756,12 @@ export default class GraphicsParametersForm extends React.Component {
       else {
         this.GetRangeDates();
       }
+      /*if(this.state.activity == "matrix"){
+        this.AddAllColors();
+        this.AddAllAppearances();
+        this.AddAllChangeLevels();
+        this.AddAllSequences();
+      }*/
     });
   }
 
@@ -844,6 +877,7 @@ export default class GraphicsParametersForm extends React.Component {
 
   RemoveFilter(index, name, type){
     let filters = this.state.filters;
+    let matrixSettings = this.state.matrixSettings;
     if(type == "level"){
       var levelSelect = document.getElementById('filter-level-select');
       var option = document.createElement("option");
@@ -870,8 +904,22 @@ export default class GraphicsParametersForm extends React.Component {
         }
   		}
     }
+    if(type == "sequence"){
+      var sequenceSelect = document.getElementById('sequences-select');
+      var option = document.createElement("option");
+      option.text = name;
+      option.value = index;
+      sequenceSelect.add(option);
+      for (var i = 0; i < matrixSettings.sequences.length; i++)
+  		{
+  			if(matrixSettings.sequences[i]._id == index){
+          matrixSettings.sequences.splice(i, 1);
+        }
+  		}
+    }
 		this.setState({
 			filters: filters,
+      matrixSettings: matrixSettings,
 		});
 	}
 
@@ -1009,6 +1057,20 @@ export default class GraphicsParametersForm extends React.Component {
         nonValidInputs = true;
       }
     }
+    if(this.state.activity == "matrix"){
+      if(this.state.matrixSettings.colors.length == 0){
+        this.AddAllColors();
+      }
+      if(this.state.matrixSettings.sequences.length == 0){
+        this.AddAllSequences();
+      }
+      if(this.state.matrixSettings.appearances.length == 0){
+        this.AddAllAppearances();
+      }
+      if(this.state.matrixSettings.changeLevels.length == 0){
+        this.AddAllChangeLevels();
+      }
+    }
     if(this.state.graphicSettings.isCollective){
       if(this.state.filters.levels.length == 0){
         this.ShowWarningMenssage("Tiene que selecionar por lo menos un nivel", "Existen campos vacios");
@@ -1027,6 +1089,359 @@ export default class GraphicsParametersForm extends React.Component {
       return false;
     }
     return true;
+  }
+
+  AddColor(color){
+    let matrixSettings = this.state.matrixSettings;
+    let colors = matrixSettings.colors;
+    if(!colors.includes(color)){
+      colors.push(color);
+    }
+    else{
+      let remove  = colors.indexOf(color);
+      colors.splice(remove, 1);
+    }
+    matrixSettings.colors = colors;
+    this.setState({
+      matrixSettings: matrixSettings,
+    }, () => {
+      this.CheckColors();
+    });
+  }
+
+  AddAllColors(){
+    let matrixSettings = this.state.matrixSettings;
+    let colors = [];
+    for (var i = 1; i <= 9; i++) {
+      colors.push(i);
+    }
+    matrixSettings.colors = colors;
+    this.setState({
+      matrixSettings: matrixSettings,
+    }, () => {
+      this.CheckColors();
+    });
+  }
+
+  CheckColors(){
+    let colors = this.state.matrixSettings.colors;
+    if(colors.includes(1)){
+      document.getElementById('matrix-white').className = "matrix-color-container-selected";
+    }
+    else{
+      document.getElementById('matrix-white').className = "matrix-color-container-unselected";
+    }
+    if(colors.includes(2)){
+      document.getElementById('matrix-yellow').className = "matrix-color-container-selected";
+    }
+    else{
+      document.getElementById('matrix-yellow').className = "matrix-color-container-unselected";
+    }
+    if(colors.includes(3)){
+      document.getElementById('matrix-blue').className = "matrix-color-container-selected";
+    }
+    else{
+      document.getElementById('matrix-blue').className = "matrix-color-container-unselected";
+    }
+    if(colors.includes(4)){
+      document.getElementById('matrix-red').className = "matrix-color-container-selected";
+    }
+    else{
+      document.getElementById('matrix-red').className = "matrix-color-container-unselected";
+    }
+    if(colors.includes(5)){
+      document.getElementById('matrix-orange').className = "matrix-color-container-selected";
+    }
+    else{
+      document.getElementById('matrix-orange').className = "matrix-color-container-unselected";
+    }
+    if(colors.includes(6)){
+      document.getElementById('matrix-green').className = "matrix-color-container-selected";
+    }
+    else{
+      document.getElementById('matrix-green').className = "matrix-color-container-unselected";
+    }
+    if(colors.includes(7)){
+      document.getElementById('matrix-purple').className = "matrix-color-container-selected";
+    }
+    else{
+      document.getElementById('matrix-purple').className = "matrix-color-container-unselected";
+    }
+    if(colors.includes(8)){
+      document.getElementById('matrix-skyblue').className = "matrix-color-container-selected";
+    }
+    else{
+      document.getElementById('matrix-skyblue').className = "matrix-color-container-unselected";
+    }
+    if(colors.includes(9)){
+      document.getElementById('matrix-pink').className = "matrix-color-container-selected";
+    }
+    else{
+      document.getElementById('matrix-pink').className = "matrix-color-container-unselected";
+    }
+  }
+
+  AddAllSequences(){
+    let matrixSettings = this.state.matrixSettings;
+    let sequenceSelect = document.getElementById('sequences-select');
+    for (var i = 0; i < sequenceSelect.options.length; i++) {
+      let sequence = {};
+      sequence.name = sequenceSelect.options[i].text;
+      sequence._id = sequenceSelect.options[i].value;
+      matrixSettings.sequences.push(sequence);
+    }
+    let selectLength = sequenceSelect.options.length;
+    for (var i = 0; i < selectLength; i++) {
+      sequenceSelect.remove(0);
+    }
+    this.setState({
+      matrixSettings: matrixSettings,
+    });
+  }
+
+  AddSequence(){
+    let sequenceId = document.getElementById('sequences-select').value;
+    let sequenceName = document.getElementById('sequences-select').options[document.getElementById('sequences-select').selectedIndex].text;
+    if(sequenceId){
+      let matrixSettings = this.state.matrixSettings;
+      let sequence = {};
+      sequence.name = sequenceName;
+      sequence._id = sequenceId;
+      matrixSettings.sequences.push(sequence);
+      this.setState({
+        matrixSettings: matrixSettings,
+      },() => {
+        document.getElementById('sequences-select').remove(document.getElementById('sequences-select').selectedIndex);
+      });
+    }
+  }
+
+  AddChangeLevel(level){
+    let matrixSettings = this.state.matrixSettings;
+    let changeLevels = matrixSettings.changeLevels;
+    if(!changeLevels.includes(level)){
+      changeLevels.push(level);
+    }
+    else{
+      let remove  = changeLevels.indexOf(level);
+      changeLevels.splice(remove, 1);
+    }
+    matrixSettings.changeLevels = changeLevels;
+    this.setState({
+      matrixSettings: matrixSettings,
+    }, () => {
+      this.CheckChangeLevels();
+    });
+  }
+
+  AddAllChangeLevels(){
+    let matrixSettings = this.state.matrixSettings;
+    let changeLevels = [];
+    for (var i = 0; i <= 15; i++) {
+      changeLevels.push(i);
+    }
+    matrixSettings.changeLevels = changeLevels;
+    this.setState({
+      matrixSettings: matrixSettings,
+    }, () => {
+      this.CheckChangeLevels();
+    });
+  }
+
+  CheckChangeLevels(){
+    let changeLevels = this.state.matrixSettings.changeLevels;
+    if(changeLevels.includes(0)){
+      document.getElementById('level-1').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('level-1').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(changeLevels.includes(1)){
+      document.getElementById('level-2').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('level-2').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(changeLevels.includes(2)){
+      document.getElementById('level-3').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('level-3').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(changeLevels.includes(3)){
+      document.getElementById('level-4').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('level-4').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(changeLevels.includes(4)){
+      document.getElementById('level-5').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('level-5').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(changeLevels.includes(5)){
+      document.getElementById('level-6').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('level-6').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(changeLevels.includes(6)){
+      document.getElementById('level-7').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('level-7').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(changeLevels.includes(7)){
+      document.getElementById('level-8').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('level-8').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(changeLevels.includes(8)){
+      document.getElementById('level-9').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('level-9').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(changeLevels.includes(9)){
+      document.getElementById('level-10').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('level-10').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(changeLevels.includes(10)){
+      document.getElementById('level-11').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('level-11').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(changeLevels.includes(11)){
+      document.getElementById('level-12').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('level-12').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(changeLevels.includes(12)){
+      document.getElementById('level-13').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('level-13').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(changeLevels.includes(13)){
+      document.getElementById('level-14').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('level-14').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(changeLevels.includes(14)){
+      document.getElementById('level-15').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('level-15').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(changeLevels.includes(15)){
+      document.getElementById('level-16').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('level-16').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+  }
+
+  AddAppearance(appearance){
+    let matrixSettings = this.state.matrixSettings;
+    let appearances = matrixSettings.appearances;
+    if(!appearances.includes(appearance)){
+      appearances.push(appearance);
+    }
+    else{
+      let remove  = appearances.indexOf(appearance);
+      appearances.splice(remove, 1);
+    }
+    matrixSettings.appearances = appearances;
+    this.setState({
+      matrixSettings: matrixSettings,
+    }, () => {
+      this.CheckAppearances();
+    });
+  }
+
+  AddAllAppearances(){
+    let matrixSettings = this.state.matrixSettings;
+    let appearances = [];
+    for (var i = 0; i <= 9; i++) {
+      appearances.push(i);
+    }
+    matrixSettings.appearances = appearances;
+    this.setState({
+      matrixSettings: matrixSettings,
+    }, () => {
+      this.CheckAppearances();
+    });
+  }
+
+  CheckAppearances(){
+    let appearances = this.state.matrixSettings.appearances;
+    if(appearances.includes(0)){
+      document.getElementById('appearance-1').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('appearance-1').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(appearances.includes(1)){
+      document.getElementById('appearance-2').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('appearance-2').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(appearances.includes(2)){
+      document.getElementById('appearance-3').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('appearance-3').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(appearances.includes(3)){
+      document.getElementById('appearance-4').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('appearance-4').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(appearances.includes(4)){
+      document.getElementById('appearance-5').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('appearance-5').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(appearances.includes(5)){
+      document.getElementById('appearance-6').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('appearance-6').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(appearances.includes(6)){
+      document.getElementById('appearance-7').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('appearance-7').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(appearances.includes(7)){
+      document.getElementById('appearance-8').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('appearance-8').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(appearances.includes(8)){
+      document.getElementById('appearance-9').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('appearance-9').className = "matrix-configuration-checkbox-icon-unselected";
+    }
+    if(appearances.includes(9)){
+      document.getElementById('appearance-10').className = "matrix-configuration-checkbox-icon-selected";
+    }
+    else{
+      document.getElementById('appearance-10').className = "matrix-configuration-checkbox-icon-unselected";
+    }
   }
 
   GenerateGraphic(){
@@ -1061,6 +1476,16 @@ export default class GraphicsParametersForm extends React.Component {
           parameters.periods.push(this.state.filters.periods[i].name);
         }
         parameters.isCollective = this.state.graphicSettings.isCollective;
+      }
+      if(this.state.activity == "matrix"){
+        let sequences = [];
+        for (var i = 0; i < this.state.matrixSettings.sequences.length; i++) {
+          sequences.push(parseInt(this.state.matrixSettings.sequences[i]._id));
+        }
+        parameters.sequences = sequences;
+        parameters.appearances = this.state.matrixSettings.appearances;
+        parameters.colors = this.state.matrixSettings.colors;
+        parameters.changeLevels = this.state.matrixSettings.changeLevels;
       }
       this.props.ShowGraphicResult(parameters);
     }
@@ -1151,6 +1576,192 @@ export default class GraphicsParametersForm extends React.Component {
                   </div>
                 </div>
                 <div id="activity-separator" className="separator"></div>
+              </div>
+            :
+            undefined
+          }
+          {
+            this.state.activity == "matrix"  && this.state.graphicSettings.isGraphicTypeSelected ?
+              <div>
+                <div className="animated-form-container">
+                  <p className="input-label">Colores</p>
+                  <div className="input-container">
+                    <div className="color-input-container">
+                      <div onClick={() => this.AddColor(1)} id="matrix-white" className="matrix-color-container-unselected"></div>
+                      <div onClick={() => this.AddColor(2)} id="matrix-yellow" className="matrix-color-container-unselected"></div>
+                      <div onClick={() => this.AddColor(3)} id="matrix-blue" className="matrix-color-container-unselected"></div>
+                      <div onClick={() => this.AddColor(4)} id="matrix-red" className="matrix-color-container-unselected"></div>
+                      <div onClick={() => this.AddColor(5)} id="matrix-orange" className="matrix-color-container-unselected"></div>
+                      <div onClick={() => this.AddColor(6)} id="matrix-green" className="matrix-color-container-unselected"></div>
+                      <div onClick={() => this.AddColor(7)} id="matrix-purple" className="matrix-color-container-unselected"></div>
+                      <div onClick={() => this.AddColor(8)} id="matrix-skyblue" className="matrix-color-container-unselected"></div>
+                      <div onClick={() => this.AddColor(9)} id="matrix-pink" className="matrix-color-container-unselected"></div>
+                    </div>
+                  </div>
+                  <div className="add-filter-button-type-container">
+                    <div onClick={() => this.AddAllColors()} className="add-all-configuration-button">Agregar todos</div>
+                  </div>
+                  <p className="input-label">Secuecias</p>
+                  <div className="input-container">
+                    <div className="filter-input-container">
+                      <div className="filter-input">
+                        <select id="sequences-select">
+                          <option value="0">Horizontal derecha</option>
+                          <option value="1">Horizontal izquierda</option>
+                          <option value="2">Vertical abajo</option>
+                          <option value="3">Vertical arriba</option>
+                          <option value="4">Rotación horaria</option>
+                          <option value="5">Rotación antihoraria</option>
+                          <option value="6">Rotación cuadrada horaria</option>
+                          <option value="7">Rotación cuadrada antihoraria</option>
+                        </select>
+                      </div>
+                      <div className="add-filter-button-container">
+                        <div className="add-filter-button-type-container">
+                          <div onClick={() => this.AddSequence()} className="add-filter-button"></div>
+                        </div>
+                        <div className="add-filter-button-type-container">
+                          <div onClick={() => this.AddAllSequences()} className="add-all-filter-button">Agregar todos</div>
+                        </div>
+                      </div>
+                      <div className="added-filters-contaier">
+                        <div className="added-filter-text">Secuencias</div>
+                        <div className="added-filter-area">
+                          {this.state.matrixSettings.sequences.map((sequences) =>
+            								{
+            									return <Filters sequences={true}
+            										RemoveFilter={this.RemoveFilter.bind(this)}
+            										sequences={sequences} key={sequences._id}></Filters>;
+            								})}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="input-label">Niveles de cambio</p>
+                  <div className="input-container">
+                    <div className="matrix-configuration-container">
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddChangeLevel(0)} id="level-1" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">1</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddChangeLevel(1)} id="level-2" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">2</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddChangeLevel(2)} id="level-3" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">3</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddChangeLevel(3)} id="level-4" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">4</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddChangeLevel(4)} id="level-5" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">5</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddChangeLevel(5)} id="level-6" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">6</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddChangeLevel(6)} id="level-7" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">7</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddChangeLevel(7)} id="level-8" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">8</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="input-container">
+                    <div className="matrix-configuration-container">
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddChangeLevel(8)} id="level-9" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">9</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddChangeLevel(9)} id="level-10" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">10</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddChangeLevel(10)} id="level-11" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">11</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddChangeLevel(11)} id="level-12" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">12</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddChangeLevel(12)} id="level-13" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">13</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddChangeLevel(13)} id="level-14" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">14</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddChangeLevel(14)} id="level-15" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">15</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddChangeLevel(15)} id="level-16" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">16</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="add-filter-button-type-container">
+                    <div onClick={() => this.AddAllChangeLevels()} className="add-all-configuration-button">Agregar todos</div>
+                  </div>
+                  <p className="input-label">Cantidad de apariciones</p>
+                  <div className="input-container">
+                    <div id="matrix-configuration-percentage" className="matrix-configuration-container">
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddAppearance(0)} id="appearance-1" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">10%</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddAppearance(1)} id="appearance-2" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">20%</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddAppearance(2)} id="appearance-3" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">30%</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddAppearance(3)} id="appearance-4" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">40%</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddAppearance(4)} id="appearance-5" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">50%</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddAppearance(5)} id="appearance-6" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">60%</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddAppearance(6)} id="appearance-7" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">70%</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddAppearance(7)} id="appearance-8" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">80%</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddAppearance(8)} id="appearance-9" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">90%</div>
+                      </div>
+                      <div className="matrix-configuration-checkbox-container">
+                        <div onClick={() => this.AddAppearance(9)} id="appearance-10" className="matrix-configuration-checkbox-icon-unselected"></div>
+                        <div className="matrix-configuration-checkbox-text">100%</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="add-filter-button-type-container">
+                    <div onClick={() => this.AddAllAppearances()} className="add-all-configuration-button">Agregar todos</div>
+                  </div>
+                </div>
               </div>
             :
             undefined

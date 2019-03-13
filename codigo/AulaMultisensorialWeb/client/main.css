@@ -362,3 +362,24 @@ select:focus {
 #small-separator{
   height: 10vh;
 }
+
+.range-value-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.range-value-label-container {
+  width: 45vw;
+  height: 2vh;
+  position: absolute;
+  margin-top: 15px;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+}
+
+#end-indicator {
+  text-align: right;
+}
