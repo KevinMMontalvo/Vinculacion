@@ -128,6 +128,54 @@ export default class FunctionalEvaluationForm extends React.Component {
       });
     }
 
+    CheckUncheckValue(type, id, check, value){
+      console.log(type);
+      console.log(id);
+      console.log(check);
+      console.log(value);
+      var standars = this.state.standars;
+      console.log(standars.glove.length);
+      if(type == 0){
+        for (var i = 0; i < standars.glove.length; i++) {
+          if(standars.glove[i]._id == id){
+            if(!check){
+              standars.glove[i].value = value;
+            }
+            else {
+              standars.glove[i].value = "";
+            }
+          }
+        }
+      }
+      if(type == 1){
+        for (var i = 0; i < standars.bottle.length; i++) {
+          if(standars.bottle[i]._id == id){
+            if(!check){
+              standars.bottle[i].value = value;
+            }
+            else {
+              standars.bottle[i].value = "";
+            }
+          }
+        }
+      }
+      if(type == 2){
+        for (var i = 0; i < standars.panel.length; i++) {
+          if(standars.panel[i]._id == id){
+            if(!check){
+              standars.panel[i].value = value;
+            }
+            else {
+              standars.panel[i].value = "";
+            }
+          }
+        }
+      }
+      this.setState({
+        standars: standars,
+      });
+    }
+
     render() {
         return(
             <div>
@@ -177,7 +225,8 @@ export default class FunctionalEvaluationForm extends React.Component {
                             return <EvaluationFormRows
                               standars={standars}
                               key={standars._id}
-                              material={0}/>;
+                              material={0}
+                              CheckUncheckValue={this.CheckUncheckValue.bind(this)}/>;
                           })}
                       </div>
                     </div>
@@ -189,7 +238,8 @@ export default class FunctionalEvaluationForm extends React.Component {
                             return <EvaluationFormRows
                               standars={standars}
                               key={standars._id}
-                              material={1}/>;
+                              material={1}
+                              CheckUncheckValue={this.CheckUncheckValue.bind(this)}/>;
                           })}
                       </div>
                     </div>
@@ -201,7 +251,8 @@ export default class FunctionalEvaluationForm extends React.Component {
                             return <EvaluationFormRows
                               standars={standars}
                               key={standars._id}
-                              material={2}/>;
+                              material={2}
+                              CheckUncheckValue={this.CheckUncheckValue.bind(this)}/>;
                           })}
                       </div>
                     </div>

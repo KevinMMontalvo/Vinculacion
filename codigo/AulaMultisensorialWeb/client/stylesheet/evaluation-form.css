@@ -177,6 +177,9 @@
   width: 5vw;
   text-align: center;
   border-right: solid 1px #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: 0.5s;
 }
 
@@ -184,6 +187,9 @@
   width: 5vw;
   text-align: center;
   border-right: solid 1px #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: 0.5s;
 }
 
@@ -191,6 +197,9 @@
   width: 5vw;
   text-align: center;
   border-right: solid 1px #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: 0.5s;
 }
 
@@ -207,4 +216,13 @@
 .a-column:hover {
   cursor: pointer;
   background-color: #000;
+}
+
+.selected-value {
+  width: 0.75vw;
+  height: 0.75vw;
+  background-color: #2980B9;
+  border-radius: 100%;
+  transition: 0.5s;
+  animation: fade-in 0.15s;
 }
