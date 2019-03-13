@@ -54,24 +54,51 @@ export default class ActivitiesReport extends React.Component {
     if(parameters.activity == "matrix"){
       if(parameters.graphicType == "bar"){
         if(parameters.isCollective){
-          data = JSON.parse(matrixActivitiesController.getBarChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods));
+          data = JSON.parse(matrixActivitiesController.getBarChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods, parameters.colors, parameters.sequences, parameters.changeLevels, parameters.appearances));
         }
         else{
-          data = JSON.parse(matrixActivitiesController.getBarChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student));
+          data = JSON.parse(matrixActivitiesController.getBarChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.colors, parameters.sequences, parameters.changeLevels, parameters.appearances));
         }
         maxValue = this.GetMaxValue(data);
       }
       if(parameters.graphicType == "pie"){
         if(parameters.isCollective){
-          data = JSON.parse(matrixActivitiesController.getPieChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods));
+          data = JSON.parse(matrixActivitiesController.getPieChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods, parameters.colors, parameters.sequences, parameters.changeLevels, parameters.appearances));
         }
         else{
-          data = JSON.parse(matrixActivitiesController.getPieChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student));
+          data = JSON.parse(matrixActivitiesController.getPieChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.colors, parameters.sequences, parameters.changeLevels, parameters.appearances));
         }
       }
       if(parameters.graphicType == "line"){
         if(parameters.isCollective){
-          data = JSON.parse(matrixActivitiesController.getLineChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods));
+          data = JSON.parse(matrixActivitiesController.getLineChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods, parameters.colors, parameters.sequences, parameters.changeLevels, parameters.appearances));
+        }
+        else{
+          data = JSON.parse(matrixActivitiesController.getLineChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student, parameters.colors, parameters.sequences, parameters.changeLevels, parameters.appearances));
+        }
+      }
+    }
+    if(parameters.activity == "sensor"){
+      if(parameters.graphicType == "bar"){
+        if(parameters.isCollective){
+          data = JSON.parse(cardiacActivitiesController.getBarChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods));
+        }
+        else{
+          data = JSON.parse(cardiacActivitiesController.getBarChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student));
+        }
+        maxValue = this.GetMaxValue(data);
+      }
+      if(parameters.graphicType == "pie"){
+        if(parameters.isCollective){
+          data = JSON.parse(cardiacActivitiesController.getPieChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods));
+        }
+        else{
+          data = JSON.parse(cardiacActivitiesController.getPieChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student));
+        }
+      }
+      if(parameters.graphicType == "line"){
+        if(parameters.isCollective){
+          data = JSON.parse(cardiacActivitiesController.getLineChartDataCollective(parameters.startDate, parameters.endDate, parameters.minAge, parameters.maxAge, parameters.genders, parameters.levels, parameters.periods));
         }
         else{
           data = JSON.parse(matrixActivitiesController.getLineChartDataIndividual(parameters.startDate, parameters.endDate, parameters.student));

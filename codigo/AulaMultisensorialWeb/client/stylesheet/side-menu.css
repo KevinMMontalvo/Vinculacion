@@ -77,23 +77,23 @@
 }
 
 #option1 {
-  animation-delay: 1.0s;
+  animation-delay: 0.75s;
 }
 
 #option2 {
-  animation-delay: 1.25s;
+  animation-delay: 0.85s;
 }
 
 #option3 {
-  animation-delay: 1.5s;
+  animation-delay: 0.95s;
 }
 
 #option4 {
-  animation-delay: 1.75s;
+  animation-delay: 1.05s;
 }
 
 #option5 {
-  animation-delay: 2.0s;
+  animation-delay: 1.15s;
 }
 
 .user-icon-container {

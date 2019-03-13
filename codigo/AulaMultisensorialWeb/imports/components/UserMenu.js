@@ -151,6 +151,10 @@ export default class UserMenu extends React.Component {
       }
     }
 
+    ShowSenSwitcherForm() {
+
+    }
+
     CreateLog(userId, action){
   		let log = {
   			user_id: userId,
@@ -171,6 +175,7 @@ export default class UserMenu extends React.Component {
                 this.state.showOptions ?
                   <div className="advanced-menu-options-container">
                     <div className="advanced-menu-title">Opciones de usuario</div>
+                    <div onClick={() => this.ShowSenSwitcherForm()} id="senswitcher" className="advanced-menu-option-container-b">SenSwitcher</div>
                     <div onClick={() => this.ShowChangePasswordForm()} id="change-password" className="advanced-menu-option-container-b">Cambiar contraseña</div>
                     <div onClick={() => this.Logout()} id="logout" className="advanced-menu-option-container-b">Cerrar sesión</div>
                   </div>

@@ -29,6 +29,12 @@ export default class Filters extends React.Component {
                     :
                     undefined
                   }
+                  {
+                    this.props.sequences && this.props.sequences.name ?
+                      <div>{this.props.sequences.name}</div>
+                    :
+                    undefined
+                  }
                 </div>
                 {
                   this.props.levels && !this.props.modal ?
@@ -43,6 +49,12 @@ export default class Filters extends React.Component {
                   undefined
                 }
                 {
+                  this.props.sequences && !this.props.modal ?
+                    <div onClick={() => this.RemoveFilter(this.props.sequences._id, this.props.sequences.name, "sequence")} className="filter-delete-button"></div>
+                  :
+                  undefined
+                }
+                {
                   this.props.levels && this.props.modal ?
                     <div onClick={() => this.RemoveFilter(this.props.levels._id, this.props.levels.name, "level")} className="modal-filter-delete-button"></div>
                   :
@@ -51,6 +63,12 @@ export default class Filters extends React.Component {
                 {
                   this.props.periods && this.props.modal ?
                     <div onClick={() => this.RemoveFilter(this.props.periods._id, this.props.periods.name, "period")} className="modal-filter-delete-button"></div>
+                  :
+                  undefined
+                }
+                {
+                  this.props.sequences && this.props.modal ?
+                    <div onClick={() => this.RemoveFilter(this.props.sequences._id, this.props.sequences.name, "sequence")} className="modal-filter-delete-button"></div>
                   :
                   undefined
                 }
