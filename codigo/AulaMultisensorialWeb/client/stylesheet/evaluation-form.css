@@ -1,0 +1,210 @@
+.evauation-form-container {
+  width: 60vw;
+  height: auto;
+}
+
+.evauation-form-title {
+  width: 100%;
+  height: 2.5vw;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.indications-container {
+  width: 60vw;
+  height: 10vh;
+  position: absolute;
+}
+
+.indications-icon {
+  width: 2.5vw;
+  height: 2.5vw;
+  border-radius: 100%;
+  position: absolute;
+  right: 0;
+  top: -2.5vw;
+  background-image: url(info-w.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 0.5vw;
+  transition: 0.5s;
+  background-color: #000;
+  z-index: 5;
+}
+
+.indications-icon:hover {
+  cursor: pointer;
+}
+
+.indications-arrow {
+  width: 0;
+  height: 0;
+  border-left: 1.25vw solid transparent;
+  border-right: 1.25vw solid transparent;
+  border-bottom: 1vw solid #000;
+  position: absolute;
+  right: 0;
+  top: -1vw;
+}
+
+.indications-text-container {
+  animation: slide-down 0.5s;
+  position: relative;
+  z-index: 4;
+}
+
+.indications-text {
+  width: 100%;
+  height: auto;
+  font-size: 0.9em;
+  background-color: #000;
+  margin-top: 1vw;
+  padding-top: 1vh;
+  text-align: center;
+}
+
+.indicators-text {
+  width: 100%;
+  height: auto;
+  font-size: 0.9em;
+  background-color: #000;
+  padding-top: 0.25vh;
+  padding-bottom: 1vh;
+  text-align: center;
+}
+
+.evauation-form-input-container {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 1.5vw;
+}
+
+.input-info {
+  width: 84%;
+  height: auto;
+  text-align: center;
+  background-color: #1E1D21;
+  position: relative;
+  left: 8%;
+  border-left: solid 2px;
+  border-color: #333;
+}
+
+.evaluation-form-select-container {
+  display: flex;
+  justify-content: center;
+}
+
+.headers-row {
+  width: 60vw;
+  height: auto;
+  position: relative;
+  margin-top: 3.5vh;
+  display: flex;
+  justify-content: flex-start;
+  background-color: #333;
+}
+
+.header-medium {
+  width: 15vw;
+  text-align: center;
+  border-right: solid 1px #1E1D21;
+}
+
+.header-large {
+  width: 30vw;
+  text-align: center;
+  border-right: solid 1px #1E1D21;
+}
+
+.header-small {
+  width: 5vw;
+  text-align: center;
+  border-right: solid 1px #1E1D21;
+}
+
+.row {
+  width: 60vw;
+  height: auto;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 0.9em;
+  background-color: #1C1B1D;
+  transition: 0.5s;
+}
+
+.row:hover {
+  filter: brightness(1.35);
+}
+
+.column-medium {
+  width: 15vw;
+  height: auto;
+  text-align: center;
+  border-right: solid 1px #333;
+  border-bottom: solid 1px #333;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  font-size: 1.15em;
+}
+
+.column-map {
+  width: 45vw;
+  height: auto;
+}
+
+.standars-contianer {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: solid 1px #333;
+}
+
+.criteria-column {
+  width: 27vw;
+  border-right: solid 1px #333;
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  padding-top: 0.5vh;
+  padding-bottom: 0.5vh;
+}
+
+.i-column {
+  width: 5vw;
+  text-align: center;
+  border-right: solid 1px #333;
+  transition: 0.5s;
+}
+
+.ep-column {
+  width: 5vw;
+  text-align: center;
+  border-right: solid 1px #333;
+  transition: 0.5s;
+}
+
+.a-column {
+  width: 5vw;
+  text-align: center;
+  border-right: solid 1px #333;
+  transition: 0.5s;
+}
+
+.i-column:hover {
+  cursor: pointer;
+  background-color: #000;
+}
+
+.ep-column:hover {
+  cursor: pointer;
+  background-color: #000;
+}
+
+.a-column:hover {
+  cursor: pointer;
+  background-color: #000;
+}

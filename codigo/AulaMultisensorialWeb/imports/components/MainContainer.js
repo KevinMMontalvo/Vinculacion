@@ -17,6 +17,7 @@ import ActivePeriodForm from '../components/ActivePeriodForm';
 import ActivitiesMenu from '../components/ActivitiesMenu';
 import ActivitiesReport from '../components/ActivitiesReport';
 
+import FunctionalEvaluationForm from '../components/FunctionalEvaluationForm';
 
 var canvas;
 var c;
@@ -1035,9 +1036,7 @@ export default class MainContainer extends React.Component {
   render() {
     return(
       <div>
-        <canvas id="space-canvas">
-
-        </canvas>
+        <canvas id="space-canvas"></canvas>
         <SideMenu
           Logout={this.Logout.bind(this)}
           user={this.state.user}
@@ -1224,7 +1223,10 @@ export default class MainContainer extends React.Component {
           }
           {
             this.state.loginForm ?
+              /*
               <LoginForm SuccessfullLogin={this.SuccessfullLogin.bind(this)}/>
+              */
+                <FunctionalEvaluationForm/>
             :
             undefined
           }

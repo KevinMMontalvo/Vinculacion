@@ -49,6 +49,17 @@
   }
 }
 
+@keyframes slide-down {
+  0%{
+    top: -5vh;
+    opacity: 0;
+  }
+  100%{
+    top: 0vh;
+    opacity: 1;
+  }
+}
+
 @keyframes slide-menu {
   0%{
     left: -100%;
