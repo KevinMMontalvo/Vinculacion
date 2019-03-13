@@ -19,6 +19,15 @@ namespace Aula_Multisensorial.Access
             activitiesCollection = DatabaseConnection.GetInstance().Database.GetCollection<GlobeActivityRegister>("glove_activity_registers");
         }
 
+        /// <summary>
+        /// Obtiene los datos para la grafica de aciertos vs errores de un estudiante 
+        /// en forma de barra
+        /// </summary>
+        /// <param name="startDate">Fecha de inicio de los registros</param>
+        /// <param name="endDate">Fecha de fin de los registros</param>
+        /// <param name="studentId">String con el ID del estudiante</param>
+        /// <param name="fingers">Arreglo de strings con los codigos de los dedos</param>
+        /// <returns>String del JSON con la informacion para el grafico</returns>
         public string GetBarChartDataIndividual(DateTime startDate, DateTime endDate, string studentId, object[] fingers)
         {
             /*Match*/
@@ -61,6 +70,15 @@ namespace Aula_Multisensorial.Access
             return StructureBarJSON(registers);
         }
 
+        /// <summary>
+        /// Obtiene los datos para la grafica de aciertos vs errores global de un estudiante
+        /// en forma de pastel
+        /// </summary>
+        /// <param name="startDate">Fecha de inicio de los registros</param>
+        /// <param name="endDate">Fecha de fin de los registros</param>
+        /// <param name="studentId">String con el ID del estudiante</param>
+        /// <param name="fingers">Arreglo de strings con los codigos de los dedos</param>
+        /// <returns>String del JSON con la informacion para el grafico</returns>
         public string GetPieChartDataIndividual(DateTime startDate, DateTime endDate, string studentId, object[] fingers)
         {
             /* Match */
@@ -102,6 +120,15 @@ namespace Aula_Multisensorial.Access
             return StructurePieJSON(registers[0]);
         }
 
+        /// <summary>
+        /// Obtiene los datos para la grafica de exito porcentual de un estudiante
+        /// en forma de linea
+        /// </summary>
+        /// <param name="startDate">Fecha de inicio de los registros</param>
+        /// <param name="endDate">Fecha de fin de los registros</param>
+        /// <param name="studentId">String con el ID del estudiante</param>
+        /// <param name="fingers">Arreglo de strings con los codigos de los dedos</param>
+        /// <returns>String del JSON con la informacion para el grafico</returns>
         public string GetLineChartDataIndividual(DateTime startDate, DateTime endDate, string studentId, object[] fingers)
         {
             /*Match*/
@@ -144,6 +171,19 @@ namespace Aula_Multisensorial.Access
             return StructureLineJSON(registers);
         }
 
+        /// <summary>
+        /// Obtiene los datos para la grafica de aciertos vs errores de varios estudiantes
+        /// segun los parametros
+        /// </summary>
+        /// <param name="startDate">Fecha de inicio de los registros</param>
+        /// <param name="endDate">Fecha de fin de los registros</param>
+        /// <param name="minAge">Edad minima de los estudiantes</param>
+        /// <param name="maxAge">Edad maxima de los estudiantes</param>
+        /// <param name="genders">Generos de los estudiantes</param>
+        /// <param name="levels">Niveles de los registros</param>
+        /// <param name="periods">Periodos de los registros</param>
+        /// <param name="fingers">Arreglo de strings con los codigos de los dedos</param>
+        /// <returns>String del JSON con la informacion para el grafico</returns>
         public string GetBarChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods, object[] fingers)
         {
             // crea el filtro de busqueda de los estudiantes
@@ -242,6 +282,19 @@ namespace Aula_Multisensorial.Access
             return StructureBarJSON(registers);
         }
 
+        /// <summary>
+        /// Obtiene los datos para la grafica de aciertos vs errores global de varios estudiantes
+        /// segun los parametros
+        /// </summary>
+        /// <param name="startDate">Fecha de inicio de los registros</param>
+        /// <param name="endDate">Fecha de fin de los registros</param>
+        /// <param name="minAge">Edad minima de los estudiantes</param>
+        /// <param name="maxAge">Edad maxima de los estudiantes</param>
+        /// <param name="genders">Generos de los estudiantes</param>
+        /// <param name="levels">Niveles de los registros</param>
+        /// <param name="periods">Periodos de los registros</param>
+        /// <param name="fingers">Arreglo de strings con los codigos de los dedos</param>
+        /// <returns>String del JSON con la informacion para el grafico</returns>
         public string GetPieChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods, object[] fingers)
         {
             // crea el filtro de busqueda de los estudiantes
@@ -336,6 +389,19 @@ namespace Aula_Multisensorial.Access
             return StructurePieJSON(registers[0]);
         }
 
+        /// <summary>
+        /// Obtiene los datos para la grafica dede exito porcentual de varios estudiantes
+        /// segun los parametros
+        /// </summary>
+        /// <param name="startDate">Fecha de inicio de los registros</param>
+        /// <param name="endDate">Fecha de fin de los registros</param>
+        /// <param name="minAge">Edad minima de los estudiantes</param>
+        /// <param name="maxAge">Edad maxima de los estudiantes</param>
+        /// <param name="genders">Generos de los estudiantes</param>
+        /// <param name="levels">Niveles de los registros</param>
+        /// <param name="periods">Periodos de los registros</param>
+        /// <param name="fingers">Arreglo de strings con los codigos de los dedos</param>
+        /// <returns>String del JSON con la informacion para el grafico</returns>
         public string GetLineChartDataCollective(DateTime startDate, DateTime endDate, int minAge, int maxAge, object[] genders, object[] levels, object[] periods, object[] fingers)
         {
             // crea el filtro de busqueda de los estudiantes
@@ -434,6 +500,11 @@ namespace Aula_Multisensorial.Access
             return StructureLineJSON(registers);
         }
 
+        /// <summary>
+        /// Obtiene las fechas maximas y minimas de los registros de actvidades de un estudiante
+        /// </summary>
+        /// <param name="studentId">String con el ID del estudiante</param>
+        /// <returns>String con el JSON de las fechas maxima y minima</returns>
         public string GetStudentMaxMinActivityDates(string studentId)
         {
             List<GlobeActivityRegister> minDateResponse;
@@ -455,6 +526,10 @@ namespace Aula_Multisensorial.Access
             return response.ToString();
         }
 
+        /// <summary>
+        /// Obtiene las fechas maximas y minimas de los registros de actvidades de todos los estudiantes
+        /// </summary>
+        /// <returns>String con el JSON de las fechas maxima y minima</returns>
         public string GetGlobalMaxMinActivityDates()
         {
             List<GlobeActivityRegister> minDateResponse;
@@ -474,6 +549,11 @@ namespace Aula_Multisensorial.Access
             return response.ToString();
         }
 
+        /// <summary>
+        /// Inserta un registro de actividad
+        /// </summary>
+        /// <param name="activity">Actividad con los datos a ser insertados</param>
+        /// <returns>Retorna verdadero si la insercion fue exitosa</returns>
         public bool InsertActivity(GlobeActivityRegister activity)
         {
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
@@ -491,6 +571,11 @@ namespace Aula_Multisensorial.Access
             }
         }
 
+        /// <summary>
+        /// Genera el String con el JSON para las graficas de barras
+        /// </summary>
+        /// <param name="activitiesList">Lista de las actividades consultadas</param>
+        /// <returns>String con el JSON de la informacion del grafico</returns>
         private string StructureBarJSON(List<BsonDocument> activitiesList)
         {
             JArray dataArray;
@@ -530,6 +615,11 @@ namespace Aula_Multisensorial.Access
             return array.ToString();
         }
 
+        /// <summary>
+        /// Genera el String con el JSON para las graficas de pastel
+        /// </summary>
+        /// <param name="activitiesList">JSON con la informacion consultada</param>
+        /// <returns>String con el JSON de la informacion del grafico</returns>
         private string StructurePieJSON(BsonDocument activitiesList)
         {
             int assertCount = 0;
@@ -569,6 +659,11 @@ namespace Aula_Multisensorial.Access
             return array.ToString();
         }
 
+        /// <summary>
+        /// Genera el String con el JSON para las graficas de linea
+        /// </summary>
+        /// <param name="activitiesList">Lista de las actividades consultadas</param>
+        /// <returns>String con el JSON de la informacion del grafico</returns>
         private string StructureLineJSON(List<BsonDocument> activitiesList)
         {
             JArray dataArray;

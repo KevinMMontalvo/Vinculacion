@@ -28,7 +28,8 @@ namespace Aula_Multisensorial.Access
             try
             {
                 cancellationTokenSource = new CancellationTokenSource();
-                cancellationTokenSource.CancelAfter(2500);
+                cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT);
+
                 List<Student> studentsList = studentsCollection.Find(_ => true).ToList();
                 return Newtonsoft.Json.JsonConvert.SerializeObject(studentsList);
             }
@@ -57,7 +58,8 @@ namespace Aula_Multisensorial.Access
             try
             {
                 cancellationTokenSource = new CancellationTokenSource();
-                cancellationTokenSource.CancelAfter(2500);
+                cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT);
+
                 studentsCollection.InsertOne(BsonSerializer.Deserialize<Student>(document), null, cancellationTokenSource.Token);
                 return true;
             }
@@ -91,7 +93,8 @@ namespace Aula_Multisensorial.Access
 
 
             cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(2500);
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT);
+
             ReplaceOneResult result = studentsCollection.ReplaceOne(filter, objectStudent, null, cancellationTokenSource.Token);
 
             //validacion de la ejecucion correcta de la modificacion
@@ -115,7 +118,8 @@ namespace Aula_Multisensorial.Access
             FilterDefinition<Student> filter = Builders<Student>.Filter.Eq("Id", id);
 
             cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(2500);
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT);
+
             DeleteResult deleteResult = studentsCollection.DeleteOne(filter, cancellationTokenSource.Token);
 
             //validacion de la ejecucion correcta de la eliminacion
@@ -134,7 +138,7 @@ namespace Aula_Multisensorial.Access
         /// </summary>
         /// <param name="studentId">String con el ID del estudiante</param>
         /// <param name="levelId">String con el ID del nuevo nivel</param>
-        /// <returns></returns>
+        /// <returns>Retona true si la modificacion ha sido exitosa</returns>
         public bool UpdateStudentLevel(string studentId, string levelId)
         {
             FilterDefinition<Student> filter = Builders<Student>.Filter.Eq("Id", studentId);
@@ -142,7 +146,8 @@ namespace Aula_Multisensorial.Access
             UpdateDefinition<Student> updateDefinition = Builders<Student>.Update.Set("LevelId", levelId);
 
             cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(2500);
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT);
+
             UpdateResult updateResult = studentsCollection.UpdateOne(filter, updateDefinition, null, cancellationTokenSource.Token);
 
             if (updateResult.IsAcknowledged && updateResult.ModifiedCount == 1)
@@ -155,6 +160,11 @@ namespace Aula_Multisensorial.Access
             }
         }
 
+        /// <summary>
+        /// Consulta la lista de estudiantes asignada a un docente
+        /// </summary>
+        /// <param name="teacherId">String con el ID del docente</param>
+        /// <returns>Lista con los estudiantes</returns>
         public List<Student> GetStudentsByTeacherLevel(string teacherId)
         {
             string levelId = new TeacherAccess().GetTeacherById(teacherId).LevelId;
@@ -162,22 +172,36 @@ namespace Aula_Multisensorial.Access
             FilterDefinition<Student> filter = Builders<Student>.Filter.Eq("LevelId", levelId);
 
             cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(2500);
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT);
+
             return studentsCollection.Find(filter).ToList(cancellationTokenSource.Token);
         }
 
+        /// <summary>
+        /// Obtiene los estudiantes que cumplen los criterios de busqueda
+        /// </summary>
+        /// <param name="query">JSON con la especificacion de la busqueda</param>
+        /// <returns>Lista con los estudiantes</returns>
         public List<Student> GetStudentsByFilter(BsonDocument query)
         {
             cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(2500);
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT);
+
             return studentsCollection.Find(query).ToList(cancellationTokenSource.Token);
         }
 
+        /// <summary>
+        /// Obtiene el objeto estudiante consultandolo por el ID
+        /// </summary>
+        /// <param name="studentId">String con el Id del estudiante a consultar</param>
+        /// <returns>Retorna el objeto estudiante consultado</returns>
         public Student GetStudentById(string studentId)
         {
             FilterDefinition<Student> filter = Builders<Student>.Filter.Eq("Id", studentId);
+
             cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(2500);
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT);
+
             return studentsCollection.Find(filter).ToList(cancellationTokenSource.Token)[0];
         }
     }

@@ -11,9 +11,8 @@ namespace Aula_Multisensorial.Access
 {
     class LevelAccess
     {
-        private CancellationTokenSource cancellationTokenSource;
-        private static readonly int TIMEOUT = 2000; //Tiempo de respuesta maximo
         private readonly IMongoCollection<Level> levelsCollection;
+        private CancellationTokenSource cancellationTokenSource;
 
         public LevelAccess()
         {
@@ -28,7 +27,10 @@ namespace Aula_Multisensorial.Access
         {
             try
             {
-                List<Level> levelsList = levelsCollection.Find(_ => true).ToList();
+                cancellationTokenSource = new CancellationTokenSource();
+                cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
+
+                List<Level> levelsList = levelsCollection.Find(_ => true).ToList(cancellationTokenSource.Token);
                 return Newtonsoft.Json.JsonConvert.SerializeObject(levelsList);
             }
             catch (Exception e)
@@ -47,8 +49,8 @@ namespace Aula_Multisensorial.Access
         {
             BsonDocument document = new BsonDocument(level);
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             try
             {
@@ -67,7 +69,7 @@ namespace Aula_Multisensorial.Access
         /// <summary>
         /// Modifica un nivel de la coleccion
         /// </summary>
-        /// <param name="level">Diccionario con los datos del nivel incluyendo su id</param>
+        /// <param name="level">Diccionario con los datos del nivel incluyendo su ID</param>
         /// <returns>Retorna true si la modificacion ha sido exitosa</returns>
         public bool ModifyLevel(Dictionary<string, object> level)
         {
@@ -77,8 +79,8 @@ namespace Aula_Multisensorial.Access
             string id = document.GetValue("_id").AsString;
             FilterDefinition<Level> filter = Builders<Level>.Filter.Eq("Id", id);
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             Level objectLevel = BsonSerializer.Deserialize<Level>(document);
             ReplaceOneResult result = levelsCollection.ReplaceOne(filter, objectLevel,null, cancellationTokenSource.Token);
@@ -97,14 +99,14 @@ namespace Aula_Multisensorial.Access
         /// <summary>
         /// Elimina a un nivel de la coleccion
         /// </summary>
-        /// <param name="id">String con el id del nivel a ser eliminado</param>
+        /// <param name="id">String con el ID del nivel a ser eliminado</param>
         /// <returns>Retorna true si la eliminacion ha sido exitosa</returns>
         public bool DeleteLevel(string id)
         {
             FilterDefinition<Level> filter = Builders<Level>.Filter.Eq("Id", id);
 
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(TIMEOUT); // configuracion del tiempo maximo de respuesta
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT); // configuracion del tiempo maximo de respuesta
 
             DeleteResult deleteResult = levelsCollection.DeleteOne(filter);
 
@@ -119,13 +121,17 @@ namespace Aula_Multisensorial.Access
             }
         }
 
+        /// <summary>
+        /// Obtiene el objeto nivel consultandolo por el ID
+        /// </summary>
+        /// <param name="levelId">String con el Id del nivel a consultar</param>
+        /// <returns>Retorna el objeto nivel consultado</returns>
         public Level GetLevelById(string levelId)
         {
             FilterDefinition<Level> filter = Builders<Level>.Filter.Eq("Id", levelId);
             cancellationTokenSource = new CancellationTokenSource();
-            cancellationTokenSource.CancelAfter(2500);
+            cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT);
             return levelsCollection.Find(filter).ToList(cancellationTokenSource.Token)[0];
         }
-
     }
 }

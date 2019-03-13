@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf6ce076-847d-40a9-a101-46c52b689462" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/imports/components/ActivitiesMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/components/ActivitiesMenu.js" afterDir="false" />
-    </list>
+    <list default="true" id="bf6ce076-847d-40a9-a101-46c52b689462" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -137,23 +135,22 @@
       <workItem from="1552070726780" duration="599000" />
       <workItem from="1552138572196" duration="599000" />
       <workItem from="1552314249593" duration="2629000" />
-      <workItem from="1552351309456" duration="591000" />
+      <workItem from="1552351309456" duration="1197000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50465000" />
+    <option name="totallyTimeSpent" value="51071000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17913593" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />

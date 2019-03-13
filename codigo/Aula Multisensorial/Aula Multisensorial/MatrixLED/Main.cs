@@ -123,6 +123,11 @@ namespace Aula_Multisensorial.MatrixLED
             Close();
         }
 
+        /// <summary>
+        /// Metodo para obtener la instancia de patron singleton de la clase
+        /// </summary>
+        /// <param name="teacherId">String con el ID del docente para ejecutar el contructor</param>
+        /// <returns>Retorna la instancia del mimo tipo de la clase</returns>
         public static Main GetInstance(string teacherId)
         {
             if (instance == null)
@@ -132,6 +137,10 @@ namespace Aula_Multisensorial.MatrixLED
             return instance;
         }
 
+        /// <summary>
+        /// Comprueba y realiza la conexion el dispositivo
+        /// </summary>
+        /// <returns>Retorna verdadero si la insercion fue exitosa</returns>
         private bool ConnectMatrix()
         {
             if (ArduinoController.GetInstance().IsPortOpen(ArduinoController.MATRIX_ARDUINO))
@@ -146,6 +155,9 @@ namespace Aula_Multisensorial.MatrixLED
             return connectionSuccessful;
         }
 
+        /// <summary>
+        /// Ejecuta los metodos que muestran la configuracion del dispositivo
+        /// </summary>
         public void LoadConfigurations()
         {
             LoadShapeConfiguration();
@@ -157,6 +169,9 @@ namespace Aula_Multisensorial.MatrixLED
             ShowConfigurationInformation();
         }
 
+        /// <summary>
+        /// Consulta y guarda la configuracion de la forma del dispositivo
+        /// </summary>
         private void LoadShapeConfiguration()
         {
             bool commandSendedProperly;
@@ -185,6 +200,9 @@ namespace Aula_Multisensorial.MatrixLED
             shapeConfiguration = Convert.ToString(upperRowsConfiguration, 2).PadLeft(8, '0') + Convert.ToString(lowerRowsConfiguration, 2).PadLeft(8, '0');
         }
 
+        /// <summary>
+        /// Consulta y guarda la configuracion de colores del dispositivo
+        /// </summary>
         private void LoadColorConfiguration()
         {
             bool commandSendedProperly;
@@ -212,6 +230,9 @@ namespace Aula_Multisensorial.MatrixLED
             colorConfiguration = int.Parse(configurationStrings[1]);
         }
 
+        /// <summary>
+        /// Consulta y guarda la configuracion de secuencia del dispositivo
+        /// </summary>
         private void LoadSequenceConfiguration()
         {
             bool commandSendedProperly;
@@ -239,6 +260,9 @@ namespace Aula_Multisensorial.MatrixLED
             sequenceConfiguration = int.Parse(configurationStrings[1]);
         }
 
+        /// <summary>
+        /// Consulta y guarda la configuracion del nivel del dispositivo
+        /// </summary>
         private void LoadLevelConfiguration()
         {
             bool commandSendedProperly;
@@ -266,6 +290,9 @@ namespace Aula_Multisensorial.MatrixLED
             levelConfiguration = int.Parse(configurationStrings[1]);
         }
 
+        /// <summary>
+        /// Consulta y guarda la configuracion del brillo del dispositivo
+        /// </summary>
         private void LoadBrightnessConfiguration()
         {
             bool commandSendedProperly;
@@ -293,6 +320,9 @@ namespace Aula_Multisensorial.MatrixLED
             brightnessConfiguration = int.Parse(configurationStrings[1]);
         }
 
+        /// <summary>
+        /// Consulta y guarda la configuracion de apariciones del dispositivo
+        /// </summary>
         private void LoadAppearancesConfiguration()
         {
             bool commandSendedProperly;
@@ -319,7 +349,10 @@ namespace Aula_Multisensorial.MatrixLED
 
             appearancesConfiguration = int.Parse(configurationStrings[1]);
         }
-
+        
+        /// <summary>
+        /// Muestra el label con la informacion de la configuracion
+        /// </summary>
         private void ShowConfigurationInformation()
         {
             Label label = new Label();
@@ -369,6 +402,9 @@ namespace Aula_Multisensorial.MatrixLED
             Controls.Add(label);
         }
 
+        /// <summary>
+        /// Llena el combobox con los nombres de los alumnos asignados al curso del docente
+        /// </summary>
         private void LoadStudentsList()
         {
             List<Student> students = new StudentAccess().GetStudentsByTeacherLevel(teacherId);
@@ -382,17 +418,23 @@ namespace Aula_Multisensorial.MatrixLED
             comboBoxStudents.DisplayMember = "Fullname";
         }
 
+        /// <summary>
+        /// Metodo que inicia el hilo de recepcion de mensajes
+        /// </summary>
         private async void StartReading()
         {
             bool messageSended = ArduinoController.GetInstance().SendMessage(ArduinoController.MATRIX_ARDUINO, "START");
             if (messageSended)
             {
-                Task readVaules = new Task(ReceiveMessages);
+                Task readVaules = new Task(ReceiveMessages); //tarea asincrona
                 readVaules.Start();
                 SetStartActivity();
             }
         }
 
+        /// <summary>
+        /// Metodo que envia el comando de fin de actividad y cierra la conexion
+        /// </summary>
         private void StopReading()
         {
             SetEndActivity();
@@ -400,6 +442,10 @@ namespace Aula_Multisensorial.MatrixLED
             ArduinoController.GetInstance().CloseConnection(ArduinoController.MATRIX_ARDUINO);
         }
 
+        /// <summary>
+        /// Metodo que se va a ejecutar asincronicamente para recibir los valores arrojados 
+        /// por el dispositivo
+        /// </summary>
         private void ReceiveMessages()
         {
             string message;
@@ -441,12 +487,19 @@ namespace Aula_Multisensorial.MatrixLED
             } while (buttonStart.Text.Equals("Terminar"));
         }
 
+        /// <summary>
+        /// Retorna el nombre del estudiante seleccionado en el combobox
+        /// </summary>
+        /// <returns></returns>
         private string GetComboBoxStudentsText()
         {
             Student selectedStudent = (Student)comboBoxStudents.SelectedItem;
             return selectedStudent.Id;
         }
 
+        /// <summary>
+        /// Cambia los atributos de los elementos del Form, se usa para cuando la actividad haya iniciado
+        /// </summary>
         private void SetStartActivity()
         {
             buttonStart.Text = "Terminar";
@@ -456,6 +509,10 @@ namespace Aula_Multisensorial.MatrixLED
             buttonStart.BackColor = Color.DarkRed;
         }
 
+        /// <summary>
+        /// Cambia los atributos de los elementos del Form, se usa para cuando la actividad se haya
+        /// terminado y se vuelve los elementos del Form a su estado inicial
+        /// </summary>
         private void SetEndActivity()
         {
             buttonStart.Text = "Iniciar";
