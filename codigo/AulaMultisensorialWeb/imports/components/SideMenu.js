@@ -77,14 +77,21 @@ export default class SideMenu extends React.Component
 		return (
 			<div>
 				<div className="side-menu">
-					{this.props.isLogged ? <div className="menu-options">
-						<div onClick={() => this.StudentOption()} id="option1" className="menu-option">Estudiantes</div>
-						<div onClick={() => this.TeacherOption()} id="option2" className="menu-option">Docentes</div>
-						<div onClick={() => this.LevelOption()} id="option3" className="menu-option">Niveles</div>
-						<div onClick={() => this.PeriodOption()} id="option4" className="menu-option">Periodos</div>
-						<div onClick={() => this.ActivitiesMenu()} id="option5" className="menu-option">Actividades
-						</div>
-					</div> : <div className="menu-icon"></div>}
+					{
+						this.props.isLogged ?
+							<div>
+								<div className="menu-options">
+									<div onClick={() => this.StudentOption()} id="option1" className="menu-option">Estudiantes</div>
+									<div onClick={() => this.TeacherOption()} id="option2" className="menu-option">Docentes</div>
+									<div onClick={() => this.LevelOption()} id="option3" className="menu-option">Niveles</div>
+									<div onClick={() => this.PeriodOption()} id="option4" className="menu-option">Periodos</div>
+									<div onClick={() => this.ActivitiesMenu()} id="option5" className="menu-option">Actividades
+									</div>
+								</div>
+							</div>
+						:
+						<div className="menu-icon"></div>
+					}
 					<div className="menu-title">FUVIME</div>
 					{this.props.user != undefined ? <div>
 						<div className="user-info-container">
