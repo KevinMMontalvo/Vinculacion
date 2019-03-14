@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import EvaluationFormRows from '../map/EvaluationFormRows';
 import ButterToast, { Cinnamon, POS_BOTTOM, POS_RIGHT, POS_TOP } from 'butter-toast';
 
-export default class FunctionalEvaluationForm extends React.Component {
+export default class BasicEvaluationForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,97 +16,112 @@ export default class FunctionalEvaluationForm extends React.Component {
           standars: {
             glove: [
               {
-                _id: 101,
-                criteria: "Logra sentir objetos sobre sus manos y los sostiene.",
+                _id: 401,
+                criteria: "Sujeta el guante con las dos manos.",
                 value: ""
               },
               {
-                _id: 102,
-                criteria: "Diferencia texturas a través de expresiones faciales o corporales.",
+                _id: 402,
+                criteria: "Reconoce la ubicación del material.",
                 value: ""
               },
               {
-                _id: 103,
-                criteria: "Logra tolerar más de 5 segundos con una textura poco conocida.",
+                _id: 403,
+                criteria: "Identifica el material por su nombre.",
                 value: ""
               },
               {
-                _id: 104,
-                criteria: "Aprieta los guantes cada vez con más fuerza.",
+                _id: 404,
+                criteria: "Manipula el guante mostrando interés.",
                 value: ""
               },
               {
-                _id: 105,
-                criteria: "En caso de rigidez: los músculos se presentan más relajados.",
+                _id: 405,
+                criteria: "Tolera más de 3 texturas diferentes.",
                 value: ""
               },
               {
-                _id: 106,
-                criteria: "En caso de hipotonía: los músculos presentan mayor control.",
+                _id: 406,
+                criteria: "Reconoce el material que rellena al guante.",
+                value: ""
+              },
+              {
+                _id: 407,
+                criteria: "Diferencia los cambios de texturas.",
                 value: ""
               },
             ],
             bottle: [
               {
-                _id: 201,
-                criteria: "Reconoce el sonido de las botellas agitadas y dirige su atención al estímulo.",
+                _id: 501,
+                criteria: "Sigue instrucciones para aprender a utilizar el frasco siguiendo las fases correspondientes (agitación, observación, relajación).",
                 value: ""
               },
               {
-                _id: 202,
-                criteria: "Mantiene la mirada en el estímulo hasta que el movimiento se detenga.",
+                _id: 502,
+                criteria: "Realiza ejercicios de respiración durante el movimiento del agua que se encuentra dentro del frasco.",
                 value: ""
               },
               {
-                _id: 203,
-                criteria: "Sostiene la botella con su mano.",
+                _id: 503,
+                criteria: "Se relaja al culminar el movimiento del agua.",
                 value: ""
               },
               {
-                _id: 204,
-                criteria: "Sostiene y agita la botella con su mano.",
+                _id: 504,
+                criteria: "Dirige la mirada hacia el movimiento del agua.",
                 value: ""
               },
               {
-                _id: 205,
-                criteria: "Después del uso de la botella denota más tranquilidad.",
+                _id: 505,
+                criteria: "Identifica el material por su nombre.",
                 value: ""
               },
               {
-                _id: 206,
-                criteria: "Respirar calmadamente según el movimiento de las botellas.",
+                _id: 506,
+                criteria: "Muestra interés por el movimiento del agua.",
                 value: ""
               },
               {
-                _id: 207,
-                criteria: "Muestra cambios emocionales desde la última vez que usó la botella.",
+                _id: 507,
+                criteria: "Disfruta del material.",
+                value: ""
+              },
+              {
+                _id: 508,
+                criteria: "Sujeta el frasco con la mano.",
                 value: ""
               },
             ],
             panel: [
               {
-                _id: 301,
-                criteria: "Toca por sí mismo las texturas.",
+                _id: 601,
+                criteria: "Tolera las diferentes texturas que forman parte del panel sensorial.",
                 value: ""
               },
               {
-                _id: 302,
-                criteria: "Diferencia texturas a través de expresiones faciales o corporales.",
+                _id: 602,
+                criteria: "Identifica el material por su nombre.",
                 value: ""
               },
               {
-                _id: 303,
-                criteria: "Tolera texturas nuevas por más de 5 segundos.",
+                _id: 603,
+                criteria: "Toca las texturas que ofrece el panel.",
                 value: ""
               },
               {
-                _id: 304,
-                criteria: "Muestra reacciones faciales o corporales al cambio de texturas.",
+                _id: 604,
+                criteria: "Tolera más de 5 texturas.",
                 value: ""
               },
               {
-                _id: 305,
-                criteria: "Relaciona las texturas de su ambiente y muestra tolerancia.",
+                _id: 605,
+                criteria: "Siente comodidad con el cambio de textura.",
+                value: ""
+              },
+              {
+                _id: 606,
+                criteria: "Disfruta de la manipulación del panel.",
                 value: ""
               },
             ],
@@ -174,19 +189,6 @@ export default class FunctionalEvaluationForm extends React.Component {
       this.dismissAll();
     }
 
-    ShowAddSuccessMenssage(){
-  		this.tray.raise({
-  			content: <Cinnamon.Crisp
-  				className="butter-alert"
-  				scheme={Cinnamon.Slim.SCHEME_DARK}
-  				content={() => <div>{"Formulario guardado"}</div>}
-  				title={"Registro completo"}
-  				icon={<div className="alert-success-icon"></div>}
-              />
-  		});
-      this.dismissAll();
-  	}
-
     CheckEmptyFields(){
       var standars = this.state.standars;
       for (var i = 0; i < standars.glove.length; i++) {
@@ -240,6 +242,7 @@ export default class FunctionalEvaluationForm extends React.Component {
           questions.push(question);
         }
         record.questions = questions;
+        console.log(record.toString());
         if(recordsController.insertStudentRecord(record)){
           this.ShowAddSuccessMenssage();
         }

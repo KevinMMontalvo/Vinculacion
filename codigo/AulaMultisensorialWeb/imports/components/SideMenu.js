@@ -13,46 +13,46 @@ export default class SideMenu extends React.Component
 
 	StudentOption()
 	{
-		this.props.StudentOption();
-		this.props.MaximizeMenu();
 		document.getElementById('option1').className = "menu-option-selected";
 		document.getElementById('option2').className = "menu-option";
 		document.getElementById('option3').className = "menu-option";
 		document.getElementById('option4').className = "menu-option";
 		document.getElementById('option5').className = "menu-option";
+		this.props.StudentOption();
+		this.props.MaximizeMenu();
 	}
 
 	TeacherOption()
 	{
-		this.props.TeacherOption();
-		this.props.MaximizeMenu();
 		document.getElementById('option1').className = "menu-option";
 		document.getElementById('option2').className = "menu-option-selected";
 		document.getElementById('option3').className = "menu-option";
 		document.getElementById('option4').className = "menu-option";
 		document.getElementById('option5').className = "menu-option";
+		this.props.TeacherOption();
+		this.props.MaximizeMenu();
 	}
 
 	LevelOption()
 	{
-		this.props.LevelOption();
-		this.props.MaximizeMenu();
 		document.getElementById('option1').className = "menu-option";
 		document.getElementById('option2').className = "menu-option";
 		document.getElementById('option3').className = "menu-option-selected";
 		document.getElementById('option4').className = "menu-option";
 		document.getElementById('option5').className = "menu-option";
+		this.props.LevelOption();
+		this.props.MaximizeMenu();
 	}
 
 	PeriodOption()
 	{
-		this.props.PeriodOption();
-		this.props.MaximizeMenu();
 		document.getElementById('option1').className = "menu-option";
 		document.getElementById('option2').className = "menu-option";
 		document.getElementById('option3').className = "menu-option";
 		document.getElementById('option4').className = "menu-option-selected";
 		document.getElementById('option5').className = "menu-option";
+		this.props.PeriodOption();
+		this.props.MaximizeMenu();
 	}
 
 	ActivitiesMenu()

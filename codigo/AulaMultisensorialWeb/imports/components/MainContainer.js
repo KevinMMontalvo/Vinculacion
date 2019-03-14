@@ -16,8 +16,7 @@ import PeriodRecords from '../components/PeriodRecords';
 import ActivePeriodForm from '../components/ActivePeriodForm';
 import ActivitiesMenu from '../components/ActivitiesMenu';
 import ActivitiesReport from '../components/ActivitiesReport';
-
-import FunctionalEvaluationForm from '../components/FunctionalEvaluationForm';
+import EvaluationFormParameters from '../components/EvaluationFormParameters';
 
 var canvas;
 var c;
@@ -96,7 +95,7 @@ export default class MainContainer extends React.Component {
       delete: false,
       newActivePeriodForm: false,
       modify: false,
-      visblePeriod: undefined,
+      visiblePeriod: undefined,
       evaluationForms: false,
     }
   }
@@ -1069,11 +1068,13 @@ export default class MainContainer extends React.Component {
   GetActualPeriod(){
     var periodsString = periodsController.getPeriods();
     var periods = JSON.parse(periodsString);
-    for (var i = 0; i < periods.length; i++) {
-      if(periods[i].is_visible){
-        this.setState({
-          visblePeriod: periods[i],
-        })
+    if(periods != null){
+      for (var i = 0; i < periods.length; i++) {
+        if(periods[i].is_visible){
+          this.setState({
+            visiblePeriod: periods[i],
+          })
+        }
       }
     }
   }
@@ -1284,8 +1285,9 @@ export default class MainContainer extends React.Component {
           }
           {
             this.state.evaluationForms ?
-              <FunctionalEvaluationForm
-                user={this.state.user}/>
+              <EvaluationFormParameters
+                user={this.state.user}
+                period={this.state.visiblePeriod}/>
             :
             undefined
           }
@@ -1295,10 +1297,10 @@ export default class MainContainer extends React.Component {
             :
             undefined
           }
-          {this.state.isLogged && this.state.visblePeriod != undefined ?
+          {this.state.isLogged && this.state.visiblePeriod != undefined ?
             <div className="actual-period-container">
               <b>Periodo actual:</b>
-              <p>{this.state.visblePeriod.name}</p>
+              <p>{this.state.visiblePeriod.name}</p>
             </div>
           :
             undefined
