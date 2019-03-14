@@ -17,7 +17,7 @@ namespace Aula_Multisensorial.Model
 
         [BsonElement("questions")]
         [JsonProperty(PropertyName = "questions")]
-        public string[][] Questions { get; set; }
+        public object[][] Questions { get; set; }
 
         public StudentRecord()
         {
