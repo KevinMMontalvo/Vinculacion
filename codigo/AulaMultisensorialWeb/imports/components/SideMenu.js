@@ -15,30 +15,55 @@ export default class SideMenu extends React.Component
 	{
 		this.props.StudentOption();
 		this.props.MaximizeMenu();
+		document.getElementById('option1').className = "menu-option-selected";
+		document.getElementById('option2').className = "menu-option";
+		document.getElementById('option3').className = "menu-option";
+		document.getElementById('option4').className = "menu-option";
+		document.getElementById('option5').className = "menu-option";
 	}
 
 	TeacherOption()
 	{
 		this.props.TeacherOption();
 		this.props.MaximizeMenu();
+		document.getElementById('option1').className = "menu-option";
+		document.getElementById('option2').className = "menu-option-selected";
+		document.getElementById('option3').className = "menu-option";
+		document.getElementById('option4').className = "menu-option";
+		document.getElementById('option5').className = "menu-option";
 	}
 
 	LevelOption()
 	{
 		this.props.LevelOption();
 		this.props.MaximizeMenu();
+		document.getElementById('option1').className = "menu-option";
+		document.getElementById('option2').className = "menu-option";
+		document.getElementById('option3').className = "menu-option-selected";
+		document.getElementById('option4').className = "menu-option";
+		document.getElementById('option5').className = "menu-option";
 	}
 
 	PeriodOption()
 	{
 		this.props.PeriodOption();
 		this.props.MaximizeMenu();
+		document.getElementById('option1').className = "menu-option";
+		document.getElementById('option2').className = "menu-option";
+		document.getElementById('option3').className = "menu-option";
+		document.getElementById('option4').className = "menu-option-selected";
+		document.getElementById('option5').className = "menu-option";
 	}
 
 	ActivitiesMenu()
 	{
 		/*Aca podes probar lo que queras*/
 		this.props.ShowActivitiesMenu();
+		document.getElementById('option1').className = "menu-option";
+		document.getElementById('option2').className = "menu-option";
+		document.getElementById('option3').className = "menu-option";
+		document.getElementById('option4').className = "menu-option";
+		document.getElementById('option5').className = "menu-option-selected";
 		//activitiesController.startMatrizActivity("Globe");
 	}
 

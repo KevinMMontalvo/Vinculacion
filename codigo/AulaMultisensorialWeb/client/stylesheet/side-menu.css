@@ -76,6 +76,23 @@
   text-indent: 2.5vw;
 }
 
+.menu-option-selected {
+  background-color: #1a181d;
+  cursor: pointer;
+  text-indent: 3.5vw;
+  width: 100%;
+  height: auto;
+  font-size: 1.4em;
+  color: #FFF;
+  transition: 0.5s;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  position: relative;
+  animation: slide-left 1s ease-out;
+  animation-fill-mode: backwards;
+  border-left: solid 0.5vw #138D75;
+}
+
 #option1 {
   animation-delay: 0.75s;
 }

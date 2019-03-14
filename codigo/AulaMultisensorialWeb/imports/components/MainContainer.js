@@ -1223,10 +1223,8 @@ export default class MainContainer extends React.Component {
           }
           {
             this.state.loginForm ?
-              /*
               <LoginForm SuccessfullLogin={this.SuccessfullLogin.bind(this)}/>
-              */
-                <FunctionalEvaluationForm/>
+                //<FunctionalEvaluationForm/>
             :
             undefined
           }
