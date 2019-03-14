@@ -60,6 +60,11 @@ export default class ActivitiesMenu extends React.Component
 		this.props.ActivitiesReport();
 	}
 
+	EvaluationForms()
+	{
+		this.props.EvaluationForms();
+	}
+
 	render()
 	{
 		return (<div>
@@ -68,10 +73,16 @@ export default class ActivitiesMenu extends React.Component
 					<div className="activity-row">
 						<div className="activities-options">
 							<div onClick={() => this.ActivitiesReport()}
-							     id="activity-report"
-							     className="activity-option">
+								id="activity-report"
+							className="activity-option">
 								<div id="report-icon" className="report-icon"></div>
 								<div className="report-text">Reporte de actividades</div>
+							</div>
+							<div onClick={() => this.EvaluationForms()}
+								id="evaluation-forms"
+							className="activity-option">
+								<div id="evaluation-icon" className="report-icon"></div>
+								<div className="report-text">Formularios de evaluación</div>
 							</div>
 						</div>
 					</div>
