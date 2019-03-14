@@ -42,7 +42,7 @@ export default class ActivitiesMenu extends React.Component
 
 		//activitiesController.startActivity("Matrix", "5c1bbb3f75c6cf37a489efcb");
 
-		console.log(recordsController.getStudentRecord("asdas"));
+		console.log(recordsController.getStudentRecords("asdas"));
 	}
 
 	GlovesActivity()

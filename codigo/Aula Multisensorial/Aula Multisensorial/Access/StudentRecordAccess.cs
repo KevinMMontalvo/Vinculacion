@@ -24,7 +24,7 @@ namespace Aula_Multisensorial.Access
         /// </summary>
         /// <param name="studentId">String con el ID del estudiante</param>
         /// <returns>Retorna un JSON con la informacion de la ficha, si el estudiante no tiene ficha retorna null</returns>
-        public string GetStudentRecord(string studentId)
+        public string GetStudentRecords(string studentId)
         {
             try
             {
@@ -101,6 +101,35 @@ namespace Aula_Multisensorial.Access
             else
             {
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene la ficha mediante si ID
+        /// </summary>
+        /// <param name="recordId">String con el ID de la ficha a ser consultada</param>
+        /// <returns>String con JSON de la ficha</returns>
+        public string GetRecordById(string recordId)
+        {
+            try
+            {
+                FilterDefinition<StudentRecord> filter = Builders<StudentRecord>.Filter.Eq("Id", recordId);
+
+                cancellationTokenSource = new CancellationTokenSource();
+                cancellationTokenSource.CancelAfter(DatabaseConnection.TIMEOUT);
+
+                List<StudentRecord> recordsList = studentsRecordsCollection.Find(filter).ToList(cancellationTokenSource.Token);
+
+                if (recordsList.Count == 0)
+                {
+                    return null;
+                }
+                return Newtonsoft.Json.JsonConvert.SerializeObject(recordsList[0]);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                return null;
             }
         }
     }
