@@ -100,6 +100,7 @@
     <Compile Include="Access\MatrixActivityRegisterAccess.cs" />
     <Compile Include="Access\PeriodAccess.cs" />
     <Compile Include="Access\StudentAccess.cs" />
+    <Compile Include="Access\StudentRecordAccess.cs" />
     <Compile Include="Access\TeacherAccess.cs" />
     <Compile Include="CardiacSensor\Main.cs">
       <SubType>Form</SubType>
@@ -131,7 +132,7 @@
     <Compile Include="MatrixLED\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\Activity.cs" />
+    <Compile Include="Model\StudentRecord.cs" />
     <Compile Include="Model\Administrator.cs" />
     <Compile Include="Model\CardiacSensorActivityRegister.cs" />
     <Compile Include="Model\GlobeActivityRegister.cs" />

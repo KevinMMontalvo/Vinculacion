@@ -30,6 +30,7 @@ namespace Aula_Multisensorial
             chromiumWebBrowser.RegisterJsObject("globeActivitiesController", new GlobeActivityRegisterAccess());
             chromiumWebBrowser.RegisterJsObject("matrixActivitiesController", new MatrixActivityRegisterAccess());
             chromiumWebBrowser.RegisterJsObject("cardiacActivitiesController", new CardiacSensorActivityRegisterAccess());
+            chromiumWebBrowser.RegisterJsObject("recordsController", new StudentRecordAccess());
         }
 
         private void InitializeChromium()

@@ -11,8 +11,8 @@ namespace Aula_Multisensorial.Access
 {
     class StudentAccess
     {
-        private CancellationTokenSource cancellationTokenSource;
         private readonly IMongoCollection<Student> studentsCollection;
+        private CancellationTokenSource cancellationTokenSource;
 
         public StudentAccess()
         {
@@ -73,12 +73,12 @@ namespace Aula_Multisensorial.Access
         /// <summary>
         /// Modifica un estudiante de la coleccion
         /// </summary>
-        /// <param name="student">Diccionario con los datos del estudiante incluyendo su id</param>
+        /// <param name="student">Diccionario con los datos del estudiante incluyendo su ID</param>
         /// <returns>Retorna true si la modificacion ha sido exitosa</returns>
         public bool ModifyStudent(Dictionary<string, object> student)
         {
             BsonDocument document = new BsonDocument(student);
-            Console.WriteLine(document.ToJson());
+
             //cuando no se ingresa ayudas tecnicas se retorna null, la siguiente linea cambia a un array vacio
             if (document.GetValue("technical_helps").IsBsonNull)
             {
