@@ -11,6 +11,7 @@ import {createBrowserHistory} from 'history';
 import {Tracker} from 'meteor/tracker';
 
 import Main from '../imports/ui/Main';
+import SenSwitcher from '../imports/ui/SenSwitcher';
 
 const history = createBrowserHistory();
 
@@ -25,6 +26,7 @@ Meteor.startup(() => {
     <Router history={history}>
       <Switch>
         <Route exact path="/" component={Main}/>
+        <Route exact path="/senswitcher" component={SenSwitcher}/>
       </Switch>
     </Router>, document.getElementById('render-target')
   );

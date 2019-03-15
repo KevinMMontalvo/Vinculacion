@@ -1,0 +1,320 @@
+.senswitcher-main-container {
+  width: 100vw;
+  max-height: 100vh;
+  color: #FFF;
+  background-color: #100E11;
+  overflow: hidden;
+}
+
+.senswitcher-title-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  background-color: #100E11;
+}
+
+.senswitcher-fuvime-icon {
+  width: 5vw;
+  height: 5vw;
+  background-image: url(fuvime.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 3vw;
+  position: relative;
+  margin-left: 2.5vw;
+}
+
+.senswitcher-title {
+  position: relative;
+  width: 100%;
+  height: 5vw;
+  display: flex;
+  align-items: center;
+  font-size: 1.3em;
+  margin-left: 1vw;
+}
+
+.presentation-container {
+  width: 100vw;
+  height: calc(100vh - 5vw);
+  margin-top: 5vw;
+  position: relative;
+}
+
+.presentation-image {
+  width: 100vw;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(space.jpg);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fade-in 3.5s ease-out;
+}
+
+.image-loader {
+  display: flex;
+  justify-content: center;
+}
+
+.loading-image-text {
+  width: auto;
+  height: 8vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-indent: 2.5vw;
+  font-size: 1.3em;
+}
+
+.presentation-column {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10vh;
+}
+
+.presentation-title {
+  font-size: 2.5em;
+  text-align: center;
+  animation: jack-in-the-box 1s;
+}
+
+.presentation-subtitle {
+  font-size: 1.75em;
+  text-align: center;
+  animation: jack-in-the-box 1.5s;
+}
+
+.senswitcher-button-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2.5vh;
+  padding-bottom: 2.5vh;
+}
+
+.senswitcher-button {
+  background: linear-gradient(to right, #2e86c1 0%, #2bbea2 100%);
+  padding: 0.5vw 2vw 0.5vw 2vw;
+  animation: fade-in 1s;
+  animation-fill-mode: backwards;
+  animation-delay: 0.75s;
+  font-size: 1.15em;
+  transition: 0.5s;
+  background-repeat: no-repeat;
+}
+
+.senswitcher-button:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.75);
+}
+
+.search-bar {
+  width: 40vw;
+  height: 5vw;
+  position: absolute;
+  right: -0.25vw;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.search-input {
+  width: 25vw;
+  height: 5vw;
+}
+
+#senswitcher-search-input {
+  background-color: #100E11;
+  position: relative;
+  animation: slide-right 0.75s;
+}
+
+#senswitcher-search-icon {
+  background-color: #100E11;
+}
+
+#senswitcher-search-icon:hover {
+  filter: brightness(1.5);
+}
+
+.activities-container {
+  width: 100vw;
+  height: 80vh;
+  margin-bottom: 2.5vw;
+  padding-top: calc(10vh + 2.5vw);
+}
+
+.activities-row {
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5vh;
+  position: relative;
+  transition: 0.5s;
+  animation: slide-left 1s;
+}
+
+.activity-container {
+  width: 17.5vw;
+  height: 20vh;
+  background-color: #100E11;
+  margin-left: 0.0725vw;
+  margin-right: 0.0725vw;
+  position: relative;
+  z-index: 2;
+  background-size: 2.5vw;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: 0.5s;
+}
+
+.activity-container:hover {
+  background-color: #2BBEA2;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.75);
+  transform: scale(1.095);
+  background-repeat: no-repeat;
+  z-index: 3;
+}
+
+.activity-title {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 1.5vh;
+  font-size: 1.15em;
+  margin-left: 10%;
+  text-align: center;
+}
+
+.show-description-button {
+  width: 100%;
+  height: 5vh;
+  position: absolute;
+  bottom: 0;
+  background-image: url(down-w.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 2.5vh;
+}
+
+.description-container {
+  width: 88vw;
+  margin-left: 6vw;
+  height: 40vh;
+  background-color: #100E11;
+  margin-top: 0.5vh;
+  transition: 0.5s;
+  animation: light-speed-in 0.75s;
+  position: relative;
+  color: #FFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 2em;
+}
+
+.close-description-button {
+  width: 2.5vw;
+  height: 2.5vw;
+  position: absolute;
+  top: 1vw;
+  right: 1vw;
+  background-image: url(close-w.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 1vw;
+}
+
+.activity-description-text {
+  width: 75%;
+}
+
+.close-description-button:hover {
+  cursor: pointer;
+}
+
+#e1f {
+  background-image: url(e1f.svg);
+}
+
+#e2p {
+  background-image: url(e2p.svg);
+}
+
+#p1p {
+  background-image: url(p1p.svg);
+}
+
+#p2o {
+  background-image: url(p2o.svg);
+}
+
+#pa1p {
+  background-image: url(pa1p.svg);
+  font-size: 0.9em;
+}
+
+
+
+#pa2o {
+  background-image: url(pa2o.svg);
+  font-size: 0.9em;
+}
+
+#p1pl {
+  background-image: url(p1pl.svg);
+  font-size: 0.9em;
+}
+
+#p2p {
+  background-image: url(p2p.svg);
+}
+
+#p3e {
+  background-image: url(p3e.svg);
+}
+
+#s1fas {
+  background-image: url(s1fas.svg);
+  font-size: 0.75em;
+}
+
+
+
+#s2f {
+  background-image: url(s2f.svg);
+}
+
+#s3a {
+  background-image: url(s3a.svg);
+}
+
+#f1fo {
+  background-image: url(f1fo.svg);
+  font-size: 0.8em;
+}
+
+#f2e {
+  background-image: url(f2e.svg);
+}
+
+#e1fo {
+  background-image: url(e1fo.svg);
+  font-size: 0.9em;
+}

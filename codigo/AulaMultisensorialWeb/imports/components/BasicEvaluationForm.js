@@ -242,7 +242,6 @@ export default class BasicEvaluationForm extends React.Component {
           questions.push(question);
         }
         record.questions = questions;
-        console.log(record.toString());
         if(recordsController.insertStudentRecord(record)){
           this.ShowAddSuccessMenssage();
         }
