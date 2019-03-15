@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf6ce076-847d-40a9-a101-46c52b689462" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Model/StudentRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Model/StudentRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/CardiacSensor/Main.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/CardiacSensor/Main.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/CardiacSensor/Main.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/CardiacSensor/Main.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Utils/ArduinoController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Aula Multisensorial/Aula Multisensorial/Utils/ArduinoController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/imports/components/ActivitiesMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/components/ActivitiesMenu.js" afterDir="false" />
     </list>
@@ -21,7 +23,11 @@
         <entry file="file://$PROJECT_DIR$/imports/components/ActivitiesMenu.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
-              <caret line="44" column="55" selection-start-line="44" selection-start-column="55" selection-end-line="44" selection-end-column="55" />
+              <caret line="44" column="10" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
+              <folding>
+                <element signature="e#1649#1685#0" expanded="true" />
+                <element signature="e#1698#3263#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -50,7 +56,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -83,6 +88,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -157,23 +163,23 @@
       <workItem from="1552314249593" duration="2629000" />
       <workItem from="1552351309456" duration="1197000" />
       <workItem from="1552531519796" duration="2947000" />
-      <workItem from="1552574947340" duration="275000" />
+      <workItem from="1552574947340" duration="877000" />
+      <workItem from="1552577454145" duration="1267000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54293000" />
+    <option name="totallyTimeSpent" value="56162000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17913593" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -215,7 +221,11 @@
     <entry file="file://$PROJECT_DIR$/imports/components/ActivitiesMenu.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="44" column="55" selection-start-line="44" selection-start-column="55" selection-end-line="44" selection-end-column="55" />
+          <caret line="44" column="10" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
+          <folding>
+            <element signature="e#1649#1685#0" expanded="true" />
+            <element signature="e#1698#3263#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

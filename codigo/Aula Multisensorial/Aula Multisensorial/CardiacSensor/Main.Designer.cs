@@ -35,6 +35,8 @@
             this.labelName = new System.Windows.Forms.Label();
             this.comboBoxStudents = new System.Windows.Forms.ComboBox();
             this.labelFinalBPM = new System.Windows.Forms.Label();
+            this.labelDeviceColor = new System.Windows.Forms.Label();
+            this.comboBoxDeviceColor = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // buttonExit
@@ -44,7 +46,7 @@
             this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonExit.ForeColor = System.Drawing.Color.White;
-            this.buttonExit.Location = new System.Drawing.Point(162, 254);
+            this.buttonExit.Location = new System.Drawing.Point(162, 276);
             this.buttonExit.Margin = new System.Windows.Forms.Padding(0);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(476, 56);
@@ -60,7 +62,7 @@
             this.buttonStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonStart.ForeColor = System.Drawing.Color.White;
-            this.buttonStart.Location = new System.Drawing.Point(162, 152);
+            this.buttonStart.Location = new System.Drawing.Point(162, 183);
             this.buttonStart.Margin = new System.Windows.Forms.Padding(0);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(476, 56);
@@ -122,6 +124,29 @@
             this.labelFinalBPM.TabIndex = 25;
             this.labelFinalBPM.Text = "Pulsaciones por minuto: ";
             // 
+            // labelDeviceColor
+            // 
+            this.labelDeviceColor.AutoSize = true;
+            this.labelDeviceColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDeviceColor.ForeColor = System.Drawing.Color.White;
+            this.labelDeviceColor.Location = new System.Drawing.Point(32, 136);
+            this.labelDeviceColor.Name = "labelDeviceColor";
+            this.labelDeviceColor.Size = new System.Drawing.Size(152, 20);
+            this.labelDeviceColor.TabIndex = 27;
+            this.labelDeviceColor.Text = "Color del dispositivo:";
+            // 
+            // comboBoxDeviceColor
+            // 
+            this.comboBoxDeviceColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxDeviceColor.FormattingEnabled = true;
+            this.comboBoxDeviceColor.Items.AddRange(new object[] {
+            "Rojo",
+            "Azul"});
+            this.comboBoxDeviceColor.Location = new System.Drawing.Point(216, 136);
+            this.comboBoxDeviceColor.Name = "comboBoxDeviceColor";
+            this.comboBoxDeviceColor.Size = new System.Drawing.Size(392, 24);
+            this.comboBoxDeviceColor.TabIndex = 26;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -129,6 +154,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.labelDeviceColor);
+            this.Controls.Add(this.comboBoxDeviceColor);
             this.Controls.Add(this.labelFinalBPM);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.comboBoxStudents);
@@ -156,5 +183,7 @@
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.ComboBox comboBoxStudents;
         private System.Windows.Forms.Label labelFinalBPM;
+        private System.Windows.Forms.Label labelDeviceColor;
+        private System.Windows.Forms.ComboBox comboBoxDeviceColor;
     }
 }

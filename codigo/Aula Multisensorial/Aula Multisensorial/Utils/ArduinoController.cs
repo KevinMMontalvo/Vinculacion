@@ -13,7 +13,8 @@ namespace Aula_Multisensorial.Utils
         public static readonly int MATRIX_ARDUINO = 0;
         public static readonly int RIGHT_HAND_ARDUINO = 1;
         public static readonly int LEFT_HAND_ARDUINO = 2;
-        public static readonly int HEART_ARDUINO = 3;
+        public static readonly int RED_HEART_ARDUINO = 3;
+        public static readonly int BLUE_HEART_ARDUINO = 4;
 
         private SerialPort[] serialPorts;
 

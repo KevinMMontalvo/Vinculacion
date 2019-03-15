@@ -11,12 +11,13 @@ namespace Aula_Multisensorial.CardiacSensor
 {
     public partial class Main : Form
     {
-        private static Main instance = null;
+        private static Main[] instance = { null, null }; //se pueden abrir solo 2 instancias de la ventana
         private readonly string teacherId;
         private delegate string GetSelectedComboBoxText();
         private delegate void ChangeActivityState();
         private delegate void SetText(string text);
         private CardiacSensorActivityRegister activity;
+        private int arduinoIndex = 0;
         private bool firstValueTaked = false;
         private bool secondValueTaked = false;
 
@@ -40,7 +41,7 @@ namespace Aula_Multisensorial.CardiacSensor
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            ArduinoController.GetInstance().CloseConnection(ArduinoController.HEART_ARDUINO);
+            ArduinoController.GetInstance().CloseConnection(arduinoIndex);
             instance = null;
         }
 
@@ -87,11 +88,17 @@ namespace Aula_Multisensorial.CardiacSensor
         /// <returns>Retorna la instancia del mimo tipo de la clase</returns>
         public static Main GetInstance(string teacherId)
         {
-            if (instance == null)
+            if (instance[0] == null)
             {
-                instance = new Main(teacherId);
+                instance[0] = new Main(teacherId);
+                return instance[0];
             }
-            return instance;
+            else if(instance[1] == null)
+            {
+                instance[1] = new Main(teacherId);
+                return instance[1];
+            }
+            return instance[0];
         }
 
         /// <summary>
@@ -150,24 +157,38 @@ namespace Aula_Multisensorial.CardiacSensor
         /// <returns>Retorna verdadero si la insercion fue exitosa</returns>
         private bool ConnectCardiacSensor()
         {
-            if (ArduinoController.GetInstance().IsPortOpen(ArduinoController.HEART_ARDUINO))
+            if (comboBoxDeviceColor.Text.Equals("Rojo"))
+            {
+                arduinoIndex = ArduinoController.RED_HEART_ARDUINO;
+            }
+            else if(comboBoxDeviceColor.Text.Equals("Rojo"))
+            {
+                arduinoIndex = ArduinoController.BLUE_HEART_ARDUINO;
+            }
+            else
+            {
+                MessageBox.Show("Seleccione el dispositivo");
+                return false;
+            }
+
+            if (ArduinoController.GetInstance().IsPortOpen(arduinoIndex))
             {
                 return true;
             }
-            bool connectionSuccessful = ArduinoController.GetInstance().StartConnection(ArduinoController.HEART_ARDUINO);
+            bool connectionSuccessful = ArduinoController.GetInstance().StartConnection(arduinoIndex);
             if (!connectionSuccessful)
             {
                 MessageBox.Show("No se pudo conectar con el dispositivo (Sensor Cardiaco)");
             }
             return connectionSuccessful;
         }
-        
+
         /// <summary>
         /// Metodo que inicia el hilo de recepcion de mensajes
         /// </summary>
         private async void StartReading()
         {
-            bool messageSended = ArduinoController.GetInstance().SendMessage(ArduinoController.HEART_ARDUINO, "ON");
+            bool messageSended = ArduinoController.GetInstance().SendMessage(arduinoIndex, "ON");
             if (messageSended)
             {
                 Task readVaules = new Task(ReceiveMessages); //tarea asincrona
@@ -185,8 +206,8 @@ namespace Aula_Multisensorial.CardiacSensor
         /// </summary>
         private void StopReading()
         {
-            ArduinoController.GetInstance().SendMessage(ArduinoController.HEART_ARDUINO, "OFF");
-            ArduinoController.GetInstance().CloseConnection(ArduinoController.HEART_ARDUINO);
+            ArduinoController.GetInstance().SendMessage(arduinoIndex, "OFF");
+            ArduinoController.GetInstance().CloseConnection(arduinoIndex);
         }
 
         /// <summary>
@@ -198,7 +219,7 @@ namespace Aula_Multisensorial.CardiacSensor
             int[] values = new int[50]; //buffer de comparacion
             int counter = 0;
             string message;
-            
+
             activity.StudentId = (string)Invoke(new GetSelectedComboBoxText(GetComboBoxStudentsText)); // para acceder a elementos de la GUI desde el hilo
             activity.Datetime = DateTime.Now.Date; //solo fecha para poder agrupar
             activity.Level = new LevelAccess().GetLevelById(new TeacherAccess().GetTeacherById(teacherId).LevelId).Name;
@@ -211,8 +232,8 @@ namespace Aula_Multisensorial.CardiacSensor
             {
                 do
                 {
-                    message = ArduinoController.GetInstance().GetMessage(ArduinoController.HEART_ARDUINO);
-                    if (message == null && !ArduinoController.GetInstance().IsPortOpen(ArduinoController.HEART_ARDUINO)) // errror de conexion
+                    message = ArduinoController.GetInstance().GetMessage(arduinoIndex);
+                    if (message == null && !ArduinoController.GetInstance().IsPortOpen(arduinoIndex)) // errror de conexion
                     {
                         MessageBox.Show("Ha ocurrido un problema de conexion con el sensor cardiaco, revise que el sensor esté bien conectado");
                         Invoke(new ChangeActivityState(SetEndActivity));
@@ -265,8 +286,8 @@ namespace Aula_Multisensorial.CardiacSensor
              */
             do
             {
-                message = ArduinoController.GetInstance().GetMessage(ArduinoController.HEART_ARDUINO);
-                if (message == null && !ArduinoController.GetInstance().IsPortOpen(ArduinoController.HEART_ARDUINO)) // errror de conexion
+                message = ArduinoController.GetInstance().GetMessage(arduinoIndex);
+                if (message == null && !ArduinoController.GetInstance().IsPortOpen(arduinoIndex)) // errror de conexion
                 {
                     MessageBox.Show("Ha ocurrido un problema de conexion con el sensor cardiaco, revise que el sensor esté bien conectado");
                     Invoke(new ChangeActivityState(SetEndActivity));
