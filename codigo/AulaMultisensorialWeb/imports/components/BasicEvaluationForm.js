@@ -13,124 +13,11 @@ export default class BasicEvaluationForm extends React.Component {
               "Panel sensorial"
             ],
           },
-          standars: {
-            glove: [
-              {
-                _id: 401,
-                criteria: "Sujeta el guante con las dos manos.",
-                value: ""
-              },
-              {
-                _id: 402,
-                criteria: "Reconoce la ubicación del material.",
-                value: ""
-              },
-              {
-                _id: 403,
-                criteria: "Identifica el material por su nombre.",
-                value: ""
-              },
-              {
-                _id: 404,
-                criteria: "Manipula el guante mostrando interés.",
-                value: ""
-              },
-              {
-                _id: 405,
-                criteria: "Tolera más de 3 texturas diferentes.",
-                value: ""
-              },
-              {
-                _id: 406,
-                criteria: "Reconoce el material que rellena al guante.",
-                value: ""
-              },
-              {
-                _id: 407,
-                criteria: "Diferencia los cambios de texturas.",
-                value: ""
-              },
-            ],
-            bottle: [
-              {
-                _id: 501,
-                criteria: "Sigue instrucciones para aprender a utilizar el frasco siguiendo las fases correspondientes (agitación, observación, relajación).",
-                value: ""
-              },
-              {
-                _id: 502,
-                criteria: "Realiza ejercicios de respiración durante el movimiento del agua que se encuentra dentro del frasco.",
-                value: ""
-              },
-              {
-                _id: 503,
-                criteria: "Se relaja al culminar el movimiento del agua.",
-                value: ""
-              },
-              {
-                _id: 504,
-                criteria: "Dirige la mirada hacia el movimiento del agua.",
-                value: ""
-              },
-              {
-                _id: 505,
-                criteria: "Identifica el material por su nombre.",
-                value: ""
-              },
-              {
-                _id: 506,
-                criteria: "Muestra interés por el movimiento del agua.",
-                value: ""
-              },
-              {
-                _id: 507,
-                criteria: "Disfruta del material.",
-                value: ""
-              },
-              {
-                _id: 508,
-                criteria: "Sujeta el frasco con la mano.",
-                value: ""
-              },
-            ],
-            panel: [
-              {
-                _id: 601,
-                criteria: "Tolera las diferentes texturas que forman parte del panel sensorial.",
-                value: ""
-              },
-              {
-                _id: 602,
-                criteria: "Identifica el material por su nombre.",
-                value: ""
-              },
-              {
-                _id: 603,
-                criteria: "Toca las texturas que ofrece el panel.",
-                value: ""
-              },
-              {
-                _id: 604,
-                criteria: "Tolera más de 5 texturas.",
-                value: ""
-              },
-              {
-                _id: 605,
-                criteria: "Siente comodidad con el cambio de textura.",
-                value: ""
-              },
-              {
-                _id: 606,
-                criteria: "Disfruta de la manipulación del panel.",
-                value: ""
-              },
-            ],
-          },
         }
     }
 
     CheckUncheckValue(type, id, check, value){
-      var standars = this.state.standars;
+      var standars = this.props.standars;
       if(type == 0){
         for (var i = 0; i < standars.glove.length; i++) {
           if(standars.glove[i]._id == id){
@@ -167,9 +54,7 @@ export default class BasicEvaluationForm extends React.Component {
           }
         }
       }
-      this.setState({
-        standars: standars,
-      });
+      this.props.SetStandars(standars, "basic");
     }
 
     dismissAll = () => {
@@ -189,8 +74,20 @@ export default class BasicEvaluationForm extends React.Component {
       this.dismissAll();
     }
 
+    ShowAddSuccessMenssage(){
+  		this.tray.raise({
+  			content: <Cinnamon.Crisp
+  				className="butter-alert"
+  				scheme={Cinnamon.Slim.SCHEME_DARK}
+  				content={() => <div>{"Formulario guardado con exito"}</div>}
+  				title={"Registro completo"}
+  				icon={<div className="alert-success-icon"></div>}
+  			/>
+  		});
+  	}
+
     CheckEmptyFields(){
-      var standars = this.state.standars;
+      var standars = this.props.standars;
       for (var i = 0; i < standars.glove.length; i++) {
         if(standars.glove[i].value == ""){
           this.ShowWarningMenssage("Existen campos vacios", "Sección guantes sensoriales - pregunta " + (parseInt(i) + 1));
@@ -243,9 +140,14 @@ export default class BasicEvaluationForm extends React.Component {
         }
         record.questions = questions;
         if(recordsController.insertStudentRecord(record)){
+          this.props.SetRecord(record);
           this.ShowAddSuccessMenssage();
         }
       }
+    }
+
+    componentDidMount(){
+
     }
 
     render() {
@@ -262,7 +164,7 @@ export default class BasicEvaluationForm extends React.Component {
                 <div className="row">
                   <div className="column-medium">{this.state.columnTitles.materials[0]}</div>
                   <div className="column-map">
-                    {this.state.standars.glove.map((standars) =>
+                    {this.props.standars.glove.map((standars) =>
                       {
                         return <EvaluationFormRows
                           standars={standars}
@@ -275,7 +177,7 @@ export default class BasicEvaluationForm extends React.Component {
                 <div className="row">
                   <div className="column-medium">{this.state.columnTitles.materials[1]}</div>
                   <div className="column-map">
-                    {this.state.standars.bottle.map((standars) =>
+                    {this.props.standars.bottle.map((standars) =>
                       {
                         return <EvaluationFormRows
                           standars={standars}
@@ -288,7 +190,7 @@ export default class BasicEvaluationForm extends React.Component {
                 <div className="row">
                   <div className="column-medium">{this.state.columnTitles.materials[2]}</div>
                   <div className="column-map">
-                    {this.state.standars.panel.map((standars) =>
+                    {this.props.standars.panel.map((standars) =>
                       {
                         return <EvaluationFormRows
                           standars={standars}

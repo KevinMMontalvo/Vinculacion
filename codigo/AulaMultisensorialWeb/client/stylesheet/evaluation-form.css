@@ -119,13 +119,13 @@
 .header-large {
   width: 30vw;
   text-align: center;
-  border-right: solid 1px #1E1D21;
+  border-right: solid 1px #333333;
 }
 
 .header-small {
   width: 5vw;
   text-align: center;
-  border-right: solid 1px #1E1D21;
+  border-right: solid 1px #333333;
 }
 
 .row {
@@ -147,8 +147,8 @@
   width: 15vw;
   height: auto;
   text-align: center;
-  border-right: solid 1px #333;
-  border-bottom: solid 1px #333;
+  border-right: solid 1px #333333;
+  border-bottom: solid 1px #333333;
   align-items: center;
   display: flex;
   justify-content: center;
@@ -163,12 +163,17 @@
 .standars-contianer {
   display: flex;
   justify-content: flex-start;
-  border-bottom: solid 1px #333;
+  border-bottom: solid 1px #D0D3D4;
+  transition: 0.5s;
+}
+
+.standars-contianer:hover {
+  background-color: #505050;
 }
 
 .criteria-column {
   width: 27vw;
-  border-right: solid 1px #333;
+  border-right: solid 1px #D0D3D4;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
   padding-top: 0.5vh;
@@ -178,7 +183,7 @@
 .i-column {
   width: 5vw;
   text-align: center;
-  border-right: solid 1px #333;
+  border-right: solid 1px #D0D3D4;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -188,7 +193,7 @@
 .ep-column {
   width: 5vw;
   text-align: center;
-  border-right: solid 1px #333;
+  border-right: solid 1px #D0D3D4;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -198,7 +203,7 @@
 .a-column {
   width: 5vw;
   text-align: center;
-  border-right: solid 1px #333;
+  border-right: solid 1px #D0D3D4;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -207,17 +212,17 @@
 
 .i-column:hover {
   cursor: pointer;
-  background-color: #000;
+  background-color: #676767;
 }
 
 .ep-column:hover {
   cursor: pointer;
-  background-color: #000;
+  background-color: #676767;
 }
 
 .a-column:hover {
   cursor: pointer;
-  background-color: #000;
+  background-color: #676767;
 }
 
 .selected-value {

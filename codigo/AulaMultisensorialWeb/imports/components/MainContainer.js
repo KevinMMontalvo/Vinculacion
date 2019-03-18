@@ -73,7 +73,7 @@ export default class MainContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loginForm: true,
+      loginForm: false,
       isLogged: false,
       studentOption: false,
       addStudentForm: false,
@@ -1073,9 +1073,16 @@ export default class MainContainer extends React.Component {
         if(periods[i].is_visible){
           this.setState({
             visiblePeriod: periods[i],
-          })
+          }, () => {
+            this.setState({
+              loginForm: true,
+            });
+          });
         }
       }
+    }
+    else{
+      this.GetActualPeriod();
     }
   }
 
