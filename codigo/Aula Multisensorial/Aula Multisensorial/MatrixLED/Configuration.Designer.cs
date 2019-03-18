@@ -55,9 +55,7 @@
             this.button41 = new System.Windows.Forms.Button();
             this.button31 = new System.Windows.Forms.Button();
             this.button44 = new System.Windows.Forms.Button();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.panelSideMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelSideMenu
@@ -376,22 +374,12 @@
             this.button44.UseVisualStyleBackColor = false;
             this.button44.Click += new System.EventHandler(this.MatrixButtonsClickEvent);
             // 
-            // trackBar1
-            // 
-            this.trackBar1.Location = new System.Drawing.Point(509, 294);
-            this.trackBar1.Maximum = 100;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(104, 45);
-            this.trackBar1.TabIndex = 19;
-            this.trackBar1.TickFrequency = 10;
-            // 
             // Configuration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(29)))), ((int)(((byte)(33)))));
             this.ClientSize = new System.Drawing.Size(884, 561);
-            this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.button44);
             this.Controls.Add(this.button31);
             this.Controls.Add(this.button41);
@@ -415,9 +403,7 @@
             this.Text = "Configuration";
             this.Load += new System.EventHandler(this.Configuration_Load);
             this.panelSideMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -449,6 +435,5 @@
         private System.Windows.Forms.Button button31;
         private System.Windows.Forms.Button button44;
         private System.Windows.Forms.Button buttonClose;
-        private System.Windows.Forms.TrackBar trackBar1;
     }
 }
