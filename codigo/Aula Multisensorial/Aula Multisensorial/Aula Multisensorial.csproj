@@ -102,6 +102,12 @@
     <Compile Include="Access\StudentAccess.cs" />
     <Compile Include="Access\StudentRecordAccess.cs" />
     <Compile Include="Access\TeacherAccess.cs" />
+    <Compile Include="Board\BoardActivity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Board\BoardActivity.Designer.cs">
+      <DependentUpon>BoardActivity.cs</DependentUpon>
+    </Compile>
     <Compile Include="CardiacSensor\Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +153,9 @@
     <Compile Include="Utils\ActivitiesController.cs" />
     <Compile Include="Utils\ArduinoController.cs" />
     <Compile Include="Utils\DatabaseConnection.cs" />
+    <EmbeddedResource Include="Board\BoardActivity.resx">
+      <DependentUpon>BoardActivity.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CardiacSensor\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>

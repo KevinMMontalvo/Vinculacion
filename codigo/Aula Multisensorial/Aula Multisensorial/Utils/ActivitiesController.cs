@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using Aula_Multisensorial.Board;
+using System.Windows.Forms;
 
 namespace Aula_Multisensorial.Utils
 {
@@ -31,6 +32,10 @@ namespace Aula_Multisensorial.Utils
             {
                 mainForm.Invoke(new StartActivty(StartCardiacSensorActivity), teacherId);
             }
+            else if (activity.Equals("Board"))
+            {
+                mainForm.Invoke(new StartActivty(StartBoardActivity), teacherId);
+            }
         }
 
         /// <summary>
@@ -58,6 +63,15 @@ namespace Aula_Multisensorial.Utils
         private void StartCardiacSensorActivity(string teacherId)
         {
             CardiacSensor.Main.GetInstance(teacherId);
+        }
+
+        /// <summary>
+        /// Inicia la actividad del senswitch
+        /// </summary>
+        /// <param name="teacherId">String con el ID del docente, no es necesario</param>
+        private void StartBoardActivity(string teacherId)
+        {
+            BoardActivity boardActivity = new BoardActivity();
         }
     }
 }
