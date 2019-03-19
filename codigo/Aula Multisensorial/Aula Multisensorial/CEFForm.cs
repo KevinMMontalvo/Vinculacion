@@ -22,8 +22,9 @@ namespace Aula_Multisensorial
 
         private void CEFForm_Load(object sender, EventArgs e)
         {
-            ShowLoadingScreen();
-            CheckMongo();
+            InitializeChromium();
+            /*ShowLoadingScreen();
+            CheckMongo();*/
         }
 
         private void InitializeChromium()
@@ -73,7 +74,7 @@ namespace Aula_Multisensorial
             pictureBox.Left = (Width - 300) / 2;
             pictureBox.Top = (Height - 300) / 2;
             Controls.Add(pictureBox);
-            pictureBox.Image = Image.FromFile(@"../../Resources/Loading.gif");
+            pictureBox.Image = Image.FromFile(@"../../../Resources/Loading.gif");
         }
 
         private void MongoDataReceivedEvent(object sender, DataReceivedEventArgs e)
@@ -144,6 +145,7 @@ namespace Aula_Multisensorial
             meteorProcess.Start();
             meteorProcess.BeginOutputReadLine();
             meteorProcess.BeginErrorReadLine();
+            meteorProcess.StandardInput.WriteLine("cd..");
             meteorProcess.StandardInput.WriteLine("cd..");
             meteorProcess.StandardInput.WriteLine("cd..");
             meteorProcess.StandardInput.WriteLine("cd..");

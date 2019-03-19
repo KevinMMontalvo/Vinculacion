@@ -1278,7 +1278,8 @@ export default class MainContainer extends React.Component {
               <div>
                 <ActivitiesMenu
                   ActivitiesReport={this.ActivitiesReport.bind(this)}
-                  EvaluationForms={this.EvaluationForms.bind(this)}/>
+                  EvaluationForms={this.EvaluationForms.bind(this)}
+                  user={this.state.user}/>
               </div>
             :
             undefined

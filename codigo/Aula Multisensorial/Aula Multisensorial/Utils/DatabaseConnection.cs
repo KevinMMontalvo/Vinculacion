@@ -6,7 +6,7 @@ namespace Aula_Multisensorial.Utils
     {
         public static readonly int TIMEOUT = 5000;
         private static DatabaseConnection instance = null;
-        private static readonly string URL = "localhost:41167/aula-multisensorial";
+        private static readonly string URL = "ds041167.mlab.com:41167/aula-multisensorial";
         private static readonly string USER = "kevin";
         private static readonly string PASSWORD = "admin123";
 

@@ -40,19 +40,19 @@ export default class ActivitiesMenu extends React.Component
 	MatrixActivity()
 	{
 
-		activitiesController.startActivity("Matrix", "5c1bbb3f75c6cf37a489efcb");
+		activitiesController.startActivity("Matrix", this.props.user._id);
 
 		//console.log(recordsController.getStudentRecords("asdas"));
 	}
 
 	GlovesActivity()
 	{
-		activitiesController.startActivity("Globe", "5c1bbb3f75c6cf37a489efcb");
+		activitiesController.startActivity("Globe", this.props.user._id);
 	}
 
 	CardiacSensorActivity()
 	{
-		activitiesController.startActivity("CardiacSensor", "5c1bbb3f75c6cf37a489efcb");
+		activitiesController.startActivity("CardiacSensor", this.props.user._id);
 	}
 
 	ActivitiesReport()
